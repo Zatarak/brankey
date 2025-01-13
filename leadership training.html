@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leadership Training</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        overflow-x: hidden;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        font-size: calc(14px + 0.390625vw);
+        background: white;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: clamp(10px, 2vw, 30px);
+        background-color: transparent;
+        position: relative;
+        z-index: 1001;
+      }
+
+      .logo {
+        margin-left: clamp(10px, 2vw, 30px);
+        font-weight: bold;
+        font-size: clamp(30px, 3vw, 50px);
+        font-family: monospace;
+      }
+
+      .menu-btn {
+        margin-right: clamp(10px, 2vw, 30px);
+        cursor: pointer;
+        font-size: clamp(30px, 3vw, 50px);
+        z-index: 1002;
+      }
+
+      .nav-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: black;
+        padding: clamp(20px, 3vw, 40px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .nav-menu.active {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: clamp(15px, 2.5vw, 30px) 0;
+        font-size: clamp(24px, 4vw, 48px);
+        text-align: center;
+        transition: color 0.3s ease;
+      }
+
+      .nav-menu a:hover {
+        color: #ff6b6b;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: white;
+        font-size: clamp(24px, 3vw, 36px);
+        cursor: pointer;
+      }
+
+      .horizontal-line {
+        height: 2px;
+        background-color: #333;
+        margin: 40px 30px;
+      }
+
+      .bigLogo {
+        display: block;
+        font-size: clamp(80px, 4vw, 48px);
+        margin: clamp(20px, 1vw, 20px) 0;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 40px;
+      }
+
+      footer {
+        background-color: transparent;
+        padding: clamp(20px, 3vw, 40px);
+        text-align: center;
+        margin-top: clamp(10px, 2vw, 20px);
+      }
+
+      footer a {
+        text-decoration: underline;
+        color: #333;
+        margin: 0 clamp(10px, 2vw, 20px);
+        font-size: clamp(16px, 2vw, 24px);
+      }
+
+      .custom-link {
+        text-decoration: none;
+        border-bottom: 10px solid black;
+        color: transparent;
+        -webkit-text-stroke: 1px black;
+        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
+          1px -1px 0px transparent, -1px -1px 0px transparent;
+      }
+
+      .custom-link:hover {
+        background-color: transparent;
+        color: rgb(76, 221, 242);
+      }
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+      }
+      .connect-button {
+        padding: 10px;
+        margin: 85px;
+        margin-top: 0px;
+        width: 30%;
+        font-size: clamp(16px, 3vw, 24px);
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        color: black;
+        background-color: rgb(76, 221, 242);
+        border: 2px solid black;
+        border-radius: 3px;
+        cursor: pointer;
+        text-align: center;
+        display: inline-block;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .connect-button:hover {
+        background: black;
+        color: rgb(76, 221, 242);
+        border: 2px solid black;
+      }
+      .book-slot-button {
+        padding: 10px;
+        margin: 85px;
+        margin-top: 0px;
+        width: 30%;
+        font-size: clamp(16px, 3vw, 24px);
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        color: black;
+        background-color: rgb(242, 76, 221);
+        border: 2px solid black;
+        border-radius: 3px;
+        cursor: pointer;
+        text-align: center;
+        display: inline-block;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .book-slot-button:hover {
+        background: black;
+        color: rgb(242, 76, 221);
+        border: 2px solid black;
+      }
+      .detail {
+        padding: 0px;
+        margin: 20px;
+        margin-top: 5px;
+        font-size: clamp(16px, 2.5vw, 24px);
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        color: black;
+        line-height: 1.5;
+      }
+      .leadershipWhy {
+        padding: 25px;
+        margin: 10px;
+        font-size: clamp(13px, 2.5vw, 24px);
+        font-family: "Courier New", Courier, monospace;
+        text-align: justify;
+        color: black;
+        line-height: 1.5;
+      }
+      h1 {
+        padding: 20px;
+        margin: 20px;
+        font-size: clamp(40px, 6vw, 24px);
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        text-align: left;
+        color: black;
+        text-align: center;
+      }
+      .box {
+        border: 2px solid black;
+        padding: 15px;
+        margin: 85px;
+        margin-bottom: 10px;
+      }
+      .highlight {
+        background-color: rgb(76, 221, 242);
+        color: black;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 180px;
+        background-color: white;
+        color: black;
+        text-align: center;
+        border-radius: 3px;
+        padding: 10px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -80px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: 15px;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">BranKey</div>
+      <div class="menu-btn">☰</div>
+    </header>
+
+    <nav class="nav-menu">
+      <div class="close-btn">×</div>
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey.html"
+        class="nav-link"
+        >Home</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey%20about%20me.html"
+        class="nav-link"
+        >About</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/services.html"
+        class="nav-link"
+        >Services</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/contact.html"
+        class="nav-link"
+        >Contact</a
+      >
+    </nav>
+
+    <div class="horizontal-line"></div>
+    <div class="box">
+      <h1><span class="highlight">Leadership Training</span></h1>
+      <p class="detail">⏲6 sessions ⏲6 weeks ⏲180 - 360 min</p>
+      <br /><br />
+      <p class="leadershipWhy">
+        <span class="highlight">Leadership</span>, from my perspective,<span
+          class="highlight"
+          >is</span
+        >
+        fundamentally <span class="highlight">about</span>
+        <span class="highlight"
+          >creating a space for collaboration and connection</span
+        >
+        among individuals<span class="highlight">.</span> It involves
+        <span class="highlight">fostering</span> an
+        <span class="highlight">environment where people</span> can express
+        themselves authentically and
+        <span class="highlight">engage in</span> meaningful conversations that
+        allow for the emergence of
+        <span class="highlight">new ideas and solutions.</span> <br /><br />In
+        essence, <span class="highlight">leadership is not</span> merely a
+        function of <span class="highlight">authority or control;</span> rather,
+        <span class="highlight">it is a</span> condition of an organization that
+        thrives on clear communication and shared purpose. It requires the
+        ability to reduce uncertainty through
+        <span class="highlight"
+          >transparent dialogue, enabling individuals to act with clarity and
+          intention.</span
+        >
+        <span class="highlight"
+          >This process of
+          <span class="tooltip"
+            ><u>languaging</u>
+            <span class="tooltiptext"
+              >Language is not just a communication tool, it's a dynamic process
+              of interaction.</span
+            >
+          </span>
+          the way we communicate and construct our realities</span
+        >
+        is crucial in shaping the dynamics of leadership and
+        <span class="highlight">ensuring</span> that
+        <span class="highlight">all voices are heard and valued.</span
+        ><br /><br />
+        Ultimately,
+        <span class="highlight">true leadership is rooted in love</span>, which
+        <span class="highlight">allows us to recognize each other</span> as
+        legitimate beings, fostering connections that
+        <span class="highlight">expands our</span> collective
+        <span class="highlight">intelligence and creativity.</span><br /><br />
+        <span class="highlight">THANK YOU ❤️</span>
+      </p>
+    </div>
+    <div class="button-container">
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/contact.html"
+        class="connect-button"
+        >Connect
+      </a>
+      <a href="calendly.html" class="book-slot-button">Schedule a Session</a>
+    </div>
+    <p class="bigLogo">
+      BRAN<a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/key%20resources.html"
+        class="custom-link"
+        >KEY</a
+      >
+    </p>
+
+    <footer>
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey.html"
+        >Home</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey%20about%20me.html"
+        >About</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/services.html"
+        >Services</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/contact.html"
+        >Contact</a
+      >
+    </footer>
+
+    <script>
+      const menuBtn = document.querySelector(".menu-btn");
+      const closeBtn = document.querySelector(".close-btn");
+      const navMenu = document.querySelector(".nav-menu");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      menuBtn.addEventListener("click", () => {
+        navMenu.classList.add("active");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+        });
+      });
+
+      function navigateTo(section) {
+        document.getElementById(`${section}-link`).click();
+      }
+    </script>
+  </body>
+</html>

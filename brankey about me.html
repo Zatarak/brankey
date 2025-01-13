@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        overflow-x: hidden;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        font-size: calc(14px + 0.390625vw);
+        background: radial-gradient(
+          circle at 10% 20%,
+          rgb(255, 37, 174) 0%,
+          rgb(241, 147, 55) 53.4%,
+          rgb(250, 237, 56) 99.5%
+        );
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: clamp(10px, 2vw, 30px);
+        background-color: transparent;
+        position: relative;
+        z-index: 1001;
+      }
+
+      .logo {
+        margin-left: clamp(10px, 2vw, 30px);
+        font-weight: bold;
+        font-size: clamp(30px, 3vw, 50px);
+        font-family: monospace;
+      }
+
+      .menu-btn {
+        margin-right: clamp(10px, 2vw, 30px);
+        cursor: pointer;
+        font-size: clamp(30px, 3vw, 50px);
+        z-index: 1002;
+      }
+
+      .nav-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: black;
+        padding: clamp(20px, 3vw, 40px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .nav-menu.active {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: clamp(15px, 2.5vw, 30px) 0;
+        font-size: clamp(24px, 4vw, 48px);
+        text-align: center;
+        transition: color 0.3s ease;
+      }
+
+      .nav-menu a:hover {
+        color: #ff6b6b;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: white;
+        font-size: clamp(24px, 3vw, 36px);
+        cursor: pointer;
+      }
+
+      .horizontal-line {
+        height: 2px;
+        background-color: #333;
+        margin: 40px 30px;
+      }
+
+      .bigLogo {
+        display: block;
+        font-size: clamp(80px, 4vw, 48px);
+        margin: clamp(20px, 1vw, 20px) 0;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 40px;
+      }
+
+      footer {
+        background-color: transparent;
+        padding: clamp(20px, 3vw, 40px);
+        text-align: center;
+        margin-top: clamp(10px, 2vw, 20px);
+      }
+
+      footer a {
+        text-decoration: underline;
+        color: #333;
+        margin: 0 clamp(10px, 2vw, 20px);
+        font-size: clamp(16px, 2vw, 24px);
+      }
+
+      .custom-link {
+        text-decoration: none;
+        border-bottom: 10px solid black;
+        color: transparent;
+        -webkit-text-stroke: 1px black;
+        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
+          1px -1px 0px transparent, -1px -1px 0px transparent;
+      }
+
+      .custom-link:hover {
+        background-color: transparent;
+        color: white;
+      }
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+      }
+
+      .box {
+        border: none;
+        padding: 40px;
+        margin: 60px;
+        background-color: transparent;
+        text-align: center;
+        font-family: monospace;
+        width: 70%;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: clamp(24px, 5vw, 48px);
+        margin-bottom: 0px;
+      }
+      .dots-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+      }
+
+      .dot {
+        font-size: 50px;
+        margin: 5px;
+      }
+      .style1 {
+        font-family: "Arial", sans-serif;
+        font-size: 14vw;
+        color: black;
+      }
+      .style2 {
+        font-family: "Courier New", monospace;
+        font-size: 11vw;
+        color: black;
+      }
+      h2 {
+        margin-top: 20px;
+      }
+      .style4,
+      .style6 {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 5vw;
+        color: black;
+      }
+      .style3 .style5 .style8 {
+        font-family: "Courier New", monospace;
+        font-size: 2vw;
+        color: black;
+      }
+      h3 {
+        font-size: 7vw;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      h4 {
+        font-size: 4vw;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+      h5 {
+        font-size: 10vw;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      }
+      h6 {
+        font-size: 5vw;
+        font-family: "Times New Roman", Times, serif;
+      }
+      .contact-button {
+        background-color: white;
+        color: black;
+        font-size: 3vw;
+        padding: 2px;
+        border: 2px solid white;
+        border-radius: 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      .contact-button:hover {
+        background-color: #f1c40f; /* Change color on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">BranKey</div>
+      <div class="menu-btn">☰</div>
+    </header>
+
+    <nav class="nav-menu">
+      <div class="close-btn">×</div>
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey.html"
+        class="nav-link"
+        >Home</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey%20about%20me.html"
+        class="nav-link"
+        >About</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/services.html"
+        class="nav-link"
+        >Services</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/Contact.html"
+        class="nav-link"
+        >Contact</a
+      >
+    </nav>
+
+    <div class="horizontal-line"></div>
+
+    <div class="content">
+      <div class="box">
+        <h1>
+          <span class="style1">Clearity</span><br />
+          <span class="style2">Connects</span>
+        </h1>
+      </div>
+      <div class="dots-container"></div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="box">
+        <h2>
+          <span class="style3">On the belief that we discover ourselves</span>
+          <span class="style4">through</span>
+          <span class="style5">our relationships</span>
+          <span class="style6"> within</span>
+          <span class="style8">the language we use.</span>
+        </h2>
+      </div>
+      <div class="dots-container"></div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="box">
+        <h3>Clarity is born.</h3>
+      </div>
+      <div class="dots-container"></div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="box">
+        <h3>From simplicity.</h3>
+      </div>
+      <div class="dots-container"></div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="box">
+        <h4>
+          Simplicity is not about DOING LESS. <br />
+          It about doing what MATTERS MOST.
+        </h4>
+      </div>
+      <div class="dots-container"></div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="box">
+        <h5>It's beautiful!</h5>
+      </div>
+      <div class="dots-container"></div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="dot">•</div>
+      <div class="box">
+        <h6>
+          I use creative language, systemic thinking and passion for experiences
+          that trigger clarity.
+        </h6>
+      </div>
+    </div>
+    <a
+      href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/contact.html"
+    >
+      <button class="contact-button">
+        C&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;N&nbsp;&nbsp;&nbsp;&nbsp;N&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;T
+      </button>
+    </a>
+    <p class="bigLogo">
+      BRAN<a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/key%20resources.html"
+        class="custom-link"
+        >KEY</a
+      >
+    </p>
+
+    <footer>
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey.html"
+        >Home</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey%20about%20me.html"
+        >About</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/services.html"
+        >Services</a
+      >
+      <a
+        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/Contact.html"
+        >Contact</a
+      >
+    </footer>
+
+    <script>
+      const menuBtn = document.querySelector(".menu-btn");
+      const closeBtn = document.querySelector(".close-btn");
+      const navMenu = document.querySelector(".nav-menu");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      menuBtn.addEventListener("click", () => {
+        navMenu.classList.add("active");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+        });
+      });
+    </script>
+  </body>
+</html>
