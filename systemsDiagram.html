@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact</title>
+    <title>Responsive About</title>
     <style>
       * {
         margin: 0;
@@ -18,11 +18,11 @@
         flex-direction: column;
         font-family: Arial, sans-serif;
         font-size: calc(14px + 0.390625vw);
-        background: linear-gradient(
-          -225deg,
-          #5d9fff 0%,
-          #b8dcff 48%,
-          #6bbbff 100%
+        background: radial-gradient(
+          circle at 10% 20%,
+          rgb(255, 37, 174) 0%,
+          rgb(241, 147, 55) 53.4%,
+          rgb(250, 237, 56) 99.5%
         );
       }
 
@@ -41,11 +41,6 @@
         font-weight: bold;
         font-size: clamp(30px, 3vw, 50px);
         font-family: monospace;
-        text-decoration: none;
-        color: black;
-        -webkit-text-fill-color: black;
-        -webkit-text-stroke: 1px black;
-        transition: all 0.3s ease;
       }
 
       .menu-btn {
@@ -77,27 +72,20 @@
         display: flex;
         opacity: 1;
         visibility: visible;
-        background: linear-gradient(
-          109.6deg,
-          rgb(255, 78, 80) 11.2%,
-          rgb(249, 212, 35) 100.2%
-        );
       }
 
       .nav-menu a {
-        color: black;
+        color: white;
         text-decoration: none;
         display: block;
         padding: clamp(15px, 2.5vw, 30px) 0;
         font-size: clamp(24px, 4vw, 48px);
-        text-align: left;
+        text-align: center;
         transition: color 0.3s ease;
-        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-        text-decoration: underline;
       }
 
       .nav-menu a:hover {
-        color: #3405aab4;
+        color: #ff6b6b;
       }
 
       .close-btn {
@@ -130,6 +118,7 @@
         text-transform: uppercase;
         margin-left: 51.5%;
       }
+
       footer {
         background-color: transparent;
         padding: clamp(20px, 3vw, 40px);
@@ -139,9 +128,9 @@
 
       footer a {
         text-decoration: underline;
-        color: black;
+        color: #333;
         margin: 0 clamp(10px, 2vw, 20px);
-        font-size: clamp(10px, 1.5vw, 20px);
+        font-size: clamp(16px, 2vw, 24px);
       }
 
       .custom-link {
@@ -156,85 +145,6 @@
       .custom-link:hover {
         background-color: transparent;
         color: white;
-      }
-
-      .contact-section {
-        display: flex;
-        justify-content: space-between;
-        padding: clamp(20px, 3vw, 40px);
-        margin-top: 40px;
-      }
-
-      .contact-info {
-        flex-basis: 45%;
-        padding-right: 20px;
-      }
-
-      .contact-info h1 {
-        font-size: clamp(58px, 11vw, 76px);
-        margin-bottom: 10px;
-        font-family: "Courier New", Courier, monospace;
-      }
-      h2,
-      h3,
-      h4 {
-        margin-top: 20px;
-        font-size: clamp(16px, 2vw, 24px);
-        font-family: monospace;
-      }
-      .contact-info p {
-        margin-bottom: 20px;
-        font-size: clamp(16px, 2vw, 24px);
-        font-family: monospace;
-        line-height: 1.5;
-      }
-
-      .contact-form {
-        flex-basis: 45%;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      input[type="text"],
-      input[type="email"] {
-        width: 90%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1 px solid #ccc;
-        font-size: clamp(13px, 1.5vw, 24px);
-        font-family: "Courier New", Courier, monospace;
-      }
-
-      textarea {
-        width: 90%;
-        height: 100px;
-        resize: none;
-        margin-right: 40px;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1 px solid #ccc;
-        font-size: clamp(16px, 2vw, 24px);
-        font-family: "Courier New", Courier, monospace;
-      }
-
-      button {
-        align-self: flex-end;
-        padding: 10px;
-        margin: 50px;
-        border: 2px solid black;
-        border-radius: 3px;
-        background-color: transparent;
-        color: black;
-        cursor: pointer;
-        font-size: clamp(16px, 4vw, 24px);
-        font-family: "Courier New", Courier, monospace;
-        text-align: center;
-      }
-      button:hover {
-        background: white;
-        color: black;
-        border: 1px solid black;
       }
     </style>
   </head>
@@ -264,7 +174,7 @@
       <a
         href="file:///Users/brankica/Desktop/brankey/brankey/key%20resources.html"
         class="nav-link"
-        >Key Resources</a
+        >KEY Resources</a
       >
       <a
         href="file:///Users/brankica/Desktop/brankey/brankey/contact.html"
@@ -274,28 +184,7 @@
     </nav>
 
     <div class="horizontal-line"></div>
-    <div class="contact-section">
-      <div class="contact-info">
-        <h1>Contact</h1>
-        <p>
-          Would you like to re<u>design</u> an aspect in your life? Got a desire
-          to <u>create</u>? Or just want to <u>connect</u>? Drop me a line — I'd
-          love to <u>build</u> new relationships!
-        </p>
-      </div>
-      <div class="contact-form">
-        <h2>Name</h2>
-        <input type="text" id="name" placeholder="How may I call you?" />
 
-        <h3>Email Address</h3>
-        <input type="email" id="email" placeholder="How can I reach you?" />
-
-        <h4>Message</h4>
-        <textarea id="message" placeholder="How can I help you?"></textarea>
-
-        <button type="submit">Submit</button>
-      </div>
-    </div>
     <p class="bigLogo">
       BRAN<a
         href="file:///Users/brankica/Desktop/brankey/brankey/key%20resources.html"
@@ -303,18 +192,15 @@
         >KEY</a
       >
     </p>
-      </p>
-      <p class="resources">Resources</p>
+    <p class="resources">Resources</p>
 
     <footer>
       <a href="file:///Users/brankica/Desktop/brankey/brankey/index.html"
         >Home</a
       >
-      <a
-        href="file:///Users/brankica/Desktop/brankey/brankey/about.html"
+      <a href="file:///Users/brankica/Desktop/brankey/brankey/about.html"
         >About</a
       >
-
       <a href="file:///Users/brankica/Desktop/brankey/brankey/services.html"
         >Services</a
       >

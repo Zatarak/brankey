@@ -40,6 +40,11 @@
         font-weight: bold;
         font-size: clamp(30px, 3vw, 50px);
         font-family: monospace;
+        text-decoration: none;
+        color: black;
+        -webkit-text-fill-color: black;
+        -webkit-text-stroke: 1px black;
+        transition: all 0.3s ease;
       }
 
       .menu-btn {
@@ -71,20 +76,27 @@
         display: flex;
         opacity: 1;
         visibility: visible;
+        background: linear-gradient(
+          109.6deg,
+          rgb(255, 78, 80) 11.2%,
+          rgb(249, 212, 35) 100.2%
+        );
       }
 
       .nav-menu a {
-        color: white;
+        color: black;
         text-decoration: none;
         display: block;
         padding: clamp(15px, 2.5vw, 30px) 0;
         font-size: clamp(24px, 4vw, 48px);
-        text-align: center;
+        text-align: left;
         transition: color 0.3s ease;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        text-decoration: underline;
       }
 
       .nav-menu a:hover {
-        color: #ff6b6b;
+        color: #280288;
       }
 
       .close-btn {
@@ -99,7 +111,7 @@
       .horizontal-line {
         height: 2px;
         background-color: #333;
-        margin: 40px 30px;
+        margin: 5px 30px;
       }
 
       .main-content {
@@ -234,7 +246,6 @@
       }
 
       h4::before,
-      h5::before,
       h6::before {
         content: "Service";
         position: absolute;
@@ -278,6 +289,13 @@
         font-weight: bold;
         text-align: center;
         padding-top: 40px;
+      }
+      .resources {
+        display: block;
+        font-size: clamp(30px, 2vw, 20px);
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-left: 51.5%;
       }
 
       .buttonLearnMore {
@@ -327,9 +345,9 @@
 
       footer a {
         text-decoration: underline;
-        color: #333;
+        color: black;
         margin: 0 clamp(10px, 2vw, 20px);
-        font-size: clamp(16px, 2vw, 24px);
+        font-size: clamp(10px, 1.5vw, 20px);
       }
       .custom-link {
         text-decoration: none;
@@ -354,26 +372,11 @@
 
     <nav class="nav-menu">
       <div class="close-btn">×</div>
-      <a
-        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey.html"
-        class="nav-link"
-        >Home</a
-      >
-      <a
-        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey%20about%20me.html"
-        class="nav-link"
-        >About</a
-      >
-      <a
-        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/services.html"
-        class="nav-link"
-        >Services</a
-      >
-      <a
-        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/Contact.html"
-        class="nav-link"
-        >Contact</a
-      >
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="keyResources.html" class="nav-link">KEY Resources</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="contact.html" class="nav-link">Contact</a>
     </nav>
 
     <div class="horizontal-line"></div>
@@ -403,13 +406,13 @@
             <p>Everyone deserves to feel whole.</p>
             <button
               class="buttonLearnMore"
-              onclick="window.location.href='file:///Users/brankica/Desktop/html-%20css%20/SheCodes/systemic%20coaching.html'"
+              onclick="window.location.href='systemicCoaching.html'"
             >
               Learn More
             </button>
             <button
               class="buttonAboutMe"
-              onclick="window.location.href='file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey%20about%20me.html'"
+              onclick="window.location.href='about.html'"
             >
               About Me
             </button>
@@ -432,7 +435,7 @@
             <br />
             <button
               class="buttonLearnMore"
-              onclick="window.location.href='file:///Users/brankica/Desktop/html-%20css%20/SheCodes/leadership%20training.html'"
+              onclick="window.location.href='leadershipTraining.html'"
             >
               Learn More
             </button>
@@ -446,7 +449,7 @@
             <br /><br />
             <button
               class="buttonLearnMore"
-              onclick="window.location.href='file:///Users/brankica/Desktop/html-%20css%20/SheCodes/community%20engagement.html'"
+              onclick="window.location.href='communityEngagement.html'"
             >
               Learn More
             </button>
@@ -454,31 +457,17 @@
         </div>
       </div>
       <p class="bigLogo">
-        BRAN<a
-          href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/key%20resources.html"
-          class="custom-link"
-          >KEY</a
-        >
+        BRAN<a href="keyResources.html" class="custom-link">KEY</a>
       </p>
+      <p class="resources">Resources</p>
     </main>
 
     <footer>
-      <a
-        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey.html"
-        >Home</a
-      >
-      <a
-        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/brankey%20about%20me.html"
-        >About</a
-      >
-      <a
-        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/services.html"
-        >Services</a
-      >
-      <a
-        href="file:///Users/brankica/Desktop/html-%20css%20/SheCodes/Contact.html"
-        >Contact</a
-      >
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="keyResources.html">KEY Resources</a>
+      <a href="contact.html">Contact</a>
     </footer>
 
     <script>
