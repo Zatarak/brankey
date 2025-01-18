@@ -119,17 +119,18 @@
       }
       .bigLogo {
         display: block;
-        font-size: clamp(80px, 4vw, 48px);
+        font-size: clamp(40px, 8vw, 80px);
         margin: clamp(20px, 1vw, 20px) 0;
         font-weight: bold;
         text-align: center;
-        padding-top: 40px;
+        padding-top: clamp(20px, 4vw, 40px);
       }
       .resources {
         display: block;
         font-size: clamp(30px, 2vw, 20px);
         font-weight: bold;
         text-transform: uppercase;
+        text-align: left;
         margin-left: 51.5%;
       }
       footer {
@@ -380,6 +381,22 @@
 
       button:hover {
         background-color: #0056b3;
+      }
+      @media (max-width: 768px) {
+        /* Adjust the breakpoint as needed */
+        .circles-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center; /* Centers circles horizontally */
+          height: auto; /* Allow height to adjust dynamically */
+        }
+
+        .circle {
+          position: relative; /* Remove absolute positioning */
+          margin: 10px 0; /* Add vertical spacing between circles */
+          transform: none; /* Reset any transform for placement */
+          animation: none; /* Disable animation if needed */
+        }
       }
     </style>
   </head>
