@@ -227,7 +227,11 @@
             32px
           ); /* Smaller font size for smaller screens */
         }
-
+        @media (max-width: 480px) {
+          .resources {
+            font-size: 14px;
+          }
+        }
         .grid-heading h2 {
           font-size: clamp(18px, 5vw, 28px); /* Adjust for smaller devices */
         }
