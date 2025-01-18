@@ -164,11 +164,11 @@
       }
       .connect-button {
         padding: 10px;
-        margin: 85px;
+        margin-left: 5vw;
         margin-top: 0px;
         width: 30%;
         font-size: clamp(16px, 3vw, 24px);
-        font-family: "Courier New", Courier, monospace;
+        font-family: monospace;
         text-align: center;
         color: black;
         background-color: rgb(76, 221, 242);
@@ -177,7 +177,6 @@
         cursor: pointer;
         text-align: center;
         display: inline-block;
-        font-weight: bold;
         text-transform: uppercase;
       }
 
@@ -217,9 +216,11 @@
         text-align: center;
       }
       .box {
+        width: 90%;
+        padding: 5px;
+        margin-left: 5vw;
+        margin-right: 5vw;
         border: 2px solid black;
-        padding: 15px;
-        margin: 85px;
         margin-bottom: 10px;
       }
       .highlight {
@@ -256,6 +257,13 @@
         visibility: visible;
         opacity: 1;
       }
+      @media (max-width: 768px) {
+        .box {
+          width: 95%; /* Increase width on small screens */
+          margin-left: 2vw; /* Adjust margin to be responsive */
+          margin-right: 2vw;
+        }
+        }
     </style>
   </head>
   <body>
