@@ -164,8 +164,10 @@
       .circles-container {
         position: relative;
         height: 60vh;
-        margin: 20px auto;
+        margin: 0 auto;
         width: 90%;
+        display: flex;
+        justify-content: center;
       }
 
       .circle {
@@ -182,7 +184,21 @@
         pointer-events: none;
         animation: pulse 2s infinite ease-in-out;
       }
+      @media (max-width: 768px) {
+        .circles-container {
+          display: flex; /* Flexbox for alignment on smaller screens */
+          flex-wrap: wrap; /* Allows wrapping of circles */
+          justify-content: flex-start; /* Align circles to the left */
+          margin: 20px auto 0; /* Adds space below the header */
+          gap: 20px; /* Adds spacing between circles */
+        }
 
+        .circle {
+          position: relative; /* Switch to relative positioning for smaller screens */
+          margin-right: 20px; /* Adds space to the right of each circle */
+          margin-bottom: 20px; /* Adds space between rows */
+        }
+      }
       .circle.active {
         opacity: 1;
         pointer-events: auto;
