@@ -121,10 +121,11 @@
       .bigLogo {
         display: block;
         font-size: clamp(80px, 4vw, 48px);
-        margin: clamp(20px, 1vw, 20px) 0;
+        margin: 0;
         font-weight: bold;
         text-align: center;
         padding-top: 40px;
+        width: 100%;
       }
 
       .resources {
@@ -132,7 +133,9 @@
         font-size: clamp(30px, 2vw, 20px);
         font-weight: bold;
         text-transform: uppercase;
-        margin-left: 51.5%;
+        text-align: left;
+        width: 100%;
+        padding-left: calc(50% + 30px);
       }
 
       footer {
@@ -185,8 +188,7 @@
       h2,
       h3,
       h4,
-      h5,
-      h6 {
+      h5 {
         font-size: clamp(24px, 5vw, 48px);
         margin-bottom: 0px;
       }
@@ -251,31 +253,16 @@
         font-size: 10vw;
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
       }
-
-      .h6-container {
-        display: flex;
-        gap: 10px;
-        text-align: left;
-        padding: 20px 0;
-        margin-top: 30px;
-        margin-bottom: 30px;
+      h6 {
+        font-size: 2.5vw;
+        font-family: Times;
+        width: 100%;
+        padding: 5px;
+        text-align: justify;
+        padding: 20px;
+        margin: 20px;
+        line-height: 1.4;
       }
-
-      .side-image {
-        flex-shrink: 40%;
-        width: 300px;
-        height: 300px;
-        display: flex;
-      }
-
-      .h6-text {
-        margin: 0px;
-        text-align: left;
-        font-size: 1.5vw;
-        font-family: monospace;
-        padding: 40px 0;
-      }
-
       .contact-button {
         background-color: white;
         color: black;
@@ -365,28 +352,21 @@
         <div class="dot">•</div>
         <div class="dot">•</div>
         <div class="dot">•</div>
-        <div class="box">
-          <div class="horizontal-line"></div>
-          <div class="h6-container">
-            <img
-              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/154/861/original/1-ai-brush-removebg-lesgllja.png?1736884268"
-              alt="placeholder"
-              class="side-image"
-            />
-            <h6 class="h6-text">
-              Hello! It's Brankey. I love words❣️ <br />Words can bring to life
-              what's already within. It's called triggering, but that one has a
-              negative connotation. As a linguist exploring the dance languages
-              and emotions play, I've discovered the stories we tell and the
-              words we choose to tell that story don't only communicate, but
-              light up paths to clarity we didn't know existed. Think of a
-              language as the key. What I do is create spaces where insights
-              naturally emerge. It is not about adding but about revealing. If
-              this resonates, I invite you to connect. We can explore your
-              symphony together!
-            </h6>
-          </div>
-        </div>
+
+        <div class="horizontal-line"></div>
+        <h6>
+          Words have always been my magic wand. Hi, I'm Brankica. Despite my
+          occasional wrestling with spelling, I fall head over heels for the
+          power of words to create entire universes from thin air. Over the
+          years, almost every connection I have made has told me I have a way of
+          bringing forth new views. Their gratitude for my shared impulses and
+          perspectives in return sparked BranKey - my love letter to everything
+          that sets my soul on fire! I might eventually be able to offer
+          something new to this world, but until then, I am here to support you
+          in reflecting on the extraordinary parts of yourself you might not yet
+          see.
+        </h6>
+        <div class="horizontal-line"></div>
       </div>
 
       <a href="contact.html">
@@ -398,6 +378,7 @@
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
       </p>
+      <br />
       <p class="resources">Resources</p>
     </main>
     <footer>
