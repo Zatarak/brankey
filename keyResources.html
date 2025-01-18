@@ -164,16 +164,12 @@
       .circles-container {
         position: relative;
         height: 60vh;
-        margin: 20px auto 0;
+        margin: 20px auto;
         width: 90%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 20px;
       }
 
       .circle {
-        position: relative;
+        position: absolute;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.3);
         border: 2px solid rgba(255, 255, 255, 0.5);
@@ -185,8 +181,6 @@
         opacity: 0.3;
         pointer-events: none;
         animation: pulse 2s infinite ease-in-out;
-        margin-right: 20px;
-        margin-bottom: 20px;
       }
 
       .circle.active {
@@ -213,8 +207,8 @@
       }
 
       #circle1 {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -387,22 +381,6 @@
 
       button:hover {
         background-color: #0056b3;
-      }
-      @media (max-width: 768px) {
-        /* Adjust the breakpoint as needed */
-        .circles-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center; /* Centers circles horizontally */
-          height: auto; /* Allow height to adjust dynamically */
-        }
-
-        .circle {
-          position: relative; /* Remove absolute positioning */
-          margin: 10px 0; /* Add vertical spacing between circles */
-          transform: none; /* Reset any transform for placement */
-          animation: none; /* Disable animation if needed */
-        }
       }
     </style>
   </head>
