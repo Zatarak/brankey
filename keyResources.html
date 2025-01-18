@@ -382,6 +382,27 @@
       button:hover {
         background-color: #0056b3;
       }
+      @media (max-width: 768px) {
+        .circles-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: auto; /* Adjust as needed */
+        }
+
+        .circle {
+          position: static;
+          margin: 10px 0; /* Space between circles */
+          animation: none; /* Remove animation if unnecessary for this layout */
+          opacity: 1; /* Ensure visibility */
+          pointer-events: auto;
+        }
+
+        .circle h3 {
+          text-align: center; /* Center text within each circle */
+        }
+      }
     </style>
   </head>
   <body>
