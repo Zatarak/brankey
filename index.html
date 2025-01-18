@@ -150,8 +150,6 @@
       .right-content {
         order: 2;
         min-width: 300px;
-        max-height: 60vh;
-        overflow-y: auto;
       }
 
       h2 {
@@ -174,6 +172,7 @@
         padding-bottom: clamp(15px, 2vw, 30px);
         margin: 0 auto;
         width: 100%;
+        position: relative;
       }
 
       @media (min-width: 768px) {
@@ -213,6 +212,8 @@
         .right-content {
           width: 70%;
           flex: 0 0 70%;
+          max-height: 60vh;
+          overflow-y: auto;
         }
 
         .left-content h2 {
@@ -237,6 +238,7 @@
         margin-bottom: -1px;
         background-color: transparent;
         position: relative;
+        overflow: visible;
       }
 
       .connected-boxes .box {
@@ -267,6 +269,7 @@
         margin-bottom: clamp(35px, 3vw, 60px);
         margin-top: 50px;
         font-family: monospace;
+        overflow: visible;
       }
 
       p {
