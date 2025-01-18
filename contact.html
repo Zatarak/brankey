@@ -170,6 +170,7 @@
         justify-content: space-between;
         padding: clamp(20px, 3vw, 40px);
         margin-top: 40px;
+        flex-wrap: wrap;
       }
 
       .contact-info {
@@ -243,6 +244,17 @@
         color: black;
         border: 1px solid black;
       }
+@media (max-width: 768px) {
+  .contact-info {
+    flex-basis: 100%; /* Full width on smaller screens */
+    order: 1; /* Move it to the top */
+  }
+
+  .contact-form {
+    flex-basis: 100%; /* Full width on smaller screens */
+    order: 2; /* Keep the form below */
+  }
+}
     </style>
   </head>
   <body>
