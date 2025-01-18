@@ -210,13 +210,14 @@
         text-align: center;
       }
       .box {
-        border: 2px solid black;
-        padding: 15px;
-        margin: 45px;
-        margin-bottom: 10px;
-        width: 90%;
-        margin: 5vw;
+          width: 90%; /* Box width adjusts to 90% of the screen */
+          padding: 15px;
+          margin-left: 5vw; /* Margin is 5% of viewport width */
+          margin-right: 5vw;
+          border: 2px solid black;
+          margin-bottom: 10px;
       }
+
       .highlight {
         background-color: rgb(92, 121, 255);
         color: white;
@@ -251,13 +252,12 @@
         visibility: visible;
         opacity: 1;
       }
-@media (max-width: 768px) {
-  .box {
-    width: 95%; /* Increase width to make the box fit smaller screens */
-    margin: 5%;
-    padding: 10px; /* Reduce padding if necessary */
-  }
-}
+      @media (max-width: 768px) {
+      .box {
+        width: 95%; /* Increase width on small screens */
+        margin-left: 2vw; /* Adjust margin to be responsive */
+        margin-right: 2vw;
+      }
     </style>
   </head>
   <body>
