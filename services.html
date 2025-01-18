@@ -23,6 +23,7 @@
           rgb(252, 165, 241) 1.8%,
           rgb(181, 255, 255) 100.5%
         );
+        width: 100%;
       }
 
       header {
@@ -115,6 +116,8 @@
         gap: 20px;
         margin: 0;
         width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
       }
 
       .grid-content {
@@ -132,6 +135,9 @@
         font-weight: bold;
         flex-direction: column; 
         text-align: center; 
+        padding: 20px; /* Add padding to make sure text fits */
+        box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+        width: 100%;
       }
 
       .learn-more-btn {
@@ -185,7 +191,7 @@
 
         .grid-heading {
           margin: 20px 0;
-          padding: 30px 20px;
+          padding: 20px;
           position: relative;
         }
 
