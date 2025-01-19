@@ -360,11 +360,7 @@
       const textContent = document.getElementById("belongingText").textContent;
 
       readButton.addEventListener("click", () => {
-        const speech = new SpeechSynthesisUtterance(textContent);
-        speech.lang = "en-US";
-        speech.rate = 1;
-        speech.pitch = 1;
-        window.speechSynthesis.speak(speech);
+        responsiveVoice.speak(textContent, "UK English Female");
       });
     </script>
   </body>
