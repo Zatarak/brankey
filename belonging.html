@@ -363,25 +363,51 @@
       document.addEventListener("DOMContentLoaded", function () {
         const readButton = document.getElementById("readText");
         const textElement = document.getElementById("belongingText");
+        function prepareTextForSpeech(text) {
+          return text
+            .replace(/\s+/g, " ") // Replace multiple spaces with single space
+            .replace(/\n/g, " ") // Replace newlines with spaces
+            .replace(/[-–—]/g, ", ") // Replace dashes with commas for better pausing
+            .replace(/\s+([.,!?])/g, "$1") // Remove spaces before punctuation
+            .replace(/([.,!?])\s*/g, "$1 ") // Ensure single space after punctuation
+            .trim(); // Remove leading/trailing spaces
+        }
 
-        // Initialize ResponsiveVoice
         if (window.responsiveVoice) {
           console.log("ResponsiveVoice is loaded");
 
           readButton.addEventListener("click", function () {
             if (textElement) {
-              const textContent = textElement.textContent.trim();
+              const rawText = textElement.textContent;
+              const processedText = prepareTextForSpeech(rawText);
 
               if (responsiveVoice.isPlaying()) {
-                responsiveVoice.cancel(); // Stop if already playing
-                readButton.textContent = "🔊"; // Reset button text
+                responsiveVoice.cancel();
+                readButton.textContent = "🔊";
               } else {
-                responsiveVoice.speak(textContent, "UK English Female", {
+                responsiveVoice.speak(processedText, "UK English Female", {
+                  pitch: 1,
+                  rate: 0.95, // Slightly slower rate for better clarity
+                  volume: 1,
                   onstart: function () {
-                    readButton.textContent = "🛑"; // Change to stop symbol
+                    readButton.textContent = "🛑";
                   },
                   onend: function () {
-                    readButton.textContent = "🔊"; // Reset button text
+                    readButton.textContent = "🔊";
+                  },
+                  onpause: function () {
+                    readButton.textContent = "🔊";
+                  },
+                  onresume: function () {
+                    readButton.textContent = "🛑";
+                  },
+                  // Add breaks at punctuation marks
+                  pitch: 1,
+                  rate: 0.95,
+                  volume: 1,
+                  parameters: {
+                    punctuation: true,
+                    linebreak: "500ms",
                   },
                 });
               }
@@ -391,7 +417,7 @@
           });
         } else {
           console.error("ResponsiveVoice is not loaded");
-          readButton.style.display = "none"; // Hide button if ResponsiveVoice fails to load
+          readButton.style.display = "none";
         }
       });
     </script>
