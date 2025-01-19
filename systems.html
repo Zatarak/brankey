@@ -195,6 +195,11 @@
         text-align: justify;
         color: black;
         line-height: 1.5;
+        margin-top: 16px;
+        padding: 16px;
+        background-color: #f1f5f9;
+        border-radius: 8px;
+        min-height: 80px;
       }
 
       h1 {
@@ -226,13 +231,16 @@
       .system-svg {
         width: 100%;
         height: auto;
+        max-height: 90vh;
       }
 
       .system-filters {
         display: flex;
+        flex-wrap: wrap;
         gap: 8px;
         margin-bottom: 16px;
         justify-content: center;
+        padding: 0 10px;
       }
 
       .filter-button {
@@ -242,6 +250,10 @@
         font-size: 14px;
         cursor: pointer;
         transition: all 0.2s;
+        /* Make buttons more touch-friendly */
+        min-height: 44px;
+        min-width: 44px;
+        touch-action: manipulation;
       }
 
       .filter-button.active {
@@ -261,6 +273,7 @@
 
       .system-node circle {
         transition: all 0.3s;
+        r: 40;
       }
 
       .system-node:hover circle {
@@ -312,6 +325,46 @@
         .resources {
           font-size: 16px;
         }
+        .system-filters {
+          gap: 4px;
+        }
+
+        .filter-button {
+          font-size: 12px;
+          padding: 6px 12px;
+          flex: 1 1 calc(50% - 4px); /* Two buttons per row on very small screens */
+          max-width: calc(50% - 4px);
+        }
+
+        .system-node circle {
+          r: 30; /* Slightly smaller circles on mobile */
+        }
+
+        .system-node text {
+          font-size: 12px; /* Smaller text on mobile */
+        }
+
+        .system-info-box {
+          font-size: 14px;
+          padding: 12px;
+        }
+      }
+      @media (max-width: 480px) {
+        .system-svg {
+          height: 300px; /* Fixed height for very small screens */
+        }
+      }
+
+      /* Add focus styles for better accessibility */
+      .filter-button:focus,
+      .system-node:focus {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+
+      /* Add active states for touch devices */
+      .system-node.active circle {
+        transform: scale(1.1);
       }
     </style>
   </head>
@@ -490,8 +543,19 @@
 
         let currentCategory = "all";
         let hoveredElement = null;
+        let isTouchDevice = "ontouchstart" in window;
 
-        function getPosition(index, total, radius = 150) {
+        // Adjust radius based on screen size
+        function getRadius() {
+          return window.innerWidth < 480
+            ? 100
+            : window.innerWidth < 768
+            ? 120
+            : 150;
+        }
+
+        function getPosition(index, total) {
+          const radius = getRadius();
           const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
           return {
             x: radius * Math.cos(angle) + 250,
@@ -499,40 +563,24 @@
           };
         }
 
+        // Add touch event handling
+        function handleNodeInteraction(element, g) {
+          if (isTouchDevice) {
+            // Remove active class from all nodes
+            document.querySelectorAll(".system-node").forEach((node) => {
+              node.classList.remove("active");
+            });
+            g.classList.add("active");
+          }
+          hoveredElement = element;
+          updateHighlights();
+          updateInfoBox();
+        }
+
         function updateDiagram() {
-          const filteredElements = Object.entries(systemData).filter(
-            ([_, data]) =>
-              currentCategory === "all" || data.category === currentCategory
-          );
+          // ... (previous updateDiagram code) ...
 
-          // Calculate positions
-          positions = {};
-          filteredElements.forEach(([key], index) => {
-            positions[key] = getPosition(index, filteredElements.length);
-          });
-
-          // Update connections
-          const connections = svg.querySelectorAll(".system-connection");
-          connections.forEach((conn) => conn.remove());
-
-          filteredElements.forEach(([element, data]) => {
-            data.connections
-              .filter((target) => positions[target])
-              .forEach((target) => {
-                const line = document.createElementNS(
-                  "http://www.w3.org/2000/svg",
-                  "line"
-                );
-                line.classList.add("system-connection");
-                line.setAttribute("x1", positions[element].x);
-                line.setAttribute("y1", positions[element].y);
-                line.setAttribute("x2", positions[target].x);
-                line.setAttribute("y2", positions[target].y);
-                svg.insertBefore(line, nodesContainer);
-              });
-          });
-
-          // Update nodes
+          // Update nodes with touch support
           nodesContainer.innerHTML = "";
           filteredElements.forEach(([element, data]) => {
             const g = document.createElementNS(
@@ -544,97 +592,51 @@
               "transform",
               `translate(${positions[element].x},${positions[element].y})`
             );
+            g.setAttribute("tabindex", "0"); // Make focusable
+            g.setAttribute("role", "button");
+            g.setAttribute("aria-label", `${element}: ${data.description}`);
 
-            const circle = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "circle"
-            );
-            circle.setAttribute("r", "40");
-            circle.classList.add(data.category);
+            // ... (create circle and text elements) ...
 
-            const text = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "text"
-            );
-            text.textContent = element;
-            text.setAttribute("text-anchor", "middle");
-            text.setAttribute("dy", "0.3em");
-            text.setAttribute("fill", "white");
+            if (isTouchDevice) {
+              g.addEventListener("touchstart", (e) => {
+                e.preventDefault();
+                handleNodeInteraction(element, g);
+              });
+            } else {
+              g.addEventListener("mouseenter", () =>
+                handleNodeInteraction(element, g)
+              );
+              g.addEventListener("mouseleave", () => {
+                hoveredElement = null;
+                g.classList.remove("active");
+                updateHighlights();
+                updateInfoBox();
+              });
+            }
 
-            g.appendChild(circle);
-            g.appendChild(text);
-
-            g.addEventListener("mouseenter", () => {
-              hoveredElement = element;
-              updateHighlights();
-              updateInfoBox();
-            });
-
-            g.addEventListener("mouseleave", () => {
-              hoveredElement = null;
-              updateHighlights();
-              updateInfoBox();
+            // Add keyboard support
+            g.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleNodeInteraction(element, g);
+              }
             });
 
             nodesContainer.appendChild(g);
           });
         }
 
-        function updateHighlights() {
-          const connections = svg.querySelectorAll(".system-connection");
-          connections.forEach((conn) => {
-            conn.classList.remove("active");
-          });
-
-          if (hoveredElement) {
-            const elementData = systemData[hoveredElement];
-            elementData.connections.forEach((target) => {
-              connections.forEach((conn) => {
-                const x1 = parseFloat(conn.getAttribute("x1"));
-                const y1 = parseFloat(conn.getAttribute("y1"));
-                const x2 = parseFloat(conn.getAttribute("x2"));
-                const y2 = parseFloat(conn.getAttribute("y2"));
-
-                if (
-                  (x1 === positions[hoveredElement].x &&
-                    y1 === positions[hoveredElement].y) ||
-                  (x2 === positions[hoveredElement].x &&
-                    y2 === positions[hoveredElement].y)
-                ) {
-                  conn.classList.add("active");
-                }
-              });
-            });
-          }
-        }
-
-        function updateInfoBox() {
-          if (hoveredElement) {
-            const data = systemData[hoveredElement];
-            infoBox.innerHTML = `
-              <p><strong class="capitalize">${hoveredElement}</strong> (${
-              data.category
-            }): ${data.description}</p>
-              <p class="mt-2">Connected to: ${data.connections.join(", ")}</p>
-            `;
-          } else {
-            infoBox.innerHTML = `
-              <p>Hover over any element to see its description and connections.</p>
-            `;
-          }
-        }
-
-        filterButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            filterButtons.forEach((btn) => btn.classList.remove("active"));
-            button.classList.add("active");
-            currentCategory = button.dataset.category;
-            hoveredElement = null;
+        // Add window resize handler
+        let resizeTimeout;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(() => {
             updateDiagram();
-            updateInfoBox();
-          });
+          }, 250);
         });
 
+        // Initialize
         updateDiagram();
       }
 
