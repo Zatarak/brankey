@@ -181,6 +181,8 @@
         opacity: 0.3;
         pointer-events: none;
         animation: pulse 2s infinite ease-in-out;
+        text-decoration: none;
+        color: #333;
       }
 
       .circle.active {
@@ -295,59 +297,6 @@
         animation-delay: 1.8s;
       }
 
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1100;
-      }
-
-      .modal-content {
-        position: relative;
-        background: white;
-        width: 80%;
-        max-width: 600px;
-        margin: 50px auto;
-        padding: 20px;
-        border-radius: 10px;
-        animation: modalFade 0.3s ease-in;
-        max-height: 80vh;
-        overflow-y: auto;
-      }
-
-      .close-modal {
-        position: absolute;
-        right: 20px;
-        top: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        color: #333;
-        float: right;
-      }
-
-      .modal-title {
-        font-size: 24px;
-        margin-bottom: 15px;
-        color: #333;
-      }
-
-      .modal-text {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #666;
-        white-space: pre-wrap;
-        margin-bottom: 20px;
-      }
-      .close-modal:hover,
-      .close-modal:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
       @keyframes pulse {
         0%,
         100% {
@@ -360,28 +309,6 @@
         }
       }
 
-      @keyframes flowline {
-        from {
-          stroke-dashoffset: 1000;
-        }
-        to {
-          stroke-dashoffset: 0;
-        }
-      }
-      button {
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        background-color: rgb(41, 116, 250);
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      button:hover {
-        background-color: #0056b3;
-      }
       @media (max-width: 768px) {
         .circles-container {
           display: flex;
@@ -426,40 +353,39 @@
     <div class="horizontal-line"></div>
     <main class="main-content">
       <div class="circles-container">
-        <div id="circle1" class="circle">
+        <a href="systems.html" id="circle1" class="circle">
           <h3>Systems</h3>
-        </div>
-        <div id="circle2" class="circle">
+        </a>
+        <a href="belonging.html" id="circle2" class="circle">
           <h3>Belonging</h3>
-        </div>
-        <div id="circle3" class="circle"><h3>Co-Being</h3></div>
-        <div id="circle4" class="circle"><h3>Needs</h3></div>
-        <div id="circle5" class="circle">
+        </a>
+        <a href="co-being.html" id="circle3" class="circle">
+          <h3>Co-Being</h3>
+        </a>
+        <a href="needs.html" id="circle4" class="circle">
+          <h3>Needs</h3>
+        </a>
+        <a href="responsibility.html" id="circle5" class="circle">
           <h3>Respons<br />bility</h3>
-        </div>
-        <div id="circle6" class="circle">
+        </a>
+        <a href="communication.html" id="circle6" class="circle">
           <h3>Communi<br />cation</h3>
-        </div>
-        <div id="circle7" class="circle">
+        </a>
+        <a href="relationships.html" id="circle7" class="circle">
           <h3>Relation<br />ships</h3>
-        </div>
-        <div id="circle8" class="circle"><h3>Love</h3></div>
-        <div id="circle9" class="circle"><h3>Curiosity</h3></div>
-        <div id="circle10" class="circle">
+        </a>
+        <a href="love.html" id="circle8" class="circle">
+          <h3>Love</h3>
+        </a>
+        <a href="curiosity.html" id="circle9" class="circle">
+          <h3>Curiosity</h3>
+        </a>
+        <a href="resilience.html" id="circle10" class="circle">
           <h3>Re<br />silience</h3>
-        </div>
-        <div id="circle11" class="circle">
+        </a>
+        <a href="create.html" id="circle11" class="circle">
           <h3>Create</h3>
-        </div>
-      </div>
-
-      <div class="modal">
-        <div class="modal-content">
-          <span class="close-modal">&times;</span>
-          <h2 class="modal-title"></h2>
-          <p class="modal-text"></p>
-          <div class="custom-content"></div>
-        </div>
+        </a>
       </div>
 
       <p class="bigLogo">
@@ -496,131 +422,12 @@
         });
       });
 
-      // Circle and modal functionality
-      const circleContent = {
-        circle1: {
-          title: "Systems",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book A Session</button>",
-        },
-
-        circle2: {
-          title: "Belonging",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle3: {
-          title: "Co-Being",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle4: {
-          title: "Needs",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle5: {
-          title: "Responsibility",
-          text: "Change",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle6: {
-          title: "Communication",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle7: {
-          title: "Relationships",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle8: {
-          title: "Love",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle9: {
-          title: "Curiosity",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle10: {
-          title: "Resilience",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-        circle11: {
-          title: "Creating",
-          text: "text",
-          customContent:
-            "<button onclick=\"navigateToPage('https://calendly.com/brankeey/30min')\">Book a Session</button>",
-        },
-      };
-
-      const modal = document.querySelector(".modal");
-      const modalTitle = document.querySelector(".modal-title");
-      const modalText = document.querySelector(".modal-text");
-      const closeModal = document.querySelector(".close-modal");
-
-      function showModal(e) {
-        const circle = e.currentTarget;
-        const content = circleContent[circle.id];
-        modalTitle.textContent = content.title;
-        modalText.textContent = content.text;
-        const existingCustomContent = modal.querySelector(".custom-content");
-        if (existingCustomContent) existingCustomContent.remove();
-
-        // Add custom content (e.g., button)
-        if (content.customContent) {
-          const customContentDiv = document.createElement("div");
-          customContentDiv.classList.add("custom-content");
-          customContentDiv.innerHTML = content.customContent;
-          modalText.after(customContentDiv);
-        }
-
-        modal.style.display = "block";
-      }
-      function closeModalAndCleanup() {
-        modal.style.display = "none";
-      }
+      // Circle animation
       document.querySelectorAll(".circle").forEach((circle) => {
         setTimeout(() => {
           circle.classList.add("active");
         }, 500 * parseInt(circle.id.replace("circle", "")));
-
-        circle.addEventListener("mouseenter", () => {
-          if (circle.classList.contains("active")) {
-            circle.addEventListener("click", showModal);
-          }
-        });
-
-        circle.addEventListener("mouseleave", () => {
-          circle.removeEventListener("click", showModal);
-        });
       });
-
-      closeModal.addEventListener("click", closeModalAndCleanup);
-      window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          closeModalAndCleanup();
-        }
-      });
-      function navigateTo(section) {
-        document.getElementById(`${section}-link`).click();
-      }
-      function navigateToPage(page) {
-        window.location.href = page;
-      }
     </script>
   </body>
 </html>
