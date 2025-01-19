@@ -197,6 +197,18 @@
         text-align: justify;
         color: black;
         line-height: 1.5;
+        animation: zoomText 1s ease-in-out infinite;
+      }
+      @keyframes zoomText {
+        0% {
+          transform: scale(1); /* Normal size */
+        }
+        50% {
+          transform: scale(1.5); /* Grow to 1.5x size */
+        }
+        100% {
+          transform: scale(1); /* Return to original size */
+        }
       }
       h1 {
         padding: 20px;
@@ -215,7 +227,6 @@
         border: 2px solid black;
         margin-bottom: 10px;
         position: relative;
-        background: white;
         display: flex; /* Make this a flex container */
         justify-content: space-between; /* Space out items evenly */
         align-items: center; /* Vertically align the items */
