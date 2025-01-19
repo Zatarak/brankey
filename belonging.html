@@ -237,7 +237,7 @@
       }
       #readText {
         position: absolute;
-        top: 10px;
+        top: 30px;
         right: 15px;
         background-color: #f4f4f4;
         padding: 5px 10px;
@@ -350,7 +350,7 @@
         document.getElementById(`${section}-link`).click();
       }
       const readButton = document.getElementById("readText");
-      const textContent = document.getElementById("belongingText").textContent;
+      const textContent = document.getElementById("Think about the last time you truly felt at home - not necessarily in a physical space, but in a moment where you thought, "These are my people. This is where I belong." That feeling of belonging isn't just a nice-to-have; it's as essential to our well-being as food and shelter. When we belong, we feel safe to be ourselves, understood without explanation, and valued for who we are, not just what we do. It's like having a comfortable chair at life's table - you know it's yours, and no one questions your right to sit there. Yet for many, this chair remains empty. The numbers tell a striking story: from America to Africa to Asia, millions struggle with chronic loneliness. Imagine walking into a party where everyone seems to be speaking a language you don't quite understand - that's how one in five Americans and South Koreans feel every day, while in China, it's one in three people searching for meaningful connection. This disconnect hits harder for some. If you've ever been the only person of your background in a room, you might know the nagging question: "Do I really fit in here?" Like a guest who's never quite sure if they received a proper invitation, people from underrepresented groups often find themselves second-guessing their place, watching their every step, wondering if each small mistake confirms their outsider status. Building true belonging is like tending a garden - it needs attention, care, and the right conditions to flourish. It starts with creating spaces where everyone's voice carries weight, where differences aren't just tolerated but celebrated. Think of times when you felt truly heard and understood - those moments are the seeds of belonging. At its heart, belonging weaves the invisible threads that connect us to our communities, our purpose, and ourselves. It's not just about being part of something; it's about helping create something - a story bigger than ourselves, where everyone's chapter matters.");
 
       readButton.addEventListener("click", () => {
         responsiveVoice.speak(textContent, "UK English Female");
