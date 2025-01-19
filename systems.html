@@ -196,8 +196,10 @@
         color: black;
         line-height: 1.5;
         margin-top: 16px;
+        margin-left: 5px;
+        margin-right: 5px;
         padding: 16px;
-        background-color: #f1f5f9;
+        background-color: #e2e8f0;
         border-radius: 8px;
         min-height: 80px;
       }
@@ -226,12 +228,14 @@
         width: 100%;
         max-width: 800px;
         margin: 20px auto;
+        padding: 0 15px;
       }
 
       .system-svg {
         width: 100%;
         height: auto;
-        max-height: 90vh;
+        aspect-ratio: 1;
+        max-height: 80vh;
       }
 
       .system-filters {
@@ -273,7 +277,6 @@
 
       .system-node circle {
         transition: all 0.3s;
-        r: 40;
       }
 
       .system-node:hover circle {
@@ -335,9 +338,12 @@
           flex: 1 1 calc(50% - 4px); /* Two buttons per row on very small screens */
           max-width: calc(50% - 4px);
         }
-
+        .system-svg {
+          aspect-ratio: 1;
+          max-height: 60vh;
+        }
         .system-node circle {
-          r: 30; /* Slightly smaller circles on mobile */
+          aspect-ratio: 1; /* Slightly smaller circles on mobile */
         }
 
         .system-node text {
@@ -351,7 +357,16 @@
       }
       @media (max-width: 480px) {
         .system-svg {
-          height: 300px; /* Fixed height for very small screens */
+          aspect-ratio: 1;
+          max-height: 50vh;
+        }
+
+        .system-node circle {
+          aspect-ratio: 1 / 1;
+        }
+
+        .system-node text {
+          font-size: 10;
         }
       }
 
