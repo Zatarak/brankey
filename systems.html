@@ -109,10 +109,12 @@
         background-color: #333;
         margin: 5px 30px;
       }
+
       .main-content {
         flex: 1;
         padding: clamp(20px, 3vw, 40px);
       }
+
       .bigLogo {
         display: block;
         font-size: clamp(40px, 8vw, 80px);
@@ -121,6 +123,7 @@
         text-align: center;
         padding-top: clamp(20px, 4vw, 40px);
       }
+
       .resources {
         display: block;
         font-size: clamp(30px, 2vw, 20px);
@@ -129,6 +132,7 @@
         text-align: left;
         margin-left: 51.5%;
       }
+
       footer {
         background-color: transparent;
         padding: clamp(20px, 3vw, 40px);
@@ -156,6 +160,7 @@
         background-color: transparent;
         color: rgb(92, 121, 255);
       }
+
       .action-button {
         padding: 10px;
         margin-left: 5vw;
@@ -181,6 +186,7 @@
         border: 2px solid black;
         text-decoration: none;
       }
+
       .sytemsText {
         padding: 25px;
         margin: 10px;
@@ -190,6 +196,7 @@
         color: black;
         line-height: 1.5;
       }
+
       h1 {
         padding: 20px;
         margin: 20px;
@@ -199,6 +206,7 @@
         color: black;
         text-align: center;
       }
+
       .box {
         width: 90%;
         padding: 5px;
@@ -206,6 +214,93 @@
         margin-right: 5vw;
         border: 2px solid black;
         margin-bottom: 10px;
+      }
+
+      /* System Diagram Styles */
+      .system-diagram {
+        width: 100%;
+        max-width: 800px;
+        margin: 20px auto;
+      }
+
+      .system-svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .system-filters {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+        justify-content: center;
+      }
+
+      .filter-button {
+        padding: 8px 16px;
+        border-radius: 9999px;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .filter-button.active {
+        background-color: #1e293b;
+        color: white;
+      }
+
+      .filter-button:not(.active) {
+        background-color: #e2e8f0;
+        color: #475569;
+      }
+
+      .system-node {
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .system-node circle {
+        transition: all 0.3s;
+      }
+
+      .system-node:hover circle {
+        transform: scale(1.1);
+      }
+
+      .system-connection {
+        transition: all 0.2s;
+        stroke: #94a3b8;
+        stroke-width: 1;
+      }
+
+      .system-connection.active {
+        stroke: #2563eb;
+        stroke-width: 3;
+      }
+
+      .system-info-box {
+        margin-top: 16px;
+        padding: 16px;
+        background-color: #f1f5f9;
+        border-radius: 8px;
+        min-height: 80px;
+      }
+
+      .physical {
+        fill: #2563eb;
+      }
+      .psychological {
+        fill: #7c3aed;
+      }
+      .social {
+        fill: #059669;
+      }
+      .environmental {
+        fill: #d97706;
+      }
+
+      .system-node:not(:hover) circle {
+        fill: #1e293b;
       }
 
       @media (max-width: 768px) {
@@ -240,33 +335,33 @@
       <div class="box">
         <h1><span class="highlight">Systems</span></h1>
 
-        <p class="sytemsText">
-          When I think about systems, I picture a forest. At first glance, it
-          might seem like just a collection of trees, animals, and soil. But
-          look closer, and you'll discover a masterpiece of interconnection
-          where every element plays a vital role in the greater whole. In this
-          living network, healthy soil nurtures trees, which in turn provide
-          shelter for animals. These creatures then enrich the soil through
-          their daily activities, completing an endless cycle of give and take.
-          This dance of interconnection isn't unique to forests – it's the
-          fundamental pattern of life itself. Systems are everywhere: in nature,
-          in our bodies, in our societies. Physically, we are a marvel of
-          cooperation, with organs, tissues, and cells working in perfect
-          harmony to keep us alive. Psychologically, we are shaped by an
-          intricate web of thoughts, emotions, memories, and beliefs. And
-          socially, we exist not in isolation but as part of an expanding circle
-          of relationships – from family to community to society. While linear
-          thinking sees life as a straight line of cause and effect, systemic
-          thinking reveals the true complexity of our world. It shows us how
-          actions ripple through networks, creating feedback loops that can take
-          time to fully unfold. A small change in one area can cascade through
-          the entire system, sometimes leading to unexpected results. This is
-          where the real power of systemic thinking lies: it helps us find those
-          precise points where thoughtful, focused actions can create lasting
-          positive change. But it requires patience. Quick fixes often address
-          only symptoms, while true solutions come from understanding and
-          working with the whole system.
-        </p>
+        <div class="system-diagram">
+          <div class="system-filters">
+            <button class="filter-button active" data-category="all">
+              All
+            </button>
+            <button class="filter-button" data-category="physical">
+              Physical
+            </button>
+            <button class="filter-button" data-category="psychological">
+              Psychological
+            </button>
+            <button class="filter-button" data-category="social">Social</button>
+            <button class="filter-button" data-category="environmental">
+              Environmental
+            </button>
+          </div>
+
+          <svg viewBox="0 0 500 500" class="system-svg">
+            <g id="nodes-container"></g>
+          </svg>
+
+          <div class="system-info-box">
+            <p class="info-text">
+              Hover over any element to see its description and connections.
+            </p>
+          </div>
+        </div>
       </div>
       <a href="#" class="action-button">ACTION</a>
 
@@ -275,6 +370,7 @@
       </p>
       <p class="resources">Resources</p>
     </main>
+
     <footer>
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
@@ -284,6 +380,7 @@
     </footer>
 
     <script>
+      // Menu functionality
       const menuBtn = document.querySelector(".menu-btn");
       const closeBtn = document.querySelector(".close-btn");
       const navMenu = document.querySelector(".nav-menu");
@@ -303,9 +400,222 @@
         });
       });
 
-      function navigateTo(section) {
-        document.getElementById(`${section}-link`).click();
+      // System diagram functionality
+      const systemData = {
+        body: {
+          category: "physical",
+          connections: ["brain", "health", "emotions"],
+          description: "Physical structure and biological processes",
+        },
+        brain: {
+          category: "physical",
+          connections: ["mind", "body", "emotions"],
+          description: "Neural networks and cognitive processing",
+        },
+        health: {
+          category: "physical",
+          connections: ["body", "emotions", "environment"],
+          description: "Overall physical wellbeing and vitality",
+        },
+        mind: {
+          category: "psychological",
+          connections: ["brain", "emotions", "beliefs"],
+          description: "Conscious thoughts and mental processes",
+        },
+        emotions: {
+          category: "psychological",
+          connections: ["mind", "body", "relationships"],
+          description: "Feelings and emotional responses",
+        },
+        beliefs: {
+          category: "psychological",
+          connections: ["mind", "culture", "behavior"],
+          description: "Personal values and belief systems",
+        },
+        relationships: {
+          category: "social",
+          connections: ["emotions", "behavior", "culture"],
+          description: "Connections with family, friends, and others",
+        },
+        culture: {
+          category: "social",
+          connections: ["beliefs", "relationships", "environment"],
+          description: "Cultural context and social norms",
+        },
+        behavior: {
+          category: "social",
+          connections: ["beliefs", "relationships", "environment"],
+          description: "Actions and interactions with others",
+        },
+        environment: {
+          category: "environmental",
+          connections: ["health", "culture", "behavior"],
+          description: "Physical and social surroundings",
+        },
+      };
+
+      let positions = {};
+
+      function initializeSystemDiagram() {
+        const svg = document.querySelector(".system-svg");
+        const nodesContainer = document.getElementById("nodes-container");
+        const infoBox = document.querySelector(".system-info-box");
+        const filterButtons = document.querySelectorAll(".filter-button");
+
+        let currentCategory = "all";
+        let hoveredElement = null;
+
+        function getPosition(index, total, radius = 150) {
+          const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
+          return {
+            x: radius * Math.cos(angle) + 250,
+            y: radius * Math.sin(angle) + 250,
+          };
+        }
+
+        function updateDiagram() {
+          const filteredElements = Object.entries(systemData).filter(
+            ([_, data]) =>
+              currentCategory === "all" || data.category === currentCategory
+          );
+
+          // Calculate positions
+          positions = {};
+          filteredElements.forEach(([key], index) => {
+            positions[key] = getPosition(index, filteredElements.length);
+          });
+
+          // Update connections
+          const connections = svg.querySelectorAll(".system-connection");
+          connections.forEach((conn) => conn.remove());
+
+          filteredElements.forEach(([element, data]) => {
+            data.connections
+              .filter((target) => positions[target])
+              .forEach((target) => {
+                const line = document.createElementNS(
+                  "http://www.w3.org/2000/svg",
+                  "line"
+                );
+                line.classList.add("system-connection");
+                line.setAttribute("x1", positions[element].x);
+                line.setAttribute("y1", positions[element].y);
+                line.setAttribute("x2", positions[target].x);
+                line.setAttribute("y2", positions[target].y);
+                svg.insertBefore(line, nodesContainer);
+              });
+          });
+
+          // Update nodes
+          nodesContainer.innerHTML = "";
+          filteredElements.forEach(([element, data]) => {
+            const g = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "g"
+            );
+            g.classList.add("system-node");
+            g.setAttribute(
+              "transform",
+              `translate(${positions[element].x},${positions[element].y})`
+            );
+
+            const circle = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "circle"
+            );
+            circle.setAttribute("r", "40");
+            circle.classList.add(data.category);
+
+            const text = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "text"
+            );
+            text.textContent = element;
+            text.setAttribute("text-anchor", "middle");
+            text.setAttribute("dy", "0.3em");
+            text.setAttribute("fill", "white");
+
+            g.appendChild(circle);
+            g.appendChild(text);
+
+            g.addEventListener("mouseenter", () => {
+              hoveredElement = element;
+              updateHighlights();
+              updateInfoBox();
+            });
+
+            g.addEventListener("mouseleave", () => {
+              hoveredElement = null;
+              updateHighlights();
+              updateInfoBox();
+            });
+
+            nodesContainer.appendChild(g);
+          });
+        }
+
+        function updateHighlights() {
+          const connections = svg.querySelectorAll(".system-connection");
+          connections.forEach((conn) => {
+            conn.classList.remove("active");
+          });
+
+          if (hoveredElement) {
+            const elementData = systemData[hoveredElement];
+            elementData.connections.forEach((target) => {
+              connections.forEach((conn) => {
+                const x1 = parseFloat(conn.getAttribute("x1"));
+                const y1 = parseFloat(conn.getAttribute("y1"));
+                const x2 = parseFloat(conn.getAttribute("x2"));
+                const y2 = parseFloat(conn.getAttribute("y2"));
+
+                if (
+                  (x1 === positions[hoveredElement].x &&
+                    y1 === positions[hoveredElement].y) ||
+                  (x2 === positions[hoveredElement].x &&
+                    y2 === positions[hoveredElement].y)
+                ) {
+                  conn.classList.add("active");
+                }
+              });
+            });
+          }
+        }
+
+        function updateInfoBox() {
+          if (hoveredElement) {
+            const data = systemData[hoveredElement];
+            infoBox.innerHTML = `
+              <p><strong class="capitalize">${hoveredElement}</strong> (${
+              data.category
+            }): ${data.description}</p>
+              <p class="mt-2">Connected to: ${data.connections.join(", ")}</p>
+            `;
+          } else {
+            infoBox.innerHTML = `
+              <p>Hover over any element to see its description and connections.</p>
+            `;
+          }
+        }
+
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
+            currentCategory = button.dataset.category;
+            hoveredElement = null;
+            updateDiagram();
+            updateInfoBox();
+          });
+        });
+
+        updateDiagram();
       }
+
+      // Initialize the system diagram when the page loads
+      document.addEventListener("DOMContentLoaded", () => {
+        initializeSystemDiagram();
+      });
     </script>
   </body>
 </html>
