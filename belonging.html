@@ -243,7 +243,38 @@
     <main class="main-content">
       <div class="box">
         <h1><span class="highlight">Belonging</span></h1>
-        <p class="belongingText"></p>
+        <p class="belongingText">
+          Think about the last time you truly felt "at home" - not necessarily
+          in a physical space, but in a moment where you thought, "These are my
+          people. This is where I belong." That feeling of belonging isn't just
+          a nice-to-have; it's as essential to our well-being as food and
+          shelter. When we belong, we feel safe to be ourselves, understood
+          without explanation, and valued for who we are, not just what we do.
+          It's like having a comfortable chair at life's table - you know it's
+          yours, and no one questions your right to sit there. Yet for many,
+          this chair remains empty. The numbers tell a striking story: from
+          America to Africa to Asia, millions struggle with chronic loneliness.
+          Imagine walking into a party where everyone seems to be speaking a
+          language you don't quite understand - that's how one in five Americans
+          and South Koreans feel every day, while in China, it's one in three
+          people searching for meaningful connection. This disconnect hits
+          harder for some. If you've ever been the only person of your
+          background in a room, you might know the nagging question: "Do I
+          really fit in here?" Like a guest who's never quite sure if they
+          received a proper invitation, people from underrepresented groups
+          often find themselves second-guessing their place, watching their
+          every step, wondering if each small mistake confirms their outsider
+          status. Building true belonging is like tending a garden - it needs
+          attention, care, and the right conditions to flourish. It starts with
+          creating spaces where everyone's voice carries weight, where
+          differences aren't just tolerated but celebrated. Think of times when
+          you felt truly heard and understood - those moments are the seeds of
+          belonging. At its heart, belonging weaves the invisible threads that
+          connect us to our communities, our purpose, and ourselves. It's not
+          just about being part of something; it's about helping create
+          something - a story bigger than ourselves, where everyone's chapter
+          matters.
+        </p>
       </div>
       <a href="#" class="action-button">Explore Your Belonging</a>
       <div id="belonging-circles"></div>
@@ -283,227 +314,6 @@
       function navigateTo(section) {
         document.getElementById(`${section}-link`).click();
       }
-      import React, { useState, useRef, useEffect } from "react";
-      import { X, Plus } from "lucide-react";
-
-      const BelongingCircles = () => {
-        const [items, setItems] = useState({
-          inner: [
-            { id: "1", category: "People", text: "Family" },
-            { id: "2", category: "Places", text: "Home" },
-            { id: "3", category: "Activities", text: "Hobbies" },
-          ],
-          middle: [
-            { id: "4", category: "People", text: "Colleagues" },
-            { id: "5", category: "Places", text: "Workplace" },
-            { id: "6", category: "Activities", text: "Social Media" },
-          ],
-          outer: [
-            { id: "7", category: "People", text: "New Acquaintances" },
-            { id: "8", category: "Places", text: "New City" },
-            { id: "9", category: "Activities", text: "New Hobby" },
-          ],
-        });
-
-        const [newItem, setNewItem] = useState("");
-        const [selectedCategory, setSelectedCategory] = useState("People");
-        const [draggingItem, setDraggingItem] = useState(null);
-        const [showForm, setShowForm] = useState(false);
-
-        const categories = ["People", "Places", "Activities", "Values"];
-        const circles = ["inner", "middle", "outer"];
-        const colors = {
-          People: "#4F46E5",
-          Places: "#059669",
-          Activities: "#DC2626",
-          Values: "#D97706",
-        };
-
-        const handleDragStart = (item, circle) => {
-          setDraggingItem({ item, sourceCircle: circle });
-        };
-
-        const handleDrop = (targetCircle) => {
-          if (!draggingItem) return;
-
-          const { item, sourceCircle } = draggingItem;
-          if (sourceCircle === targetCircle) return;
-
-          setItems((prev) => ({
-            ...prev,
-            [sourceCircle]: prev[sourceCircle].filter((i) => i.id !== item.id),
-            [targetCircle]: [...prev[targetCircle], item],
-          }));
-          setDraggingItem(null);
-        };
-
-        const handleAddItem = (e) => {
-          e.preventDefault();
-          if (!newItem.trim()) return;
-
-          const newId = Math.random().toString(36).substr(2, 9);
-          setItems((prev) => ({
-            ...prev,
-            outer: [
-              ...prev.outer,
-              {
-                id: newId,
-                category: selectedCategory,
-                text: newItem.trim(),
-              },
-            ],
-          }));
-          setNewItem("");
-          setShowForm(false);
-        };
-
-        const handleRemoveItem = (itemId, circle) => {
-          setItems((prev) => ({
-            ...prev,
-            [circle]: prev[circle].filter((item) => item.id !== itemId),
-          }));
-        };
-
-        return (
-          <div className="w-full max-w-3xl mx-auto p-4 font-mono">
-            <h2 className="text-2xl font-bold mb-4 text-center">
-              Map Your Circles of Belonging
-            </h2>
-
-            <div className="relative h-[500px] bg-gray-50 rounded-lg mb-4">
-              {circles.map((circle, idx) => (
-                <div
-                  key={circle}
-                  className={`absolute rounded-full border-2 border-gray-300 transition-colors
-              ${
-                idx === 0
-                  ? "w-[200px] h-[200px]"
-                  : idx === 1
-                  ? "w-[350px] h-[350px]"
-                  : "w-[500px] h-[500px]"
-              }
-              ${draggingItem && "hover:border-blue-500"}`}
-                  style={{
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={() => handleDrop(circle)}
-                >
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-sm font-bold">
-                    {circle.charAt(0).toUpperCase() + circle.slice(1)}
-                  </div>
-
-                  {items[circle].map((item) => (
-                    <div
-                      key={item.id}
-                      draggable
-                      onDragStart={() => handleDragStart(item, circle)}
-                      className="absolute cursor-move bg-white px-3 py-1 rounded-full shadow-sm
-                  transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2"
-                      style={{
-                        top: `${Math.random() * 70 + 15}%`,
-                        left: `${Math.random() * 70 + 15}%`,
-                        borderLeft: `4px solid ${colors[item.category]}`,
-                      }}
-                    >
-                      {item.text}
-                      <button
-                        onClick={() => handleRemoveItem(item.id, circle)}
-                        className="text-gray-400 hover:text-red-500"
-                      >
-                        <X size={14} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ))}
-
-              <button
-                onClick={() => setShowForm(true)}
-                className="absolute bottom-4 right-4 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
-              >
-                <Plus size={24} />
-              </button>
-            </div>
-
-            {showForm && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                <form
-                  onSubmit={handleAddItem}
-                  className="bg-white p-6 rounded-lg max-w-md w-full"
-                >
-                  <h3 className="text-lg font-bold mb-4">Add New Item</h3>
-
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">
-                      Category
-                    </label>
-                    <select
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="w-full border rounded p-2"
-                    >
-                      {categories.map((category) => (
-                        <option key={category} value={category}>
-                          {category}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">
-                      Text
-                    </label>
-                    <input
-                      type="text"
-                      value={newItem}
-                      onChange={(e) => setNewItem(e.target.value)}
-                      className="w-full border rounded p-2"
-                      placeholder="Enter text..."
-                    />
-                  </div>
-
-                  <div className="flex justify-end gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(false)}
-                      className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                    >
-                      Add
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <h3 className="font-bold mb-2">How to use:</h3>
-              <ul className="list-disc pl-5 space-y-1 text-sm">
-                <li>
-                  Drag items between circles to show how connected you feel to
-                  them
-                </li>
-                <li>Add new items using the + button</li>
-                <li>Different colors represent different categories</li>
-                <li>
-                  Inner circle = Most connected, Outer circle = Less connected
-                </li>
-              </ul>
-            </div>
-          </div>
-        );
-      };
-
-      export default BelongingCircles;
     </script>
   </body>
 </html>
