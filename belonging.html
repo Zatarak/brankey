@@ -236,23 +236,16 @@
         border: 1px solid #ccc;
       }
       #readText {
-        padding: 12px 20px;
-        margin-top: 20px;
-        background-color: #5c79ff;
-        color: white;
-        border: 2px solid black;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background-color: #f4f4f4;
+        padding: 5px 10px;
         border-radius: 5px;
-        font-size: clamp(16px, 3vw, 24px);
-        font-family: Arial, sans-serif;
-        text-align: center;
-        cursor: pointer;
-        text-transform: uppercase;
-        width: 100%;
-        max-width: 300px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        font-size: 0.9em;
+        color: #333;
+        font-weight: bold;
+        border: 1px solid #ccc;
       }
 
       #readText:hover {
@@ -281,11 +274,11 @@
     <main class="main-content">
       <div class="box">
         <div class="reading-time">~2 min read</div>
-        <button id="readText" class="action-button">🔊 Listen</button>
+        <button id="readText" class="action-button">🔊</button>
         <p class="belongingText" id="belongingText"></p>
         <h1>Belonging</h1>
 
-        <p class="belongingText">
+        <p class="belongingText" id="belongingText">
           Think about the last time you truly felt "at home" - not necessarily
           in a physical space, but in a moment where you thought, "These are my
           people. This is where I belong." That feeling of belonging isn't just
