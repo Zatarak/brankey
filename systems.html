@@ -578,24 +578,39 @@
           };
         }
 
-        // Add touch event handling
-        function handleNodeInteraction(element, g) {
-          if (isTouchDevice) {
-            // Remove active class from all nodes
-            document.querySelectorAll(".system-node").forEach((node) => {
-              node.classList.remove("active");
-            });
-            g.classList.add("active");
-          }
-          hoveredElement = element;
-          updateHighlights();
-          updateInfoBox();
-        }
-
         function updateDiagram() {
-          // ... (previous updateDiagram code) ...
+          const filteredElements = Object.entries(systemData).filter(
+            ([_, data]) =>
+              currentCategory === "all" || data.category === currentCategory
+          );
 
-          // Update nodes with touch support
+          // Calculate positions
+          filteredElements.forEach(([key], index) => {
+            positions[key] = getPosition(index, filteredElements.length);
+          });
+
+          // Update connections
+          const connections = svg.querySelectorAll(".system-connection");
+          connections.forEach((conn) => conn.remove());
+
+          filteredElements.forEach(([element, data]) => {
+            data.connections
+              .filter((target) => positions[target])
+              .forEach((target) => {
+                const line = document.createElementNS(
+                  "http://www.w3.org/2000/svg",
+                  "line"
+                );
+                line.classList.add("system-connection");
+                line.setAttribute("x1", positions[element].x);
+                line.setAttribute("y1", positions[element].y);
+                line.setAttribute("x2", positions[target].x);
+                line.setAttribute("y2", positions[target].y);
+                svg.insertBefore(line, nodesContainer);
+              });
+          });
+
+          // Update nodes
           nodesContainer.innerHTML = "";
           filteredElements.forEach(([element, data]) => {
             const g = document.createElementNS(
@@ -607,11 +622,29 @@
               "transform",
               `translate(${positions[element].x},${positions[element].y})`
             );
-            g.setAttribute("tabindex", "0"); // Make focusable
+            g.setAttribute("tabindex", "0");
             g.setAttribute("role", "button");
             g.setAttribute("aria-label", `${element}: ${data.description}`);
 
-            // ... (create circle and text elements) ...
+            const circle = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "circle"
+            );
+            circle.setAttribute("r", "40");
+            circle.classList.add(data.category);
+
+            const text = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "text"
+            );
+            text.textContent = element;
+            text.setAttribute("text-anchor", "middle");
+            text.setAttribute("dy", "0.3em");
+            text.setAttribute("fill", "white");
+            text.setAttribute("font-size", "14");
+
+            g.appendChild(circle);
+            g.appendChild(text);
 
             if (isTouchDevice) {
               g.addEventListener("touchstart", (e) => {
@@ -630,7 +663,6 @@
               });
             }
 
-            // Add keyboard support
             g.addEventListener("keydown", (e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
@@ -642,7 +674,74 @@
           });
         }
 
-        // Add window resize handler
+        function handleNodeInteraction(element, g) {
+          if (isTouchDevice) {
+            document.querySelectorAll(".system-node").forEach((node) => {
+              node.classList.remove("active");
+            });
+            g.classList.add("active");
+          }
+          hoveredElement = element;
+          updateHighlights();
+          updateInfoBox();
+        }
+
+        function updateHighlights() {
+          const connections = svg.querySelectorAll(".system-connection");
+          connections.forEach((conn) => conn.classList.remove("active"));
+
+          if (hoveredElement && systemData[hoveredElement]) {
+            systemData[hoveredElement].connections.forEach((target) => {
+              if (positions[target]) {
+                connections.forEach((conn) => {
+                  const x1 = parseFloat(conn.getAttribute("x1"));
+                  const y1 = parseFloat(conn.getAttribute("y1"));
+                  const x2 = parseFloat(conn.getAttribute("x2"));
+                  const y2 = parseFloat(conn.getAttribute("y2"));
+
+                  if (
+                    (Math.abs(x1 - positions[hoveredElement].x) < 1 &&
+                      Math.abs(y1 - positions[hoveredElement].y) < 1) ||
+                    (Math.abs(x2 - positions[hoveredElement].x) < 1 &&
+                      Math.abs(y2 - positions[hoveredElement].y) < 1)
+                  ) {
+                    conn.classList.add("active");
+                  }
+                });
+              }
+            });
+          }
+        }
+
+        function updateInfoBox() {
+          if (hoveredElement && systemData[hoveredElement]) {
+            const data = systemData[hoveredElement];
+            infoBox.innerHTML = `
+        <p><strong>${hoveredElement}</strong> (${data.category}): ${
+              data.description
+            }</p>
+        <p>Connected to: ${data.connections.join(", ")}</p>
+      `;
+          } else {
+            infoBox.innerHTML = `
+        <p>Hover over or tap any element to see its description and connections.</p>
+      `;
+          }
+        }
+
+        // Add event listeners to filter buttons
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
+            currentCategory = button.dataset.category;
+            hoveredElement = null;
+            updateDiagram();
+            updateInfoBox();
+          });
+        });
+
+        // Handle window resizing
         let resizeTimeout;
         window.addEventListener("resize", () => {
           clearTimeout(resizeTimeout);
@@ -651,14 +750,12 @@
           }, 250);
         });
 
-        // Initialize
+        // Initial setup
         updateDiagram();
       }
 
-      // Initialize the system diagram when the page loads
-      document.addEventListener("DOMContentLoaded", () => {
-        initializeSystemDiagram();
-      });
+      // Initialize when the page loads
+      document.addEventListener("DOMContentLoaded", initializeSystemDiagram);
     </script>
   </body>
 </html>
