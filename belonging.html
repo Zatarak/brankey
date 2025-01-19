@@ -326,38 +326,42 @@
     </footer>
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <script>
-        const menuBtn = document.querySelector(".menu-btn");
-        const closeBtn = document.querySelector(".close-btn");
-        const navMenu = document.querySelector(".nav-menu");
-        const navLinks = document.querySelectorAll(".nav-link");
+      const menuBtn = document.querySelector(".menu-btn");
+      const closeBtn = document.querySelector(".close-btn");
+      const navMenu = document.querySelector(".nav-menu");
+      const navLinks = document.querySelectorAll(".nav-link");
 
-        menuBtn.addEventListener("click", () => {
-          navMenu.classList.add("active");
-        });
+      menuBtn.addEventListener("click", () => {
+        navMenu.classList.add("active");
+      });
 
-        closeBtn.addEventListener("click", () => {
+      closeBtn.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
           navMenu.classList.remove("active");
         });
+      });
 
-        navLinks.forEach((link) => {
-          link.addEventListener("click", () => {
-            navMenu.classList.remove("active");
-          });
-        });
+      function navigateTo(section) {
+        document.getElementById(`${section}-link`).click();
+      }
+      const readButton = document.getElementById("readText");
+      const textContent = document.getElementById("belongingText").textContent;
 
-        function navigateTo(section) {
-          document.getElementById(`${section}-link`).click();
-        }
-        const readButton = document.getElementById("readText");
-        const textContent = document.getElementById("belongingText").textContent;
+      if (textElement && textElement.textContent.trim() !== "") {
+        const textContent = textElement.textContent;
+        console.log("Text Content found:", textContent);
 
-        readButton.addEventListener("click", () => {
+        readButton.addEventListener("click", function () {
+          console.log("Button clicked");
           responsiveVoice.speak(textContent, "UK English Female");
         });
-        } else {
-      console.error("Text content not found or is empty");
-        }
-        });
+      } else {
+        console.error("Text content not found or is empty");
+      }
     </script>
   </body>
 </html>
