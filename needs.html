@@ -279,7 +279,7 @@
         <div class="reading-time">~2 min read</div>
         <button id="readText" class="action-button">🔊</button>
         <h1>Needs</h1>
-        <p class="needsText">
+        <p class="needsText" id="needsText">
           Imagine walking into your home after a long day. You're hungry, tired,
           and just want to rest. These aren't just wants – they're needs, as
           fundamental to your well-being as roots are to a tree. But human needs
@@ -347,7 +347,7 @@
         });
       });
 
-// Text-to-speech functionality
+      // Text-to-speech functionality
       document.addEventListener("DOMContentLoaded", function () {
         const readButton = document.getElementById("readText");
         const textElement = document.getElementById("needsText");
