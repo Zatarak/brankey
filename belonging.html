@@ -266,6 +266,106 @@
         color: white;
         border: 2px solid black;
       }
+      .wall-container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border: 2px solid black;
+        border-radius: 5px;
+      }
+
+      .wall {
+        min-height: 300px;
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        border-radius: 3px;
+      }
+
+      .wall-message {
+        background-color: rgb(92, 121, 255);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px;
+        max-width: 200px;
+        word-wrap: break-word;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .instructions {
+        background-color: #fff;
+        padding: 15px;
+        margin: 20px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: clamp(12px, 1.5vw, 16px);
+        line-height: 1.4;
+      }
+
+      .message-input-container {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .message-input {
+        flex: 1;
+        padding: 10px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: clamp(12px, 1.5vw, 16px);
+        border: 2px solid black;
+        border-radius: 3px;
+      }
+
+      .submit-button {
+        padding: 10px 20px;
+        background-color: rgb(92, 121, 255);
+        color: white;
+        border: 2px solid black;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: monospace;
+        text-transform: uppercase;
+        font-size: clamp(12px, 1.5vw, 16px);
+      }
+
+      .submit-button:hover {
+        background-color: white;
+        color: rgb(92, 121, 255);
+      }
+
+      @media (max-width: 768px) {
+        .wall-container {
+          width: 95%;
+          padding: 10px;
+        }
+
+        .message-input-container {
+          flex-direction: column;
+        }
+
+        .submit-button {
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -320,6 +420,29 @@
           significant than ourselves, where everyone's chapter matters.
         </p>
       </div>
+
+      <div class="wall-container">
+        <h2 style="font-family: Impact; margin-bottom: 15px">Belonging Wall</h2>
+        <div class="instructions">
+          Share your thoughts on belonging. What makes you feel like you truly
+          belong? Your message will be added to our wall of belonging, creating
+          a tapestry of shared experiences. Keep it kind, keep it real. 💫
+        </div>
+        <div class="wall" id="messageWall">
+          <!-- Messages will be added here dynamically -->
+        </div>
+        <div class="message-input-container">
+          <input
+            type="text"
+            class="message-input"
+            id="messageInput"
+            placeholder="Share your belonging story..."
+            maxlength="200"
+          />
+          <button class="submit-button" id="submitMessage">Share</button>
+        </div>
+      </div>
+
       <a href="#" class="action-button">Explore Your Belonging</a>
       <div id="belonging-circles"></div>
       <p class="bigLogo">
@@ -416,6 +539,29 @@
           console.error("ResponsiveVoice is not loaded");
           readButton.style.display = "none";
         }
+      });
+      // New functionality for the belonging wall
+      document.addEventListener("DOMContentLoaded", function () {
+        const messageWall = document.getElementById("messageWall");
+        const messageInput = document.getElementById("messageInput");
+        const submitButton = document.getElementById("submitMessage");
+
+        submitButton.addEventListener("click", function () {
+          const message = messageInput.value.trim();
+          if (message) {
+            const messageElement = document.createElement("div");
+            messageElement.className = "wall-message";
+            messageElement.textContent = message;
+            messageWall.appendChild(messageElement);
+            messageInput.value = "";
+          }
+        });
+
+        messageInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            submitButton.click();
+          }
+        });
       });
     </script>
   </body>
