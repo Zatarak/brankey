@@ -264,8 +264,9 @@
       }
 
       .visualization-area {
-        height: 300px;
-        position: relative;
+        height: 50vh; /* Make height relative to viewport */
+        min-height: 300px; /* Minimum height */
+        max-height: 500px; /* Maximum height */
         background: #f8f8f8;
         border-radius: 8px;
         margin: 20px 0;
@@ -310,6 +311,12 @@
         justify-content: space-between;
         margin-top: 10px;
         font-family: monospace;
+        padding: 0 10px;
+      }
+
+      .slider-labels span {
+        text-align: center;
+        flex: 1;
       }
 
       .reflection-text {
@@ -404,12 +411,13 @@
             id="balanceSlider"
           />
           <div class="slider-labels">
+            <span>Dependence</span>
             <span>Independence</span>
             <span>Interdependence</span>
           </div>
           <p class="reflection-text" id="reflectionText">
-            Observe the harmony when independence and interdependence are in
-            balance...
+            Observe the harmony when dependence, independence and
+            interdependence are in balance...
           </p>
         </div>
       </div>
@@ -515,62 +523,91 @@
         const balanceSlider = document.getElementById("balanceSlider");
         const reflectionText = document.getElementById("reflectionText");
 
-        // Create SVG element
+        // Create SVG element with viewBox for better scaling
         const svg = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "svg"
         );
         svg.setAttribute("width", "100%");
         svg.setAttribute("height", "100%");
+        svg.setAttribute("viewBox", "0 0 1000 500");
+        svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
         visualizationArea.appendChild(svg);
 
-        // Create circles
-        const circle1 = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-        const circle2 = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-
-        [circle1, circle2].forEach((circle) => {
-          circle.setAttribute("r", "40");
-          svg.appendChild(circle);
-        });
+        // Create three circles
+        const circles = Array(3)
+          .fill()
+          .map(() => {
+            const circle = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "circle"
+            );
+            circle.setAttribute("r", "80"); // Larger base radius
+            svg.appendChild(circle);
+            return circle;
+          });
 
         function updateVisualization(value) {
-          const intensity = Math.abs(value - 50) * 2;
-          const color1 = `rgb(${255 - intensity}, ${100 + intensity}, ${
-            255 - intensity
-          })`;
-          const color2 = `rgb(${100 + intensity}, ${255 - intensity}, ${
-            255 - intensity
-          })`;
+          // Convert 0-100 range to three stages
+          let stage = 0;
+          if (value > 33 && value <= 66) stage = 1;
+          if (value > 66) stage = 2;
 
-          // Update circle positions and colors
-          const svgWidth = svg.clientWidth;
-          const svgHeight = svg.clientHeight;
+          // Define base positions for each stage
+          const positions = {
+            0: {
+              // Dependence
+              spacing: 100,
+              sizes: [100, 60, 60],
+              colors: [
+                "rgb(255,200,200)",
+                "rgb(200,200,255)",
+                "rgb(200,255,200)",
+              ],
+            },
+            1: {
+              // Independence
+              spacing: 300,
+              sizes: [60, 100, 60],
+              colors: [
+                "rgb(200,200,255)",
+                "rgb(255,200,200)",
+                "rgb(200,255,200)",
+              ],
+            },
+            2: {
+              // Interdependence
+              spacing: 200,
+              sizes: [80, 80, 80],
+              colors: [
+                "rgb(200,255,200)",
+                "rgb(200,255,200)",
+                "rgb(200,255,200)",
+              ],
+            },
+          };
 
-          circle1.setAttribute("cx", svgWidth * (0.3 + (value - 50) * 0.002));
-          circle1.setAttribute("cy", svgHeight / 2);
-          circle1.setAttribute("fill", color1);
+          const config = positions[stage];
+          const centerY = 250; // Vertical center
+          const centerX = 500; // Horizontal center
 
-          circle2.setAttribute("cx", svgWidth * (0.7 - (value - 50) * 0.002));
-          circle2.setAttribute("cy", svgHeight / 2);
-          circle2.setAttribute("fill", color2);
+          // Update circles
+          circles.forEach((circle, i) => {
+            const offset = (i - 1) * config.spacing;
+            circle.setAttribute("cx", centerX + offset);
+            circle.setAttribute("cy", centerY);
+            circle.setAttribute("r", config.sizes[i]);
+            circle.setAttribute("fill", config.colors[i]);
+            circle.setAttribute("opacity", "0.7");
+          });
 
-          // Update reflection text
-          if (value < 40) {
-            reflectionText.textContent =
-              "Notice how focusing too much on independence can create separation...";
-          } else if (value > 60) {
-            reflectionText.textContent =
-              "See how strong interdependence creates beautiful patterns of connection...";
-          } else {
-            reflectionText.textContent =
-              "Observe the harmony when independence and interdependence are in balance...";
-          }
+          // Update reflection text based on stage
+          const messages = [
+            "In dependence, we rely heavily on others for support and guidance...",
+            "Through independence, we develop our own strength and capabilities...",
+            "Interdependence creates a harmonious balance of mutual support and individual growth...",
+          ];
+          reflectionText.textContent = messages[stage];
         }
 
         // Initial update
