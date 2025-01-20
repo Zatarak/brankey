@@ -255,6 +255,69 @@
         color: white;
         border: 2px solid black;
       }
+      .co-being-container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 2px solid black;
+        background: white;
+      }
+
+      .visualization-area {
+        height: 300px;
+        position: relative;
+        background: #f8f8f8;
+        border-radius: 8px;
+        margin: 20px 0;
+        overflow: hidden;
+      }
+
+      .circle {
+        position: absolute;
+        transition: all 0.5s ease;
+        opacity: 0.8;
+      }
+
+      .slider-container {
+        width: 100%;
+        padding: 20px 0;
+      }
+
+      .balance-slider {
+        width: 100%;
+        margin: 10px 0;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 4px;
+        background: #ddd;
+        outline: none;
+        border-radius: 2px;
+      }
+
+      .balance-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: rgb(92, 121, 255);
+        border: 2px solid black;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-family: monospace;
+      }
+
+      .reflection-text {
+        text-align: center;
+        margin-top: 20px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: clamp(13px, 1.5vw, 18px);
+      }
     </style>
   </head>
   <body>
@@ -322,7 +385,35 @@
           right conditions to grow - soil, rain, sun, and yes, other trees.
         </p>
       </div>
-      <a href="#" class="action-button">Explore Your Belonging</a>
+
+      <!-- New Co-Being visualization section -->
+      <div class="co-being-container">
+        <h2
+          style="text-align: center; font-family: Impact; margin-bottom: 20px"
+        >
+          Experience Co-Being
+        </h2>
+        <div class="visualization-area" id="visualizationArea"></div>
+        <div class="slider-container">
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            class="balance-slider"
+            id="balanceSlider"
+          />
+          <div class="slider-labels">
+            <span>Independence</span>
+            <span>Interdependence</span>
+          </div>
+          <p class="reflection-text" id="reflectionText">
+            Observe the harmony when independence and interdependence are in
+            balance...
+          </p>
+        </div>
+      </div>
+
       <div id="co-being-circles"></div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
@@ -417,6 +508,83 @@
           console.error("ResponsiveVoice is not loaded");
           readButton.style.display = "none";
         }
+      });
+      // New Co-Being visualization JavaScript
+      document.addEventListener("DOMContentLoaded", function () {
+        const visualizationArea = document.getElementById("visualizationArea");
+        const balanceSlider = document.getElementById("balanceSlider");
+        const reflectionText = document.getElementById("reflectionText");
+
+        // Create SVG element
+        const svg = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
+        svg.setAttribute("width", "100%");
+        svg.setAttribute("height", "100%");
+        visualizationArea.appendChild(svg);
+
+        // Create circles
+        const circle1 = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        const circle2 = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+
+        [circle1, circle2].forEach((circle) => {
+          circle.setAttribute("r", "40");
+          svg.appendChild(circle);
+        });
+
+        function updateVisualization(value) {
+          const intensity = Math.abs(value - 50) * 2;
+          const color1 = `rgb(${255 - intensity}, ${100 + intensity}, ${
+            255 - intensity
+          })`;
+          const color2 = `rgb(${100 + intensity}, ${255 - intensity}, ${
+            255 - intensity
+          })`;
+
+          // Update circle positions and colors
+          const svgWidth = svg.clientWidth;
+          const svgHeight = svg.clientHeight;
+
+          circle1.setAttribute("cx", svgWidth * (0.3 + (value - 50) * 0.002));
+          circle1.setAttribute("cy", svgHeight / 2);
+          circle1.setAttribute("fill", color1);
+
+          circle2.setAttribute("cx", svgWidth * (0.7 - (value - 50) * 0.002));
+          circle2.setAttribute("cy", svgHeight / 2);
+          circle2.setAttribute("fill", color2);
+
+          // Update reflection text
+          if (value < 40) {
+            reflectionText.textContent =
+              "Notice how focusing too much on independence can create separation...";
+          } else if (value > 60) {
+            reflectionText.textContent =
+              "See how strong interdependence creates beautiful patterns of connection...";
+          } else {
+            reflectionText.textContent =
+              "Observe the harmony when independence and interdependence are in balance...";
+          }
+        }
+
+        // Initial update
+        updateVisualization(50);
+
+        // Listen for slider changes
+        balanceSlider.addEventListener("input", (e) => {
+          updateVisualization(parseInt(e.target.value));
+        });
+
+        // Handle window resize
+        window.addEventListener("resize", () => {
+          updateVisualization(parseInt(balanceSlider.value));
+        });
       });
     </script>
   </body>
