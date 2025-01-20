@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Love</title>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <style>
       * {
         margin: 0;
@@ -226,7 +227,7 @@
       .reading-time {
         position: absolute;
         top: 10px;
-        right: 15px;
+        left: 15px;
         background-color: #f4f4f4;
         padding: 5px 10px;
         border-radius: 5px;
@@ -234,6 +235,25 @@
         color: #333;
         font-weight: bold;
         border: 1px solid #ccc;
+      }
+
+      #readText {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background-color: transparent;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9em;
+        color: rgb(92, 121, 255);
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+
+      #readText:hover {
+        background-color: transparent;
+        color: white;
+        border: 2px solid black;
       }
     </style>
   </head>
@@ -256,6 +276,7 @@
     <main class="main-content">
       <div class="box">
         <div class="reading-time">~1 min read</div>
+        <button id="readText" class="action-button">🔊</button>
         <h1>Love</h1>
         <p class="loveText">
           Imagine trying to explain the color blue to someone who's never seen
@@ -312,6 +333,67 @@
       function navigateTo(section) {
         document.getElementById(`${section}-link`).click();
       }
+// Text-to-speech functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const readButton = document.getElementById("readText");
+        const textElement = document.getElementById("loveText");
+        function prepareTextForSpeech(text) {
+          return text
+            .replace(/\s+/g, " ") // Replace multiple spaces with single space
+            .replace(/\n/g, " ") // Replace newlines with spaces
+            .replace(/[-–—]/g, ", ") // Replace dashes with commas for better pausing
+            .replace(/\s+([.,!?])/g, "$1") // Remove spaces before punctuation
+            .replace(/([.,!?])\s*/g, "$1 ") // Ensure single space after punctuation
+            .trim(); // Remove leading/trailing spaces
+        }
+
+        if (window.responsiveVoice) {
+          console.log("ResponsiveVoice is loaded");
+
+          readButton.addEventListener("click", function () {
+            if (textElement) {
+              const rawText = textElement.textContent;
+              const processedText = prepareTextForSpeech(rawText);
+
+              if (responsiveVoice.isPlaying()) {
+                responsiveVoice.cancel();
+                readButton.textContent = "🔊";
+              } else {
+                responsiveVoice.speak(processedText, "UK English Female", {
+                  pitch: 1,
+                  rate: 0.95, // Slightly slower rate for better clarity
+                  volume: 1,
+                  onstart: function () {
+                    readButton.textContent = "🛑";
+                  },
+                  onend: function () {
+                    readButton.textContent = "🔊";
+                  },
+                  onpause: function () {
+                    readButton.textContent = "🔊";
+                  },
+                  onresume: function () {
+                    readButton.textContent = "🛑";
+                  },
+                  // Add breaks at punctuation marks
+                  pitch: 1,
+                  rate: 0.95,
+                  volume: 1,
+                  parameters: {
+                    punctuation: true,
+                    linebreak: "500ms",
+                  },
+                });
+              }
+            } else {
+              console.error("Text element not found");
+            }
+          });
+        } else {
+          console.error("ResponsiveVoice is not loaded");
+          readButton.style.display = "none";
+        }
+      });
     </script>
   </body>
 </html>
