@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Systems</title>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <style>
       * {
         margin: 0;
@@ -381,7 +382,7 @@
       .reading-time {
         position: absolute;
         top: 10px;
-        right: 15px;
+        left: 15px;
         background-color: #f4f4f4;
         padding: 5px 10px;
         border-radius: 5px;
@@ -389,6 +390,25 @@
         color: #333;
         font-weight: bold;
         border: 1px solid #ccc;
+      }
+
+      #readText {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background-color: transparent;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9em;
+        color: rgb(92, 121, 255);
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+
+      #readText:hover {
+        background-color: transparent;
+        color: white;
+        border: 2px solid black;
       }
     </style>
   </head>
@@ -416,30 +436,30 @@
           Imagine standing in the center of a forest at dawn. Above you,
           branches weave a living canopy. Below, your feet sink slightly into
           soil teeming with life. In this moment, you're not just observing a
-          collection of separate things - you're witnessing one of nature's most
+          collection of separate things, you're witnessing one of nature's most
           perfect symphonies. Every rustle and movement tells a story of
           connection. A squirrel buries an acorn, unknowingly planting
           tomorrow's oak. A fallen log, seemingly dead, nurtures new life as
           fungi break it down to feed the forest floor. Even the morning mist
           plays its part, carrying nutrients from canopy to soil in an endless
           cycle of renewal. This intricate dance of life isn't just happening in
-          forests - it's the blueprint for everything around and within us. Your
+          forests, it's the blueprint for everything around and within us. Your
           body is orchestrating its own symphony right now: your heart beats,
           lungs expand, and billions of cells coordinate in a beautiful
           complexity you never have to consciously direct. Your thoughts and
           emotions flow in similar patterns, each feeling or memory rippling out
           to influence others in ways that aren't always obvious at first
           glance. Think about the last time you smiled at a stranger and they
-          smiled back. That simple gesture created a ripple - perhaps
-          brightening their day, leading them to spread that warmth to others.
-          In a world of cause-and-effect thinking, the story would end there.
-          But through a systems lens, we see how these small moments weave
-          together into the fabric of community and connection. The beauty of
-          systems thinking lies in its patience and wisdom. While we often reach
-          for quick fixes - like treating a headache without addressing its root
-          cause - true change comes from understanding the whole picture. It's
-          about finding those golden threads that, when gently tugged, can
-          transform entire patterns.
+          smiled back. That simple gesture created a ripple, perhaps brightening
+          their day, leading them to spread that warmth to others. In a world of
+          cause and effect thinking, the story would end there. But through a
+          systems lens, we see how these small moments weave together into the
+          fabric of community and connection. The beauty of systems thinking
+          lies in its patience and wisdom. While we often reach for quick fixes,
+          like treating a headache without addressing its root cause, true
+          change comes from understanding the whole picture. It's about finding
+          those golden threads that, when gently tugged, can transform entire
+          patterns.
         </p>
         <div class="system-diagram">
           <div class="system-filters">
@@ -768,6 +788,67 @@
 
       // Initialize when the page loads
       document.addEventListener("DOMContentLoaded", initializeSystemDiagram);
+      // Text-to-speech functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const readButton = document.getElementById("readText");
+        const textElement = document.getElementById("belongingText");
+        function prepareTextForSpeech(text) {
+          return text
+            .replace(/\s+/g, " ") // Replace multiple spaces with single space
+            .replace(/\n/g, " ") // Replace newlines with spaces
+            .replace(/[-–—]/g, ", ") // Replace dashes with commas for better pausing
+            .replace(/\s+([.,!?])/g, "$1") // Remove spaces before punctuation
+            .replace(/([.,!?])\s*/g, "$1 ") // Ensure single space after punctuation
+            .trim(); // Remove leading/trailing spaces
+        }
+
+        if (window.responsiveVoice) {
+          console.log("ResponsiveVoice is loaded");
+
+          readButton.addEventListener("click", function () {
+            if (textElement) {
+              const rawText = textElement.textContent;
+              const processedText = prepareTextForSpeech(rawText);
+
+              if (responsiveVoice.isPlaying()) {
+                responsiveVoice.cancel();
+                readButton.textContent = "🔊";
+              } else {
+                responsiveVoice.speak(processedText, "UK English Female", {
+                  pitch: 1,
+                  rate: 0.95, // Slightly slower rate for better clarity
+                  volume: 1,
+                  onstart: function () {
+                    readButton.textContent = "🛑";
+                  },
+                  onend: function () {
+                    readButton.textContent = "🔊";
+                  },
+                  onpause: function () {
+                    readButton.textContent = "🔊";
+                  },
+                  onresume: function () {
+                    readButton.textContent = "🛑";
+                  },
+                  // Add breaks at punctuation marks
+                  pitch: 1,
+                  rate: 0.95,
+                  volume: 1,
+                  parameters: {
+                    punctuation: true,
+                    linebreak: "500ms",
+                  },
+                });
+              }
+            } else {
+              console.error("Text element not found");
+            }
+          });
+        } else {
+          console.error("ResponsiveVoice is not loaded");
+          readButton.style.display = "none";
+        }
+      });
     </script>
   </body>
 </html>
