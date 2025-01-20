@@ -623,6 +623,147 @@
           updateVisualization(parseInt(balanceSlider.value));
         });
       });
+      import React, { useState, useEffect } from "react";
+      import { Plus, Minus, ArrowRight } from "lucide-react";
+
+      const NeedsVisualization = () => {
+        const [selectedNeed, setSelectedNeed] = useState(null);
+        const [completedNeeds, setCompletedNeeds] = useState([]);
+        const [showGrowthPath, setShowGrowthPath] = useState(false);
+
+        const basicNeeds = [
+          {
+            id: 1,
+            name: "Physical Security",
+            healthy: "Seeking stable shelter and safety",
+            needy: "Constant fear of abandonment",
+            nextLevel: "Emotional Security",
+          },
+          {
+            id: 2,
+            name: "Sustenance",
+            healthy: "Regular, nutritious meals",
+            needy: "Emotional eating, hoarding food",
+            nextLevel: "Self-Care",
+          },
+          {
+            id: 3,
+            name: "Rest",
+            healthy: "Balanced sleep schedule",
+            needy: "Avoiding life through oversleeping",
+            nextLevel: "Energy Management",
+          },
+        ];
+
+        const growthNeeds = [
+          {
+            id: 4,
+            name: "Self-Expression",
+            description: "Finding your authentic voice",
+          },
+          {
+            id: 5,
+            name: "Connection",
+            description: "Building meaningful relationships",
+          },
+          {
+            id: 6,
+            name: "Purpose",
+            description: "Contributing to something larger",
+          },
+        ];
+
+        const handleNeedClick = (need) => {
+          if (selectedNeed?.id === need.id) {
+            setSelectedNeed(null);
+          } else {
+            setSelectedNeed(need);
+          }
+        };
+
+        const handleNeedComplete = (needId) => {
+          if (!completedNeeds.includes(needId)) {
+            setCompletedNeeds([...completedNeeds, needId]);
+          }
+          if (completedNeeds.length + 1 === basicNeeds.length) {
+            setShowGrowthPath(true);
+          }
+        };
+
+        return (
+          <div className="max-w-4xl mx-auto p-6">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-4">Basic Needs</h2>
+              <div className="grid md:grid-cols-3 gap-4">
+                {basicNeeds.map((need) => (
+                  <div
+                    key={need.id}
+                    className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                      completedNeeds.includes(need.id)
+                        ? "bg-green-50 border-green-500"
+                        : "border-gray-300 hover:border-blue-500"
+                    }`}
+                    onClick={() => handleNeedClick(need)}
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <h3 className="font-semibold">{need.name}</h3>
+                      {!completedNeeds.includes(need.id) && (
+                        <button
+                          className="p-1 rounded-full hover:bg-blue-100"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleNeedComplete(need.id);
+                          }}
+                        >
+                          <Plus size={16} />
+                        </button>
+                      )}
+                    </div>
+                    {selectedNeed?.id === need.id && (
+                      <div className="mt-2 text-sm">
+                        <div className="mb-2">
+                          <span className="font-medium text-green-600">
+                            Healthy:{" "}
+                          </span>
+                          {need.healthy}
+                        </div>
+                        <div>
+                          <span className="font-medium text-red-600">
+                            Neediness:{" "}
+                          </span>
+                          {need.needy}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {showGrowthPath && (
+              <div className="mt-8">
+                <div className="flex items-center mb-4">
+                  <ArrowRight className="text-green-500 mr-2" />
+                  <h2 className="text-2xl font-bold">Growth Path Unlocked</h2>
+                </div>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {growthNeeds.map((need) => (
+                    <div
+                      key={need.id}
+                      className="p-4 border-2 border-purple-300 rounded-lg bg-purple-50"
+                    >
+                      <h3 className="font-semibold mb-2">{need.name}</h3>
+                      <p className="text-sm text-gray-600">
+                        {need.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      };
     </script>
   </body>
 </html>
