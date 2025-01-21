@@ -7,6 +7,7 @@
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.10/babel.min.js"></script>
     <style>
       * {
         margin: 0;
@@ -262,7 +263,20 @@
         max-width: 800px;
         margin: 0 auto;
       }
+      .interactive-container button {
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
 
+      .interactive-container button:hover {
+        transform: scale(1.1);
+      }
+
+      #interactive-communication-root {
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px);
+      }
       .movement-tracker {
         font-family: monospace;
         margin-top: 20px;
@@ -442,6 +456,152 @@
           readButton.style.display = "none";
         }
       });
+
+      const CommunicationInteractive = () => {
+        const [mood, setMood] = React.useState("neutral");
+        const [message, setMessage] = React.useState(
+          "How are you feeling today?"
+        );
+        const [mousePosition, setMousePosition] = React.useState({
+          x: 0,
+          y: 0,
+        });
+
+        React.useEffect(() => {
+          const handleMouseMove = (e) => {
+            // Get the mouse position relative to the viewport
+            const x = e.clientX;
+            const y = e.clientY;
+
+            // Only update state if the values have changed significantly
+            setMousePosition((prev) => {
+              if (Math.abs(prev.x - x) > 5 || Math.abs(prev.y - y) > 5) {
+                return { x, y };
+              }
+              return prev;
+            });
+
+            // Calculate hue based on x position
+            const hue = (x / window.innerWidth) * 360;
+
+            // Use requestAnimationFrame for smoother background color updates
+            requestAnimationFrame(() => {
+              document.body.style.backgroundColor = `hsl(${hue}, 10%, 98%)`;
+            });
+          };
+
+          // Add throttled event listener
+          let timeoutId;
+          const throttledHandleMouseMove = (e) => {
+            if (!timeoutId) {
+              timeoutId = setTimeout(() => {
+                handleMouseMove(e);
+                timeoutId = null;
+              }, 16); // Approximately 60fps
+            }
+          };
+
+          window.addEventListener("mousemove", throttledHandleMouseMove);
+
+          // Cleanup
+          return () => {
+            window.removeEventListener("mousemove", throttledHandleMouseMove);
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+            }
+          };
+        }, []);
+
+        const emotionalStates = [
+          { emoji: "😊", label: "Happy", color: "#FFD700" },
+          { emoji: "😢", label: "Sad", color: "#4169E1" },
+          { emoji: "😡", label: "Angry", color: "#FF4500" },
+          { emoji: "😌", label: "Peaceful", color: "#98FB98" },
+        ];
+
+        const handleEmotionClick = (emotion) => {
+          setMood(emotion.label.toLowerCase());
+          setMessage(
+            `Your body language shows ${emotion.label.toLowerCase()}. Notice how this affects the way others might perceive your message.`
+          );
+
+          // Use requestAnimationFrame for smoother DOM updates
+          requestAnimationFrame(() => {
+            const textElement = document.querySelector(".communicationText");
+            if (textElement) {
+              textElement.style.color = emotion.color;
+              textElement.style.letterSpacing =
+                emotion.label === "Angry"
+                  ? "1px"
+                  : emotion.label === "Peaceful"
+                  ? "0.5px"
+                  : "normal";
+            }
+          });
+        };
+        return (
+          <div className="interactive-container mt-8 p-4">
+            <div
+              style={{
+                textAlign: "center",
+                marginBottom: "1.5rem",
+                fontSize: "1.2rem",
+              }}
+            >
+              {message}
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                marginBottom: "1.5rem",
+              }}
+            >
+              {emotionalStates.map((emotion) => (
+                <button
+                  key={emotion.label}
+                  onClick={() => handleEmotionClick(emotion)}
+                  style={{
+                    padding: "1rem",
+                    borderRadius: "50%",
+                    fontSize: "2rem",
+                    transition: "transform 0.2s",
+                    transform:
+                      mood === emotion.label.toLowerCase()
+                        ? "scale(1.1)"
+                        : "scale(1)",
+                    border:
+                      mood === emotion.label.toLowerCase()
+                        ? "4px solid black"
+                        : "none",
+                  }}
+                >
+                  {emotion.emoji}
+                </button>
+              ))}
+            </div>
+
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "0.9rem",
+                opacity: 0.7,
+                marginTop: "1.5rem",
+                borderTop: "1px solid #eee",
+                paddingTop: "1rem",
+              }}
+            >
+              Your movement patterns: {mousePosition.x}, {mousePosition.y}
+              <div style={{ fontSize: "0.8rem", marginTop: "0.5rem" }}>
+                Notice how your physical movement affects the space and
+                communication
+              </div>
+            </div>
+          </div>
+        );
+      };
+
       // Initialize the React component
       const root = ReactDOM.createRoot(
         document.getElementById("interactive-communication-root")
