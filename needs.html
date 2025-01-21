@@ -259,6 +259,83 @@
         color: white;
         border: 2px solid black;
       }
+      .explanation-box {
+        width: 90%;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+      }
+
+      .explanation-title {
+        text-align: center;
+        font-size: clamp(24px, 4vw, 32px);
+        margin-bottom: 20px;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        color: black;
+      }
+
+      .instruction-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 10px;
+      }
+
+      .instruction-card {
+        position: relative;
+        padding: 20px;
+        background-color: white;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        transition: transform 0.3s ease;
+      }
+
+      .instruction-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .step-number {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(92, 121, 255);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border: 2px solid black;
+      }
+
+      .instruction-card h3 {
+        margin: 10px 0;
+        font-size: clamp(18px, 2vw, 22px);
+        font-family: "Courier New", Courier, monospace;
+        font-weight: bold;
+      }
+
+      .instruction-card p {
+        font-size: clamp(14px, 1.5vw, 16px);
+        line-height: 1.4;
+        color: #495057;
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      @media (max-width: 768px) {
+        .explanation-box {
+          width: 95%;
+          margin: 20px auto;
+        }
+
+        .instruction-card {
+          padding: 15px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -315,7 +392,35 @@
           flourish, we naturally help others do the same.
         </p>
       </div>
-
+      <div class="explanation-box">
+        <h2 class="explanation-title">How to Explore Your Needs</h2>
+        <div class="instruction-grid">
+          <div class="instruction-card">
+            <span class="step-number">1</span>
+            <h3>Explore Basic Needs</h3>
+            <p>
+              Click on each need card to understand the difference between
+              healthy needs and neediness in that area
+            </p>
+          </div>
+          <div class="instruction-card">
+            <span class="step-number">2</span>
+            <h3>Mark Your Progress</h3>
+            <p>
+              Use the plus button (➕) to acknowledge when you've developed a
+              healthy relationship with each basic need
+            </p>
+          </div>
+          <div class="instruction-card">
+            <span class="step-number">3</span>
+            <h3>Unlock Growth</h3>
+            <p>
+              As you complete your basic needs, watch how new growth
+              opportunities become available to you
+            </p>
+          </div>
+        </div>
+      </div>
       <div id="needs-circles"></div>
       <div id="needs-visualization-root"></div>
       <p class="bigLogo">
