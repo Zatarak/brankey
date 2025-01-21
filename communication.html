@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Communication</title>
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
     <style>
       * {
         margin: 0;
@@ -255,6 +257,22 @@
         color: white;
         border: 2px solid black;
       }
+      .interactive-container {
+        transition: all 0.3s ease;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .movement-tracker {
+        font-family: monospace;
+        margin-top: 20px;
+        padding: 10px;
+        border-top: 1px solid #eee;
+      }
+
+      .communicationText {
+        transition: all 0.5s ease;
+      }
     </style>
   </head>
   <body>
@@ -328,7 +346,7 @@
           understood.
         </p>
       </div>
-      <a href="#" class="action-button">Explore Your Belonging</a>
+      <div id="interactive-communication-root" class="box"></div>
       <div id="communication-circles"></div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
@@ -363,7 +381,7 @@
         });
       });
 
-// Text-to-speech functionality
+      // Text-to-speech functionality
       document.addEventListener("DOMContentLoaded", function () {
         const readButton = document.getElementById("readText");
         const textElement = document.getElementById("communicationText");
@@ -424,6 +442,11 @@
           readButton.style.display = "none";
         }
       });
+      // Initialize the React component
+      const root = ReactDOM.createRoot(
+        document.getElementById("interactive-communication-root")
+      );
+      root.render(<CommunicationInteractive />);
     </script>
   </body>
 </html>
