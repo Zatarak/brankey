@@ -255,6 +255,40 @@
         color: white;
         border: 2px solid black;
       }
+      .reflection-card {
+        background: white;
+        border: 2px solid black;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+      }
+
+      .reflection-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .reflection-input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      .save-btn {
+        background: rgb(92, 121, 255);
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      .save-btn:hover {
+        background: black;
+      }
     </style>
   </head>
   <body>
@@ -335,7 +369,16 @@
           meaning you give to each step along the way.
         </p>
       </div>
-      <a href="#" class="action-button">Explore Your Belonging</a>
+      <div class="reflection-card">
+        <h3>Daily Responsibility Reflection</h3>
+        <p>What's one situation you can take more responsibility for today?</p>
+        <textarea
+          class="reflection-input"
+          rows="3"
+          placeholder="Write your reflection here..."
+        ></textarea>
+        <button class="save-btn">Save Reflection</button>
+      </div>
       <div id="responsibility-circles"></div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
@@ -370,7 +413,7 @@
         });
       });
 
-// Text-to-speech functionality
+      // Text-to-speech functionality
       document.addEventListener("DOMContentLoaded", function () {
         const readButton = document.getElementById("readText");
         const textElement = document.getElementById("responsibilityText");
@@ -431,6 +474,26 @@
           readButton.style.display = "none";
         }
       });
+      // Responsibility Reflection Save Feature
+      document
+        .querySelector(".save-btn")
+        ?.addEventListener("click", function () {
+          const reflection = document.querySelector(".reflection-input").value;
+          if (reflection) {
+            localStorage.setItem(
+              "responsibility-reflection-" + new Date().toISOString(),
+              reflection
+            );
+            alert("Reflection saved! Keep growing!");
+            document.querySelector(".reflection-input").value = "";
+          }
+        });
+
+      // Initialize ResponsibilitySlider React component
+      const sliderContainer = document.getElementById("responsibility-circles");
+      if (sliderContainer) {
+        ReactDOM.render(<ResponsibilitySlider />, sliderContainer);
+      }
     </script>
   </body>
 </html>
