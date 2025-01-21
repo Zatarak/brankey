@@ -270,7 +270,20 @@
         background: #f8f8f8;
         border-radius: 8px;
         margin: 20px 0;
-        overflow: hidden;
+        overflow: visible;
+        position: relative;
+      }
+      visualization-area svg {
+        width: 100%;
+        height: 100%;
+        display: block; /* Ensure SVG takes up full space */
+      }
+
+      /* Add styles for circles */
+      .visualization-area svg circle {
+        transition: all 0.5s ease;
+        stroke: #333;
+        stroke-width: 1;
       }
 
       .circle {
@@ -400,7 +413,13 @@
         >
           Experience Co-Being
         </h2>
-        <div class="visualization-area" id="visualizationArea"></div>
+        <div
+          class="visualization-area"
+          id="visualizationArea"
+          style="background: #f8f8f8; position: relative"
+        >
+          <!-- SVG will be inserted here by JavaScript -->
+        </div>
         <div class="slider-container">
           <input
             type="range"
@@ -523,7 +542,10 @@
         const balanceSlider = document.getElementById("balanceSlider");
         const reflectionText = document.getElementById("reflectionText");
 
-        // Create SVG element with viewBox for better scaling
+        // Clear any existing content
+        visualizationArea.innerHTML = "";
+
+        // Create SVG element
         const svg = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "svg"
@@ -542,7 +564,8 @@
               "http://www.w3.org/2000/svg",
               "circle"
             );
-            circle.setAttribute("r", "80"); // Larger base radius
+            circle.setAttribute("r", "80");
+            circle.setAttribute("opacity", "0.7");
             svg.appendChild(circle);
             return circle;
           });
@@ -588,20 +611,19 @@
           };
 
           const config = positions[stage];
-          const centerY = 250; // Vertical center
-          const centerX = 500; // Horizontal center
+          const centerY = 250;
+          const centerX = 500;
 
-          // Update circles
+          // Update circles with animation
           circles.forEach((circle, i) => {
             const offset = (i - 1) * config.spacing;
             circle.setAttribute("cx", centerX + offset);
             circle.setAttribute("cy", centerY);
             circle.setAttribute("r", config.sizes[i]);
             circle.setAttribute("fill", config.colors[i]);
-            circle.setAttribute("opacity", "0.7");
           });
 
-          // Update reflection text based on stage
+          // Update reflection text
           const messages = [
             "In dependence, we rely heavily on others for support and guidance...",
             "Through independence, we develop our own strength and capabilities...",
@@ -623,147 +645,6 @@
           updateVisualization(parseInt(balanceSlider.value));
         });
       });
-      import React, { useState, useEffect } from "react";
-      import { Plus, Minus, ArrowRight } from "lucide-react";
-
-      const NeedsVisualization = () => {
-        const [selectedNeed, setSelectedNeed] = useState(null);
-        const [completedNeeds, setCompletedNeeds] = useState([]);
-        const [showGrowthPath, setShowGrowthPath] = useState(false);
-
-        const basicNeeds = [
-          {
-            id: 1,
-            name: "Physical Security",
-            healthy: "Seeking stable shelter and safety",
-            needy: "Constant fear of abandonment",
-            nextLevel: "Emotional Security",
-          },
-          {
-            id: 2,
-            name: "Sustenance",
-            healthy: "Regular, nutritious meals",
-            needy: "Emotional eating, hoarding food",
-            nextLevel: "Self-Care",
-          },
-          {
-            id: 3,
-            name: "Rest",
-            healthy: "Balanced sleep schedule",
-            needy: "Avoiding life through oversleeping",
-            nextLevel: "Energy Management",
-          },
-        ];
-
-        const growthNeeds = [
-          {
-            id: 4,
-            name: "Self-Expression",
-            description: "Finding your authentic voice",
-          },
-          {
-            id: 5,
-            name: "Connection",
-            description: "Building meaningful relationships",
-          },
-          {
-            id: 6,
-            name: "Purpose",
-            description: "Contributing to something larger",
-          },
-        ];
-
-        const handleNeedClick = (need) => {
-          if (selectedNeed?.id === need.id) {
-            setSelectedNeed(null);
-          } else {
-            setSelectedNeed(need);
-          }
-        };
-
-        const handleNeedComplete = (needId) => {
-          if (!completedNeeds.includes(needId)) {
-            setCompletedNeeds([...completedNeeds, needId]);
-          }
-          if (completedNeeds.length + 1 === basicNeeds.length) {
-            setShowGrowthPath(true);
-          }
-        };
-
-        return (
-          <div className="max-w-4xl mx-auto p-6">
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-4">Basic Needs</h2>
-              <div className="grid md:grid-cols-3 gap-4">
-                {basicNeeds.map((need) => (
-                  <div
-                    key={need.id}
-                    className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                      completedNeeds.includes(need.id)
-                        ? "bg-green-50 border-green-500"
-                        : "border-gray-300 hover:border-blue-500"
-                    }`}
-                    onClick={() => handleNeedClick(need)}
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <h3 className="font-semibold">{need.name}</h3>
-                      {!completedNeeds.includes(need.id) && (
-                        <button
-                          className="p-1 rounded-full hover:bg-blue-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleNeedComplete(need.id);
-                          }}
-                        >
-                          <Plus size={16} />
-                        </button>
-                      )}
-                    </div>
-                    {selectedNeed?.id === need.id && (
-                      <div className="mt-2 text-sm">
-                        <div className="mb-2">
-                          <span className="font-medium text-green-600">
-                            Healthy:{" "}
-                          </span>
-                          {need.healthy}
-                        </div>
-                        <div>
-                          <span className="font-medium text-red-600">
-                            Neediness:{" "}
-                          </span>
-                          {need.needy}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {showGrowthPath && (
-              <div className="mt-8">
-                <div className="flex items-center mb-4">
-                  <ArrowRight className="text-green-500 mr-2" />
-                  <h2 className="text-2xl font-bold">Growth Path Unlocked</h2>
-                </div>
-                <div className="grid md:grid-cols-3 gap-4">
-                  {growthNeeds.map((need) => (
-                    <div
-                      key={need.id}
-                      className="p-4 border-2 border-purple-300 rounded-lg bg-purple-50"
-                    >
-                      <h3 className="font-semibold mb-2">{need.name}</h3>
-                      <p className="text-sm text-gray-600">
-                        {need.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      };
     </script>
   </body>
 </html>
