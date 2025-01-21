@@ -7,6 +7,7 @@
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
     <style>
       * {
         margin: 0;
@@ -219,8 +220,8 @@
 
       @media (max-width: 768px) {
         .box {
-          width: 95%; /* Increase width on small screens */
-          margin-left: 2vw; /* Adjust margin to be responsive */
+          width: 95%;
+          margin-left: 2vw;
           margin-right: 2vw;
         }
         .resources {
@@ -314,9 +315,9 @@
           flourish, we naturally help others do the same.
         </p>
       </div>
-      <div id="needs-visualization-root"></div>
-      
+      <a href="#" class="action-button">Explore Your Belonging</a>
       <div id="needs-circles"></div>
+      <div id="needs-visualization-root"></div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
       </p>
@@ -354,14 +355,15 @@
       document.addEventListener("DOMContentLoaded", function () {
         const readButton = document.getElementById("readText");
         const textElement = document.getElementById("needsText");
+
         function prepareTextForSpeech(text) {
           return text
-            .replace(/\s+/g, " ") // Replace multiple spaces with single space
-            .replace(/\n/g, " ") // Replace newlines with spaces
-            .replace(/[-–—]/g, ", ") // Replace dashes with commas for better pausing
-            .replace(/\s+([.,!?])/g, "$1") // Remove spaces before punctuation
-            .replace(/([.,!?])\s*/g, "$1 ") // Ensure single space after punctuation
-            .trim(); // Remove leading/trailing spaces
+            .replace(/\s+/g, " ")
+            .replace(/\n/g, " ")
+            .replace(/[-–—]/g, ", ")
+            .replace(/\s+([.,!?])/g, "$1")
+            .replace(/([.,!?])\s*/g, "$1 ")
+            .trim();
         }
 
         if (window.responsiveVoice) {
@@ -378,7 +380,7 @@
               } else {
                 responsiveVoice.speak(processedText, "UK English Female", {
                   pitch: 1,
-                  rate: 0.95, // Slightly slower rate for better clarity
+                  rate: 0.95,
                   volume: 1,
                   onstart: function () {
                     readButton.textContent = "🛑";
@@ -392,10 +394,6 @@
                   onresume: function () {
                     readButton.textContent = "🛑";
                   },
-                  // Add breaks at punctuation marks
-                  pitch: 1,
-                  rate: 0.95,
-                  volume: 1,
                   parameters: {
                     punctuation: true,
                     linebreak: "500ms",
@@ -411,6 +409,214 @@
           readButton.style.display = "none";
         }
       });
+    </script>
+
+    <!-- React Component Script -->
+    <script type="text/babel">
+      // NeedsVisualization Component
+      const NeedsVisualization = () => {
+        const [selectedNeed, setSelectedNeed] = React.useState(null);
+        const [completedNeeds, setCompletedNeeds] = React.useState([]);
+        const [showGrowthPath, setShowGrowthPath] = React.useState(false);
+
+        const basicNeeds = [
+          {
+            id: 1,
+            name: "Physical Security",
+            healthy: "Seeking stable shelter and safety",
+            needy: "Constant fear of abandonment",
+            nextLevel: "Emotional Security",
+          },
+          {
+            id: 2,
+            name: "Sustenance",
+            healthy: "Regular, nutritious meals",
+            needy: "Emotional eating, hoarding food",
+            nextLevel: "Self-Care",
+          },
+          {
+            id: 3,
+            name: "Rest",
+            healthy: "Balanced sleep schedule",
+            needy: "Avoiding life through oversleeping",
+            nextLevel: "Energy Management",
+          },
+        ];
+
+        const growthNeeds = [
+          {
+            id: 4,
+            name: "Self-Expression",
+            description: "Finding your authentic voice",
+          },
+          {
+            id: 5,
+            name: "Connection",
+            description: "Building meaningful relationships",
+          },
+          {
+            id: 6,
+            name: "Purpose",
+            description: "Contributing to something larger",
+          },
+        ];
+
+        const handleNeedClick = (need) => {
+          if (selectedNeed?.id === need.id) {
+            setSelectedNeed(null);
+          } else {
+            setSelectedNeed(need);
+          }
+        };
+
+        const handleNeedComplete = (needId) => {
+          if (!completedNeeds.includes(needId)) {
+            setCompletedNeeds([...completedNeeds, needId]);
+          }
+          if (completedNeeds.length + 1 === basicNeeds.length) {
+            setShowGrowthPath(true);
+          }
+        };
+
+        return (
+          <div
+            style={{ maxWidth: "1200px", margin: "0 auto", padding: "24px" }}
+          >
+            <div style={{ marginBottom: "32px" }}>
+              <h2
+                style={{
+                  fontSize: "24px",
+                  fontWeight: "bold",
+                  marginBottom: "16px",
+                }}
+              >
+                Basic Needs
+              </h2>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                  gap: "16px",
+                }}
+              >
+                {basicNeeds.map((need) => (
+                  <div
+                    key={need.id}
+                    onClick={() => handleNeedClick(need)}
+                    style={{
+                      padding: "16px",
+                      border: "2px solid",
+                      borderColor: completedNeeds.includes(need.id)
+                        ? "#10B981"
+                        : "#E5E7EB",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      backgroundColor: completedNeeds.includes(need.id)
+                        ? "#ECFDF5"
+                        : "white",
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      <h3 style={{ fontWeight: "600" }}>{need.name}</h3>
+                      {!completedNeeds.includes(need.id) && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleNeedComplete(need.id);
+                          }}
+                          style={{
+                            padding: "4px",
+                            borderRadius: "50%",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ➕
+                        </button>
+                      )}
+                    </div>
+                    {selectedNeed?.id === need.id && (
+                      <div style={{ marginTop: "8px", fontSize: "14px" }}>
+                        <div style={{ marginBottom: "8px" }}>
+                          <span style={{ fontWeight: "500", color: "#059669" }}>
+                            Healthy:{" "}
+                          </span>
+                          {need.healthy}
+                        </div>
+                        <div>
+                          <span style={{ fontWeight: "500", color: "#DC2626" }}>
+                            Neediness:{" "}
+                          </span>
+                          {need.needy}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {showGrowthPath && (
+              <div style={{ marginTop: "32px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <span style={{ color: "#059669", marginRight: "8px" }}>
+                    ➡️
+                  </span>
+                  <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>
+                    Growth Path Unlocked
+                  </h2>
+                </div>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                    gap: "16px",
+                  }}
+                >
+                  {growthNeeds.map((need) => (
+                    <div
+                      key={need.id}
+                      style={{
+                        padding: "16px",
+                        border: "2px solid #C4B5FD",
+                        borderRadius: "8px",
+                        backgroundColor: "#F5F3FF",
+                      }}
+                    >
+                      <h3 style={{ fontWeight: "600", marginBottom: "8px" }}>
+                        {need.name}
+                      </h3>
+                      <p style={{ fontSize: "14px", color: "#6B7280" }}>
+                        {need.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      };
+
+      // Mount the React component
+      ReactDOM.render(
+        <NeedsVisualization />,
+        document.getElementById("needs-visualization-root")
+      );
     </script>
   </body>
 </html>
