@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Responsibility</title>
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <style>
       * {
         margin: 0;
@@ -255,39 +258,30 @@
         color: white;
         border: 2px solid black;
       }
-      .reflection-card {
-        background: white;
-        border: 2px solid black;
-        padding: 20px;
-        margin: 20px 0;
+      input[type="range"] {
+        -webkit-appearance: none;
+        height: 10px;
         border-radius: 5px;
-        transition: transform 0.3s ease;
+        background: #ddd;
+        outline: none;
       }
 
-      .reflection-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .reflection-input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        font-family: "Courier New", Courier, monospace;
-      }
-
-      .save-btn {
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
         background: rgb(92, 121, 255);
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        border-radius: 3px;
         cursor: pointer;
       }
 
-      .save-btn:hover {
-        background: black;
+      input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgb(92, 121, 255);
+        cursor: pointer;
       }
     </style>
   </head>
@@ -369,16 +363,7 @@
           meaning you give to each step along the way.
         </p>
       </div>
-      <div class="reflection-card">
-        <h3>Daily Responsibility Reflection</h3>
-        <p>What's one situation you can take more responsibility for today?</p>
-        <textarea
-          class="reflection-input"
-          rows="3"
-          placeholder="Write your reflection here..."
-        ></textarea>
-        <button class="save-btn">Save Reflection</button>
-      </div>
+      <a href="#" class="action-button">Explore Your Belonging</a>
       <div id="responsibility-circles"></div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
@@ -474,26 +459,88 @@
           readButton.style.display = "none";
         }
       });
-      // Responsibility Reflection Save Feature
-      document
-        .querySelector(".save-btn")
-        ?.addEventListener("click", function () {
-          const reflection = document.querySelector(".reflection-input").value;
-          if (reflection) {
-            localStorage.setItem(
-              "responsibility-reflection-" + new Date().toISOString(),
-              reflection
-            );
-            alert("Reflection saved! Keep growing!");
-            document.querySelector(".reflection-input").value = "";
-          }
-        });
+    </script>
+    <script type="text/babel">
+      // Responsibility Slider Component
+      const ResponsibilitySlider = () => {
+        const [sliderValue, setSliderValue] = React.useState(50);
 
-      // Initialize ResponsibilitySlider React component
-      const sliderContainer = document.getElementById("responsibility-circles");
-      if (sliderContainer) {
-        ReactDOM.render(<ResponsibilitySlider />, sliderContainer);
-      }
+        const getMessageAndStyle = (value) => {
+          if (value < 33) {
+            return {
+              message:
+                "You're in victim mode. Remember: You have more power than you think!",
+              background: "#ffcdd2",
+            };
+          } else if (value < 66) {
+            return {
+              message: "You're learning to take responsibility. Keep growing!",
+              background: "#fff9c4",
+            };
+          } else {
+            return {
+              message:
+                "You're taking full responsibility for your life. Great job!",
+              background: "#c8e6c9",
+            };
+          }
+        };
+
+        const { message, background } = getMessageAndStyle(sliderValue);
+
+        const sliderStyle = {
+          width: "90%",
+          margin: "20px auto",
+          display: "block",
+        };
+
+        const cardStyle = {
+          maxWidth: "800px",
+          margin: "20px auto",
+          padding: "20px",
+          border: "2px solid black",
+          borderRadius: "5px",
+          backgroundColor: "white",
+        };
+
+        const messageStyle = {
+          padding: "15px",
+          marginTop: "15px",
+          borderRadius: "5px",
+          textAlign: "center",
+          background,
+          transition: "background-color 0.5s ease",
+        };
+
+        return (
+          <div style={cardStyle}>
+            <h3 style={{ textAlign: "center", marginBottom: "15px" }}>
+              Responsibility Mindset Meter
+            </h3>
+            <p
+              style={{ textAlign: "center", fontSize: "0.9em", color: "#666" }}
+            >
+              Move the slider to reflect: "How much control do you feel you have
+              over your life's outcomes?"
+            </p>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={sliderValue}
+              onChange={(e) => setSliderValue(parseInt(e.target.value))}
+              style={sliderStyle}
+            />
+            <div style={messageStyle}>{message}</div>
+          </div>
+        );
+      };
+
+      // Render the component
+      ReactDOM.render(
+        <ResponsibilitySlider />,
+        document.getElementById("responsibility-circles")
+      );
     </script>
   </body>
 </html>
