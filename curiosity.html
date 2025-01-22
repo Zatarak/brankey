@@ -160,31 +160,6 @@
         background-color: white;
         color: rgb(92, 121, 255);
       }
-      .action-button {
-        padding: 10px;
-        margin-left: 5vw;
-        margin-top: 0px;
-        width: 30%;
-        font-size: clamp(13px, 1vw, 24px);
-        font-family: monospace;
-        text-align: center;
-        color: white;
-        background-color: rgb(92, 121, 255);
-        border: 2px solid black;
-        border-radius: 3px;
-        cursor: pointer;
-        text-align: center;
-        display: inline-block;
-        text-transform: uppercase;
-        text-decoration: none;
-      }
-
-      .action-button:hover {
-        background: black;
-        color: rgb(92, 121, 255);
-        border: 2px solid black;
-        text-decoration: none;
-      }
 
       .curiosityText {
         padding: 25px;
@@ -255,6 +230,22 @@
         color: white;
         border: 2px solid black;
       }
+      #curiosity-container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 20px;
+      }
+
+      .curiosity-circle:hover {
+        fill-opacity: 0.8;
+        cursor: pointer;
+      }
+
+      .concept:hover {
+        fill: #333;
+        cursor: pointer;
+        transition: fill 0.3s ease;
+      }
     </style>
   </head>
   <body>
@@ -285,7 +276,7 @@
           a flashlight in a dark room - it doesn't just help us see what's
           there; it makes us eager to explore what might be around the corner.
           Think about the last time something genuinely surprised you. Maybe it
-          was learning an unexpected fact about a friend, or discovering a new
+          was learning an unexpected fact about a friend or discovering a new
           perspective on something you thought you understood completely. That
           little spark of surprise? That's curiosity nudging you, saying
           "there's more to discover here." Curiosity isn't just about gathering
@@ -296,7 +287,159 @@
           excited about what they don't know yet.
         </p>
       </div>
-      <a href="#" class="action-button">Explore Your Belonging</a>
+      <div id="curiosity-container">
+        <svg viewBox="0 0 800 400" style="width: 100%; height: auto">
+          <defs>
+            <radialGradient
+              id="circle-gradient"
+              cx="50%"
+              cy="50%"
+              r="50%"
+              fx="50%"
+              fy="50%"
+            >
+              <stop
+                offset="0%"
+                style="stop-color: rgb(255, 255, 255); stop-opacity: 1"
+              />
+              <stop
+                offset="100%"
+                style="stop-color: rgb(92, 121, 255); stop-opacity: 0.6"
+              />
+            </radialGradient>
+          </defs>
+
+          <!-- Main circles -->
+          <circle
+            class="curiosity-circle"
+            cx="400"
+            cy="200"
+            r="150"
+            fill="url(#circle-gradient)"
+            stroke="black"
+            stroke-width="2"
+          >
+            <animate
+              attributeName="r"
+              values="150;155;150"
+              dur="4s"
+              repeatCount="indefinite"
+            />
+          </circle>
+
+          <!-- Orbital circles -->
+          <g class="orbital-system">
+            <circle
+              class="orbit"
+              cx="400"
+              cy="200"
+              r="80"
+              fill="none"
+              stroke="#333"
+              stroke-width="1"
+              stroke-dasharray="4 4"
+            />
+            <circle
+              class="orbit"
+              cx="400"
+              cy="200"
+              r="120"
+              fill="none"
+              stroke="#333"
+              stroke-width="1"
+              stroke-dasharray="4 4"
+            />
+            <circle
+              class="orbit"
+              cx="400"
+              cy="200"
+              r="160"
+              fill="none"
+              stroke="#333"
+              stroke-width="1"
+              stroke-dasharray="4 4"
+            />
+
+            <!-- Concept circles -->
+            <circle
+              class="concept"
+              cx="480"
+              cy="200"
+              r="20"
+              fill="rgb(92,121,255)"
+              stroke="black"
+            >
+              <animate
+                attributeName="cx"
+                values="480;320;480"
+                dur="8s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="cy"
+                values="200;200;200"
+                dur="8s"
+                repeatCount="indefinite"
+              />
+            </circle>
+
+            <circle
+              class="concept"
+              cx="400"
+              cy="280"
+              r="20"
+              fill="rgb(92,121,255)"
+              stroke="black"
+            >
+              <animate
+                attributeName="cx"
+                values="400;400;400"
+                dur="6s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="cy"
+                values="280;120;280"
+                dur="6s"
+                repeatCount="indefinite"
+              />
+            </circle>
+
+            <circle
+              class="concept"
+              cx="320"
+              cy="200"
+              r="20"
+              fill="rgb(92,121,255)"
+              stroke="black"
+            >
+              <animate
+                attributeName="cx"
+                values="320;480;320"
+                dur="10s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="cy"
+                values="200;200;200"
+                dur="10s"
+                repeatCount="indefinite"
+              />
+            </circle>
+          </g>
+
+          <!-- Labels -->
+          <text
+            x="400"
+            y="205"
+            text-anchor="middle"
+            fill="black"
+            style="font-size: 16px"
+          >
+            Curiosity
+          </text>
+        </svg>
+      </div>
       <div id="curiosity-circles"></div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
@@ -331,7 +474,7 @@
         });
       });
 
-// Text-to-speech functionality
+      // Text-to-speech functionality
       document.addEventListener("DOMContentLoaded", function () {
         const readButton = document.getElementById("readText");
         const textElement = document.getElementById("curiosityText");
