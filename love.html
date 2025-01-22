@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Love</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <style>
       * {
@@ -255,6 +257,37 @@
         color: white;
         border: 2px solid black;
       }
+      .concept-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .concept-card {
+        padding: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .concept-card:hover {
+        transform: translateY(-2px);
+      }
+
+      .concept-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .concept-content {
+        font-size: 0.9em;
+        line-height: 1.4;
+      }
     </style>
   </head>
   <body>
@@ -278,25 +311,11 @@
         <div class="reading-time">~1 min read</div>
         <button id="readText" class="action-button">🔊</button>
         <h1>Love</h1>
-        <p class="loveText" id="loveText">
-          Imagine trying to explain the color blue. Explaining love would be a
-          bit like that - deeply familiar yet somehow beyond words. It's in the
-          small moments: making coffee just the way someone likes it,
-          remembering their story about that childhood pet, or sitting in
-          comfortable silence together. Love isn't just those butterfly feelings
-          or grand gestures we see in movies. It's more like tending a fire -
-          sometimes it roars bright and warm, sometimes it's just gentle embers
-          needing attention. The real magic isn't in starting the fire but in
-          learning to keep it alive through all seasons. We often think of love
-          as something that happens to us, like being struck by lightning. But
-          lasting love is more active - it's a choice we make every day, in how
-          we speak, listen, forgive, and grow together. It's about seeing
-          someone fully, imperfections and all, and choosing to nurture their
-          growth while allowing them to nurture yours.
-        </p>
+        <p class="loveText" id="loveText">Text</p>
       </div>
-      <a href="#" class="action-button">Explore Your Belonging</a>
+
       <div id="love-circles"></div>
+      <div id="love-visualization"></div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
       </p>
@@ -391,6 +410,77 @@
           readButton.style.display = "none";
         }
       });
+      function LoveVisualization() {
+        const [activeSection, setActiveSection] = React.useState(null);
+
+        const concepts = [
+          {
+            id: "biological",
+            title: "Biological Foundation",
+            content:
+              "Maturana sees love as fundamental to human biology - it's not just emotion but the basis of social coexistence",
+            color: "#3B82F6",
+          },
+          {
+            id: "acceptance",
+            title: "Mutual Acceptance",
+            content:
+              "Love creates a space where we accept others as legitimate beings, independent of expectations",
+            color: "#8B5CF6",
+          },
+          {
+            id: "language",
+            title: "Language & Coordination",
+            content:
+              "Through language and interaction, we coordinate our behaviors in love - like making coffee just right",
+            color: "#10B981",
+          },
+          {
+            id: "autopoiesis",
+            title: "Autopoietic Process",
+            content:
+              "Love is self-creating and self-maintaining, like tending a fire that keeps itself alive",
+            color: "#F97316",
+          },
+        ];
+
+        return React.createElement(
+          "div",
+          { className: "concept-grid" },
+          concepts.map((concept) =>
+            React.createElement(
+              "div",
+              {
+                key: concept.id,
+                className: "concept-card",
+                style: {
+                  backgroundColor:
+                    activeSection === concept.id ? concept.color : "#f3f4f6",
+                  color: activeSection === concept.id ? "white" : "black",
+                },
+                onClick: () => setActiveSection(concept.id),
+              },
+              React.createElement(
+                "div",
+                { className: "concept-header" },
+                React.createElement("h3", null, concept.title)
+              ),
+              activeSection === concept.id &&
+                React.createElement(
+                  "p",
+                  { className: "concept-content" },
+                  concept.content
+                )
+            )
+          )
+        );
+      }
+
+      // Mount the React component
+      ReactDOM.render(
+        React.createElement(LoveVisualization),
+        document.getElementById("love-visualization")
+      );
     </script>
   </body>
 </html>
