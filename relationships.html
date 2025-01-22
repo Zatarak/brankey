@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Relationships</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <style>
       * {
@@ -279,24 +282,50 @@
         <button id="readText" class="action-button">🔊</button>
         <h1>Relationships</h1>
         <p class="relationshipsText" id="relationshipsText">
-          Think of your favorite old sweater - comfortable, familiar, yet each
-          wear adds to its story. Relationships are a bit like that. They start
-          fresh and new, gradually molding to fit our lives, collecting memories
-          and meaning along the way. But unlike that sweater, relationships are
-          living things, constantly growing and changing. Remember building
-          sandcastles as a kid? You needed just the right mix of sand and water
-          - too dry, it crumbles; too wet, it collapses. Relationships have a
-          similar delicate balance. They require attention and care, but also
-          space to breathe. Sometimes you're the architect, sometimes the
-          supporter, and sometimes you're just enjoying what you've built
-          together. Every relationship is like a unique dance - sometimes
-          flowing smoothly, sometimes stepping on toes. There's no perfect
-          choreography, just two people learning to move together, adapting
-          their steps as the music changes. The beauty isn't in perfection, but
-          in how we recover from missteps and keep dancing.
+          Each relationship we forge – whether romantic, familial, or platonic –
+          serves as a mirror, reflecting parts of ourselves we might never have
+          discovered otherwise. These connections challenge us, nurture us, and
+          ultimately transform us. Think back to the relationships that have
+          left an indelible mark on your journey. Perhaps there were moments of
+          profound joy that made your heart soar, or challenges that initially
+          felt insurmountable. Those difficult conversations, misunderstandings,
+          and moments of vulnerability – what if we viewed them not as
+          obstacles, but as invitations to grow? Every disagreement becomes an
+          opportunity to practice empathy, every misalignment a chance to
+          strengthen our communication skills. The beauty of relationships lies
+          in their ability to stretch our understanding of love, patience, and
+          acceptance. When we encounter differences with others, we're presented
+          with a choice: we can retreat into familiar patterns, or we can lean
+          into the discomfort and allow it to reshape our perspectives. Those
+          moments when we feel most challenged often precede our greatest
+          breakthroughs in understanding both ourselves and others. Remember
+          that authenticity forms the bedrock of meaningful connections. By
+          embracing our true selves – imperfections and all – we create space
+          for others to do the same. This mutual vulnerability becomes the soil
+          from which trust and deeper understanding can flourish. When we stop
+          trying to be perfect and start being real, we often find that our
+          relationships naturally deepen and strengthen. Consider how each
+          relationship in your life has contributed to your personal evolution.
+          That friend who always speaks their truth may have helped you find
+          your voice. The partner who challenged your assumptions might have
+          sparked tremendous personal growth. Even those connections that didn't
+          last forever likely taught invaluable lessons about boundaries,
+          self-respect, and resilience. As we move forward in our relational
+          journeys, let's approach each interaction with curiosity and openness.
+          Every person we meet carries their own wisdom, their own stories, and
+          their own potential to enrich our lives in unexpected ways. By viewing
+          relationships as opportunities for mutual growth rather than sources
+          of validation or security, we free ourselves to experience deeper,
+          more authentic connections. The path of relationship building isn't
+          always smooth, but its twists and turns shape us into more
+          compassionate, understanding, and self-aware individuals. Each step
+          forward, even the challenging ones, brings us closer to becoming the
+          person we're meant to be. In the end, it's not just about the
+          relationships we build with others – it's about the relationship we
+          develop with ourselves along the way.
         </p>
       </div>
-      <a href="#" class="action-button">Explore Your Belonging</a>
+      <div id="relationships-circles"></div>
       <div id="relationships-circles"></div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
@@ -331,8 +360,7 @@
         });
       });
 
-
-// Text-to-speech functionality
+      // Text-to-speech functionality
       document.addEventListener("DOMContentLoaded", function () {
         const readButton = document.getElementById("readText");
         const textElement = document.getElementById("relationshipsText");
@@ -393,6 +421,96 @@
           readButton.style.display = "none";
         }
       });
+    </script>
+    <script type="text/babel">
+      import React, { useState } from "react";
+
+      const RelationshipsDiagram = () => {
+        const [activeCircle, setActiveCircle] = useState(null);
+
+        const relationships = [
+          {
+            id: "growth",
+            label: "Personal Growth",
+            description:
+              "Every relationship offers opportunities for learning and development",
+            color: "rgb(255, 78, 80)",
+          },
+          {
+            id: "connection",
+            label: "Authentic Connection",
+            description:
+              "Building trust through genuine interaction and vulnerability",
+            color: "rgb(249, 212, 35)",
+          },
+          {
+            id: "understanding",
+            label: "Mutual Understanding",
+            description:
+              "Developing empathy and appreciation for different perspectives",
+            color: "rgb(92, 121, 255)",
+          },
+          {
+            id: "challenges",
+            label: "Relationship Challenges",
+            description:
+              "Viewing difficulties as opportunities for strengthening bonds",
+            color: "#3405aa",
+          },
+        ];
+
+        return (
+          <div className="flex flex-col items-center my-8 p-4">
+            <div className="relative w-full h-[400px] flex items-center justify-center">
+              {relationships.map((rel, index) => {
+                const angle = (index * 2 * Math.PI) / relationships.length;
+                const radius = 150;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+
+                return (
+                  <div
+                    key={rel.id}
+                    className={`absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300 ${
+                      activeCircle === rel.id ? "scale-110" : "scale-100"
+                    }`}
+                    style={{
+                      left: `calc(50% + ${x}px)`,
+                      top: `calc(50% + ${y}px)`,
+                    }}
+                    onMouseEnter={() => setActiveCircle(rel.id)}
+                    onMouseLeave={() => setActiveCircle(null)}
+                  >
+                    <div
+                      className="w-24 h-24 rounded-full flex items-center justify-center text-white text-center p-2 shadow-lg transition-all duration-300"
+                      style={{ backgroundColor: rel.color }}
+                    >
+                      <span className="text-sm font-bold">{rel.label}</span>
+                    </div>
+                    {activeCircle === rel.id && (
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white p-3 rounded-lg shadow-lg w-48 z-10 text-center">
+                        <p className="text-sm">{rel.description}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              <div className="absolute w-32 h-32 rounded-full bg-black flex items-center justify-center text-white">
+                <span className="text-lg font-bold text-center">
+                  Relationship Dynamic
+                </span>
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      export default RelationshipsDiagram;
+
+      ReactDOM.render(
+        <RelationshipsDiagram />,
+        document.getElementById("relationships-circles")
+      );
     </script>
   </body>
 </html>
