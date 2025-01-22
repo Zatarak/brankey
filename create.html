@@ -259,11 +259,6 @@
       }
 
       .circle-container:hover .interactive-circle {
-        background: linear-gradient(
-          109.6deg,
-          rgb(255, 78, 80) 11.2%,
-          rgb(249, 212, 35) 100.2%
-        );
         transform: scale(1.1);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       }
@@ -330,7 +325,6 @@
         position: absolute;
         inset: 0;
         border-radius: 50%;
-        background: #f0f0f0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -351,37 +345,65 @@
 
       /* Modified circle animations */
       .create .interactive-circle {
-        background: conic-gradient(from 0deg, #f0f0f0 0%, transparent 0%);
+        background: linear-gradient(
+          106.5deg,
+          rgba(255, 215, 185, 0.91) 23%,
+          rgba(223, 159, 247, 0.8) 93%
+        );
         animation: createCircle 2s ease-in-out infinite;
       }
 
       .transform .interactive-circle {
+        background: radial-gradient(
+          circle at 10% 20%,
+          rgb(255, 37, 174) 0%,
+          rgb(241, 147, 55) 53.4%,
+          rgb(250, 237, 56) 99.5%
+        );
         animation: transformShape 2s ease-in-out infinite;
       }
 
       .imagine .interactive-circle {
+        background: linear-gradient(
+          -225deg,
+          #5d9fff 0%,
+          #b8dcff 48%,
+          #6bbbff 100%
+        );
         animation: imagineRipple 2s ease-in-out infinite;
       }
 
       .play .interactive-circle {
+        background: linear-gradient(
+          121.7deg,
+          rgb(41, 116, 250) 22.9%,
+          rgb(67, 212, 255) 69%
+        );
         animation: playBounce 1s ease-in-out infinite;
       }
 
       .discover .interactive-circle {
+        background: linear-gradient(
+          68.6deg,
+          rgb(252, 165, 241) 1.8%,
+          rgb(181, 255, 255) 100.5%
+        );
         animation: discoverEffect 1.5s ease-in-out infinite;
       }
 
       /* Updated keyframe animations */
       @keyframes createCircle {
         0% {
-          background: conic-gradient(from 0deg, #f0f0f0 0%, transparent 0%);
+          opacity: 0.7;
+          transform: scale(0.95);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
         }
         100% {
-          background: conic-gradient(
-            from 360deg,
-            #f0f0f0 100%,
-            transparent 100%
-          );
+          opacity: 0.7;
+          transform: scale(0.95);
         }
       }
 
@@ -410,13 +432,13 @@
 
       @keyframes imagineRipple {
         0% {
-          box-shadow: 0 0 0 0 rgba(240, 240, 240, 0.7);
+          box-shadow: 0 0 0 0 rgba(93, 159, 255, 0.7);
         }
         70% {
-          box-shadow: 0 0 0 20px rgba(240, 240, 240, 0);
+          box-shadow: 0 0 0 20px rgba(93, 159, 255, 0);
         }
         100% {
-          box-shadow: 0 0 0 0 rgba(240, 240, 240, 0);
+          box-shadow: 0 0 0 0 rgba(93, 159, 255, 0);
         }
       }
 
@@ -442,16 +464,8 @@
         }
       }
 
-      /* Hover effects */
-      .circle-container:hover .interactive-circle {
-        background: linear-gradient(
-          109.6deg,
-          rgb(255, 78, 80) 11.2%,
-          rgb(249, 212, 35) 100.2%
-        );
-      }
-
-      .circle-container:hover .circle-text {
+      /* Make text white by default since we have colored backgrounds */
+      .circle-text {
         color: white;
       }
     </style>
