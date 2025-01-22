@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Communication</title>
-    <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.10/babel.min.js"></script>
+    <!-- Load ResponsiveVoice after React -->
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
+
     <style>
       * {
         margin: 0;
@@ -287,6 +289,63 @@
       .communicationText {
         transition: all 0.5s ease;
       }
+      .interactive-container {
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 2rem auto;
+        max-width: 800px;
+      }
+      #interactive-communication-root {
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .emotion-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .emotion-button {
+        font-size: 2rem;
+        padding: 10px;
+        background: none;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 50%;
+      }
+
+      .emotion-button:hover {
+        transform: scale(1.1);
+      }
+
+      .emotion-button.active {
+        border-color: black;
+        transform: scale(1.1);
+      }
+
+      .message-display {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 1.2rem;
+        min-height: 50px;
+      }
+
+      .movement-tracker {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid #eee;
+        margin-top: 20px;
+        font-size: 0.9rem;
+      }
     </style>
   </head>
   <body>
@@ -456,8 +515,10 @@
           readButton.style.display = "none";
         }
       });
-
-      const CommunicationInteractive = () => {
+    </script>
+    <script type="text/babel">
+      // Create the React component
+      function CommunicationInteractive() {
         const [mood, setMood] = React.useState("neutral");
         const [message, setMessage] = React.useState(
           "How are you feeling today?"
@@ -468,48 +529,14 @@
         });
 
         React.useEffect(() => {
-          const handleMouseMove = (e) => {
-            // Get the mouse position relative to the viewport
-            const x = e.clientX;
-            const y = e.clientY;
+          function handleMouseMove(e) {
+            setMousePosition({ x: e.clientX, y: e.clientY });
+            const hue = (e.clientX / window.innerWidth) * 360;
+            document.body.style.backgroundColor = `hsl(${hue}, 10%, 98%)`;
+          }
 
-            // Only update state if the values have changed significantly
-            setMousePosition((prev) => {
-              if (Math.abs(prev.x - x) > 5 || Math.abs(prev.y - y) > 5) {
-                return { x, y };
-              }
-              return prev;
-            });
-
-            // Calculate hue based on x position
-            const hue = (x / window.innerWidth) * 360;
-
-            // Use requestAnimationFrame for smoother background color updates
-            requestAnimationFrame(() => {
-              document.body.style.backgroundColor = `hsl(${hue}, 10%, 98%)`;
-            });
-          };
-
-          // Add throttled event listener
-          let timeoutId;
-          const throttledHandleMouseMove = (e) => {
-            if (!timeoutId) {
-              timeoutId = setTimeout(() => {
-                handleMouseMove(e);
-                timeoutId = null;
-              }, 16); // Approximately 60fps
-            }
-          };
-
-          window.addEventListener("mousemove", throttledHandleMouseMove);
-
-          // Cleanup
-          return () => {
-            window.removeEventListener("mousemove", throttledHandleMouseMove);
-            if (timeoutId) {
-              clearTimeout(timeoutId);
-            }
-          };
+          window.addEventListener("mousemove", handleMouseMove);
+          return () => window.removeEventListener("mousemove", handleMouseMove);
         }, []);
 
         const emotionalStates = [
@@ -519,94 +546,61 @@
           { emoji: "😌", label: "Peaceful", color: "#98FB98" },
         ];
 
-        const handleEmotionClick = (emotion) => {
+        function handleEmotionClick(emotion) {
           setMood(emotion.label.toLowerCase());
           setMessage(
             `Your body language shows ${emotion.label.toLowerCase()}. Notice how this affects the way others might perceive your message.`
           );
 
-          // Use requestAnimationFrame for smoother DOM updates
-          requestAnimationFrame(() => {
-            const textElement = document.querySelector(".communicationText");
-            if (textElement) {
-              textElement.style.color = emotion.color;
-              textElement.style.letterSpacing =
-                emotion.label === "Angry"
-                  ? "1px"
-                  : emotion.label === "Peaceful"
-                  ? "0.5px"
-                  : "normal";
-            }
-          });
-        };
-        return (
-          <div className="interactive-container mt-8 p-4">
-            <div
-              style={{
-                textAlign: "center",
-                marginBottom: "1.5rem",
-                fontSize: "1.2rem",
-              }}
-            >
-              {message}
-            </div>
+          const textElement = document.querySelector(".communicationText");
+          if (textElement) {
+            textElement.style.color = emotion.color;
+            textElement.style.letterSpacing =
+              emotion.label === "Angry"
+                ? "1px"
+                : emotion.label === "Peaceful"
+                ? "0.5px"
+                : "normal";
+          }
+        }
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                marginBottom: "1.5rem",
-              }}
-            >
+        return (
+          <div className="interactive-container">
+            <div className="message-display">{message}</div>
+
+            <div className="emotion-buttons">
               {emotionalStates.map((emotion) => (
                 <button
                   key={emotion.label}
                   onClick={() => handleEmotionClick(emotion)}
-                  style={{
-                    padding: "1rem",
-                    borderRadius: "50%",
-                    fontSize: "2rem",
-                    transition: "transform 0.2s",
-                    transform:
-                      mood === emotion.label.toLowerCase()
-                        ? "scale(1.1)"
-                        : "scale(1)",
-                    border:
-                      mood === emotion.label.toLowerCase()
-                        ? "4px solid black"
-                        : "none",
-                  }}
+                  className={`emotion-button ${
+                    mood === emotion.label.toLowerCase() ? "active" : ""
+                  }`}
                 >
                   {emotion.emoji}
                 </button>
               ))}
             </div>
 
-            <div
-              style={{
-                textAlign: "center",
-                fontSize: "0.9rem",
-                opacity: 0.7,
-                marginTop: "1.5rem",
-                borderTop: "1px solid #eee",
-                paddingTop: "1rem",
-              }}
-            >
-              Your movement patterns: {mousePosition.x}, {mousePosition.y}
-              <div style={{ fontSize: "0.8rem", marginTop: "0.5rem" }}>
+            <div className="movement-tracker">
+              Mouse position: {mousePosition.x}, {mousePosition.y}
+              <div>
                 Notice how your physical movement affects the space and
                 communication
               </div>
             </div>
           </div>
         );
-      };
+      }
 
-      // Initialize the React component
-      const root = ReactDOM.createRoot(
-        document.getElementById("interactive-communication-root")
+      // Initialize React component
+      const container = document.getElementById(
+        "interactive-communication-root"
       );
-      root.render(<CommunicationInteractive />);
+      if (container) {
+        const root = ReactDOM.createRoot(container);
+        root.render(<CommunicationInteractive />);
+      }
     </script>
   </body>
 </html>
