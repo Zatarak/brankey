@@ -339,6 +339,19 @@
       function navigateTo(section) {
         document.getElementById(`${section}-link`).click();
       }
+// Add email handling function
+      function sendEmail(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        // Replace 'your.email@example.com' with your actual email address
+        const mailtoLink = `mailto:brankeey@gmail.com?subject=Contact Form Submission from ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+        
+        window.location.href = mailtoLink;
+        }
     </script>
   </body>
 </html>
