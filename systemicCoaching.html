@@ -312,6 +312,26 @@
         margin: 0 auto;
         display: block;
       }
+      h4,
+      h6 {
+        font-size: clamp(18px, 1.5vw, 26px);
+        margin-bottom: 15px;
+        font-family: monospace;
+      }
+
+      @media (min-width: 768px) {
+        .grid-space svg {
+          width: 100%; /* Allow SVGs to expand fully within their grid space */
+          height: auto; /* Maintain aspect ratio */
+          max-width: 500px; /* Optional: prevent excessive growth */
+          margin: 0 auto; /* Center SVGs */
+        }
+
+        /* Specifically for circular text SVGs */
+        .system-trigger-diagram text {
+          font-size: clamp(8px, 1vw, 14px); /* Proportional text sizing */
+        }
+      }
     </style>
   </head>
   <body>
@@ -364,6 +384,7 @@
             stroke-width="2"
             stroke-dasharray="5,5"
           />
+
           <text
             x="100"
             y="50"
@@ -396,13 +417,31 @@
             fill="none"
             stroke="black"
             marker-end="url(#arrowhead)"
-          />
+          >
+            <animate
+              attributeName="d"
+              values="M100,60 Q140,100 100,140;
+              M110,60 Q150,100 110,140;
+              M100,60 Q140,100 100,140"
+              dur="3s"
+              repeatCount="indefinite"
+            />
+          </path>
           <path
             d="M100,140 Q60,100 100,60"
             fill="none"
             stroke="black"
             marker-end="url(#arrowhead)"
-          />
+          >
+            <animate
+              attributeName="d"
+              values="M100,140 Q60,100 100,60;
+              M90,140 Q50,100 90,60;
+              M100,140 Q60,100 100,60"
+              dur="3s"
+              repeatCount="indefinite"
+            />
+          </path>
           <defs>
             <marker
               id="arrowhead"
@@ -435,33 +474,33 @@
           />
 
           <circle cx="50" cy="75" r="10" fill="black" />
-          <text x="70" y="80" font-family="monospace" font-size="14px">
-            Whispers of Belonging
+          <text x="70" y="80" font-family="monospace" font-size="12px">
+            week 1: Whispers of Belonging
           </text>
 
           <circle cx="50" cy="115" r="10" fill="black" />
-          <text x="70" y="120" font-family="monospace" font-size="14px">
-            Unspoken River Currents
+          <text x="70" y="120" font-family="monospace" font-size="12px">
+            week 2: Unspoken River Currents
           </text>
 
           <circle cx="50" cy="155" r="10" fill="black" />
-          <text x="70" y="160" font-family="monospace" font-size="14px">
-            Dance of Relationships
+          <text x="70" y="160" font-family="monospace" font-size="12px">
+            week 3: Dance of Relationships
           </text>
 
           <circle cx="50" cy="195" r="10" fill="black" />
-          <text x="70" y="200" font-family="monospace" font-size="14px">
-            Resilience for Personal Mythology
+          <text x="70" y="200" font-family="monospace" font-size="12px">
+            week 4: Resilience for Personal Mythology
           </text>
 
           <circle cx="50" cy="235" r="10" fill="black" />
-          <text x="70" y="240" font-family="monospace" font-size="14px">
-            Radical Compassion
+          <text x="70" y="240" font-family="monospace" font-size="12px">
+            week 5: Radical Compassion
           </text>
 
           <circle cx="50" cy="275" r="10" fill="black" />
-          <text x="70" y="280" font-family="monospace" font-size="14px">
-            Integrated Self
+          <text x="70" y="280" font-family="monospace" font-size="12px">
+            week 6: Integrated Self
           </text>
         </svg>
       </div>
