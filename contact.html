@@ -212,7 +212,7 @@
         width: 90%;
         padding: 10px;
         border-radius: 5px;
-        border: 1 px solid #ccc;
+        border: 1px solid #ccc;
         font-size: clamp(13px, 1.5vw, 24px);
         font-family: "Courier New", Courier, monospace;
       }
@@ -224,7 +224,7 @@
         margin-right: 40px;
         padding: 10px;
         border-radius: 5px;
-        border: 1 px solid #ccc;
+        border: 1px solid #ccc;
         font-size: clamp(16px, 2vw, 24px);
         font-family: "Courier New", Courier, monospace;
       }
@@ -249,13 +249,13 @@
       }
       @media (max-width: 768px) {
         .contact-info {
-          flex-basis: 100%; /* Full width on smaller screens */
-          order: 1; /* Move it to the top */
+          flex-basis: 100%;
+          order: 1;
         }
 
         .contact-form {
-          flex-basis: 100%; /* Full width on smaller screens */
-          order: 2; /* Keep the form below */
+          flex-basis: 100%;
+          order: 2;
         }
         .resources {
           font-size: 16px;
@@ -289,18 +289,36 @@
             line — I'd love to <u>build</u> new relationships!
           </p>
         </div>
-        <div class="contact-form">
+        <form
+          class="contact-form"
+          action="https://formspree.io/f/mzzdbvzl"
+          method="POST"
+        >
           <h2>Name</h2>
-          <input type="text" id="name" placeholder="How may I call you?" />
+          <input
+            type="text"
+            name="name"
+            placeholder="How may I call you?"
+            required
+          />
 
           <h3>Email Address</h3>
-          <input type="email" id="email" placeholder="How can I reach you?" />
+          <input
+            type="email"
+            name="_replyto"
+            placeholder="How can I reach you?"
+            required
+          />
 
           <h4>Message</h4>
-          <textarea id="message" placeholder="How can I help you?"></textarea>
+          <textarea
+            name="message"
+            placeholder="How can I help you?"
+            required
+          ></textarea>
 
           <button type="submit">Submit</button>
-        </div>
+        </form>
       </div>
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
@@ -335,32 +353,6 @@
           navMenu.classList.remove("active");
         });
       });
-
-      function navigateTo(section) {
-        document.getElementById(`${section}-link`).click();
-      }
-      // Add email handling function
-      function sendEmail(e) {
-        e.preventDefault();
-
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
-
-        if (!name || !email || !message) {
-          alert("Please fill in all fields");
-          return;
-        }
-
-        const mailtoLink = `mailto:brankeey@gmail.com?subject=Contact Form Submission from ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-
-        window.location.href = mailtoLink;
-
-        // Optional: Clear the form after submission
-        document.getElementById("name").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("message").value = "";
-      }
     </script>
   </body>
 </html>
