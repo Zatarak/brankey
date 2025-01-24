@@ -562,6 +562,58 @@
           }
         });
       });
+      document.addEventListener("DOMContentLoaded", function () {
+        const messageWall = document.getElementById("messageWall");
+        const messageInput = document.getElementById("messageInput");
+        const submitButton = document.getElementById("submitMessage");
+
+        // Load existing messages
+        const savedMessages = JSON.parse(
+          localStorage.getItem("belongingWallMessages") || "[]"
+        );
+
+        function renderMessages() {
+          messageWall.innerHTML = ""; // Clear existing messages
+          savedMessages.forEach((message, index) => {
+            const messageElement = document.createElement("div");
+            messageElement.className = "wall-message";
+            messageElement.textContent = message;
+
+            // Add delete button
+            const deleteBtn = document.createElement("span");
+            deleteBtn.innerHTML = "&times;"; // × symbol
+            deleteBtn.style.marginLeft = "10px";
+            deleteBtn.style.cursor = "pointer";
+            deleteBtn.style.color = "red";
+            deleteBtn.addEventListener("click", () => {
+              savedMessages.splice(index, 1);
+              localStorage.setItem(
+                "belongingWallMessages",
+                JSON.stringify(savedMessages)
+              );
+              renderMessages(); // Re-render messages
+            });
+
+            messageElement.appendChild(deleteBtn);
+            messageWall.appendChild(messageElement);
+          });
+        }
+
+        renderMessages(); // Initial render
+
+        submitButton.addEventListener("click", function () {
+          const message = messageInput.value.trim();
+          if (message) {
+            savedMessages.push(message);
+            localStorage.setItem(
+              "belongingWallMessages",
+              JSON.stringify(savedMessages)
+            );
+            renderMessages();
+            messageInput.value = "";
+          }
+        });
+      });
     </script>
   </body>
 </html>
