@@ -578,6 +578,8 @@
             const messageElement = document.createElement("div");
             messageElement.className = "wall-message";
             messageElement.textContent = message;
+            messageElement.style.width = "auto";
+            messageElement.style.maxWidth = "none";
 
             // Add delete button
             const deleteBtn = document.createElement("span");
