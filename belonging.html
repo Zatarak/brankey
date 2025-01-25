@@ -589,7 +589,7 @@
         const messageInput = document.getElementById("messageInput");
         const submitButton = document.getElementById("submitMessage");
 
-        // Use let instead of const for mutability
+        // Single, definitive source of messages from localStorage
         let savedMessages = JSON.parse(
           localStorage.getItem("belongingWallMessages") || "[]"
         );
@@ -601,12 +601,12 @@
             messageElement.className = "wall-message";
             messageElement.textContent = message;
 
-            // Randomize positioning with more controlled spread
+            // Randomize positioning
             messageElement.style.position = "absolute";
             messageElement.style.left = `${Math.random() * 90}%`;
             messageElement.style.top = `${Math.random() * 90}%`;
 
-            // Delete functionality
+            // Delete button
             const deleteBtn = document.createElement("span");
             deleteBtn.innerHTML = "&times;";
             deleteBtn.style.marginLeft = "10px";
@@ -626,10 +626,11 @@
           });
         }
 
-        // Initial render
+        // Render messages on page load
         renderMessages();
 
-        submitButton.addEventListener("click", function () {
+        // Submit new message
+        function submitMessage() {
           const message = messageInput.value.trim();
           if (message) {
             savedMessages.push(message);
@@ -640,11 +641,12 @@
             renderMessages();
             messageInput.value = "";
           }
-        });
+        }
 
+        submitButton.addEventListener("click", submitMessage);
         messageInput.addEventListener("keypress", function (e) {
           if (e.key === "Enter") {
-            submitButton.click();
+            submitMessage();
           }
         });
       });
