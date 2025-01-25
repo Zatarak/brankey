@@ -480,176 +480,125 @@
     </footer>
 
     <script>
-      // Menu functionality
-      const menuBtn = document.querySelector(".menu-btn");
-      const closeBtn = document.querySelector(".close-btn");
-      const navMenu = document.querySelector(".nav-menu");
-      const navLinks = document.querySelectorAll(".nav-link");
+document.addEventListener("DOMContentLoaded", function () {
+  // Menu functionality
+  const menuBtn = document.querySelector(".menu-btn");
+  const closeBtn = document.querySelector(".close-btn");
+  const navMenu = document.querySelector(".nav-menu");
+  const navLinks = document.querySelectorAll(".nav-link");
 
-      menuBtn.addEventListener("click", () => {
-        navMenu.classList.add("active");
-      });
+  menuBtn.addEventListener("click", () => navMenu.classList.add("active"));
+  closeBtn.addEventListener("click", () => navMenu.classList.remove("active"));
+  navLinks.forEach((link) => link.addEventListener("click", () => navMenu.classList.remove("active")));
 
-      closeBtn.addEventListener("click", () => {
-        navMenu.classList.remove("active");
-      });
+  // Text-to-speech functionality
+  const readButton = document.getElementById("readText");
+  const textElement = document.getElementById("belongingText");
 
-      navLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          navMenu.classList.remove("active");
-        });
-      });
+  function prepareTextForSpeech(text) {
+    return text
+      .replace(/\s+/g, " ")
+      .replace(/\n/g, " ")
+      .replace(/[-–—]/g, ", ")
+      .replace(/\s+([.,!?])/g, "$1")
+      .replace(/([.,!?])\s*/g, "$1 ")
+      .trim();
+  }
 
-      // Text-to-speech functionality
-      document.addEventListener("DOMContentLoaded", function () {
-        const readButton = document.getElementById("readText");
-        const textElement = document.getElementById("belongingText");
-        function prepareTextForSpeech(text) {
-          return text
-            .replace(/\s+/g, " ") // Replace multiple spaces with single space
-            .replace(/\n/g, " ") // Replace newlines with spaces
-            .replace(/[-–—]/g, ", ") // Replace dashes with commas for better pausing
-            .replace(/\s+([.,!?])/g, "$1") // Remove spaces before punctuation
-            .replace(/([.,!?])\s*/g, "$1 ") // Ensure single space after punctuation
-            .trim(); // Remove leading/trailing spaces
-        }
+  if (window.responsiveVoice) {
+    readButton.addEventListener("click", function () {
+      if (textElement) {
+        const rawText = textElement.textContent;
+        const processedText = prepareTextForSpeech(rawText);
 
-        if (window.responsiveVoice) {
-          console.log("ResponsiveVoice is loaded");
-
-          readButton.addEventListener("click", function () {
-            if (textElement) {
-              const rawText = textElement.textContent;
-              const processedText = prepareTextForSpeech(rawText);
-
-              if (responsiveVoice.isPlaying()) {
-                responsiveVoice.cancel();
-                readButton.textContent = "🔊";
-              } else {
-                responsiveVoice.speak(processedText, "UK English Female", {
-                  pitch: 1,
-                  rate: 0.95, // Slightly slower rate for better clarity
-                  volume: 1,
-                  onstart: function () {
-                    readButton.textContent = "🛑";
-                  },
-                  onend: function () {
-                    readButton.textContent = "🔊";
-                  },
-                  onpause: function () {
-                    readButton.textContent = "🔊";
-                  },
-                  onresume: function () {
-                    readButton.textContent = "🛑";
-                  },
-                  // Add breaks at punctuation marks
-                  pitch: 1,
-                  rate: 0.95,
-                  volume: 1,
-                  parameters: {
-                    punctuation: true,
-                    linebreak: "500ms",
-                  },
-                });
-              }
-            } else {
-              console.error("Text element not found");
-            }
-          });
+        if (responsiveVoice.isPlaying()) {
+          responsiveVoice.cancel();
+          readButton.textContent = "🔊";
         } else {
-          console.error("ResponsiveVoice is not loaded");
-          readButton.style.display = "none";
-        }
-      });
-      // New functionality for the belonging wall
-      document.addEventListener("DOMContentLoaded", function () {
-        const messageWall = document.getElementById("messageWall");
-        const messageInput = document.getElementById("messageInput");
-        const submitButton = document.getElementById("submitMessage");
-
-        submitButton.addEventListener("click", function () {
-          const message = messageInput.value.trim();
-          if (message) {
-            const messageElement = document.createElement("div");
-            messageElement.className = "wall-message";
-            messageElement.textContent = message;
-            messageWall.appendChild(messageElement);
-            messageInput.value = "";
-          }
-        });
-
-        messageInput.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            submitButton.click();
-          }
-        });
-      });
-      document.addEventListener("DOMContentLoaded", function () {
-        const messageWall = document.getElementById("messageWall");
-        const messageInput = document.getElementById("messageInput");
-        const submitButton = document.getElementById("submitMessage");
-
-        // Single, definitive source of messages from localStorage
-        let savedMessages = JSON.parse(
-          localStorage.getItem("belongingWallMessages") || "[]"
-        );
-
-        function renderMessages() {
-          messageWall.innerHTML = "";
-          savedMessages.forEach((message, index) => {
-            const messageElement = document.createElement("div");
-            messageElement.className = "wall-message";
-            messageElement.textContent = message;
-
-            // Randomize positioning
-            messageElement.style.position = "absolute";
-            messageElement.style.left = `${Math.random() * 90}%`;
-            messageElement.style.top = `${Math.random() * 90}%`;
-
-            // Delete button
-            const deleteBtn = document.createElement("span");
-            deleteBtn.innerHTML = "&times;";
-            deleteBtn.style.marginLeft = "10px";
-            deleteBtn.style.cursor = "pointer";
-            deleteBtn.style.color = "red";
-            deleteBtn.addEventListener("click", () => {
-              savedMessages.splice(index, 1);
-              localStorage.setItem(
-                "belongingWallMessages",
-                JSON.stringify(savedMessages)
-              );
-              renderMessages();
-            });
-
-            messageElement.appendChild(deleteBtn);
-            messageWall.appendChild(messageElement);
+          responsiveVoice.speak(processedText, "UK English Female", {
+            pitch: 1,
+            rate: 0.95,
+            volume: 1,
+            onstart: () => readButton.textContent = "🛑",
+            onend: () => readButton.textContent = "🔊",
+            onpause: () => readButton.textContent = "🔊",
+            onresume: () => readButton.textContent = "🛑",
+            parameters: {
+              punctuation: true,
+              linebreak: "500ms",
+            },
           });
         }
+      }
+    });
+  } else {
+    readButton.style.display = "none";
+  }
 
-        // Render messages on page load
+  // Belonging Wall functionality
+  const messageWall = document.getElementById("messageWall");
+  const messageInput = document.getElementById("messageInput");
+  const submitButton = document.getElementById("submitMessage");
+
+  let savedMessages = JSON.parse(
+    localStorage.getItem("belongingWallMessages") || "[]"
+  );
+
+  function renderMessages() {
+    messageWall.innerHTML = "";
+    savedMessages.forEach((message, index) => {
+      const messageElement = document.createElement("div");
+      messageElement.className = "wall-message";
+      messageElement.textContent = message;
+      
+      const wallWidth = messageWall.clientWidth;
+      const wallHeight = messageWall.clientHeight;
+      
+      messageElement.style.position = "absolute";
+      messageElement.style.left = `${Math.random() * (wallWidth - 200)}px`;
+      messageElement.style.top = `${Math.random() * (wallHeight - 50)}px`;
+      
+      const deleteBtn = document.createElement("span");
+      deleteBtn.innerHTML = "&times;";
+      deleteBtn.style.marginLeft = "10px";
+      deleteBtn.style.cursor = "pointer";
+      deleteBtn.style.color = "red";
+      deleteBtn.addEventListener("click", () => {
+        savedMessages.splice(index, 1);
+        localStorage.setItem(
+          "belongingWallMessages", 
+          JSON.stringify(savedMessages)
+        );
         renderMessages();
-
-        // Submit new message
-        function submitMessage() {
-          const message = messageInput.value.trim();
-          if (message) {
-            savedMessages.push(message);
-            localStorage.setItem(
-              "belongingWallMessages",
-              JSON.stringify(savedMessages)
-            );
-            renderMessages();
-            messageInput.value = "";
-          }
-        }
-
-        submitButton.addEventListener("click", submitMessage);
-        messageInput.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            submitMessage();
-          }
-        });
       });
+
+      messageElement.appendChild(deleteBtn);
+      messageWall.appendChild(messageElement);
+    });
+  }
+
+  renderMessages();
+
+  function submitMessage() {
+    const message = messageInput.value.trim();
+    if (message) {
+      savedMessages.push(message);
+      localStorage.setItem(
+        "belongingWallMessages", 
+        JSON.stringify(savedMessages)
+      );
+      renderMessages();
+      messageInput.value = "";
+    }
+  }
+
+  submitButton.addEventListener("click", submitMessage);
+  messageInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      submitMessage();
+    }
+  });
+});
     </script>
   </body>
 </html>
