@@ -589,7 +589,8 @@
         const messageInput = document.getElementById("messageInput");
         const submitButton = document.getElementById("submitMessage");
 
-        const savedMessages = JSON.parse(
+        // Use let instead of const for mutability
+        let savedMessages = JSON.parse(
           localStorage.getItem("belongingWallMessages") || "[]"
         );
 
@@ -600,7 +601,7 @@
             messageElement.className = "wall-message";
             messageElement.textContent = message;
 
-            // Randomize positioning
+            // Randomize positioning with more controlled spread
             messageElement.style.position = "absolute";
             messageElement.style.left = `${Math.random() * 90}%`;
             messageElement.style.top = `${Math.random() * 90}%`;
@@ -625,6 +626,7 @@
           });
         }
 
+        // Initial render
         renderMessages();
 
         submitButton.addEventListener("click", function () {
