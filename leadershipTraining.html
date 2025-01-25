@@ -248,13 +248,19 @@
       }
       .title {
         display: block;
-        font-size: clamp(80px, 4vw, 48px);
-        margin: clamp(60px, 1vw, 20px) 0;
+        font-size: clamp(
+          28px,
+          10vw,
+          48px
+        ); /* Reduced minimum size and adjusted scaling */
+        margin: clamp(20px, 1vw, 40px) 0;
         font-weight: bold;
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
         text-align: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: clamp(20px, 4vw, 40px);
+        padding-bottom: clamp(20px, 4vw, 40px);
+        word-wrap: break-word; /* Allow long words to break */
+        overflow-wrap: break-word; /* Ensure text wraps on small screens */
       }
       .reflection-buttons {
         display: flex;
@@ -642,7 +648,9 @@
 
         <br />
         <div class="reflection-buttons">
-          <a href="keyResources.html" class="reflection-btn">View KEY resources</a>
+          <a href="keyResources.html" class="reflection-btn"
+            >View KEY resources</a
+          >
         </div>
       </div>
     </div>
