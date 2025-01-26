@@ -546,6 +546,7 @@
         }
 
         // Firebase configuration
+
         const firebaseConfig = {
           apiKey: "AIzaSyBlJcfYnRktHQ0RnX1xuLPydXVc2Mtf2cE",
           authDomain: "brankey.firebaseapp.com",
@@ -570,26 +571,22 @@
         // Render messages from Firebase
         function renderMessages() {
           messageWall.innerHTML = "";
-          messagesRef.on("value", (snapshot) => {
-            const messages = snapshot.val() || {};
-            Object.values(messages).forEach((message) => {
-              const messageElement = document.createElement("div");
-              messageElement.className = "wall-message";
-              messageElement.textContent = message;
+          messagesRef.on("child_added", (snapshot) => {
+            const message = snapshot.val();
+            const messageElement = document.createElement("div");
+            messageElement.className = "wall-message";
+            messageElement.textContent = message;
 
-              const wallWidth = messageWall.clientWidth;
-              const wallHeight = messageWall.clientHeight;
+            const wallWidth = messageWall.clientWidth;
+            const wallHeight = messageWall.clientHeight;
 
-              messageElement.style.position = "absolute";
-              messageElement.style.left = `${
-                Math.random() * (wallWidth - 200)
-              }px`;
-              messageElement.style.top = `${
-                Math.random() * (wallHeight - 50)
-              }px`;
+            messageElement.style.position = "absolute";
+            messageElement.style.left = `${
+              Math.random() * (wallWidth - 200)
+            }px`;
+            messageElement.style.top = `${Math.random() * (wallHeight - 50)}px`;
 
-              messageWall.appendChild(messageElement);
-            });
+            messageWall.appendChild(messageElement);
           });
         }
 
