@@ -344,6 +344,23 @@
       .back-button:hover {
         left: 0;
       }
+      @media screen and (max-width: 768px) {
+        .bigLogo {
+          font-size: clamp(
+            40px,
+            8vw,
+            60px
+          ); /* Smaller base size, larger viewport scaling */
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .bigLogo {
+          font-size: clamp(30px, 10vw, 40px); /* Even smaller for phone sizes */
+          margin: 10px 0;
+          padding-top: 20px;
+        }
+      }
     </style>
   </head>
   <body>
