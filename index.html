@@ -89,8 +89,10 @@
         display: block;
         padding: clamp(15px, 2.5vw, 30px) 0;
         font-size: clamp(24px, 4vw, 48px);
+        text-align: left;
         transition: color 0.3s ease;
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        text-decoration: underline;
       }
 
       .nav-menu a:hover {
@@ -99,15 +101,13 @@
 
       .close-btn {
         position: absolute;
-        bottom: 190px;
-        right: 280px;
-        color: black;
-        font-size: clamp(24px, 4vw, 48px);
+        top: 20px;
+        right: 20px;
+        color: white;
+        font-size: clamp(24px, 3vw, 36px);
         cursor: pointer;
       }
-      .close-btn:hover {
-        color: #280288;
-      }
+
       .horizontal-line {
         height: 2px;
         background-color: #333;
@@ -166,7 +166,7 @@
         border: 1px solid #333;
         padding: clamp(15px, 2vw, 40px);
         background-color: transparent;
-        margin-bottom: clamp(35px, 3vw, 60px);
+        margin-bottom: 1px;
         font-family: "Times New Roman", Times, serif;
         padding-top: clamp(90px, 4vw, 90px);
         padding-bottom: clamp(15px, 2vw, 30px);
@@ -191,8 +191,8 @@
         .buttonLearnMore,
         .buttonAboutMe {
           width: auto;
-          min-width: 160px;
-          max-width: 180px;
+          min-width: 80px;
+          max-width: 120px;
         }
 
         h1,
@@ -229,29 +229,6 @@
         .right-content .box {
           width: 100%;
           border-right: none;
-        }
-        .resources-animation {
-          margin-left: 0; /* Remove the percentage-based left margin */
-          text-align: center; /* Ensure centered alignment */
-          width: 100%; /* Full width */
-        }
-
-        .resources-container {
-          display: inline-block; /* Helps with centering */
-          margin: 0 auto; /* Centers the container */
-          padding: 0; /* Remove side padding */
-        }
-
-        .resources-container__text {
-          display: inline-block; /* Ensures it sits inline with the list */
-          margin-right: 0px; /* Add some space between text and list */
-        }
-
-        .resources-container__list {
-          padding-left: 0px; /* Small padding instead of 200px */
-          margin: 0;
-          display: inline-block;
-          vertical-align: top;
         }
       }
 
@@ -299,7 +276,6 @@
       p {
         font-size: clamp(18px, 4vw, 15px);
         font-family: monospace;
-        margin-bottom: clamp(35px, 3vw, 60px);
       }
 
       .quote {
@@ -320,34 +296,43 @@
         text-align: center;
         padding-top: 40px;
       }
+      .resources {
+        display: block;
+        font-size: clamp(30px, 2vw, 20px);
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-left: 51.5%;
+      }
+
       .buttonLearnMore {
-        width: 30%;
+        width: 25%;
         position: absolute;
-        right: -1px;
+        right: -2px;
         bottom: -1px;
-        padding: 18px;
+        padding: 10px;
         background-color: transparent;
         color: black;
         border: 1px solid black;
         cursor: pointer;
         text-align: center;
         transform: translateY(-2%);
-        font-size: 15px;
+        font-size: 12px;
         font-family: "Courier New", Courier, monospace;
       }
 
       .buttonAboutMe {
-        width: 30%;
+        width: 25%;
         position: absolute;
-        top: -1px;
-        right: -1px;
-        padding: 18px;
+        top: -33px;
+        right: -2px;
+        padding: 10px;
         background-color: transparent;
         color: black;
         border: 1px solid black;
         cursor: pointer;
         text-align: center;
-        font-size: 15px;
+        transform: translateY(-10%);
+        font-size: 12px;
         font-family: "Courier New", Courier, monospace;
       }
 
@@ -383,69 +368,6 @@
         background-color: transparent;
         color: white;
       }
-
-      .resources-animation {
-        position: relative;
-        text-align: center;
-        margin-top: 20px;
-        width: 100%;
-        height: 60px;
-        overflow: hidden;
-        font-family: "Courier New", Courier, monospace;
-        font-size: clamp(20px, 2vw, 20px);
-        line-height: 40px;
-        color: black;
-        margin-left: 12%;
-      }
-
-      .resources-container {
-        font-weight: 600;
-        overflow: hidden;
-        height: 40px;
-        padding: 0 40px;
-        position: relative;
-      }
-
-      .resources-container__text {
-        display: inline;
-        float: left;
-        margin: 1px;
-        font-size: clamp(36px, 3vw, 20px);
-        font-weight: bold;
-        text-transform: uppercase;
-      }
-
-      .resources-container__list {
-        position: absolute; /* Position absolutely within the container */
-        left: 200px; /* Adjust this value to position it away from the text */
-        margin-top: 0;
-        padding-left: 10px;
-        text-align: left;
-        list-style: none;
-        animation: change 3s infinite;
-        font-size: clamp(26px, 2vw, 20px);
-        color: transparent;
-        -webkit-text-stroke: 1px black;
-        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
-          1px -1px 0px transparent, -1px -1px 0px transparent;
-      }
-
-      .resources-container__list__item {
-        line-height: 40px;
-        margin: 0;
-      }
-
-      @keyframes change {
-        0%,
-        49.99%,
-        100% {
-          transform: translate3d(0, 0, 0);
-        }
-        50%,
-        99.99% {
-          transform: translate3d(0, -50%, 0);
-        }
-      }
     </style>
   </head>
   <body>
@@ -455,12 +377,12 @@
     </header>
 
     <nav class="nav-menu">
+      <div class="close-btn">×</div>
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
       <a href="keyResources.html" class="nav-link">KEY Resources</a>
       <a href="services.html" class="nav-link">Services</a>
       <a href="contact.html" class="nav-link">Contact</a>
-      <div class="close-btn">×</div>
     </nav>
 
     <div class="horizontal-line"></div>
@@ -544,15 +466,7 @@
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
       </p>
-      <div class="resources-animation">
-        <div class="resources-container">
-          <span class="resources-container__text">Resources:</span>
-          <ul class="resources-container__list">
-            <li class="resources-container__list__item">Click</li>
-            <li class="resources-container__list__item">KEY</li>
-          </ul>
-        </div>
-      </div>
+      <p class="resources">Resources</p>
     </main>
 
     <footer>
@@ -582,6 +496,10 @@
           navMenu.classList.remove("active");
         });
       });
+
+      function navigateTo(section) {
+        document.getElementById(`${section}-link`).click();
+      }
     </script>
   </body>
 </html>
