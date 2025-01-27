@@ -97,12 +97,12 @@
         font-size: clamp(24px, 4vw, 48px);
         text-align: left;
         transition: color 0.3s ease;
-        font-family: Impact, sans-serif;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
         text-decoration: underline;
       }
 
       .nav-menu a:hover {
-        color: #280288;
+        color: #3405aab4;
       }
 
       .close-btn {
@@ -138,6 +138,7 @@
         text-align: center;
         padding-top: 40px;
       }
+
       .resources {
         display: flex;
         align-items: center;
@@ -149,6 +150,7 @@
         margin: clamp(20px, 1vw, 20px) 0;
         padding-top: 10px;
       }
+
       .custom-link {
         text-decoration: none;
         border-bottom: 10px solid black;
@@ -198,6 +200,7 @@
         min-height: 250px;
         transition: all 0.3s ease;
       }
+
       .grid-space:nth-child(odd) {
         border-left: 0.5px solid transparent;
       }
@@ -205,6 +208,7 @@
       .grid-space:nth-child(even) {
         border-left: 0.5px solid black;
       }
+
       .grid-space h1,
       .grid-space h3,
       .grid-space h4,
@@ -224,53 +228,26 @@
         margin-right: 20px;
       }
 
-      @media (min-width: 768px) {
-        .grid-spaces {
-          grid-template-columns: repeat(2, 1fr);
-          grid-template-rows: repeat(3, auto);
-          gap: 0;
-          padding: 0 clamp(20px, 4vw, 50px);
-        }
-        .grid-space:not(:first-child):before {
-          left: 0;
-          width: 80%;
-        }
-        .grid-space {
-          min-height: auto; /* Remove fixed min-height */
-          height: auto; /* Allow height to adjust to content */
-        }
-        .grid-space svg {
-          margin: 0 auto; /* Center SVGs within grid spaces */
-          display: block; /* Ensure block display for margin to work */
-        }
-      }
-      @media (max-width: 767px) {
-        .grid-space:nth-child(even) {
-          border-left: 0.5px solid transparent;
-        }
-      }
       .title {
         display: block;
-        font-size: clamp(
-          28px,
-          10vw,
-          48px
-        ); /* Reduced minimum size and adjusted scaling */
+        font-size: clamp(28px, 10vw, 48px);
         margin: clamp(20px, 1vw, 40px) 0;
         font-weight: bold;
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
         text-align: center;
         padding-top: clamp(20px, 4vw, 40px);
         padding-bottom: clamp(20px, 4vw, 40px);
-        word-wrap: break-word; /* Allow long words to break */
-        overflow-wrap: break-word; /* Ensure text wraps on small screens */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
+
       .reflection-buttons {
         display: flex;
         justify-content: center;
         gap: 20px;
         margin-top: 20px;
       }
+
       .reflection-btn {
         padding: 10px 20px;
         background-color: white;
@@ -282,22 +259,118 @@
         cursor: pointer;
         transition: all 0.3s ease;
       }
+
       .reflection-btn:hover {
         background-color: black;
         color: #e9dae1;
       }
 
+      .cta-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .cta-text {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        font-family: monospace;
+      }
+
+      .cta-option {
+        background: rgba(255, 255, 255, 0.3);
+        padding: 1.5rem;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+      }
+
+      .cta-option:hover {
+        transform: translateY(-5px);
+      }
+
+      .cta-option h6 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      .cta-option p {
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      .primary-cta .secondary-cta {
+        background-color: white;
+        border: 2px solid #280288;
+        color: #280288;
+      }
+      .primary-cta:hover .secondary-cta:hover {
+        background-color: #280288;
+        color: white;
+      }
+
+      .module-group {
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        margin-bottom: 20px;
+      }
+
+      .module-group:hover {
+        opacity: 0.7;
+      }
+
+      .clickable-text {
+        font-family: monospace;
+        font-size: 16px;
+        color: black;
+        transition: color 0.3s ease;
+        cursor: pointer;
+        display: block;
+      }
+
+      .module-group:hover .clickable-text {
+        color: #280288;
+      }
+
+      .module-content {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+        font-family: monospace;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
       @media (min-width: 768px) {
-        .grid-space svg {
-          width: 100%; /* Allow SVGs to expand fully within their grid space */
-          height: auto; /* Maintain aspect ratio */
-          max-width: 500px; /* Optional: prevent excessive growth */
-          margin: 0 auto; /* Center SVGs */
+        .grid-spaces {
+          grid-template-columns: repeat(2, 1fr);
         }
 
-        /* Specifically for circular text SVGs */
-        .system-trigger-diagram text {
-          font-size: clamp(8px, 1vw, 14px); /* Proportional text sizing */
+        .cta-container {
+          flex-direction: row;
+        }
+
+        .cta-option {
+          flex: 1;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .grid-space:nth-child(even) {
+          border-left: 0.5px solid transparent;
         }
       }
       .quote {
@@ -321,7 +394,6 @@
         font-size: clamp(14px, 2vw, 20px);
         padding-bottom: 30px;
       }
-
       @keyframes scrollText {
         100% {
           transform: translateX(-100%);
@@ -330,8 +402,6 @@
           transform: translateX(100%);
         }
       }
-
-      /* Responsive adjustments */
       @media (max-width: 767px) {
         .quote-scroll {
           font-size: clamp(12px, 4vw, 16px);
@@ -441,52 +511,23 @@
       }
       .module-group {
         cursor: pointer;
-        transition: opacity 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
       .module-group:hover {
         opacity: 0.7;
       }
 
-      .module-content {
-        margin-top: 20px;
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0.3);
-        border-radius: 5px;
-        font-family: monospace;
-        animation: fadeIn 0.5s ease;
+      .module-group::after {
+        content: "▼";
+        font-size: 12px;
+        transition: transform 0.3s ease;
       }
 
-      .module-content h6 {
-        font-size: 16px;
-        margin-bottom: 10px;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      .module-content ul {
-        margin-left: 20px;
-        margin-top: 10px;
-      }
-
-      .module-content li {
-        margin-bottom: 5px;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .clickable-circle,
-      .clickable-text {
-        cursor: pointer;
+      .module-group.active::after {
+        transform: rotate(180deg);
       }
     </style>
   </head>
@@ -515,18 +556,21 @@
         as legitimate beings.
       </div>
     </div>
+
     <div class="grid-spaces">
       <div class="grid-space">
-        <h1>What is leadership?</h1>
+        <h1>What is leadership training?</h1>
         <br />
         <p>
-          Leadership is about creating a space for collaboration and connection.
-          It's not about control, rather a condition of an organization that
-          thrives on clear communication and shared purpose. Leadership allows
-          transparent dialogue enabling individuals to act with clarity and
-          intention, thus reducing uncertainty.
+          Imagine a dynamic learning process that develops leaders' abilities to
+          create collaborative spaces where clear communication, shared purpose,
+          and transparent dialogue flourish. Participants learn to foster
+          environments that value diverse voices, encourage meaningful
+          conversations, and enable team members to act with clarity and
+          intention, leading to the emergence of innovative solutions.
         </p>
       </div>
+
       <div class="grid-space">
         <h2></h2>
         <p>
@@ -563,7 +607,7 @@
               fill-opacity="0"
             />
 
-            <!-- Central Interconnected Circles representing Leadership Concepts -->
+            <!-- Central Interconnected Circles -->
             <circle
               cx="300"
               cy="200"
@@ -587,7 +631,6 @@
 
             <!-- Interconnected Concepts -->
             <g fill="#000" font-family="monospace">
-              <!-- Collaboration -->
               <text x="300" y="130" text-anchor="middle" font-size="16">
                 Collaboration
               </text>
@@ -598,7 +641,6 @@
                 stroke-dasharray="5,5"
               />
 
-              <!-- Communication -->
               <text x="300" y="190" text-anchor="middle" font-size="16">
                 Transparent Dialogue
               </text>
@@ -609,7 +651,6 @@
                 stroke-dasharray="5,5"
               />
 
-              <!-- Shared Purpose -->
               <text x="306" y="280" text-anchor="middle" font-size="16">
                 Shared Purpose
               </text>
@@ -620,7 +661,6 @@
                 stroke-dasharray="5,5"
               />
 
-              <!-- Central Core -->
               <text
                 x="300"
                 y="230"
@@ -632,7 +672,6 @@
               </text>
             </g>
 
-            <!-- Quote Attribution -->
             <text
               x="300"
               y="380"
@@ -646,21 +685,62 @@
           </svg>
         </p>
       </div>
+
       <div class="grid-space">
-        <h3>And, leadership training?</h3>
+        <h3>Training Modules</h3>
         <br />
-        <p>
-          These trainings will foster an environment where people can express
-          themselves, and engage in meaningful conversations that allow
-          emergence of new ideas and solutions. This dynamic process of
-          interaction, the way we communicate and construct our realities is
-          crutial in ensuring all voices are heard and valued.
-        </p>
+        <div class="module-group" data-module-id="1">
+          <span class="clickable-text"
+            >Module 1: Build trust and team cohesion</span
+          >
+        </div>
+        <div class="module-content" id="module-1-content" style="display: none">
+          <p>
+            This foundational module focuses on creating psychological safety
+            and building strong team relationships. Topics include:
+          </p>
+          <ul>
+            <li>Understanding team dynamics</li>
+            <li>Building psychological safety</li>
+            <li>Developing trust through authentic communication</li>
+            <li>Creating collaborative environments</li>
+          </ul>
+        </div>
+        <div class="module-group" data-module-id="2">
+          <span class="clickable-text"
+            >Module 2: Leadership Communication Intensive</span
+          >
+        </div>
+        <div class="module-content" id="module-2-content" style="display: none">
+          <p>
+            Develop advanced communication skills essential for effective
+            leadership. Areas covered include:
+          </p>
+          <ul>
+            <li>Active listening techniques</li>
+            <li>Conflict resolution strategies</li>
+            <li>Giving and receiving feedback</li>
+            <li>Facilitating productive meetings</li>
+          </ul>
+        </div>
+        <div class="module-group" data-module-id="3">
+          <span class="clickable-text"
+            >Module 3: Holistic organizational growth</span
+          >
+        </div>
+        <div class="module-content" id="module-3-content" style="display: none">
+          <p>Learn to foster sustainable organizational development through:</p>
+          <ul>
+            <li>Systems thinking approach</li>
+            <li>Change management strategies</li>
+            <li>Cultural transformation</li>
+            <li>Sustainable leadership practices</li>
+          </ul>
+        </div>
       </div>
       <div class="grid-space">
         <h4>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-            <!-- Background gradient -->
             <defs>
               <linearGradient
                 id="trainingGradient"
@@ -684,7 +764,6 @@
               </linearGradient>
             </defs>
 
-            <!-- Background -->
             <rect
               width="600"
               height="400"
@@ -692,9 +771,7 @@
               fill-opacity="0"
             />
 
-            <!-- Central Structure -->
             <g font-family="monospace">
-              <!-- Title -->
               <text
                 x="300"
                 y="50"
@@ -705,28 +782,23 @@
                 Leadership Training Process
               </text>
 
-              <!-- Key Concepts -->
               <g text-anchor="middle">
-                <!-- Expression -->
                 <text x="150" y="150" font-size="16">
                   <tspan x="180" dy="0">Express</tspan>
                   <tspan x="150" dy="20">Yourself</tspan>
                 </text>
 
-                <!-- Meaningful Conversations -->
                 <text x="450" y="150" font-size="16">
                   <tspan x="450" dy="0">Meaningful</tspan>
                   <tspan x="470" dy="20">Conversations</tspan>
                 </text>
 
-                <!-- Emergence of Ideas -->
                 <text x="300" y="280" font-size="16">
                   <tspan x="310" dy="0">Emergence of</tspan>
                   <tspan x="300" dy="20">New Ideas</tspan>
                 </text>
               </g>
 
-              <!-- Connecting Paths -->
               <path
                 d="M180,180 Q300,120 420,180"
                 fill="none"
@@ -740,7 +812,6 @@
                 stroke-dasharray="5,5"
               />
 
-              <!-- Central Core -->
               <text
                 x="300"
                 y="350"
@@ -754,137 +825,49 @@
           </svg>
         </h4>
       </div>
+
       <div class="grid-space">
-        <h5>Training Modules</h5>
+        <h5>Empower Your Leadership</h5>
         <br />
-        <div class="training-modules">
-          <svg
-            class="coaching-timeline"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="50 10 350 200"
-          >
-            <line
-              x1="50"
-              y1="50"
-              x2="50"
-              y2="180"
-              stroke="black"
-              stroke-width="2"
-            />
+        <p class="cta-text">Choose your path to leadership excellence:</p>
 
-            <g class="module-group" data-module="1">
-              <circle
-                cx="50"
-                cy="75"
-                r="10"
-                fill="black"
-                class="clickable-circle"
-              />
-              <text
-                x="70"
-                y="80"
-                font-family="monospace"
-                font-size="12px"
-                class="clickable-text"
-              >
-                Module 1: Build trust and team cohesion
-              </text>
-            </g>
-
-            <g class="module-group" data-module="2">
-              <circle
-                cx="50"
-                cy="115"
-                r="10"
-                fill="black"
-                class="clickable-circle"
-              />
-              <text
-                x="70"
-                y="120"
-                font-family="monospace"
-                font-size="12px"
-                class="clickable-text"
-              >
-                Module 2: Leadership Communication Intensive
-              </text>
-            </g>
-
-            <g class="module-group" data-module="3">
-              <circle
-                cx="50"
-                cy="155"
-                r="10"
-                fill="black"
-                class="clickable-circle"
-              />
-              <text
-                x="70"
-                y="160"
-                font-family="monospace"
-                font-size="12px"
-                class="clickable-text"
-              >
-                Module 3: Holistic organizational growth
-              </text>
-            </g>
-          </svg>
-
-          <div class="module-content" id="module1" style="display: none">
-            <h6>Module 1: Build trust and team cohesion</h6>
+        <div class="cta-container">
+          <div class="cta-option">
+            <h6>Personal Guidance</h6>
             <p>
-              This foundational module focuses on creating psychological safety
-              and building strong team relationships. Topics include:
+              Get tailored leadership development strategies through a
+              one-on-one consultation.
             </p>
-            <ul>
-              <li>Understanding team dynamics</li>
-              <li>Building psychological safety</li>
-              <li>Developing trust through authentic communication</li>
-              <li>Creating collaborative environments</li>
-            </ul>
-          </div>
-
-          <div class="module-content" id="module2" style="display: none">
-            <h6>Module 2: Leadership Communication Intensive</h6>
-            <p>
-              Develop advanced communication skills essential for effective
-              leadership. Areas covered include:
-            </p>
-            <ul>
-              <li>Active listening techniques</li>
-              <li>Conflict resolution strategies</li>
-              <li>Giving and receiving feedback</li>
-              <li>Facilitating productive meetings</li>
-            </ul>
-          </div>
-
-          <div class="module-content" id="module3" style="display: none">
-            <h6>Module 3: Holistic organizational growth</h6>
-            <p>
-              Learn to foster sustainable organizational development through:
-            </p>
-            <ul>
-              <li>Systems thinking approach</li>
-              <li>Change management strategies</li>
-              <li>Cultural transformation</li>
-              <li>Sustainable leadership practices</li>
-            </ul>
+            <div class="reflection-buttons">
+              <a
+                href="https://calendly.com/brankeey/30min"
+                class="reflection-btn primary-cta"
+              >
+                Schedule Free Consultation
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="grid-space">
-        <br />
-        <div class="reflection-buttons">
-          <a href="https://calendly.com/brankeey/30min" class="reflection-btn"
-            >Schedule a consultation</a
-          >
-        </div>
 
+      <div class="grid-space">
+        <h6>Self-Paced Learning</h6>
         <br />
-        <div class="reflection-buttons">
-          <a href="keyResources.html" class="reflection-btn"
-            >View KEY resources</a
-          >
+        <p>Access the KEY resources at your own pace:</p>
+        <br />
+        <div class="cta-container">
+          <div class="cta-option">
+            <h6>Self-Paced Learning</h6>
+            <p>
+              Access our curated collection of leadership resources and start
+              learning today.
+            </p>
+            <div class="reflection-buttons">
+              <a href="keyResources.html" class="reflection-btn secondary-cta">
+                Explore KEY Resources
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -910,7 +893,6 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // Navigation menu functionality
         const navMenu = document.querySelector(".nav-menu");
         const menuToggle = document.querySelector(".menu-btn");
         const closeBtn = document.querySelector(".close-btn");
@@ -930,20 +912,17 @@
         const moduleGroups = document.querySelectorAll(".module-group");
 
         moduleGroups.forEach((group) => {
-          group.addEventListener("click", () => {
-            const moduleNumber = group.getAttribute("data-module");
-            const content = document.getElementById(`module${moduleNumber}`);
+          group.addEventListener("click", function () {
+            const moduleId = this.getAttribute("data-module-id");
+            const content = document.getElementById(
+              `module-${moduleId}-content`
+            );
 
-            // Hide all module contents first
-            document.querySelectorAll(".module-content").forEach((el) => {
-              el.style.display = "none";
-            });
-
-            // Toggle the clicked module content
-            if (content.style.display === "none") {
-              content.style.display = "block";
-            } else {
+            this.classList.toggle("active");
+            if (content.style.display === "block") {
               content.style.display = "none";
+            } else {
+              content.style.display = "block";
             }
           });
         });
