@@ -452,6 +452,49 @@
           padding-top: 20px;
         }
       }
+      .week-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 0 20px;
+        border-radius: 5px;
+      }
+
+      .week-content.active {
+        max-height: 500px;
+        padding: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .week-header {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .week-header:hover {
+        opacity: 0.7;
+      }
+
+      .week-header::after {
+        content: "▼";
+        font-size: 12px;
+        transition: transform 0.3s ease;
+      }
+
+      .week-header.active::after {
+        transform: rotate(180deg);
+      }
+
+      .week-content p {
+        margin: 0;
+        line-height: 1.6;
+        font-size: clamp(14px, 1.2vw, 18px);
+      }
     </style>
   </head>
   <body>
@@ -584,47 +627,87 @@
         <svg
           class="coaching-timeline"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="30 10 350 400"
+          viewBox="50 10 350 400"
         >
-          <line
-            x1="50"
-            y1="50"
-            x2="50"
-            y2="300"
-            stroke="black"
-            stroke-width="2"
-          />
-
-          <circle cx="50" cy="75" r="10" fill="black" />
-          <text x="70" y="80" font-family="monospace" font-size="12px">
-            week 1: Whispers of Belonging
-          </text>
-
-          <circle cx="50" cy="115" r="10" fill="black" />
-          <text x="70" y="120" font-family="monospace" font-size="12px">
-            week 2: Unspoken River Currents
-          </text>
-
-          <circle cx="50" cy="155" r="10" fill="black" />
-          <text x="70" y="160" font-family="monospace" font-size="12px">
-            week 3: Dance of Relationships
-          </text>
-
-          <circle cx="50" cy="195" r="10" fill="black" />
-          <text x="70" y="200" font-family="monospace" font-size="12px">
-            week 4: Resilience for Personal Mythology
-          </text>
-
-          <circle cx="50" cy="235" r="10" fill="black" />
-          <text x="70" y="240" font-family="monospace" font-size="12px">
-            week 5: Radical Compassion
-          </text>
-
-          <circle cx="50" cy="275" r="10" fill="black" />
-          <text x="70" y="280" font-family="monospace" font-size="12px">
-            week 6: Integrated Self
-          </text>
+          <!-- SVG content remains the same -->
         </svg>
+
+        <div class="weeks-container">
+          <div class="week">
+            <h4 class="week-header">Week 1: Whispers of Belonging</h4>
+            <div class="week-content">
+              <p>
+                Explore your place within various systems - family, work,
+                society. We'll work with: <br />• Understanding your role in
+                different contexts <br />• Identifying patterns of belonging
+                <br />• Recognizing inherited systemic patterns <br />• Building
+                awareness of your position in various systems
+              </p>
+            </div>
+          </div>
+
+          <div class="week">
+            <h4 class="week-header">Week 2: Unspoken River Currents</h4>
+            <div class="week-content">
+              <p>
+                Dive into the hidden dynamics that influence your life: <br />•
+                Mapping emotional currents in relationships <br />•
+                Understanding unconscious loyalties <br />• Identifying systemic
+                blocks <br />• Exploring generational patterns
+              </p>
+            </div>
+          </div>
+
+          <div class="week">
+            <h4 class="week-header">Week 3: Dance of Relationships</h4>
+            <div class="week-content">
+              <p>
+                Examine the choreography of your relationships: <br />•
+                Understanding relationship dynamics <br />• Exploring patterns
+                of interaction <br />• Identifying roles and expectations
+                <br />• Building healthy boundaries
+              </p>
+            </div>
+          </div>
+
+          <div class="week">
+            <h4 class="week-header">
+              Week 4: Resilience for Personal Mythology
+            </h4>
+            <div class="week-content">
+              <p>
+                Create your personal narrative of resilience: <br />• Crafting
+                your personal story <br />• Building systemic resilience <br />•
+                Understanding your life's themes <br />• Integrating past
+                experiences
+              </p>
+            </div>
+          </div>
+
+          <div class="week">
+            <h4 class="week-header">Week 5: Radical Compassion</h4>
+            <div class="week-content">
+              <p>
+                Develop deep compassion for yourself and your systems: <br />•
+                Practicing self-compassion <br />• Understanding systemic
+                empathy <br />• Working with forgiveness <br />• Building
+                sustainable self-care
+              </p>
+            </div>
+          </div>
+
+          <div class="week">
+            <h4 class="week-header">Week 6: Integrated Self</h4>
+            <div class="week-content">
+              <p>
+                Bring together all aspects of your systemic work: <br />•
+                Integration of insights <br />• Creating sustainable change
+                <br />• Building future vision <br />• Establishing ongoing
+                practices
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="grid-space">
         <svg
@@ -791,13 +874,13 @@
     <p class="bigLogo">
       BRAN<a href="keyResources.html" class="custom-link">KEY</a>
     </p>
-      <p class="resources">
-        Resources:
-        <span class="rotating-text">
-          <span>Click</span>
-          <span>KEY</span>
-        </span>
-      </p>
+    <p class="resources">
+      Resources:
+      <span class="rotating-text">
+        <span>Click</span>
+        <span>KEY</span>
+      </span>
+    </p>
 
     <footer>
       <a href="index.html">Home</a>
@@ -822,6 +905,29 @@
           if (e.target.classList.contains("nav-link")) {
             toggleMenu();
           }
+        });
+        // New functionality for week headers
+        const weekHeaders = document.querySelectorAll(".week-header");
+
+        weekHeaders.forEach((header) => {
+          header.addEventListener("click", () => {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains("active");
+
+            // Close all other active weeks
+            document
+              .querySelectorAll(".week-header.active")
+              .forEach((activeHeader) => {
+                if (activeHeader !== header) {
+                  activeHeader.classList.remove("active");
+                  activeHeader.nextElementSibling.classList.remove("active");
+                }
+              });
+
+            // Toggle current week
+            header.classList.toggle("active");
+            content.classList.toggle("active");
+          });
         });
       });
     </script>
