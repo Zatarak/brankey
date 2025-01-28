@@ -920,8 +920,9 @@
           console.error("ResponsiveVoice is not loaded");
           readButton.style.display = "none";
         }
-        document.addEventListener("DOMContentLoaded", function () {
-          const text = `          Imagine standing in the center of a forest at dawn. Above you,
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const text = `          Imagine standing in the center of a forest at dawn. Above you,
           branches weave a living canopy. Below, your feet sink slightly into
           soil teeming with life. In this moment, you're not just observing a
           collection of separate things, you're witnessing one of nature's most
@@ -949,47 +950,46 @@
           those golden threads that, when gently tugged, can transform entire
           patterns.`;
 
-          const systemsText = document.getElementById("systemsText");
-          let currentIndex = 0;
+        const systemsText = document.getElementById("systemsText");
+        let currentIndex = 0;
 
-          // Create cursor element
-          const cursor = document.createElement("span");
-          cursor.className = "cursor";
-          systemsText.appendChild(cursor);
+        // Create cursor element
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        systemsText.appendChild(cursor);
 
-          function typeWriter() {
-            if (currentIndex < text.length) {
-              systemsText.textContent = text.slice(0, currentIndex + 1);
-              systemsText.appendChild(cursor);
-              currentIndex++;
-              setTimeout(typeWriter, 50); // Adjust speed here (lower number = faster)
-            }
+        function typeWriter() {
+          if (currentIndex < text.length) {
+            systemsText.textContent = text.slice(0, currentIndex + 1);
+            systemsText.appendChild(cursor);
+            currentIndex++;
+            setTimeout(typeWriter, 50); // Adjust speed here (lower number = faster)
           }
+        }
 
-          // Add restart animation button
-          const restartBtn = document.createElement("button");
-          restartBtn.textContent = "Restart Animation";
-          restartBtn.style.position = "absolute";
-          restartBtn.style.bottom = "-40px";
-          restartBtn.style.left = "50%";
-          restartBtn.style.transform = "translateX(-50%)";
-          restartBtn.style.padding = "8px 16px";
-          restartBtn.style.backgroundColor = "#2563eb";
-          restartBtn.style.color = "white";
-          restartBtn.style.border = "none";
-          restartBtn.style.borderRadius = "4px";
-          restartBtn.style.cursor = "pointer";
+        // Add restart animation button
+        const restartBtn = document.createElement("button");
+        restartBtn.textContent = "Restart Animation";
+        restartBtn.style.position = "absolute";
+        restartBtn.style.bottom = "-40px";
+        restartBtn.style.left = "50%";
+        restartBtn.style.transform = "translateX(-50%)";
+        restartBtn.style.padding = "8px 16px";
+        restartBtn.style.backgroundColor = "#2563eb";
+        restartBtn.style.color = "white";
+        restartBtn.style.border = "none";
+        restartBtn.style.borderRadius = "4px";
+        restartBtn.style.cursor = "pointer";
 
-          restartBtn.addEventListener("click", () => {
-            currentIndex = 0;
-            typeWriter();
-          });
-
-          systemsText.parentElement.appendChild(restartBtn);
-
-          // Start the initial animation
+        restartBtn.addEventListener("click", () => {
+          currentIndex = 0;
           typeWriter();
         });
+
+        systemsText.parentElement.appendChild(restartBtn);
+
+        // Start the initial animation
+        typeWriter();
       });
     </script>
   </body>
