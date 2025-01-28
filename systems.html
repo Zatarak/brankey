@@ -259,15 +259,18 @@
 
       .system-connection {
         transition: all 0.2s;
-        stroke: #94a3b8;
-        stroke-width: 1;
+        stroke: #475569;
+        stroke-width: 2;
       }
 
       .system-connection.active {
         stroke: #2563eb;
         stroke-width: 3;
       }
-
+      .system-node,
+      .system-connection {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
       .system-info-box {
         margin-top: 16px;
         padding: 16px;
@@ -922,7 +925,7 @@
         }
       });
       document.addEventListener("DOMContentLoaded", function () {
-        const text = `          Imagine standing in the center of a forest at dawn. Above you,
+        const text = `Imagine standing in the center of a forest at dawn. Above you,
           branches weave a living canopy. Below, your feet sink slightly into
           soil teeming with life. In this moment, you're not just observing a
           collection of separate things, you're witnessing one of nature's most
@@ -948,23 +951,55 @@
           like treating a headache without addressing its root cause, true
           change comes from understanding the whole picture. It's about finding
           those golden threads that, when gently tugged, can transform entire
-          patterns.`;
+          patterns. Click or tap a node below to explore the system connections.`;
 
         const systemsText = document.getElementById("systemsText");
+        const readButton = document.getElementById("readText");
         let currentIndex = 0;
+        let isSpeaking = false;
 
         // Create cursor element
         const cursor = document.createElement("span");
         cursor.className = "cursor";
         systemsText.appendChild(cursor);
 
-        function typeWriter() {
-          if (currentIndex < text.length) {
-            systemsText.textContent = text.slice(0, currentIndex + 1);
-            systemsText.appendChild(cursor);
-            currentIndex++;
-            setTimeout(typeWriter, 50); // Adjust speed here (lower number = faster)
+        // Prepare text for speech and split into sentences
+        const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
+        let currentSentence = 0;
+
+        function speakAndType() {
+          isSpeaking = true;
+          readButton.textContent = "🛑";
+
+          function typeWriter() {
+            if (currentIndex < text.length) {
+              systemsText.textContent = text.slice(0, currentIndex + 1);
+              systemsText.appendChild(cursor);
+              currentIndex++;
+              setTimeout(typeWriter, 50); // Typing speed
+            } else {
+              readButton.textContent = "🔊";
+              isSpeaking = false;
+            }
           }
+
+          // Start typing immediately
+          typeWriter();
+
+          // Start speaking with slight delay to match typing
+          setTimeout(() => {
+            if (window.responsiveVoice) {
+              responsiveVoice.speak(text, "UK English Female", {
+                pitch: 1,
+                rate: 0.95,
+                volume: 1,
+                onend: function () {
+                  readButton.textContent = "🔊";
+                  isSpeaking = false;
+                },
+              });
+            }
+          }, 500); // Slight delay to match typing start
         }
 
         // Add restart animation button
@@ -982,14 +1017,33 @@
         restartBtn.style.cursor = "pointer";
 
         restartBtn.addEventListener("click", () => {
+          if (isSpeaking) {
+            responsiveVoice.cancel();
+          }
           currentIndex = 0;
-          typeWriter();
+          systemsText.textContent = "";
+          systemsText.appendChild(cursor);
+          speakAndType();
         });
 
         systemsText.parentElement.appendChild(restartBtn);
 
-        // Start the initial animation
-        typeWriter();
+        // Modify read button functionality
+        readButton.addEventListener("click", function () {
+          if (isSpeaking) {
+            responsiveVoice.cancel();
+            readButton.textContent = "🔊";
+            isSpeaking = false;
+          } else {
+            currentIndex = 0;
+            systemsText.textContent = "";
+            systemsText.appendChild(cursor);
+            speakAndType();
+          }
+        });
+
+        // Start the initial animation and speech
+        speakAndType();
       });
     </script>
   </body>
