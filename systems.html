@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Systems</title>
-    <script src="https://code.responsivevoice.org/responsivevoice.js?key=fGycQQX6"></script>
     <style>
       * {
         margin: 0;
@@ -17,9 +16,16 @@
         display: flex;
         overflow-x: hidden;
         flex-direction: column;
-        font-family: Arial, sans-serif;
         font-size: calc(14px + 0.390625vw);
-        background: white;
+        background: linear-gradient(
+          111.4deg,
+          rgb(209, 231, 235) 7.4%,
+          rgb(238, 219, 199) 51.4%,
+          rgb(255, 159, 122) 82.6%,
+          rgb(255, 109, 58) 100.2%
+        );
+        line-height: 1.6;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       header {
@@ -43,10 +49,12 @@
         -webkit-text-stroke: 1px black;
         transition: all 0.3s ease;
       }
+
       .logo:hover {
         background-color: transparent;
         cursor: pointer;
       }
+
       .menu-btn {
         margin-right: clamp(10px, 2vw, 30px);
         cursor: pointer;
@@ -116,8 +124,53 @@
       .main-content {
         flex: 1;
         padding: clamp(20px, 3vw, 40px);
+        width: 100%;
+        max-width: none;
+        margin: 0 auto;
+        max-width: 1200px;
       }
 
+      .box {
+        width: 90%;
+        padding: 5px;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        border: 2px solid black;
+        margin-bottom: 10px;
+        position: relative;
+      }
+      h1 {
+        font-size: clamp(40px, 6vw, 24px);
+        color: black;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .description-text {
+        font-size: 1.2rem;
+        color: #333;
+        text-align: justify;
+        margin-bottom: 1rem;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      p {
+        font-size: clamp(16px, 2vw, 18px);
+        color: #34495e;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        text-align: justify;
+      }
+      h2 {
+        padding: 10px;
+        margin: 10px;
+        font-size: clamp(26px, 3vw, 30px);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        color: black;
+      }
       .bigLogo {
         display: block;
         font-size: clamp(80px, 4vw, 48px);
@@ -137,7 +190,36 @@
         margin: clamp(20px, 1vw, 20px) 0;
         padding-top: 10px;
       }
+      .custom-link {
+        text-decoration: none;
+        border-bottom: 10px solid black;
+        color: transparent;
+        -webkit-text-stroke: 1px black;
+        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
+          1px -1px 0px transparent, -1px -1px 0px transparent;
+      }
 
+      .custom-link:hover {
+        background-color: transparent;
+        color: #d6e4e3;
+      }
+      @media screen and (max-width: 768px) {
+        .bigLogo {
+          font-size: clamp(
+            40px,
+            8vw,
+            60px
+          ); /* Smaller base size, larger viewport scaling */
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .bigLogo {
+          font-size: clamp(30px, 10vw, 40px); /* Even smaller for phone sizes */
+          margin: 10px 0;
+          padding-top: 20px;
+        }
+      }
       footer {
         background-color: transparent;
         padding: clamp(20px, 3vw, 40px);
@@ -152,242 +234,21 @@
         font-size: clamp(10px, 1.5vw, 20px);
       }
 
-      .custom-link {
-        text-decoration: none;
-        border-bottom: 10px solid black;
-        color: transparent;
-        -webkit-text-stroke: 1px black;
-        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
-          1px -1px 0px transparent, -1px -1px 0px transparent;
-      }
-
-      .custom-link:hover {
-        background-color: white;
-        color: rgb(92, 121, 255);
-      }
-
-      .systemsText {
-        padding: 25px;
-        margin: 10px;
-        font-size: clamp(13px, 2.5vw, 24px);
-        font-family: "Courier New", Courier, monospace;
-        text-align: justify;
-        color: black;
-        line-height: 1.5;
-        position: relative;
-      }
-
-      h1 {
-        padding: 20px;
-        margin: 20px;
-        font-size: clamp(40px, 6vw, 24px);
-        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-        text-align: left;
-        color: black;
-        text-align: center;
-      }
-
-      .box {
-        width: 90%;
-        padding: 5px;
-        margin-left: 5vw;
-        margin-right: 5vw;
-        border: 2px solid black;
-        margin-bottom: 10px;
-        position: relative;
-      }
-
-      /* System Diagram Styles */
-      .system-diagram {
-        width: 100%;
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 0 15px;
-      }
-
-      .system-svg {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1;
-        max-height: 80vh;
-      }
-
-      .system-filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 16px;
-        justify-content: center;
-        padding: 0 10px;
-      }
-
-      .filter-button {
-        padding: 8px 16px;
-        border-radius: 9999px;
-        border: none;
-        font-size: 14px;
-        cursor: pointer;
-        transition: all 0.2s;
-        /* Make buttons more touch-friendly */
-        min-height: 44px;
-        min-width: 44px;
-        touch-action: manipulation;
-      }
-
-      .filter-button.active {
-        background-color: #1e293b;
-        color: white;
-      }
-
-      .filter-button:not(.active) {
-        background-color: #e2e8f0;
-        color: #475569;
-      }
-
-      .system-node {
-        transition: all 0.3s;
-        cursor: pointer;
-      }
-
-      .system-node circle {
-        transition: all 0.3s;
-      }
-
-      .system-node:hover circle {
-        transform: scale(1.1);
-      }
-
-      .system-connection {
-        transition: all 0.2s;
-        stroke: #475569;
-        stroke-width: 2;
-      }
-
-      .system-connection.active {
-        stroke: #2563eb;
-        stroke-width: 3;
-      }
-      .system-node,
-      .system-connection {
-        transition: opacity 0.3s ease, transform 0.3s ease;
-      }
-      .system-info-box {
-        margin-top: 16px;
-        padding: 16px;
-        background-color: #f1f5f9;
-        border-radius: 8px;
-        min-height: 80px;
-      }
-
-      .physical {
-        fill: #2563eb;
-      }
-      .psychological {
-        fill: #7c3aed;
-      }
-      .social {
-        fill: #059669;
-      }
-      .environmental {
-        fill: #d97706;
-      }
-
-      .system-node:not(:hover) circle {
-        fill: #1e293b;
-      }
-
       @media (max-width: 768px) {
         .box {
           width: 95%;
           margin-left: 2vw;
           margin-right: 2vw;
         }
-        .resources {
-          font-size: 16px;
-        }
-        .system-filters {
-          gap: 4px;
+        .system-circle-container {
+          width: 300px;
+          height: 300px;
         }
 
-        .filter-button {
-          font-size: 12px;
-          padding: 6px 12px;
-          flex: 1 1 calc(50% - 4px); /* Two buttons per row on very small screens */
-          max-width: calc(50% - 4px);
+        .system-item {
+          width: 90px;
+          height: 90px;
         }
-        .system-svg {
-          aspect-ratio: 1;
-          max-height: 60vh;
-        }
-        .system-node circle {
-          aspect-ratio: 1; /* Slightly smaller circles on mobile */
-        }
-
-        .system-node text {
-          font-size: 12px; /* Smaller text on mobile */
-        }
-
-        .system-info-box {
-          font-size: 14px;
-          padding: 12px;
-        }
-      }
-      @media (max-width: 480px) {
-        .system-svg {
-          aspect-ratio: 1;
-          max-height: 50vh;
-        }
-
-        .system-node circle {
-          aspect-ratio: 1 / 1;
-        }
-
-        .system-node text {
-          font-size: 10;
-        }
-      }
-
-      /* Add focus styles for better accessibility */
-      .filter-button:focus,
-      .system-node:focus {
-        outline: 2px solid #2563eb;
-        outline-offset: 2px;
-      }
-
-      /* Add active states for touch devices */
-      .system-node.active circle {
-        transform: scale(1.1);
-      }
-      .reading-time {
-        position: absolute;
-        top: 10px;
-        left: 15px;
-        background-color: #f4f4f4;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.9em;
-        color: #333;
-        font-weight: bold;
-        border: 1px solid #ccc;
-      }
-
-      #readText {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        background-color: transparent;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.9em;
-        color: rgb(92, 121, 255);
-        border: 1px solid #ccc;
-        cursor: pointer;
-      }
-
-      #readText:hover {
-        background-color: transparent;
-        color: white;
-        border: 2px solid black;
       }
       .rotating-text {
         position: relative;
@@ -485,27 +346,214 @@
           margin: 10px 0;
           padding-top: 20px;
         }
-      }
-      .typewriter-text {
-        display: inline-block;
-        white-space: pre-wrap;
-        font-family: "Courier New", Courier, monospace;
-        line-height: 1.5;
-      }
-
-      .cursor {
-        display: inline-block;
-        width: 2px;
-        height: 1em;
-        background-color: #000;
-        margin-left: 2px;
-        animation: blink 1s infinite;
-      }
-
-      @keyframes blink {
-        50% {
-          opacity: 0;
+        .systems-container {
+          flex-direction: row;
+          justify-content: center;
+          align-items: flex-start;
         }
+
+        .system-card {
+          width: 50%;
+          max-width: 600px;
+        }
+      }
+
+      .systems-container {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        padding: 2rem;
+        width: 100%;
+      }
+
+      .system-card {
+        position: relative;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .system-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .system-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .system-circle-container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        margin: 0 auto;
+      }
+      .system-item {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+      }
+
+      .system-item:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .system-item h3 {
+        margin: 0;
+        font-size: 1rem;
+        color: #34495e;
+      }
+
+      .system-elements {
+        position: absolute;
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        display: none;
+        width: 150px;
+      }
+
+      .system-element {
+        font-size: 0.875rem;
+        color: #4b5563;
+      }
+      .connection-line {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.1);
+        height: 2px;
+        transform-origin: left center;
+        pointer-events: none;
+        transition: background-color 0.3s ease;
+      }
+
+      /* Health states */
+      .health-high {
+        background-color: #2ecc71;
+      }
+      .health-medium {
+        background-color: #f1c40f;
+      }
+      .health-low {
+        background-color: #e74c3c;
+      }
+      .popup-btn {
+        background: transparent;
+        border: 2px solid black;
+        color: black;
+        padding: 12px 24px;
+        border-radius: 15px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .popup-btn:hover {
+        background: #fff;
+        color: #1a2a6c;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .popup {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .popup-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 5px;
+        position: relative;
+      }
+
+      .close-popup {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close-popup:hover,
+      .close-popup:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      @media screen and (min-width: 768px) {
+        .systems-container {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .system-card {
+          flex: 1 1 calc(50% - 2rem);
+          max-width: calc(50% - 2rem);
+        }
+        h1 {
+          text-align: center;
+          max-width: 80%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .description-text {
+          font-size: 1.5rem;
+          color: #333;
+          text-align: justify;
+          margin-bottom: 1rem;
+          max-width: 80%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+      /* Update the system-circle-container class to replace system-grid */
+      .system-circle-container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        backdrop-filter: blur(8px);
+      }
+      .connection-line {
+        position: absolute;
+        background: pink;
+        height: 0.3px;
+        transform-origin: left center;
+        pointer-events: none;
+        transition: background-color 0.3s ease;
+        z-index: 1;
       }
     </style>
   </head>
@@ -528,40 +576,92 @@
 
     <div class="horizontal-line"></div>
     <main class="main-content">
-      <div class="box">
-        <div class="reading-time">~1 min read</div>
-        <button id="readText" class="action-button">🔊</button>
-        <h1>Systems</h1>
-        <p class="systemsText" id="systemsText"></p>
-        <div class="system-diagram">
-          <div class="system-filters">
-            <button class="filter-button active" data-category="all">
-              All
-            </button>
-            <button class="filter-button" data-category="physical">
-              Physical
-            </button>
-            <button class="filter-button" data-category="psychological">
-              Psychological
-            </button>
-            <button class="filter-button" data-category="social">Social</button>
-            <button class="filter-button" data-category="environmental">
-              Environmental
-            </button>
-          </div>
+      <h1>Systems Overview</h1>
+      <p class="system-description description-text">
+        Systems don't exist in isolation - they flow into each other like rivers
+        joining the sea, creating waves of change across the whole. Nurturing
+        one system can create harmony in others, and teach us to orchestrate
+        this beautiful complexity.
+      </p>
 
-          <svg viewBox="0 0 500 500" class="system-svg">
-            <g id="nodes-container"></g>
-          </svg>
-
-          <div class="system-info-box">
-            <p class="info-text">
-              Hover over any element to see its description and connections.
-            </p>
+      <div class="systems-container">
+        <div class="system-card">
+          <h2 class="system-title">Human Systems</h2>
+          <p>
+            Each system within us is like a string in an instrument - when one
+            vibrates, others respond. Notice how strengthening your physical
+            health might lift your psychological state, or how enriching your
+            social connections can transform your environment. Click each system
+            to explore its elements and reflect on where you might need to
+            restore balance or amplify strength.
+          </p>
+          <div id="humanSystemsGrid" class="system-circle-container">
+            <!-- Human systems will be dynamically inserted here -->
           </div>
+          <button class="popup-btn" data-target="humanPopup">Read More</button>
+        </div>
+
+        <div class="system-card">
+          <h2 class="system-title">Organizational Systems</h2>
+          <p>
+            Organizations are living ecosystems where each system nurtures the
+            others. A strong core culture flows into human engagement, which in
+            turn powers operational excellence. Explore how these systems
+            support and strengthen each other, creating resilient organizations
+            that thrive through change.
+          </p>
+          <div id="orgSystemsGrid" class="system-circle-container">
+            <!-- Organizational systems will be dynamically inserted here -->
+          </div>
+          <button class="popup-btn" data-target="orgPopup">Read More</button>
         </div>
       </div>
-      <div id="systems-circles"></div>
+      <div id="humanPopup" class="popup">
+        <div class="popup-content">
+          <span class="close-popup">&times;</span>
+          <h2>Human Systems</h2>
+          <p>
+            Within us lies a magnificent web of interconnected systems, each
+            supporting and influencing the others. When our physical system is
+            strained, we can lean into environmental change - perhaps a walk in
+            nature or a workspace refresh. If our psychological system feels
+            overwhelmed, we might find balance through social connections or
+            physical movement. These systems form a natural support network,
+            offering multiple paths to restore harmony when one area is
+            challenged.
+            <br /><br />
+            Understanding these connections empowers us to cultivate wholeness.
+            Rather than fixing isolated problems, we can activate the natural
+            healing potential of our interconnected systems. This awareness
+            transforms personal growth into an art of balance, where
+            strengthening one system creates positive ripples throughout our
+            entire being.
+          </p>
+        </div>
+      </div>
+
+      <div id="orgPopup" class="popup">
+        <div class="popup-content">
+          <span class="close-popup">&times;</span>
+          <h2>Organizational Systems</h2>
+          <p>
+            Organizations thrive when their systems flow together in harmony. A
+            strong core system radiates purpose and clarity, energizing the
+            human system with meaning and direction. This human engagement, in
+            turn, fuels operational excellence, creating a virtuous cycle of
+            growth and innovation.
+            <br /><br />
+            When challenges arise in one system, solutions often lie in
+            strengthening another. Operational inefficiencies might signal a
+            need for better human connection and communication. Cultural
+            struggles might be addressed through improved processes and
+            workflows. By understanding these interconnections, leaders can
+            orchestrate positive change that resonates throughout the entire
+            organization, creating sustainable success and meaningful impact.
+          </p>
+        </div>
+      </div>
+
       <p class="bigLogo">
         BRAN<a href="keyResources.html" class="custom-link">KEY</a>
       </p>
@@ -581,7 +681,6 @@
       <a href="keyResources.html" class="nav-link">KEY Resources</a>
       <a href="contact.html" class="nav-link">Contact</a>
     </footer>
-
     <script>
       // Menu functionality
       document.addEventListener("DOMContentLoaded", () => {
@@ -599,412 +698,280 @@
             toggleMenu();
           }
         });
-      });
+        const humanSystems = {
+          physical: {
+            name: "Physical",
+            elements: ["Body", "Brain", "Health"],
+            color: "#E63946",
+            health: 100,
+          },
+          psychological: {
+            name: "Psychological",
+            elements: ["Mind", "Emotions", "Beliefs"],
+            color: "#A8DADC",
+            health: 100,
+          },
+          social: {
+            name: "Social",
+            elements: ["Relationships", "Culture", "Behavior"],
+            color: "#F4D35E",
+            health: 100,
+          },
+          environmental: {
+            name: "Environmental",
+            elements: ["Surroundings", "Climate", "Resources"],
+            color: "#3A7D44",
+            health: 100,
+          },
+        };
 
-      // System diagram functionality
-      const systemData = {
-        body: {
-          category: "physical",
-          connections: ["brain", "health", "emotions"],
-          description: "Physical structure and biological processes",
-        },
-        brain: {
-          category: "physical",
-          connections: ["mind", "body", "emotions"],
-          description: "Neural networks and cognitive processing",
-        },
-        health: {
-          category: "physical",
-          connections: ["body", "emotions", "environment"],
-          description: "Overall physical wellbeing and vitality",
-        },
-        mind: {
-          category: "psychological",
-          connections: ["brain", "emotions", "beliefs"],
-          description: "Conscious thoughts and mental processes",
-        },
-        emotions: {
-          category: "psychological",
-          connections: ["mind", "body", "relationships"],
-          description: "Feelings and emotional responses",
-        },
-        beliefs: {
-          category: "psychological",
-          connections: ["mind", "culture", "behavior"],
-          description: "Personal values and belief systems",
-        },
-        relationships: {
-          category: "social",
-          connections: ["emotions", "behavior", "culture"],
-          description: "Connections with family, friends, and others",
-        },
-        culture: {
-          category: "social",
-          connections: ["beliefs", "relationships", "environment"],
-          description: "Cultural context and social norms",
-        },
-        behavior: {
-          category: "social",
-          connections: ["beliefs", "relationships", "environment"],
-          description: "Actions and interactions with others",
-        },
-        environment: {
-          category: "environmental",
-          connections: ["health", "culture", "behavior"],
-          description: "Physical and social surroundings",
-        },
-      };
+        const orgSystems = {
+          core: {
+            name: "Core",
+            elements: ["Leadership", "Culture", "Process"],
+            color: "#1D3557",
+            health: 100,
+          },
+          human: {
+            name: "Human",
+            elements: ["Teams", "Communication", "Learning"],
+            color: "#E76F51",
+            health: 100,
+          },
+          operational: {
+            name: "Operational",
+            elements: ["Workflow", "Resources", "Technology"],
+            color: "#495057",
+            health: 100,
+          },
+        };
 
-      let positions = {};
+        function createSystemElement(key, system, index, total) {
+          const div = document.createElement("div");
+          div.className = "system-item";
 
-      function initializeSystemDiagram() {
-        const svg = document.querySelector(".system-svg");
-        const nodesContainer = document.getElementById("nodes-container");
-        const infoBox = document.querySelector(".system-info-box");
-        const filterButtons = document.querySelectorAll(".filter-button");
+          // Calculate position in circle
+          const angle = index * ((2 * Math.PI) / total) - Math.PI / 2;
+          const radius = total === 4 ? 140 : 120;
+          const centerX = 200;
+          const centerY = 200;
 
-        let currentCategory = "all";
-        let hoveredElement = null;
-        let isTouchDevice = "ontouchstart" in window;
+          const x = centerX + radius * Math.cos(angle) - 60;
+          const y = centerY + radius * Math.sin(angle) - 60;
 
-        // Adjust radius based on screen size
-        function getRadius() {
-          return window.innerWidth < 480
-            ? 100
-            : window.innerWidth < 768
-            ? 120
-            : 150;
+          div.style.left = `${x}px`;
+          div.style.top = `${y}px`;
+          div.style.borderColor = system.color;
+
+          div.innerHTML = `
+                    <h3>${system.name}</h3>
+                    <div class="system-health-indicator health-high"></div>
+                    <div class="system-elements">
+                        ${system.elements
+                          .map(
+                            (element) =>
+                              `<div class="system-element">• ${element}</div>`
+                          )
+                          .join("")}
+                    </div>
+                `;
+
+          return div;
         }
 
-        function getPosition(index, total) {
-          const radius = getRadius();
-          const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
-          return {
-            x: radius * Math.cos(angle) + 250,
-            y: radius * Math.sin(angle) + 250,
-          };
+        function createConnections(container, total) {
+          const items = container.querySelectorAll(".system-item");
+          const containerRect = container.getBoundingClientRect();
+
+          items.forEach((item, i) => {
+            items.forEach((target, j) => {
+              if (i < j) {
+                const line = document.createElement("div");
+                line.className = "connection-line";
+
+                const rect1 = item.getBoundingClientRect();
+                const rect2 = target.getBoundingClientRect();
+
+                // Use relative positioning within the container
+                const x1 = rect1.left - containerRect.left + rect1.width / 2;
+                const y1 = rect1.top - containerRect.top + rect1.height / 2;
+                const x2 = rect2.left - containerRect.left + rect2.width / 2;
+                const y2 = rect2.top - containerRect.top + rect2.height / 2;
+
+                const length = Math.sqrt(
+                  Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)
+                );
+                const angle = Math.atan2(y2 - y1, x2 - x1);
+
+                line.style.width = `${length}px`;
+                line.style.transform = `rotate(${angle}rad)`;
+                line.style.left = `${x1}px`;
+                line.style.top = `${y1}px`;
+
+                container.appendChild(line);
+              }
+            });
+          });
         }
 
-        function updateDiagram() {
-          const filteredElements = Object.entries(systemData).filter(
-            ([_, data]) =>
-              currentCategory === "all" || data.category === currentCategory
+        function updateSystemHealth(system, value) {
+          system.health = Math.max(0, Math.min(100, value));
+          const indicator = system.element.querySelector(
+            ".system-health-indicator"
           );
 
-          // Calculate positions
-          filteredElements.forEach(([key], index) => {
-            positions[key] = getPosition(index, filteredElements.length);
-          });
-
-          // Update connections
-          const connections = svg.querySelectorAll(".system-connection");
-          connections.forEach((conn) => conn.remove());
-
-          filteredElements.forEach(([element, data]) => {
-            data.connections
-              .filter((target) => positions[target])
-              .forEach((target) => {
-                const line = document.createElementNS(
-                  "http://www.w3.org/2000/svg",
-                  "line"
-                );
-                line.classList.add("system-connection");
-                line.setAttribute("x1", positions[element].x);
-                line.setAttribute("y1", positions[element].y);
-                line.setAttribute("x2", positions[target].x);
-                line.setAttribute("y2", positions[target].y);
-                svg.insertBefore(line, nodesContainer);
-              });
-          });
-
-          // Update nodes
-          nodesContainer.innerHTML = "";
-          filteredElements.forEach(([element, data]) => {
-            const g = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "g"
-            );
-            g.classList.add("system-node");
-            g.setAttribute(
-              "transform",
-              `translate(${positions[element].x},${positions[element].y})`
-            );
-            g.setAttribute("tabindex", "0");
-            g.setAttribute("role", "button");
-            g.setAttribute("aria-label", `${element}: ${data.description}`);
-
-            const circle = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "circle"
-            );
-            circle.setAttribute("r", "40");
-            circle.classList.add(data.category);
-
-            const text = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "text"
-            );
-            text.textContent = element;
-            text.setAttribute("text-anchor", "middle");
-            text.setAttribute("dy", "0.3em");
-            text.setAttribute("fill", "white");
-            text.setAttribute("font-size", "14");
-
-            g.appendChild(circle);
-            g.appendChild(text);
-
-            if (isTouchDevice) {
-              g.addEventListener("touchstart", (e) => {
-                e.preventDefault();
-                handleNodeInteraction(element, g);
-              });
-            } else {
-              g.addEventListener("mouseenter", () =>
-                handleNodeInteraction(element, g)
-              );
-              g.addEventListener("mouseleave", () => {
-                hoveredElement = null;
-                g.classList.remove("active");
-                updateHighlights();
-                updateInfoBox();
-              });
-            }
-
-            g.addEventListener("keydown", (e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                handleNodeInteraction(element, g);
-              }
-            });
-
-            nodesContainer.appendChild(g);
-          });
-        }
-
-        function handleNodeInteraction(element, g) {
-          if (isTouchDevice) {
-            document.querySelectorAll(".system-node").forEach((node) => {
-              node.classList.remove("active");
-            });
-            g.classList.add("active");
-          }
-          hoveredElement = element;
-          updateHighlights();
-          updateInfoBox();
-        }
-
-        function updateHighlights() {
-          const connections = svg.querySelectorAll(".system-connection");
-          connections.forEach((conn) => conn.classList.remove("active"));
-
-          if (hoveredElement && systemData[hoveredElement]) {
-            systemData[hoveredElement].connections.forEach((target) => {
-              if (positions[target]) {
-                connections.forEach((conn) => {
-                  const x1 = parseFloat(conn.getAttribute("x1"));
-                  const y1 = parseFloat(conn.getAttribute("y1"));
-                  const x2 = parseFloat(conn.getAttribute("x2"));
-                  const y2 = parseFloat(conn.getAttribute("y2"));
-
-                  if (
-                    (Math.abs(x1 - positions[hoveredElement].x) < 1 &&
-                      Math.abs(y1 - positions[hoveredElement].y) < 1) ||
-                    (Math.abs(x2 - positions[hoveredElement].x) < 1 &&
-                      Math.abs(y2 - positions[hoveredElement].y) < 1)
-                  ) {
-                    conn.classList.add("active");
-                  }
-                });
-              }
-            });
-          }
-        }
-
-        function updateInfoBox() {
-          if (hoveredElement && systemData[hoveredElement]) {
-            const data = systemData[hoveredElement];
-            infoBox.innerHTML = `
-        <p><strong>${hoveredElement}</strong> (${data.category}): ${
-              data.description
-            }</p>
-        <p>Connected to: ${data.connections.join(", ")}</p>
-      `;
+          if (system.health >= 70) {
+            indicator.className = "system-health-indicator health-high";
+          } else if (system.health >= 40) {
+            indicator.className = "system-health-indicator health-medium";
           } else {
-            infoBox.innerHTML = `
-        <p>Hover over or tap any element to see its description and connections.</p>
-      `;
+            indicator.className = "system-health-indicator health-low";
           }
+
+          // Update connected systems
+          const impactValue = (100 - system.health) * 0.3;
+          Object.values(system.connections).forEach((connectedSystem) => {
+            updateSystemHealth(
+              connectedSystem,
+              connectedSystem.health - impactValue
+            );
+          });
         }
 
-        // Add event listeners to filter buttons
-        filterButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            filterButtons.forEach((btn) => btn.classList.remove("active"));
-            button.classList.add("active");
-            currentCategory = button.dataset.category;
-            hoveredElement = null;
-            updateDiagram();
-            updateInfoBox();
+        const humanSystemsGrid = document.getElementById("humanSystemsGrid");
+        Object.entries(humanSystems).forEach(([key, system], index) => {
+          const element = createSystemElement(key, system, index, 4);
+          humanSystemsGrid.appendChild(element);
+
+          // Add click handlers
+          element.addEventListener("click", () => {
+            const elements = element.querySelector(".system-elements");
+            elements.style.display =
+              elements.style.display === "none" ? "block" : "none";
           });
         });
 
-        // Handle window resizing
-        let resizeTimeout;
-        window.addEventListener("resize", () => {
-          clearTimeout(resizeTimeout);
-          resizeTimeout = setTimeout(() => {
-            updateDiagram();
-          }, 250);
+        const orgSystemsGrid = document.getElementById("orgSystemsGrid");
+        Object.entries(orgSystems).forEach(([key, system], index) => {
+          const element = createSystemElement(key, system, index, 3);
+          orgSystemsGrid.appendChild(element);
+
+          // Add click handlers
+          element.addEventListener("click", () => {
+            const elements = element.querySelector(".system-elements");
+            elements.style.display =
+              elements.style.display === "none" ? "block" : "none";
+          });
         });
 
-        // Initial setup
-        updateDiagram();
+        // Create connections
+        createConnections(humanSystemsGrid, 4);
+        createConnections(orgSystemsGrid, 3);
+      });
+      // Update popup functionality
+      const popupBtns = document.querySelectorAll(".popup-btn");
+      const popups = document.querySelectorAll(".popup");
+      const closePopups = document.querySelectorAll(".close-popup");
+
+      popupBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.dataset.target;
+          const targetPopup = targetId
+            ? document.getElementById(targetId)
+            : null;
+          if (targetPopup) {
+            targetPopup.style.display = "block";
+          } else {
+            console.warn(`Popup with id ${targetId} not found`);
+          }
+        });
+      });
+
+      closePopups.forEach((closeBtn) => {
+        closeBtn.addEventListener("click", () => {
+          const popup = closeBtn.closest(".popup");
+          if (popup) {
+            popup.style.display = "none";
+          }
+        });
+      });
+
+      window.addEventListener("click", (event) => {
+        popups.forEach((popup) => {
+          if (event.target === popup) {
+            popup.style.display = "none";
+          }
+        });
+      });
+
+      // Systems data remains the same...
+
+      function createSystemElement(key, system, index, total) {
+        const div = document.createElement("div");
+        div.className = "system-item";
+
+        // Calculate position in circle
+        const angle = index * ((2 * Math.PI) / total) - Math.PI / 2;
+        const radius = total === 4 ? 140 : 120;
+        const centerX = 200;
+        const centerY = 200;
+
+        const x = centerX + radius * Math.cos(angle) - 60;
+        const y = centerY + radius * Math.sin(angle) - 60;
+
+        div.style.left = `${x}px`;
+        div.style.top = `${y}px`;
+        div.style.borderColor = system.color;
+
+        div.innerHTML = `
+            <h3>${system.name}</h3>
+            <div class="system-health-indicator health-high"></div>
+            <div class="system-elements">
+                ${system.elements
+                  .map(
+                    (element) =>
+                      `<div class="system-element">• ${element}</div>`
+                  )
+                  .join("")}
+            </div>
+        `;
+
+        return div;
       }
 
-      // Initialize when the page loads
-      document.addEventListener("DOMContentLoaded", initializeSystemDiagram);
-      // Text-to-speech functionality
-      document.addEventListener("DOMContentLoaded", function () {
-        const readButton = document.getElementById("readText");
-        const textElement = document.getElementById("systemsText");
-        function prepareTextForSpeech(text) {
-          return text
-            .replace(/\s+/g, " ") // Replace multiple spaces with single space
-            .replace(/\n/g, " ") // Replace newlines with spaces
-            .replace(/[-–—]/g, ", ") // Replace dashes with commas for better pausing
-            .replace(/\s+([.,!?])/g, "$1") // Remove spaces before punctuation
-            .replace(/([.,!?])\s*/g, "$1 ") // Ensure single space after punctuation
-            .trim(); // Remove leading/trailing spaces
-        }
+      function createConnections(container, total) {
+        const items = container.querySelectorAll(".system-item");
+        const containerRect = container.getBoundingClientRect();
 
-        if (window.responsiveVoice) {
-          console.log("ResponsiveVoice is loaded");
+        items.forEach((item, i) => {
+          items.forEach((target, j) => {
+            if (i < j) {
+              const line = document.createElement("div");
+              line.className = "connection-line";
 
-          readButton.addEventListener("click", function () {
-            if (textElement) {
-              const rawText = textElement.textContent;
-              const processedText = prepareTextForSpeech(rawText);
+              const rect1 = item.getBoundingClientRect();
+              const rect2 = target.getBoundingClientRect();
 
-              if (responsiveVoice.isPlaying()) {
-                responsiveVoice.cancel();
-                readButton.textContent = "🔊";
-              } else {
-                responsiveVoice.speak(processedText, "UK English Female", {
-                  pitch: 1,
-                  rate: 0.95, // Slightly slower rate for better clarity
-                  volume: 1,
-                  onstart: function () {
-                    readButton.textContent = "🛑";
-                  },
-                  onend: function () {
-                    readButton.textContent = "🔊";
-                  },
-                  onpause: function () {
-                    readButton.textContent = "🔊";
-                  },
-                  onresume: function () {
-                    readButton.textContent = "🛑";
-                  },
-                  // Add breaks at punctuation marks
-                  pitch: 1,
-                  rate: 0.95,
-                  volume: 1,
-                  parameters: {
-                    punctuation: true,
-                    linebreak: "500ms",
-                  },
-                });
-              }
-            } else {
-              console.error("Text element not found");
+              const x1 = rect1.left - containerRect.left + rect1.width / 2;
+              const y1 = rect1.top - containerRect.top + rect1.height / 2;
+              const x2 = rect2.left - containerRect.left + rect2.width / 2;
+              const y2 = rect2.top - containerRect.top + rect2.height / 2;
+
+              const length = Math.sqrt(
+                Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)
+              );
+              const angle = Math.atan2(y2 - y1, x2 - x1);
+
+              line.style.width = `${length}px`;
+              line.style.transform = `rotate(${angle}rad)`;
+              line.style.left = `${x1}px`;
+              line.style.top = `${y1}px`;
+
+              container.appendChild(line);
             }
           });
-        } else {
-          console.error("ResponsiveVoice is not loaded");
-          readButton.style.display = "none";
-        }
-      });
-      document.addEventListener("DOMContentLoaded", function () {
-        const text = `Imagine standing in the center of a forest at dawn. Above you,
-          branches weave a living canopy. Below, your feet sink slightly into
-          soil teeming with life. In this moment, you're not just observing a
-          collection of separate things, you're witnessing one of nature's most
-          perfect symphonies. Every rustle and movement tells a story of
-          connection. A squirrel buries an acorn, unknowingly planting
-          tomorrow's oak. A fallen log, seemingly dead, nurtures new life as
-          fungi break it down to feed the forest floor. Even the morning mist
-          plays its part, carrying nutrients from canopy to soil in an endless
-          cycle of renewal. This intricate dance of life isn't just happening in
-          forests, it's the blueprint for everything around and within us. Your
-          body is orchestrating its own symphony right now: your heart beats,
-          lungs expand, and billions of cells coordinate in a beautiful
-          complexity you never have to consciously direct. Your thoughts and
-          emotions flow in similar patterns, each feeling or memory rippling out
-          to influence others in ways that aren't always obvious at first
-          glance. Think about the last time you smiled at a stranger and they
-          smiled back. That simple gesture created a ripple, perhaps brightening
-          their day, leading them to spread that warmth to others. In a world of
-          cause and effect thinking, the story would end there. But through a
-          systems lens, we see how these small moments weave together into the
-          fabric of community and connection. The beauty of systems thinking
-          lies in its patience and wisdom. While we often reach for quick fixes,
-          like treating a headache without addressing its root cause, true
-          change comes from understanding the whole picture. It's about finding
-          those golden threads that, when gently tugged, can transform entire
-          patterns. Click or tap a node below to explore the system connections.`;
-
-        const systemsText = document.getElementById("systemsText");
-        const readButton = document.getElementById("readText");
-        let currentIndex = 0;
-        let isSpeaking = false;
-
-        // Create cursor element
-        const cursor = document.createElement("span");
-        cursor.className = "cursor";
-        systemsText.appendChild(cursor);
-
-        // Prepare text for speech and split into sentences
-        const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
-        let currentSentence = 0;
-
-        function speakAndType() {
-          isSpeaking = true;
-          readButton.textContent = "🛑";
-
-          function typeWriter() {
-            if (currentIndex < text.length) {
-              systemsText.textContent = text.slice(0, currentIndex + 1);
-              systemsText.appendChild(cursor);
-              currentIndex++;
-              setTimeout(typeWriter, 50); // Typing speed
-            } else {
-              readButton.textContent = "🔊";
-              isSpeaking = false;
-            }
-          }
-
-          // Start typing immediately
-          typeWriter();
-
-          // Start speaking with slight delay to match typing
-          setTimeout(() => {
-            if (window.responsiveVoice) {
-              responsiveVoice.speak(text, "UK English Female", {
-                pitch: 1,
-                rate: 0.95,
-                volume: 1,
-                onend: function () {
-                  readButton.textContent = "🔊";
-                  isSpeaking = false;
-                },
-              });
-            }
-          }, 500); // Slight delay to match typing start
-        }
-
-        // Start the initial animation and speech
-        speakAndType();
-      });
+        });
+      }
     </script>
   </body>
 </html>
