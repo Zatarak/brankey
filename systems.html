@@ -1002,46 +1002,6 @@
           }, 500); // Slight delay to match typing start
         }
 
-        // Add restart animation button
-        const restartBtn = document.createElement("button");
-        restartBtn.textContent = "Restart Animation";
-        restartBtn.style.position = "absolute";
-        restartBtn.style.bottom = "-40px";
-        restartBtn.style.left = "50%";
-        restartBtn.style.transform = "translateX(-50%)";
-        restartBtn.style.padding = "8px 16px";
-        restartBtn.style.backgroundColor = "#2563eb";
-        restartBtn.style.color = "white";
-        restartBtn.style.border = "none";
-        restartBtn.style.borderRadius = "4px";
-        restartBtn.style.cursor = "pointer";
-
-        restartBtn.addEventListener("click", () => {
-          if (isSpeaking) {
-            responsiveVoice.cancel();
-          }
-          currentIndex = 0;
-          systemsText.textContent = "";
-          systemsText.appendChild(cursor);
-          speakAndType();
-        });
-
-        systemsText.parentElement.appendChild(restartBtn);
-
-        // Modify read button functionality
-        readButton.addEventListener("click", function () {
-          if (isSpeaking) {
-            responsiveVoice.cancel();
-            readButton.textContent = "🔊";
-            isSpeaking = false;
-          } else {
-            currentIndex = 0;
-            systemsText.textContent = "";
-            systemsText.appendChild(cursor);
-            speakAndType();
-          }
-        });
-
         // Start the initial animation and speech
         speakAndType();
       });
