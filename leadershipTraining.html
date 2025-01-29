@@ -211,9 +211,7 @@
 
       .grid-space h1,
       .grid-space h3,
-      .grid-space h4,
-      .grid-space h5,
-      .grid-space h6 {
+      .grid-space h4 {
         font-size: clamp(24px, 3vw, 36px);
         margin-bottom: 15px;
         font-family: monospace;
@@ -226,6 +224,26 @@
         font-family: monospace;
         text-align: justify;
         margin-right: 20px;
+      }
+      .grid-space h5,
+      .grid-space h6 {
+        font-size: clamp(22px, 2.5vw, 32px);
+        margin-bottom: 1.5rem;
+        font-family: monospace;
+        letter-spacing: 1px;
+        position: relative;
+      }
+
+      .grid-space h5::after,
+      .grid-space h6::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: #000;
+        opacity: 0.5;
       }
 
       .title {
@@ -249,66 +267,48 @@
       }
 
       .reflection-btn {
-        padding: 10px 20px;
-        background-color: white;
-        color: black;
-        border: 1px solid black;
-        text-decoration: none;
+        padding: 12px 24px;
+        background: transparent;
+        border: 1px solid #000;
+        color: #000;
         font-family: monospace;
-        text-transform: uppercase;
-        cursor: pointer;
+        font-size: 14px;
+        letter-spacing: 1px;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
       }
 
       .reflection-btn:hover {
-        background-color: black;
-        color: #e9dae1;
+        background: #000;
+        color: #fff;
+        transform: translateY(-2px);
       }
 
       .cta-container {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        margin-top: 2rem;
+        gap: 2.5rem;
+        margin-top: 2.5rem;
       }
 
       .cta-text {
-        font-size: 1.2rem;
+        font-size: 0.5rem;
         text-align: center;
         margin-bottom: 1rem;
         font-family: monospace;
       }
 
       .cta-option {
-        background: rgba(255, 255, 255, 0.3);
-        padding: 1.5rem;
-        border-radius: 8px;
-        transition: transform 0.3s ease;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
       }
 
       .cta-option:hover {
-        transform: translateY(-5px);
-      }
-
-      .cta-option h6 {
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-      }
-
-      .cta-option p {
-        margin-bottom: 1.5rem;
-        font-size: 0.9rem;
-      }
-
-      .primary-cta .secondary-cta {
-        background-color: white;
-        border: 2px solid #280288;
-        color: #280288;
-      }
-      .primary-cta:hover .secondary-cta:hover {
-        background-color: #280288;
-        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
 
       .module-group {
@@ -376,24 +376,10 @@
       .quote {
         font-size: clamp(20px, 2vw, 20px);
         font-family: "Courier New", Courier, monospace;
-      }
-      .quote-animation {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        background-color: transparent;
-        padding: 10px 0;
+        padding-bottom: 40px;
+        text-align: center;
       }
 
-      .quote-scroll {
-        display: inline-block;
-        white-space: nowrap;
-        animation: scrollText 20s linear infinite;
-        color: black;
-        font-family: monospace;
-        font-size: clamp(14px, 2vw, 20px);
-        padding-bottom: 30px;
-      }
       @keyframes scrollText {
         100% {
           transform: translateX(-100%);
@@ -510,24 +496,75 @@
         }
       }
       .module-group {
+        border-radius: 8px;
+        padding: 12px 20px;
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.3);
         cursor: pointer;
+        transition: all 0.3s ease;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: 10px;
+        border: 1px solid transparent;
       }
 
       .module-group:hover {
-        opacity: 0.7;
+        background: rgba(245, 167, 191, 0.2);
+        border: 1px solid rgba(201, 218, 238, 0.3);
       }
 
-      .module-group::after {
-        content: "▼";
-        font-size: 12px;
+      .module-title {
+        font-family: monospace;
+        font-size: 16px;
+        color: black;
+        flex-grow: 1;
+      }
+
+      .arrow {
+        width: 20px;
+        height: 20px;
         transition: transform 0.3s ease;
       }
 
-      .module-group.active::after {
+      .module-group.active .arrow {
         transform: rotate(180deg);
+      }
+
+      .module-content {
+        background: rgba(201, 218, 238, 0.2);
+        border-radius: 8px;
+        margin-top: -10px;
+        margin-bottom: 15px;
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+        opacity: 0;
+      }
+
+      .module-content.active {
+        padding: 20px;
+        max-height: 300px;
+        opacity: 1;
+      }
+
+      .module-content ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .module-content li {
+        font-family: monospace;
+        margin: 10px 0;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .module-content li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: rgb(245, 167, 191);
       }
     </style>
   </head>
@@ -550,151 +587,103 @@
 
     <div class="horizontal-line"></div>
     <p class="title">Leadership Training</p>
-    <div class="quote-animation">
-      <div class="quote-scroll">
-        True leadership is rooted in love, allowing us to recognise each other
-        as legitimate beings.
-      </div>
-    </div>
+    <p class="quote">
+      Leadership is the art of enabling others to do their best work
+    </p>
 
     <div class="grid-spaces">
       <div class="grid-space">
         <h1>What is leadership training?</h1>
         <br />
         <p>
-          Imagine a dynamic learning process that develops leaders' abilities to
-          create collaborative spaces where clear communication, shared purpose,
-          and transparent dialogue flourish. Participants learn to foster
-          environments that value diverse voices, encourage meaningful
-          conversations, and enable team members to act with clarity and
-          intention, leading to the emergence of innovative solutions.
+          A focused program that develops your ability to inspire teams and
+          create collaborative spaces. Learn practical skills to communicate
+          effectively and build teams that value diverse voices.
         </p>
       </div>
 
       <div class="grid-space">
         <h2></h2>
-        <p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="50 0 500 400">
-            <!-- Background gradient -->
-            <defs>
-              <linearGradient
-                id="bgGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop
-                  offset="0%"
-                  style="stop-color: #f5a7bf; stop-opacity: 0"
-                />
-                <stop
-                  offset="50%"
-                  style="stop-color: #c9daee; stop-opacity: 0"
-                />
-                <stop
-                  offset="100%"
-                  style="stop-color: #a4f0e5; stop-opacity: 0"
-                />
-              </linearGradient>
-            </defs>
 
-            <!-- Background -->
-            <rect
-              width="600"
-              height="400"
-              fill="url(#bgGradient)"
-              fill-opacity="0"
-            />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+          <!-- Main center circle -->
+          <circle
+            cx="200"
+            cy="150"
+            r="60"
+            fill="none"
+            stroke="#000"
+            stroke-width="1"
+          />
 
-            <!-- Central Interconnected Circles -->
-            <circle
-              cx="300"
-              cy="200"
-              r="150"
-              fill="rgba(255,255,255,0.3)"
-              stroke="#000"
-              stroke-width="2"
-            />
+          <!-- Smaller circles for each text element -->
+          <circle
+            cx="200"
+            cy="50"
+            r="40"
+            fill="none"
+            stroke="#000"
+            stroke-width="1"
+          />
+          <circle
+            cx="300"
+            cy="155"
+            r="40"
+            fill="none"
+            stroke="#000"
+            stroke-width="1"
+          />
+          <circle
+            cx="200"
+            cy="240"
+            r="50"
+            fill="none"
+            stroke="#000"
+            stroke-width="1"
+          />
+          <circle
+            cx="90"
+            cy="155"
+            r="60"
+            fill="none"
+            stroke="#000"
+            stroke-width="1"
+          />
 
-            <!-- Core Leadership Elements -->
-            <text
-              x="300"
-              y="45"
-              text-anchor="middle"
-              font-family="monospace"
-              font-weight="bold"
-              font-size="20"
-            >
-              Leadership Ecosystem
-            </text>
+          <!-- Text elements -->
+          <g font-family="monospace" font-size="14">
+            <!-- Center text -->
+            <text x="200" y="155" text-anchor="middle">Leadership</text>
 
-            <!-- Interconnected Concepts -->
-            <g fill="#000" font-family="monospace">
-              <text x="300" y="130" text-anchor="middle" font-size="16">
-                Collaboration
-              </text>
-              <path
-                d="M230,160 Q300,120 370,160"
-                fill="none"
-                stroke="#000"
-                stroke-dasharray="5,5"
-              />
-
-              <text x="300" y="190" text-anchor="middle" font-size="16">
-                Transparent Dialogue
-              </text>
-              <path
-                d="M350,200 Q300,200 250,200"
-                fill="none"
-                stroke="#000"
-                stroke-dasharray="5,5"
-              />
-
-              <text x="306" y="280" text-anchor="middle" font-size="16">
-                Shared Purpose
-              </text>
-              <path
-                d="M300,230 Q300,270 300,310"
-                fill="none"
-                stroke="#000"
-                stroke-dasharray="5,5"
-              />
-
-              <text
-                x="300"
-                y="230"
-                text-anchor="middle"
-                font-size="18"
-                font-weight="bold"
-              >
-                Collective Intelligence
-              </text>
-            </g>
-
-            <text
-              x="300"
-              y="380"
-              text-anchor="middle"
-              font-family="monospace"
-              font-size="12"
-              fill="#333"
-            >
-              Inspired by Humberto Maturana's Perspective
-            </text>
-          </svg>
-        </p>
+            <!-- Surrounding text -->
+            <text x="200" y="50" text-anchor="middle">Vision</text>
+            <text x="300" y="155" text-anchor="middle">Growth</text>
+            <text x="200" y="260" text-anchor="middle">Foundation</text>
+            <text x="90" y="155" text-anchor="middle">Trust</text>
+          </g>
+        </svg>
       </div>
 
       <div class="grid-space">
         <h3>Training Modules</h3>
         <br />
-        <div class="module-group" data-module-id="1">
-          <span class="clickable-text"
+        <div class="module-group">
+          <span class="module-title"
             >Module 1: Build trust and team cohesion</span
           >
+          <svg
+            class="arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
         </div>
-        <div class="module-content" id="module-1-content" style="display: none">
+        <div class="module-content">
           <p>
             This foundational module focuses on creating psychological safety
             and building strong team relationships. Topics include:
@@ -706,12 +695,24 @@
             <li>Creating collaborative environments</li>
           </ul>
         </div>
-        <div class="module-group" data-module-id="2">
-          <span class="clickable-text"
+
+        <div class="module-group">
+          <span class="module-title"
             >Module 2: Leadership Communication Intensive</span
           >
+          <svg
+            class="arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
         </div>
-        <div class="module-content" id="module-2-content" style="display: none">
+        <div class="module-content">
           <p>
             Develop advanced communication skills essential for effective
             leadership. Areas covered include:
@@ -723,12 +724,24 @@
             <li>Facilitating productive meetings</li>
           </ul>
         </div>
-        <div class="module-group" data-module-id="3">
-          <span class="clickable-text"
+
+        <div class="module-group">
+          <span class="module-title"
             >Module 3: Holistic organizational growth</span
           >
+          <svg
+            class="arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
         </div>
-        <div class="module-content" id="module-3-content" style="display: none">
+        <div class="module-content">
           <p>Learn to foster sustainable organizational development through:</p>
           <ul>
             <li>Systems thinking approach</li>
@@ -740,87 +753,58 @@
       </div>
       <div class="grid-space">
         <h4>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-            <defs>
-              <linearGradient
-                id="trainingGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop
-                  offset="0%"
-                  style="stop-color: #a4f0e5; stop-opacity: 0"
-                />
-                <stop
-                  offset="50%"
-                  style="stop-color: #c9daee; stop-opacity: 0"
-                />
-                <stop
-                  offset="100%"
-                  style="stop-color: #f5a7bf; stop-opacity: 0"
-                />
-              </linearGradient>
-            </defs>
-
-            <rect
-              width="600"
-              height="400"
-              fill="url(#trainingGradient)"
-              fill-opacity="0"
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+            <!-- Central circle -->
+            <circle
+              cx="200"
+              cy="150"
+              r="60"
+              fill="none"
+              stroke="#000"
+              stroke-width="1"
             />
 
-            <g font-family="monospace">
-              <text
-                x="300"
-                y="50"
-                text-anchor="middle"
-                font-size="20"
-                font-weight="bold"
-              >
-                Leadership Training Process
-              </text>
+            <!-- Surrounding circles -->
+            <circle
+              cx="200"
+              cy="70"
+              r="40"
+              fill="none"
+              stroke="#000"
+              stroke-width="1"
+            />
+            <circle
+              cx="200"
+              cy="230"
+              r="40"
+              fill="none"
+              stroke="#000"
+              stroke-width="1"
+            />
+            <circle
+              cx="110"
+              cy="150"
+              r="40"
+              fill="none"
+              stroke="#000"
+              stroke-width="1"
+            />
+            <circle
+              cx="290"
+              cy="150"
+              r="40"
+              fill="none"
+              stroke="#000"
+              stroke-width="1"
+            />
 
-              <g text-anchor="middle">
-                <text x="150" y="150" font-size="16">
-                  <tspan x="180" dy="0">Express</tspan>
-                  <tspan x="150" dy="20">Yourself</tspan>
-                </text>
-
-                <text x="450" y="150" font-size="16">
-                  <tspan x="450" dy="0">Meaningful</tspan>
-                  <tspan x="470" dy="20">Conversations</tspan>
-                </text>
-
-                <text x="300" y="280" font-size="16">
-                  <tspan x="310" dy="0">Emergence of</tspan>
-                  <tspan x="300" dy="20">New Ideas</tspan>
-                </text>
-              </g>
-
-              <path
-                d="M180,180 Q300,120 420,180"
-                fill="none"
-                stroke="#000"
-                stroke-dasharray="5,5"
-              />
-              <path
-                d="M300,180 Q300,220 300,260"
-                fill="none"
-                stroke="#000"
-                stroke-dasharray="5,5"
-              />
-
-              <text
-                x="300"
-                y="350"
-                text-anchor="middle"
-                font-size="18"
-                font-weight="bold"
-              >
-                Collective Learning
-              </text>
+            <!-- Key concepts -->
+            <g font-family="monospace" font-size="14" text-anchor="middle">
+              <text x="200" y="60">Vision</text>
+              <text x="200" y="250">Action</text>
+              <text x="100" y="150">Learn</text>
+              <text x="300" y="150">Grow</text>
+              <text x="200" y="150" font-weight="bold">Lead</text>
             </g>
           </svg>
         </h4>
@@ -828,12 +812,8 @@
 
       <div class="grid-space">
         <h5>Empower Your Leadership</h5>
-        <br />
-        <p class="cta-text">Choose your path to leadership excellence:</p>
-
         <div class="cta-container">
           <div class="cta-option">
-            <h6>Personal Guidance</h6>
             <p>
               Get tailored leadership development strategies through a
               one-on-one consultation.
@@ -852,12 +832,8 @@
 
       <div class="grid-space">
         <h6>Self-Paced Learning</h6>
-        <br />
-        <p>Access the KEY resources at your own pace:</p>
-        <br />
         <div class="cta-container">
           <div class="cta-option">
-            <h6>Self-Paced Learning</h6>
             <p>
               Access our curated collection of leadership resources and start
               learning today.
@@ -907,22 +883,25 @@
             toggleMenu();
           }
         });
-
-        // Training modules functionality
+      });
+      document.addEventListener("DOMContentLoaded", () => {
         const moduleGroups = document.querySelectorAll(".module-group");
 
         moduleGroups.forEach((group) => {
-          group.addEventListener("click", function () {
-            const moduleId = this.getAttribute("data-module-id");
-            const content = document.getElementById(
-              `module-${moduleId}-content`
-            );
+          group.addEventListener("click", () => {
+            const content = group.nextElementSibling;
+            const isOpening = !group.classList.contains("active");
 
-            this.classList.toggle("active");
-            if (content.style.display === "block") {
-              content.style.display = "none";
-            } else {
-              content.style.display = "block";
+            // Close all modules
+            moduleGroups.forEach((otherGroup) => {
+              otherGroup.classList.remove("active");
+              otherGroup.nextElementSibling.classList.remove("active");
+            });
+
+            // Open clicked module if it wasn't already open
+            if (isOpening) {
+              group.classList.add("active");
+              content.classList.add("active");
             }
           });
         });
