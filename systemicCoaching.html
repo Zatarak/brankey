@@ -120,16 +120,6 @@
         margin: 5px 30px;
       }
 
-      @media (min-width: 768px) {
-        .content-container {
-          flex-direction: row;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 30px;
-          padding: 0 15px;
-        }
-      }
-
       .bigLogo {
         display: block;
         font-size: clamp(80px, 4vw, 48px);
@@ -139,14 +129,6 @@
         padding-top: clamp(20px, 4vw, 40px);
       }
 
-      .bigLogo {
-        display: block;
-        font-size: clamp(80px, 4vw, 48px);
-        margin: clamp(20px, 1vw, 20px) 0;
-        font-weight: bold;
-        text-align: center;
-        padding-top: 40px;
-      }
       .resources {
         display: flex;
         align-items: center;
@@ -216,17 +198,9 @@
         border-left: 0.5px solid black;
       }
       .grid-space h1,
+      .grid-space h3,
       .grid-space h5 {
         font-size: clamp(24px, 3vw, 36px);
-        margin-bottom: 15px;
-        font-family: monospace;
-      }
-      .grid-space h3 {
-        margin-bottom: 20px;
-        font-size: clamp(24px, 3vw, 36px);
-      }
-      .grid-space h4 {
-        font-size: clamp(18px, 1.5vw, 26px);
         margin-bottom: 15px;
         font-family: monospace;
       }
@@ -280,6 +254,12 @@
         padding-bottom: clamp(20px, 4vw, 40px);
         word-wrap: break-word; /* Allow long words to break */
         overflow-wrap: break-word; /* Ensure text wraps on small screens */
+      }
+      .quote {
+        font-size: clamp(20px, 2vw, 20px);
+        font-family: "Courier New", Courier, monospace;
+        padding-bottom: 40px;
+        text-align: center;
       }
       .system-diagram {
         max-width: 300px;
@@ -373,7 +353,7 @@
       }
 
       .reflection-btn:hover {
-        background-color: black;
+        background-color: #f5a7bf;
         color: white;
         transform: translateY(-2px);
       }
@@ -415,9 +395,7 @@
           gap: 10px;
         }
       }
-      h4 {
-        font-size: inherit;
-      }
+
       @keyframes rotateText {
         0% {
           transform-origin: center;
@@ -429,36 +407,12 @@
         }
       }
 
-      #animatedTextPath {
-        animation: rotateText 20s linear infinite;
-        transform-origin: center;
-      }
-
       .flower-svg {
         max-width: 100px;
         margin: 0 auto;
         display: block;
       }
-      h4,
-      h6 {
-        font-size: clamp(18px, 1.5vw, 26px);
-        margin-bottom: 15px;
-        font-family: monospace;
-      }
 
-      @media (min-width: 768px) {
-        .grid-space svg {
-          width: 100%; /* Allow SVGs to expand fully within their grid space */
-          height: auto; /* Maintain aspect ratio */
-          max-width: 500px; /* Optional: prevent excessive growth */
-          margin: 0 auto; /* Center SVGs */
-        }
-
-        /* Specifically for circular text SVGs */
-        .system-trigger-diagram text {
-          font-size: clamp(8px, 1vw, 14px); /* Proportional text sizing */
-        }
-      }
       @media (max-width: 480px) {
         .resources {
           font-size: 14px;
@@ -556,71 +510,89 @@
 
       @media screen and (max-width: 480px) {
         .bigLogo {
-          font-size: clamp(30px, 10vw, 40px); /* Even smaller for phone sizes */
+          font-size: clamp(30px, 10vw, 40px);
           margin: 10px 0;
           padding-top: 20px;
         }
       }
+      .weeks-container {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .week {
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+
       .week-content {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease-out;
-        background: rgba(255, 255, 255, 0.1);
-        margin: 0 20px; /* Reduced from larger margins */
-        border-radius: 5px;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(245, 167, 191, 0.05);
+        margin: 0; /* Removed side margins */
+        border-top: 1px solid rgba(201, 218, 238, 0.2); /* Subtle separator */
       }
 
       .week-content.active {
-        max-height: 300px; /* Reduced from 500px */
-        padding: 10px; /* Reduced from 20px */
-        margin-top: 3px; /* Reduced from 10px */
-        margin-bottom: px; /* Reduced from 20px */
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        max-height: 500px;
+        padding: 15px;
+        margin: 0; /* Removed margins to keep content flush with header */
       }
 
       .week-header {
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 10px;
+        justify-content: space-between;
+        padding: 8px 10px;
+        background: rgba(201, 218, 238, 0.1); /* Light blue background */
+        transition: all 0.3s ease;
+        border: none;
+        font-family: monospace;
+        font-size: 15px;
       }
 
       .week-header:hover {
+        background: rgba(245, 167, 191, 0.1); /* Light pink on hover */
+      }
+
+      .week-header .arrow {
+        font-family: monospace;
+        transition: transform 0.3s ease;
+        margin-left: 10px;
+        font-size: 14px;
         opacity: 0.7;
       }
 
-      .week-header::after {
-        content: "▼";
-        font-size: 12px;
-        transition: transform 0.3s ease;
-      }
-
-      .week-header.active::after {
+      .week-header.active .arrow {
         transform: rotate(180deg);
       }
 
+      .week-header.active {
+        background: rgba(201, 218, 238, 0.15); /* Slightly darker when active */
+      }
+
+      .week-title {
+        flex-grow: 1;
+        font-weight: 500;
+      }
+
       .week-content p {
-        margin: 0 0 5px 0;
-        line-height: 1.4;
+        color: #333;
+        line-height: 1.6;
+        margin: 0;
         font-size: clamp(14px, 1.2vw, 16px);
       }
-      .coaching-timeline {
-        max-height: none; /* Reduce the height of the timeline */
-        display: block; /* Ensure SVG is block-level */
-        margin: 0;
-        width: 100%;
-        height: auto;
-      }
 
-      .weeks-container {
-        margin-top: 30px; /* Add space above the weeks container */
-      }
-
-      .week {
-        margin-bottom: 3px; /* Reduce space between weeks */
-      }
-      svg.coaching-timeline {
-        vertical-align: top; /* Remove potential inline element spacing */
+      /* Add subtle hover effect to entire week box */
+      .week:hover {
+        transform: translateY(-1px);
+        transition: transform 0.2s ease;
       }
     </style>
   </head>
@@ -643,6 +615,7 @@
 
     <div class="horizontal-line"></div>
     <p class="title">Systemic Coaching</p>
+    <p class="quote">In systems, we don't fix - we flow</p>
     <div class="grid-spaces">
       <div class="grid-space">
         <h1>What is systemic coaching?</h1>
@@ -658,7 +631,7 @@
       <div class="grid-space">
         <h2></h2>
         <br />
-        <svg class="system-diagram" viewBox="0 0 200 200">
+        <svg class="system-diagram" viewBox="-50 0 300 200">
           <circle
             cx="100"
             cy="100"
@@ -709,31 +682,13 @@
             fill="none"
             stroke="black"
             marker-end="url(#arrowhead)"
-          >
-            <animate
-              attributeName="d"
-              values="M100,60 Q140,100 100,140;
-              M110,60 Q150,100 110,140;
-              M100,60 Q140,100 100,140"
-              dur="3s"
-              repeatCount="indefinite"
-            />
-          </path>
+          ></path>
           <path
             d="M100,140 Q60,100 100,60"
             fill="none"
             stroke="black"
             marker-end="url(#arrowhead)"
-          >
-            <animate
-              attributeName="d"
-              values="M100,140 Q60,100 100,60;
-              M90,140 Q50,100 90,60;
-              M100,140 Q60,100 100,60"
-              dur="3s"
-              repeatCount="indefinite"
-            />
-          </path>
+          ></path>
           <defs>
             <marker
               id="arrowhead"
@@ -751,10 +706,10 @@
       <div class="grid-space">
         <h3>The process ...</h3>
         <!-- SVG content remains the same -->
-
+        <br />
         <p>
-          Each session will be a gentle revolution—not fixing. You are not
-          broken!
+          Each session will be a reminder that you are a living system
+          constantly emerging, reconnecting, becoming.
         </p>
 
         <div class="weeks-container">
@@ -772,7 +727,7 @@
           </div>
 
           <div class="week">
-            <h4 class="week-header">Week 2: Unspoken River Currents</h4>
+            <h4 class="week-header">Week 2: Unspoken Currents</h4>
             <div class="week-content">
               <p>
                 Dive into the hidden dynamics that influence your life: <br />•
@@ -784,7 +739,7 @@
           </div>
 
           <div class="week">
-            <h4 class="week-header">Week 3: Dance of Relationships</h4>
+            <h4 class="week-header">Week 3: Relationships Dance</h4>
             <div class="week-content">
               <p>
                 Examine the choreography of your relationships: <br />•
@@ -912,30 +867,11 @@
             stroke-dasharray="5,5"
             marker-end="url(#arrowhead)"
           />
-
-          <!-- Circular Text -->
-          <text>
-            <textPath href="#circlePath" startOffset="0%">
-              <animate
-                attributeName="startOffset"
-                values="100%;0%"
-                dur="10s"
-                repeatCount="indefinite"
-              />
-              Imagine a journey not of miles, but of inner landscapes—where each
-              week opens layers of your being.
-            </textPath>
-          </text>
         </svg>
       </div>
       <div class="grid-space">
         <div class="cta-section">
           <h2 class="cta-title">How to start?</h2>
-          <p class="cta-text">
-            You're not a problem to solve, but a living system constantly
-            emerging, reconnecting, becoming. Take the first step in your
-            journey.
-          </p>
 
           <div class="journey-steps">
             <div class="journey-step">
@@ -968,7 +904,7 @@
           <svg
             class="flower-svg"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 100"
+            viewBox="-50 -50 200 150"
           >
             <defs>
               <path
@@ -1049,11 +985,22 @@
         const weekHeaders = document.querySelectorAll(".week-header");
 
         weekHeaders.forEach((header) => {
+          const titleSpan = document.createElement("span");
+          titleSpan.className = "week-title";
+          titleSpan.textContent = header.textContent;
+
+          const arrowSpan = document.createElement("span");
+          arrowSpan.className = "arrow";
+          arrowSpan.textContent = "▼";
+
+          header.textContent = "";
+          header.appendChild(titleSpan);
+          header.appendChild(arrowSpan);
+
           header.addEventListener("click", () => {
             const content = header.nextElementSibling;
             const isActive = header.classList.contains("active");
 
-            // Close all other active weeks
             document
               .querySelectorAll(".week-header.active")
               .forEach((activeHeader) => {
@@ -1063,9 +1010,14 @@
                 }
               });
 
-            // Toggle current week
             header.classList.toggle("active");
             content.classList.toggle("active");
+
+            if (!isActive) {
+              setTimeout(() => {
+                header.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              }, 100);
+            }
           });
         });
       });
