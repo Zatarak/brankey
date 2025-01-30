@@ -226,34 +226,44 @@
           width: 80%;
         }
         .grid-space {
-          min-height: auto; /* Remove fixed min-height */
-          height: auto; /* Allow height to adjust to content */
+          min-height: auto;
+          height: auto;
         }
         .grid-space svg {
-          margin: 0 auto; /* Center SVGs within grid spaces */
-          display: block; /* Ensure block display for margin to work */
+          margin: 0 auto;
+          display: block;
         }
       }
       @media (max-width: 767px) {
         .grid-space:nth-child(even) {
           border-left: 0.5px solid transparent;
         }
+        .grid-space:nth-child(2),
+        .grid-space:nth-child(3),
+        .grid-space:nth-child(6) {
+          display: none;
+        }
+
+        .grid-spaces {
+          padding: 0 10px; /* Reduced from 20px */
+        }
+
+        .grid-space {
+          padding: 15px; /* Reduced from 20px */
+          min-height: auto; /* Remove fixed height */
+        }
       }
       .title {
         display: block;
-        font-size: clamp(
-          28px,
-          10vw,
-          48px
-        ); /* Reduced minimum size and adjusted scaling */
+        font-size: clamp(28px, 10vw, 48px);
         margin: clamp(20px, 1vw, 40px) 0;
         font-weight: bold;
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
         text-align: center;
         padding-top: clamp(20px, 4vw, 40px);
         padding-bottom: clamp(20px, 4vw, 40px);
-        word-wrap: break-word; /* Allow long words to break */
-        overflow-wrap: break-word; /* Ensure text wraps on small screens */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
       .quote {
         font-size: clamp(18px, 1.5vw, 20px);
@@ -630,79 +640,8 @@
       </div>
       <div class="grid-space">
         <h2></h2>
-        <br />
-        <svg class="system-diagram" viewBox="-50 0 300 200">
-          <circle
-            cx="100"
-            cy="100"
-            r="80"
-            fill="none"
-            stroke="black"
-            stroke-width="2"
-          />
-          <circle
-            cx="100"
-            cy="100"
-            r="40"
-            fill="none"
-            stroke="black"
-            stroke-width="2"
-            stroke-dasharray="5,5"
-          />
-
-          <text
-            x="100"
-            y="50"
-            text-anchor="middle"
-            font-family="monospace"
-            font-size="8px"
-          >
-            External Systems
-          </text>
-          <text
-            x="100"
-            y="110"
-            text-anchor="middle"
-            font-family="monospace"
-            font-size="10px"
-          >
-            Self
-          </text>
-          <text
-            x="100"
-            y="150"
-            text-anchor="middle"
-            font-family="monospace"
-            font-size="8px"
-          >
-            Internal Systems
-          </text>
-          <path
-            d="M100,60 Q140,100 100,140"
-            fill="none"
-            stroke="black"
-            marker-end="url(#arrowhead)"
-          ></path>
-          <path
-            d="M100,140 Q60,100 100,60"
-            fill="none"
-            stroke="black"
-            marker-end="url(#arrowhead)"
-          ></path>
-          <defs>
-            <marker
-              id="arrowhead"
-              markerWidth="10"
-              markerHeight="7"
-              refX="0"
-              refY="3.5"
-              orient="auto"
-            >
-              <polygon points="0 0, 10 3.5, 0 7" fill="black" />
-            </marker>
-          </defs>
-        </svg>
       </div>
+      <div class="grid-space"></div>
       <div class="grid-space">
         <h3>The process ...</h3>
         <!-- SVG content remains the same -->
@@ -786,88 +725,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="grid-space">
-        <svg
-          class="system-trigger-diagram"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="30 -60 350 400"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <defs>
-            <marker
-              id="arrowhead"
-              markerWidth="10"
-              markerHeight="7"
-              refX="0"
-              refY="3.5"
-              orient="auto"
-            >
-              <polygon points="0 0, 10 3.5, 0 7" fill="black" />
-            </marker>
-            <path id="circlePath" d="M200,30 A130,130 0 1,1 199.9,30" />
-          </defs>
-
-          <circle
-            cx="200"
-            cy="150"
-            r="80"
-            fill="none"
-            stroke="black"
-            stroke-width="2"
-          />
-          <circle
-            cx="120"
-            cy="150"
-            r="30"
-            fill="none"
-            stroke="black"
-            stroke-width="2"
-          />
-          <circle
-            cx="280"
-            cy="150"
-            r="30"
-            fill="none"
-            stroke="black"
-            stroke-width="2"
-          />
-
-          <text
-            x="120"
-            y="155"
-            text-anchor="middle"
-            font-family="monospace"
-            font-size="10px"
-          >
-            Self
-          </text>
-
-          <text
-            x="280"
-            y="155"
-            text-anchor="middle"
-            font-family="monospace"
-            font-size="10px"
-          >
-            Self
-          </text>
-
-          <path
-            d="M150,150 Q200,100 250,150"
-            fill="none"
-            stroke="black"
-            stroke-dasharray="5,5"
-            marker-end="url(#arrowhead)"
-          />
-          <path
-            d="M250,150 Q200,200 150,150"
-            fill="none"
-            stroke="black"
-            stroke-dasharray="5,5"
-            marker-end="url(#arrowhead)"
-          />
-        </svg>
       </div>
       <div class="grid-space">
         <div class="cta-section">

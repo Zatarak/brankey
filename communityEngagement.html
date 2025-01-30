@@ -248,6 +248,20 @@
         .grid-space:nth-child(even) {
           border-left: 0.5px solid transparent;
         }
+        .grid-space:nth-child(2),
+        .grid-space:nth-child(3),
+        .grid-space:nth-child(6) {
+          display: none;
+        }
+
+        .grid-spaces {
+          padding: 0 10px; /* Reduced from 20px */
+        }
+
+        .grid-space {
+          padding: 15px; /* Reduced from 20px */
+          min-height: auto; /* Remove fixed height */
+        }
       }
       .rotating-text {
         position: relative;
@@ -333,7 +347,7 @@
         background-color: #f5a7bf;
         color: black;
       }
-      .grid-space h6 {
+      .grid-space h5 {
         font-size: clamp(22px, 2.5vw, 32px);
         margin-bottom: 1.5rem;
         font-family: monospace;
@@ -341,7 +355,7 @@
         position: relative;
       }
 
-      .grid-space h6::after {
+      .grid-space h5::after {
         content: "";
         position: absolute;
         bottom: -8px;
@@ -591,102 +605,19 @@
         <p>
           Community engagement brings people together to share experiences and
           ideas. It creates spaces where diverse perspectives are valued and
-          everyone contributes to collective growth.
+          everyone contributes to collective growth. Through meaningful
+          connections and open dialogue, we build stronger networks and deeper
+          understanding of our shared environment.
         </p>
       </div>
       <div class="grid-space">
-        <h2>
-          <!-- Simplified first diagram -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 400 300"
-            preserveAspectRatio="xMidYMid meet"
-            style="width: 100%; height: auto; max-width: 600px"
-          >
-            <!-- Simple circular diagram -->
-            <circle cx="200" cy="150" r="80" fill="#f5a7bf" opacity="0.7" />
-
-            <!-- Three connected smaller circles -->
-            <circle cx="160" cy="150" r="30" fill="#f9d423" opacity="0.7" />
-            <circle cx="240" cy="150" r="30" fill="#f9d423" opacity="0.7" />
-            <circle cx="200" cy="100" r="30" fill="#f9d423" opacity="0.7" />
-
-            <!-- Connection lines -->
-
-            <!-- Simple labels -->
-
-            <text
-              x="160"
-              y="150"
-              text-anchor="middle"
-              font-family="monospace"
-              font-size="12"
-            >
-              Share
-            </text>
-            <text
-              x="240"
-              y="150"
-              text-anchor="middle"
-              font-family="monospace"
-              font-size="12"
-            >
-              Learn
-            </text>
-            <text
-              x="200"
-              y="95"
-              text-anchor="middle"
-              font-family="monospace"
-              font-size="12"
-            >
-              Grow
-            </text>
-          </svg>
-        </h2>
+        <h2></h2>
       </div>
       <div class="grid-space">
-        <h3>Why community engagement?</h3>
-        <br />
-        <p>
-          Every person brings unique experiences and perspectives to their
-          community. Through meaningful connections and open dialogue, we build
-          stronger networks and deeper understanding of our shared environment.
-        </p>
+        <h3></h3>
       </div>
       <div class="grid-space">
-        <h4>
-          <!-- Simplified second diagram -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 400 300"
-            preserveAspectRatio="xMidYMid meet"
-            style="width: 100%; height: auto; max-width: 600px"
-          >
-            <!-- Simple connected dots representing network -->
-            <circle cx="200" cy="150" r="40" fill="#f5a7bf" />
-            <circle cx="120" cy="120" r="30" fill="#f9d423" />
-            <circle cx="280" cy="120" r="20" fill="#f9d423" />
-            <circle cx="120" cy="180" r="15" fill="#f9d423" />
-            <circle cx="280" cy="180" r="25" fill="#f9d423" />
-
-            <!-- Connection lines -->
-
-            <!-- Simple labels -->
-            <text
-              x="200"
-              y="155"
-              text-anchor="middle"
-              font-family="monospace"
-              font-size="14"
-            >
-              Connect
-            </text>
-          </svg>
-        </h4>
-      </div>
-      <div class="grid-space">
-        <h5>Community Engagement Modules</h5>
+        <h4>Community Engagement Modules</h4>
         <br />
         <div class="module-container">
           <div class="module">
@@ -769,7 +700,7 @@
         </div>
       </div>
       <div class="grid-space">
-        <h6>Connect, Collaborate, Grow!</h6>
+        <h5>Connect, Collaborate, Grow!</h5>
         <div class="cta-container">
           <div class="cta-option">
             <p>Empower Your People</p>
@@ -793,6 +724,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="grid-space">
+        <h6></h6>
       </div>
     </div>
     <div class="logo-resources-section">
