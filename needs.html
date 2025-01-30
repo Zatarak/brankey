@@ -695,6 +695,8 @@
             toggleMenu();
           }
         });
+        // Initialize reflection immediately
+        renderQuestion();
       });
       function toggleContent(id) {
         const content = document.getElementById(id);
@@ -710,10 +712,6 @@
         // Toggle the clicked content
         content.style.display =
           content.style.display === "block" ? "none" : "block";
-      }
-
-      function openModal(modalId) {
-        document.getElementById(modalId).style.display = "block";
       }
 
       function closeModal(modalId) {
@@ -764,7 +762,7 @@
       const needsEducation = {
         "Physical Needs": {
           description:
-            "Physical needs form the foundation of well-being. They include food, water, sleep, shelter, and safety.",
+            "Physical needs form the foundation of well-being, like food, water, sleep, shelter, and safety.",
           tips: "Start by ensuring regular meals, consistent sleep schedule, and a safe living environment.",
         },
         "Emotional Needs": {
