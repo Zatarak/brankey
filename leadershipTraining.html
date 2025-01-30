@@ -169,14 +169,15 @@
         background-color: transparent;
         padding: clamp(20px, 3vw, 40px);
         text-align: center;
-        margin-top: auto;
+        margin-top: clamp(10px, 2vw, 20px);
       }
 
       footer a {
         text-decoration: underline;
         color: black;
-        margin: 0 clamp(10px, 2vw, 20px);
+        margin: 0 clamp(7px, 1vw, 20px);
         font-size: clamp(10px, 1.5vw, 20px);
+        font-family: monospace;
       }
       .grid-spaces {
         display: grid;
@@ -573,7 +574,7 @@
     <div class="back-hover-area"></div>
     <button onclick="history.back()" class="back-button">←</button>
     <header>
-      <div class="logo">BranKey</div>
+      <a href="index.html" class="logo">BranKey</a>
       <div class="menu-btn">☰</div>
     </header>
 
