@@ -396,6 +396,8 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.5);
+        z-index: 1100;
+        overflow-y: auto;
       }
 
       .modal-content {
@@ -404,10 +406,12 @@
         width: 90%;
         max-width: 600px;
         position: absolute;
+        max-height: 90vh;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 8px;
+        overflow-y: auto;
       }
 
       .close-btn {
@@ -426,17 +430,43 @@
           padding: 10px;
         }
 
-        /* Adjust font sizes for better readability on small screens */
         h1 {
           font-size: 20px;
         }
-        
+
         h2 {
           font-size: 16px;
         }
 
         .header p {
           font-size: 14px;
+        }
+        .modal-content {
+          width: 95%;
+          max-height: 80vh;
+          margin: 20px auto;
+          padding: 15px;
+          font-size: 14px; /* Smaller font size for better readability */
+        }
+
+        .modal-content h2 {
+          font-size: 18px;
+          margin-bottom: 10px;
+          padding-right: 30px; /* Make space for close button */
+        }
+
+        .modal-content p {
+          font-size: 14px;
+          line-height: 1.4;
+          margin-bottom: 15px;
+        }
+
+        .close-btn {
+          top: 5px;
+          right: 5px;
+          font-size: 20px;
+          width: 25px;
+          height: 25px;
         }
       }
 
@@ -451,7 +481,6 @@
           padding-right: 10px;
         }
 
-        /* Further adjustments for very small screens */
         .header {
           gap: 10px;
         }
@@ -474,6 +503,30 @@
 
         .rotating-text {
           margin-left: 5px;
+        }
+        .modal-content {
+          width: 100%;
+          height: 100vh;
+          max-height: 100vh;
+          margin: 0;
+          border-radius: 0;
+          position: fixed;
+          top: 0;
+          left: 0;
+          transform: none;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .modal-content h2 {
+          font-size: 16px;
+          margin-top: 10px;
+        }
+
+        .modal-content p {
+          font-size: 13px;
+          flex: 1;
+          overflow-y: auto;
         }
       }
     </style>
