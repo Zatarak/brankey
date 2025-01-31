@@ -378,7 +378,17 @@
         .grid-space:nth-child(even) {
           border-left: 0.5px solid transparent;
         }
+        .grid-space:nth-child(2),
+        .grid-space:nth-child(3),
+        .grid-space:nth-child(6) {
+          display: none;
+        }
 
+        .grid-space:nth-child(2),
+        .grid-space:nth-child(3) {
+          display: none;
+        }
+        
         .grid-space {
           padding: 15px; /* Reduced from 20px */
           min-height: auto; /* Remove fixed height */
@@ -732,7 +742,7 @@
         <div class="cta-container">
           <div class="cta-option">
             <p>
-              Access our curated collection of leadership resources and start
+              Access a curated collection of leadership resources and start
               learning today.
             </p>
             <div class="reflection-buttons">
