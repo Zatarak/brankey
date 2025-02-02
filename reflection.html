@@ -323,38 +323,10 @@
         background-color: rgba(255, 255, 255, 0.7);
         border-radius: 50%;
         margin: 0;
-        transition: all 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        transform: scale(1);
+        transform-origin: center;
+        will-change: transform;
         display: none;
-      }
-
-      #breathing-circle.inhale {
-        width: 300px;
-        height: 300px;
-      }
-
-      #breathing-circle.hold {
-        animation: vibrate 4s infinite;
-      }
-
-      #breathing-circle.exhale {
-        width: 50px;
-        height: 50px;
-      }
-
-      @keyframes vibrate {
-        0%,
-        100% {
-          transform: translate(-50%, -50%);
-        }
-        25% {
-          transform: translate(calc(-50% - 2px), calc(-50% - 2px));
-        }
-        50% {
-          transform: translate(calc(-50% + 2px), calc(-50% + 2px));
-        }
-        75% {
-          transform: translate(calc(-50% - 2px), calc(-50% + 2px));
-        }
       }
 
       .breathing-explanation {
@@ -612,6 +584,8 @@
         max-width: 600px;
         margin-bottom: 20px;
         margin-top: 40px;
+        flex-direction: column;
+        align-items: center;
       }
 
       .navigation-result {
@@ -1608,19 +1582,32 @@
         // Breathing Animation
         function startBreathingAnimation() {
           breathingCircle.className = "";
-          setTimeout(() => breathingCircle.classList.add("inhale"), 100);
+
+          // Initial reset to small size
+          breathingCircle.style.transform = "scale(1)";
+
+          // Inhale phase (4 seconds)
           setTimeout(() => {
-            breathingCircle.classList.remove("inhale");
-            breathingCircle.classList.add("hold");
+            breathingCircle.style.transition =
+              "transform 4s cubic-bezier(0.4, 0, 0.2, 1)";
+            breathingCircle.style.transform = "scale(6)";
+          }, 100);
+
+          // Hold phase starts after 4 seconds
+          setTimeout(() => {
+            // Maintain size during hold
+            breathingCircle.style.transition = "none";
+
+            // Exhale phase starts after total 8 seconds (4 inhale + 4 hold)
+            setTimeout(() => {
+              breathingCircle.style.transition =
+                "transform 6s cubic-bezier(0.4, 0, 0.2, 1)";
+              breathingCircle.style.transform = "scale(1)";
+            }, 4000);
           }, 4000);
-          setTimeout(() => {
-            breathingCircle.classList.remove("hold");
-            breathingCircle.classList.add("exhale");
-          }, 8000);
-          setTimeout(() => {
-            breathingCircle.classList.remove("exhale");
-            startBreathingAnimation();
-          }, 14000);
+
+          // Restart animation after full cycle (14 seconds)
+          setTimeout(startBreathingAnimation, 14000);
         }
 
         // Reflection Flow
@@ -1680,6 +1667,7 @@
           });
         });
 
+        // Journey Options Handler for vertical layout
         document.querySelectorAll(".journey-option").forEach((option) => {
           option.addEventListener("click", (e) => {
             const currentModal = e.target.closest(".emotion-content");
@@ -1689,6 +1677,7 @@
               userJourney.duration = selectedOption;
               currentModal.style.display = "none";
               environmentQuestion.style.display = "flex";
+              environmentQuestion.style.flexDirection = "column"; // Add vertical layout
               updateProgressIndicator(6);
             } else if (currentModal.id === "environment-question") {
               userJourney.environment = selectedOption;
@@ -1714,14 +1703,13 @@
             if (currentNavigation) {
               currentNavigation.style.display = "none";
               const emotionId = currentNavigation.id.replace("navigate-", "");
-              if (response === "yes") {
-                const resultContent = document.getElementById(
-                  `navigate-${emotionId}-yes`
-                );
-                if (resultContent) {
-                  resultContent.style.display = "block";
-                  updateProgressIndicator(8);
-                }
+              const resultContent = document.getElementById(
+                `navigate-${emotionId}-yes`
+              );
+
+              if (resultContent) {
+                resultContent.style.display = "block";
+                updateProgressIndicator(8); // Progress to Action step for both responses
               }
             }
           });
