@@ -130,43 +130,6 @@
         max-width: 1200px;
       }
 
-      .bigLogo {
-        display: block;
-        font-size: clamp(48px, 10vw, 80px);
-        margin: clamp(20px, 1vw, 20px) 0;
-        font-weight: bold;
-        text-align: center;
-        padding-top: 40px;
-        width: 100%;
-        overflow-wrap: break-word;
-      }
-      .resources {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: clamp(20px, 4vw, 26px);
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: center;
-        margin: clamp(20px, 1vw, 20px) 0;
-        padding-top: 10px;
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-      .custom-link {
-        text-decoration: none;
-        border-bottom: 10px solid black;
-        color: transparent;
-        -webkit-text-stroke: 1px black;
-        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
-          1px -1px 0px transparent, -1px -1px 0px transparent;
-      }
-
-      .custom-link:hover {
-        background-color: transparent;
-        color: #d6e4e3;
-      }
-
       footer {
         background-color: transparent;
         padding: clamp(20px, 3vw, 40px);
@@ -177,54 +140,71 @@
       footer a {
         text-decoration: underline;
         color: black;
-        margin: 0 clamp(7px, 1vw, 20px);
+        margin: 0 clamp(1px, 0.5vw, 10px);
         font-size: clamp(10px, 1.5vw, 20px);
+        font-family: monospace;
+      }      
+
+      .demo-container {
+        padding: clamp(10px, 2vw, 30px);
         font-family: monospace;
       }
 
-      .rotating-text {
+      .logo-pulse {
+        display: block;
+        font-size: clamp(60px, 4vw, 40px);
+        margin: clamp(20px, 1vw, 20px) 0;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 40px;
+        line-height: 1.2;
+      }
+
+      .key-pulse {
+        text-decoration: none;
+        color: black;
+        padding: clamp(2px, 0.5vw, 5px);
         position: relative;
-        height: 1.2em;
-        margin-left: 10px;
-        width: auto;
-        min-width: 60px;
-        color: transparent;
+        display: inline-block;
         -webkit-text-stroke: 1px black;
-        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
-          1px -1px 0px transparent, -1px -1px 0px transparent;
+        text-shadow: 1px 1px 0px transparent,
+                    -1px 1px 0px transparent,
+                    1px -1px 0px transparent,
+                    -1px -1px 0px transparent;
       }
 
-      .rotating-text span {
+      .key-pulse::after {
+        content: '';
         position: absolute;
+        top: 0;
         left: 0;
-        opacity: 0;
-        animation: rotate 4s infinite;
+        right: 0;
+        bottom: 0;
+        border: clamp(1px, 0.3vw, 3px) solid black;
+        animation: pulse 2s infinite;
+        transform-origin: center;
       }
 
-      .rotating-text span:nth-child(1) {
-        animation-delay: 0s;
+      @keyframes pulse {
+        0% { 
+          transform: scale(1); 
+          opacity: 1; 
+        }
+        50% { 
+          transform: scale(1.1); 
+          opacity: 0.5; 
+        }
+        100% { 
+          transform: scale(1); 
+          opacity: 1; 
+        }
       }
 
-      .rotating-text span:nth-child(2) {
-        animation-delay: 2s;
+      .key-pulse:hover {
+          background-color: transparent;
+          color: white;
       }
 
-      @keyframes rotate {
-        0%,
-        45% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        50%,
-        95% {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
       .back-button {
         position: fixed;
         left: -40px;
@@ -457,18 +437,7 @@
         h2 {
           font-size: 16px;
         }
-        .bigLogo {
-          font-size: clamp(36px, 8vw, 48px);
-          padding-top: 20px;
-        }
 
-        .resources {
-          font-size: clamp(16px, 3vw, 20px);
-        }
-
-        .rotating-text {
-          margin-left: 5px;
-        }
         .modal-content {
           width: 100%;
           height: 100vh;
@@ -613,16 +582,11 @@
         </div>
       </div>
 
-      <p class="bigLogo">
-        BRAN<a href="keyResources.html" class="custom-link">KEY</a>
-      </p>
-      <p class="resources">
-        Resources:
-        <span class="rotating-text">
-          <span>Click</span>
-          <span>KEY</span>
-        </span>
-      </p>
+      <div class="demo-container">
+  <div class="logo-pulse">
+    BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
+  </div>
+  
     </main>
 
     <footer>
