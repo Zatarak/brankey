@@ -218,6 +218,7 @@
         animation: pulse 2s infinite ease-in-out;
         text-decoration: none;
         color: #333;
+        overflow: hidden;
       }
 
       .circle.active {
@@ -234,13 +235,46 @@
         color: #333;
         font-size: 0.9em;
         opacity: 1;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease;
         text-align: center;
         font-family: monospace;
       }
 
       .circle.active:hover h3 {
         opacity: 1;
+      }
+
+      .circle .hover-text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        color: rgba(0,0,0,0.7);
+        opacity: 0;
+        transform: scale(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        font-family: monospace;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        font-size: 10px;
+      }
+
+      .circle:hover .hover-text,
+      .circle:focus .hover-text {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .circle:hover h3,
+      .circle:focus h3 {
+        opacity: 0;
+        transform: scale(0);
       }
 
       #circle1 {
@@ -404,6 +438,16 @@
         left: 0;
       }
 
+      .page-intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 30px;
+        padding: 0 20px;
+        font-family: monospace;
+        color: black;
+      }
+
+
     </style>
   </head>
   <body>
@@ -425,39 +469,58 @@
 
     <div class="horizontal-line"></div>
     <main class="main-content">
+      <div class="network-overlay"></div>
+      
+      <div class="page-intro">
+        <h1>:Systemic Approach:</h1>
+        <br />
+        <p>is a holistic framework designed to support development and organizational effectiveness through interconnected insights and practices.</p>
+      </div>
+
       <div class="circles-container">
-        <a href="systems.html" id="circle1" class="circle">
+        <a href="systems.html" id="circle1" class="circle" tabindex="0">
           <h3>Systems</h3>
+          <span class="hover-text">Org Dynamics</span>
         </a>
-        <a href="belonging.html" id="circle2" class="circle">
+        <a href="belonging.html" id="circle2" class="circle" tabindex="0">
           <h3>Belonging</h3>
+          <span class="hover-text">Team Culture</span>
         </a>
-        <a href="co-being.html" id="circle3" class="circle">
+        <a href="co-being.html" id="circle3" class="circle" tabindex="0">
           <h3>Co-Being</h3>
+          <span class="hover-text">Shared Awareness</span>
         </a>
-        <a href="needs.html" id="circle4" class="circle">
+        <a href="needs.html" id="circle4" class="circle" tabindex="0">
           <h3>Needs</h3>
+          <span class="hover-text">Core Motivation</span>
         </a>
-        <a href="responsibility.html" id="circle5" class="circle">
+        <a href="responsibility.html" id="circle5" class="circle" tabindex="0">
           <h3>Respons<br />bility</h3>
+          <span class="hover-text">Accountable Action</span>
         </a>
-        <a href="communication.html" id="circle6" class="circle">
+        <a href="communication.html" id="circle6" class="circle" tabindex="0">
           <h3>Communi<br />cation</h3>
+          <span class="hover-text">Clear Dialogue</span>
         </a>
-        <a href="relationships.html" id="circle7" class="circle">
+        <a href="relationships.html" id="circle7" class="circle" tabindex="0">
           <h3>Relation<br />ships</h3>
+          <span class="hover-text">Team Dynamics</span>
         </a>
-        <a href="love.html" id="circle8" class="circle">
+        <a href="love.html" id="circle8" class="circle" tabindex="0">
           <h3>Love</h3>
+          <span class="hover-text">Human Connection</span>
         </a>
-        <a href="curiosity.html" id="circle9" class="circle">
+        <a href="curiosity.html" id="circle9" class="circle" tabindex="0">
           <h3>Curiosity</h3>
+          <span class="hover-text">Continuous Learning</span>
         </a>
-        <a href="resilience.html" id="circle10" class="circle">
+        <a href="resilience.html" id="circle10" class="circle" tabindex="0">
           <h3>Re<br />silience</h3>
+          <span class="hover-text">Adaptive Strength</span>
         </a>
-        <a href="create.html" id="circle11" class="circle">
+        <a href="create.html" id="circle11" class="circle" tabindex="0">
           <h3>Create</h3>
+          <span class="hover-text">Innovative Thinking</span>
         </a>
       </div>
 
