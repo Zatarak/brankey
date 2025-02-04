@@ -132,7 +132,7 @@
         margin: 0 clamp(1px, 0.5vw, 10px);
         font-size: clamp(10px, 1.5vw, 20px);
         font-family: monospace;
-      }      
+      }
 
       .demo-container {
         padding: clamp(10px, 2vw, 30px);
@@ -156,14 +156,12 @@
         position: relative;
         display: inline-block;
         -webkit-text-stroke: 1px black;
-        text-shadow: 1px 1px 0px transparent,
-                    -1px 1px 0px transparent,
-                    1px -1px 0px transparent,
-                    -1px -1px 0px transparent;
+        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
+          1px -1px 0px transparent, -1px -1px 0px transparent;
       }
 
       .key-pulse::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -175,110 +173,23 @@
       }
 
       @keyframes pulse {
-        0% { 
-          transform: scale(1); 
-          opacity: 1; 
+        0% {
+          transform: scale(1);
+          opacity: 1;
         }
-        50% { 
-          transform: scale(1.1); 
-          opacity: 0.5; 
+        50% {
+          transform: scale(1.1);
+          opacity: 0.5;
         }
-        100% { 
-          transform: scale(1); 
-          opacity: 1; 
+        100% {
+          transform: scale(1);
+          opacity: 1;
         }
       }
 
       .key-pulse:hover {
-          background-color: transparent;
-          color: white;
-      }
-
-      .grid-spaces {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0;
-        margin-bottom: 40px;
-        padding: 0 clamp(20px, 4vw, 50px);
-      }
-
-      .grid-space {
         background-color: transparent;
-        border: 0.5px solid transparent;
-        border-top: 0.5px solid black;
-        border-left: 0.5px solid black;
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: left;
-        text-align: left;
-        min-height: auto;
-        height: auto;
-        transition: all 0.3s ease;
-      }
-      .grid-space:nth-child(odd) {
-        border-left: 0.5px solid transparent;
-      }
-
-      .grid-space:nth-child(even) {
-        border-left: 0.5px solid black;
-      }
-      .grid-space h1,
-      .grid-space h3,
-      .grid-space h5 {
-        font-size: clamp(24px, 3vw, 36px);
-        margin-bottom: 15px;
-        font-family: monospace;
-      }
-
-      .grid-space p {
-        font-size: clamp(14px, 1.5vw, 24px);
-        color: #333;
-        line-height: 1.4;
-        font-family: monospace;
-        text-align: justify;
-        margin-bottom: 30px;
-      }
-
-      @media (min-width: 768px) {
-        .grid-spaces {
-          grid-template-columns: repeat(2, 1fr);
-          grid-template-rows: repeat(3, auto);
-          gap: 0;
-          padding: 0 clamp(20px, 4vw, 50px);
-        }
-        .grid-space:not(:first-child):before {
-          left: 0;
-          width: 80%;
-        }
-        .grid-space {
-          min-height: auto;
-          height: auto;
-        }
-        .grid-space svg {
-          margin: 0 auto;
-          display: block;
-        }
-      }
-
-      @media (max-width: 767px) {
-        .grid-space:nth-child(even) {
-          border-left: 0.5px solid transparent;
-        }
-        .grid-space:nth-child(2),
-        .grid-space:nth-child(3){
-          display: none;
-        }
-
-        .grid-spaces {
-          padding: 0 10px; 
-        }
-
-        .grid-space {
-          padding: 15px; 
-          min-height: auto; 
-        }
+        color: white;
       }
 
       .title {
@@ -289,9 +200,20 @@
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
         text-align: center;
         padding-top: clamp(20px, 4vw, 40px);
-        padding-bottom: clamp(20px, 4vw, 40px);
+        padding-bottom: clamp(10px, 2vw, 20px);
         word-wrap: break-word;
         overflow-wrap: break-word;
+        position: relative;
+      }
+
+      .title::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 4px;
+        background: rgba(0, 0, 0, 0.2);
+        margin: 15px auto 0;
+        border-radius: 2px;
       }
 
       .quote {
@@ -299,16 +221,16 @@
         font-family: "Courier New", Courier, monospace;
         padding-bottom: 40px;
         text-align: center;
+        font-style: italic;
+        color: rgba(0, 0, 0, 0.7);
+        position: relative;
       }
 
-      .system-diagram {
-        max-width: 300px;
-        margin: 0 auto;
-      }
-
-      .system-trigger-diagram {
-        max-width: 400px;
-        margin: 0 auto;
+      .quote::before,
+      .quote::after {
+        content: '"';
+        font-size: 1.2em;
+        color: rgba(0, 0, 0, 0.4);
       }
 
       .cta-section {
@@ -400,46 +322,9 @@
         transform: translateY(-2px);
       }
 
-      .journey-steps {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin: 20px 0;
-      }
-
-      .journey-step {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        font-family: monospace;
-      }
-
-      .step-number {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: black;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-      }
-
-      @media (max-width: 768px) {
-        .cta-section {
-          margin: 10px;
-          padding: 20px;
-        }
-
-        .journey-steps {
-          gap: 10px;
-        }
-      }
-
       .back-button {
         position: fixed;
-        left: -40px; 
+        left: -40px;
         top: 50%;
         transform: translateY(-50%);
         background: rgba(0, 0, 0, 0.7);
@@ -478,79 +363,184 @@
         padding: 10px;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 5px;
       }
 
       .week {
-        border-radius: 8px;
         background: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        overflow: hidden;
-      }
-
-      .week-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        background: rgba(245, 167, 191, 0.05);
-        margin: 0; 
-        border-top: 1px solid rgba(201, 218, 238, 0.2); 
-      }
-
-      .week-content.active {
-        max-height: 500px;
-        padding: 15px;
-        margin: 0; 
+        border-radius: 12px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
       }
 
       .week-header {
+        padding: 15px 20px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 12px 12px 0 0;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 8px 10px;
-        background: rgba(201, 218, 238, 0.1); 
-        transition: all 0.3s ease;
-        border: none;
         font-family: monospace;
-        font-size: 15px;
+        font-size: clamp(16px, 1.8vw, 20px);
+        transition: all 0.3s ease;
       }
 
       .week-header:hover {
-        background: rgba(245, 167, 191, 0.1); 
+        background: rgba(245, 167, 191, 0.2);
       }
 
-      .week-header .arrow {
-        font-family: monospace;
+      .arrow {
         transition: transform 0.3s ease;
-        margin-left: 10px;
-        font-size: 14px;
-        opacity: 0.7;
       }
 
       .week-header.active .arrow {
         transform: rotate(180deg);
       }
 
-      .week-header.active {
-        background: rgba(201, 218, 238, 0.15); /* Slightly darker when active */
+      .week-content {
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0 0 12px 12px;
       }
 
-      .week-title {
-        flex-grow: 1;
-        font-weight: 500;
+      .week-content.active {
+        max-height: 500px;
+        padding: 20px;
       }
 
       .week-content p {
-        color: #333;
-        line-height: 1.6;
-        margin: 0;
-        font-size: clamp(14px, 1.2vw, 16px);
+        margin: 10px 0;
+        font-family: monospace;
+        position: relative;
+        padding-left: 20px;
       }
 
-      .week:hover {
-        transform: translateY(-1px);
-        transition: transform 0.2s ease;
+      .week-content p::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      .content-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px;
+        flex-wrap: wrap;
+        padding: 10px;
+      }
+
+      .tab-button {
+        padding: 12px 24px;
+        background: transparent;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 25px;
+        cursor: pointer;
+        font-family: monospace;
+        transition: all 0.3s ease;
+        font-size: clamp(14px, 1.2vw, 16px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .tab-button.active {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: black;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .tab-button:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .content-section {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 1200px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        background: transparent;
+        backdrop-filter: blur(10px);
+      }
+
+      .content-section.active {
+        display: block;
+        opacity: 1;
+      }
+
+      /* Card styles for better content organization */
+      .info-card {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 30px;
+        margin: 20px 0;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .info-card h3 {
+        margin-bottom: 20px;
+        font-family: Impact, sans-serif;
+        font-size: clamp(20px, 2.5vw, 28px);
+        color: rgba(0, 0, 0, 0.8);
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 10px;
+      }
+
+      .info-card p {
+        line-height: 1.8;
+        font-family: monospace;
+        padding: 8px 0;
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .info-card p::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      .journey-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .journey-step {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-family: monospace;
+      }
+
+      .step-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
       }
     </style>
   </head>
@@ -574,168 +564,149 @@
     <div class="horizontal-line"></div>
     <p class="title">Systemic Coaching</p>
     <p class="quote">Systems thrive on connection, not correction</p>
-    <div class="grid-spaces">
-      <div class="grid-space">
-        <h1>What is systemic coaching?</h1>
-        <br />
-        <p>
-          Systemic coaching examines how your work, relationships, and life experiences interconnect. Whether you're seeking personal growth, professional development, or organizational change, these sessions help you see the patterns that shape your decisions and relationships. For companies, this means understanding team dynamics and improving processes naturally. For individuals, it means aligning your career choices with your deeper values.
-        </p>
-      </div>
-      <div class="grid-space">
-        <h2></h2>
-      </div>
-      <div class="grid-space"></div>
-      <div class="grid-space">
-        <h3>The process ...</h3>
-        <br />
-        <p>
-          Each session will be a reminder that you are a living system
-          constantly emerging, reconnecting, becoming.
-        </p>
 
+    <!-- New tab navigation -->
+    <div class="content-tabs">
+      <button class="tab-button active" data-tab="overview">Overview</button>
+      <button class="tab-button" data-tab="process">The Process</button>
+      <button class="tab-button" data-tab="journey">Your Journey</button>
+    </div>
+
+    <!-- Overview Section -->
+    <div class="content-section active" id="overview">
+      <div class="info-card">
+        <h3>Who is it For?</h3>
+        <p>Individuals who feel stuck in patterns</p>
+        <p>Individuals who want deeper self-understanding</p>
+        <p>Professionals developing skills</p>
+        <p>Organizations looking to improve collaboration</p>
+      </div>
+
+      <div class="info-card">
+        <h3>The Impact</h3>
+        <p>Breaking unconscious behavioral cycles</p>
+        <p>Resolving dynamics causing friction</p>
+        <p>Aligning personal and professional goals</p>
+      </div>
+    </div>
+
+    <!-- Process Section -->
+    <div class="content-section" id="process">
+      <div class="info-card">
+        <h3>Your 6-Week Journey</h3>
         <div class="weeks-container">
           <div class="week">
-            <h4 class="week-header">wk 1: Mapping Your Systems</h4>
+            <div class="week-header">
+              <span>Week 1: Mapping Your Systems</span>
+              <span class="arrow">▼</span>
+            </div>
             <div class="week-content">
-              <p>
-                Explore your place within various systems - family, work,
-                society. We'll work with: <br />• Understanding your different roles <br />• Identifying patterns of belonging
-                <br />• Recognizing family and work patterns <br />• Team dynamics <br />• Organizational influences
-              </p>
+              <p>Understanding your different roles</p>
+              <p>Identifying patterns of belonging</p>
+              <p>Recognizing family and work patterns</p>
             </div>
           </div>
 
           <div class="week">
-            <h4 class="week-header">wk 2: Hidden Patterns</h4>
+            <div class="week-header">
+              <span>Week 2: Hidden Patterns</span>
+              <span class="arrow">▼</span>
+            </div>
             <div class="week-content">
-              <p>
-                Dive into the hidden dynamics that influence your life: <br />•
-                Mapping emotional patterns <br />•
-                Understanding unconscious loyalties <br />• Identifying systemic
-                blocks <br />• Team and organizational blind spots
-              </p>
+              <p>Mapping emotional patterns</p>
+              <p>Understanding unconscious loyalties</p>
+              <p>Identifying systemic blocks</p>
             </div>
           </div>
 
           <div class="week">
-            <h4 class="week-header">wk 3: Relationships Dance</h4>
+            <div class="week-header">
+              <span>Week 3: Relationships Dance</span>
+              <span class="arrow">▼</span>
+            </div>
             <div class="week-content">
-              <p>
-                Examine the choreography of your relationships: <br />•
-                Understanding relationship dynamics <br />• Team interactions <br />• Leadership style and expectations
-                <br />• Boundary setting
-              </p>
+              <p>Understanding relationship dynamics</p>
+              <p>Team interactions</p>
+              <p>Leadership style and expectations</p>
             </div>
           </div>
 
           <div class="week">
-            <h4 class="week-header">wk 4: Resilience</h4>
+            <div class="week-header">
+              <span>Week 4: Resilience</span>
+              <span class="arrow">▼</span>
+            </div>
             <div class="week-content">
-              <p>
-                Create your personal narrative of resilience: <br />• Crafting
-                your personal story <br />• Building systemic resilience <br />•
-                Understanding your themes <br />• Integrating past
-                experiences
-              </p>
+              <p>Crafting your story</p>
+              <p>Building systemic resilience</p>
+              <p>Integrating past experiences</p>
             </div>
           </div>
 
           <div class="week">
-            <h4 class="week-header">wk 5: Radical Compassion</h4>
+            <div class="week-header">
+              <span>Week 5: Radical Compassion</span>
+              <span class="arrow">▼</span>
+            </div>
             <div class="week-content">
-              <p>
-                Develop deep compassion for yourself and your systems: <br />•
-                Self-awareness in contexts <br />• Understanding systemic
-                empathy <br />• Forgiveness and culture <br />• Building
-                sustainable practices
-              </p>
+              <p>Self-awareness in contexts</p>
+              <p>Understanding systemic empathy</p>
+              <p>Forgiveness and culture</p>
             </div>
           </div>
 
           <div class="week">
-            <h4 class="week-header">wk 6: Integrated Self</h4>
+            <div class="week-header">
+              <span>Week 6: Integrated Self</span>
+              <span class="arrow">▼</span>
+            </div>
             <div class="week-content">
-              <p>
-                Bring together all aspects of your systemic work: <br />•
-                Integration of insights <br />• Creating sustainable change
-                <br />• Building future vision <br />• Establishing ongoing
-                practices
-              </p>
+              <p>Integration of insights</p>
+              <p>Creating sustainable change</p>
+              <p>Building future vision</p>
             </div>
           </div>
         </div>
       </div>
- 
-<div class="grid-space">
-  <div class="cta-section">
-    <h2 class="cta-title">Your Coaching Journey</h2>
-    <div class="journey-steps">
-      <div class="journey-step">
-        <span class="step-number">1</span>
-        <span>Take 10 minutes for guided self-reflection</span>
-      </div>
-      <div class="journey-step">
-        <span class="step-number">2</span>
-        <span>Explore your current systemic patterns</span>
-      </div>
-      <div class="journey-step">
-        <span class="step-number">3</span>
-        <span>Receive personalized insights</span>
-      </div>
-      <div class="journey-step">
-        <span class="step-number">4</span>
-        <span>Deep-dive consultation with a systemic coach</span>
+    </div>
+
+    <!-- Journey Section -->
+    <div class="content-section" id="journey">
+      <div class="info-card">
+        <h3>Getting Started</h3>
+        <div class="journey-steps">
+          <div class="journey-step">
+            <span class="step-number">1</span>
+            <span>Take 10 minutes for guided self-reflection</span>
+          </div>
+          <div class="journey-step">
+            <span class="step-number">2</span>
+            <span>Explore your current systemic patterns</span>
+          </div>
+          <div class="journey-step">
+            <span class="step-number">3</span>
+            <span>Receive personalized insights</span>
+          </div>
+          <div class="journey-step">
+            <span class="step-number">4</span>
+            <span>Deep-dive consultation with a systemic coach</span>
+          </div>
+        </div>
+        <div class="reflection-buttons">
+          <a href="reflection.html" class="reflection-btn"
+            >Begin Your Reflection</a
+          >
+        </div>
       </div>
     </div>
 
-    <div class="reflection-buttons">
-      <a href="reflection.html" class="reflection-btn">
-        Begin Your Reflection
-      </a>
-    </div>
-  </div>
-</div>
-      
-      <div class="grid-space">
-<div class="cta-section">
-    <h2 class="cta-title">Your Path Forward</h2>
-    <div class="journey-steps">
-      <div class="journey-step">
-        <span class="step-number">5</span>
-        <span>Map your organizational or personal ecosystem</span>
-      </div>
-      <div class="journey-step">
-        <span class="step-number">6</span>
-        <span>Identify core systemic interactions and blockages</span>
-      </div>
-      <div class="journey-step">
-        <span class="step-number">7</span>
-        <span>Develop tailored strategic approaches</span>
-      </div>
-      <div class="journey-step">
-        <span class="step-number">8</span>
-        <span>Create measurable action plan with ongoing support</span>
+    <div class="horizontal-line"></div>
+
+    <div class="demo-container">
+      <div class="logo-pulse">
+        BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
       </div>
     </div>
-
-    <div class="reflection-buttons">
-      <a href="contact.html" class="reflection-btn">
-        Connect with Our Team
-      </a>
-    </div>
-  </div>
-</div>
-      </div>
-
-
-      <div class="horizontal-line"></div>
-
-      <div class="demo-container">
-  <div class="logo-pulse">
-    BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
-  </div>
-
 
     <footer>
       <a href="index.html">Home</a>
@@ -747,6 +718,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        // Navigation menu functionality
         const navMenu = document.querySelector(".nav-menu");
         const menuToggle = document.querySelector(".menu-btn");
         const closeBtn = document.querySelector(".close-btn");
@@ -761,26 +733,56 @@
             toggleMenu();
           }
         });
-        // New functionality for week headers
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const contentSections = document.querySelectorAll(".content-section");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Remove active class from all buttons and sections
+            tabButtons.forEach((btn) => btn.classList.remove("active"));
+            contentSections.forEach((section) =>
+              section.classList.remove("active")
+            );
+
+            // Add active class to clicked button and corresponding section
+            button.classList.add("active");
+            document
+              .querySelector(`#${button.dataset.tab}`)
+              .classList.add("active");
+          });
+        });
+
+        // Week headers functionality
         const weekHeaders = document.querySelectorAll(".week-header");
 
         weekHeaders.forEach((header) => {
+          // Clear existing content but preserve the original text
+          const headerText =
+            header.querySelector("span")?.textContent || header.textContent;
+
+          // Create title span
           const titleSpan = document.createElement("span");
           titleSpan.className = "week-title";
-          titleSpan.textContent = header.textContent;
+          titleSpan.textContent = headerText;
 
+          // Create arrow span
           const arrowSpan = document.createElement("span");
           arrowSpan.className = "arrow";
           arrowSpan.textContent = "▼";
 
+          // Clear and reconstruct header content
           header.textContent = "";
           header.appendChild(titleSpan);
           header.appendChild(arrowSpan);
 
+          // Add click event listener
           header.addEventListener("click", () => {
             const content = header.nextElementSibling;
             const isActive = header.classList.contains("active");
 
+            // Close other active weeks
             document
               .querySelectorAll(".week-header.active")
               .forEach((activeHeader) => {
@@ -790,9 +792,11 @@
                 }
               });
 
+            // Toggle current week
             header.classList.toggle("active");
             content.classList.toggle("active");
 
+            // Smooth scroll to the clicked week if opening
             if (!isActive) {
               setTimeout(() => {
                 header.scrollIntoView({ behavior: "smooth", block: "nearest" });
