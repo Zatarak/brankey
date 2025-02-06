@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Belonging</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
     <style>
       * {
         margin: 0;
@@ -132,43 +130,6 @@
         max-width: 1200px;
       }
 
-      .bigLogo {
-        display: block;
-        font-size: clamp(48px, 10vw, 80px);
-        margin: clamp(20px, 1vw, 20px) 0;
-        font-weight: bold;
-        text-align: center;
-        padding-top: 40px;
-        width: 100%;
-        overflow-wrap: break-word;
-      }
-      .resources {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: clamp(20px, 4vw, 26px);
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: center;
-        margin: clamp(20px, 1vw, 20px) 0;
-        padding-top: 10px;
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-      .custom-link {
-        text-decoration: none;
-        border-bottom: 10px solid black;
-        color: transparent;
-        -webkit-text-stroke: 1px black;
-        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
-          1px -1px 0px transparent, -1px -1px 0px transparent;
-      }
-
-      .custom-link:hover {
-        background-color: transparent;
-        color: #d6e4e3;
-      }
-
       footer {
         background-color: transparent;
         padding: clamp(20px, 3vw, 40px);
@@ -179,54 +140,69 @@
       footer a {
         text-decoration: underline;
         color: black;
-        margin: 0 clamp(7px, 1vw, 20px);
+        margin: 0 clamp(1px, 0.5vw, 10px);
         font-size: clamp(10px, 1.5vw, 20px);
         font-family: monospace;
       }
 
-      .rotating-text {
+      .demo-container {
+        padding: clamp(10px, 2vw, 30px);
+        font-family: monospace;
+      }
+
+      .logo-pulse {
+        display: block;
+        font-size: clamp(60px, 4vw, 40px);
+        margin: clamp(20px, 1vw, 20px) 0;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 40px;
+        line-height: 1.2;
+      }
+
+      .key-pulse {
+        text-decoration: none;
+        color: black;
+        padding: clamp(2px, 0.5vw, 5px);
         position: relative;
-        height: 1.2em;
-        margin-left: 10px;
-        width: auto;
-        min-width: 60px;
-        color: transparent;
+        display: inline-block;
         -webkit-text-stroke: 1px black;
         text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
           1px -1px 0px transparent, -1px -1px 0px transparent;
       }
 
-      .rotating-text span {
+      .key-pulse::after {
+        content: "";
         position: absolute;
+        top: 0;
         left: 0;
-        opacity: 0;
-        animation: rotate 4s infinite;
+        right: 0;
+        bottom: 0;
+        border: clamp(1px, 0.3vw, 3px) solid black;
+        animation: pulse 2s infinite;
+        transform-origin: center;
       }
 
-      .rotating-text span:nth-child(1) {
-        animation-delay: 0s;
-      }
-
-      .rotating-text span:nth-child(2) {
-        animation-delay: 2s;
-      }
-
-      @keyframes rotate {
-        0%,
-        45% {
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
           opacity: 1;
-          transform: translateY(0);
         }
-        50%,
-        95% {
-          opacity: 0;
-          transform: translateY(-20px);
+        50% {
+          transform: scale(1.1);
+          opacity: 0.5;
         }
         100% {
+          transform: scale(1);
           opacity: 1;
-          transform: translateY(0);
         }
       }
+
+      .key-pulse:hover {
+        background-color: transparent;
+        color: white;
+      }
+
       .back-button {
         position: fixed;
         left: -40px;
@@ -376,58 +352,6 @@
         font-size: 24px;
       }
 
-      .belonging-board {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background: transparent;
-        border-radius: 12px;
-        box-shadow: 20px 20px 26px rgba(0, 0, 0, 0.6);
-        background: rgba(255, 255, 255, 0.1);
-        border-color: white;
-        font-family: monospace;
-        border: 2px solid black;
-      }
-
-      .message-container {
-        max-height: 400px;
-        overflow-y: auto;
-        margin: 20px 0;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 8px;
-      }
-
-      .message {
-        padding: 15px;
-        margin: 10px 0;
-        background: #f8f9fa;
-        border-radius: 8px;
-        border-left: 4px solid #007bff;
-        transition: transform 0.2s;
-      }
-
-      .message:hover {
-        transform: translateX(5px);
-      }
-
-      .message-input {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        font-family: inherit;
-        resize: vertical;
-        min-height: 80px;
-      }
-
-      .message-meta {
-        font-size: 0.8em;
-        color: #666;
-        margin-top: 5px;
-      }
-
       @media (max-width: 768px) {
         .container {
           padding: 10px;
@@ -437,22 +361,9 @@
           font-size: 20px;
         }
 
-        .header {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 10px;
-        }
-
-        h1 {
-          font-size: 20px;
-          margin-right: 0;
-        }
-
         .header p {
           font-size: 14px;
-          min-width: 100%;
         }
-
         .modal-content {
           width: 95%;
           max-height: 80vh;
@@ -480,14 +391,6 @@
           width: 25px;
           height: 25px;
         }
-        .belonging-board {
-          margin: 10px;
-          padding: 15px;
-        }
-
-        .message-container {
-          max-height: 300px;
-        }
       }
 
       @media (max-width: 480px) {
@@ -503,18 +406,6 @@
           font-size: 16px;
         }
 
-        .bigLogo {
-          font-size: clamp(36px, 8vw, 48px);
-          padding-top: 20px;
-        }
-
-        .resources {
-          font-size: clamp(16px, 3vw, 20px);
-        }
-
-        .rotating-text {
-          margin-left: 5px;
-        }
         .modal-content {
           width: 100%;
           height: 100vh;
@@ -539,13 +430,212 @@
           flex: 1;
           overflow-y: auto;
         }
-        .belonging-board {
-          margin: 5px;
-          padding: 10px;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 3rem;
+        font-family: monospace;
+      }
+
+      .visualization-container {
+        max-width: 900px; /* Reduced from 1200px for better proportions */
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px);
+        border-radius: 1rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .elements-container {
+        position: relative;
+        min-height: 400px; /* Reduced from 600px */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 0;
+      }
+
+      .connecting-line {
+        position: absolute;
+        left: 50%;
+        top: 15%;
+        width: 3px;
+        height: 70%; /* Reduced to make line shorter */
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.1),
+          rgba(0, 0, 0, 0.3),
+          rgba(0, 0, 0, 0.1)
+        );
+        transform: translateX(-50%);
+      }
+
+      .element {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem 0;
+        height: 120px; /* Fixed height for equal spacing */
+      }
+
+      .element-content {
+        position: absolute;
+        width: calc(50% - 3rem);
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(4px);
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        opacity: 0.9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .element-content.active {
+        opacity: 1;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .element-content.left {
+        right: 50%;
+        margin-right: 3rem;
+        text-align: right;
+      }
+
+      .element-content.right {
+        left: 50%;
+        margin-left: 3rem;
+        text-align: left;
+      }
+
+      .element-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-family: monospace;
+        color: #000;
+      }
+
+      .element-description {
+        font-size: 0.9rem;
+        color: rgba(0, 0, 0, 0.8);
+        font-family: monospace;
+        line-height: 1.4;
+      }
+
+      .icon-container {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 50%;
+        background: transparent;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .icon-container:hover {
+        transform: scale(1.1);
+        border-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .icon-container.active {
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(145deg, #f5f5f5, #ffffff);
+      }
+
+      .central-element {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 20;
+      }
+
+      .central-circle {
+        width: 80px;
+        height: 80px;
+        border: 3px solid black;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        animation: pulse 2s infinite;
+        font-family: monospace;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .visualization-container {
+          padding: 1rem;
+          margin: 1rem;
         }
 
-        .message {
-          padding: 10px;
+        .elements-container {
+          min-height: 500px;
+        }
+
+        .element-content {
+          width: calc(50% - 2rem);
+          padding: 0.8rem;
+        }
+
+        .element-content.left {
+          margin-right: 2rem;
+        }
+
+        .element-content.right {
+          margin-left: 2rem;
+        }
+
+        .element-title {
+          font-size: 1rem;
+        }
+
+        .element-description {
+          font-size: 0.8rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .element-content {
+          width: calc(50% - 1.5rem);
+          padding: 0.6rem;
+        }
+
+        .element-content.left {
+          margin-right: 1.5rem;
+        }
+
+        .element-content.right {
+          margin-left: 1.5rem;
+        }
+
+        .central-circle {
+          width: 60px;
+          height: 60px;
+          font-size: 0.9rem;
+        }
+
+        .icon-container {
+          width: 3rem;
+          height: 3rem;
         }
       }
     </style>
@@ -625,32 +715,33 @@
         </div>
       </div>
 
-      <div class="belonging-board">
-        <h2>Belonging Thoughts</h2>
-        <p>
-          What makes you feel like you truly belong? Your message will be added
-          to our board of belonging, creating a tapestry of shared experiences.
-          Keep it kind, keep it real. 💫
+      <div class="visualization-container">
+        <h2 class="title">Understanding Belonging</h2>
+
+        <div class="elements-container">
+          <div class="connecting-line"></div>
+
+          <!-- Elements will be inserted here by JavaScript -->
+
+          <div class="central-element">
+            <div class="central-circle">
+              <span>Belonging</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="footer-text">
+          Belonging emerges when these elements align and reinforce each other,
+          creating a space where you can be authentically yourself while
+          connecting meaningfully with others.
         </p>
-
-        <div class="message-container" id="messageContainer"></div>
-
-        <textarea
-          class="message-input"
-          id="messageInput"
-          placeholder="Share your thoughts on belonging..."
-          maxlength="500"
-        ></textarea>
-        <button class="submit-btn" onclick="submitMessage()">
-          Share Message
-        </button>
       </div>
 
       <div class="demo-container">
-  <div class="logo-pulse">
-    BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
-  </div>
-  
+        <div class="logo-pulse">
+          BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
+        </div>
+      </div>
     </main>
 
     <footer>
@@ -660,40 +751,9 @@
       <a href="keyResources.html" class="nav-link">KEY Resources</a>
       <a href="contact.html" class="nav-link">Contact</a>
     </footer>
+
     <script>
-      // Menu functionality
-      document.addEventListener("DOMContentLoaded", () => {
-        const navMenu = document.querySelector(".nav-menu");
-        const menuToggle = document.querySelector(".menu-btn");
-        const closeBtn = document.querySelector(".close-btn");
-
-        const toggleMenu = () => navMenu.classList.toggle("active");
-
-        menuToggle.addEventListener("click", toggleMenu);
-        closeBtn.addEventListener("click", toggleMenu);
-
-        navMenu.addEventListener("click", (e) => {
-          if (e.target.classList.contains("nav-link")) {
-            toggleMenu();
-          }
-        });
-      });
-      function toggleContent(id) {
-        const content = document.getElementById(id);
-        const allContent = document.getElementsByClassName("content-box");
-
-        // Close all other content boxes
-        Array.from(allContent).forEach((box) => {
-          if (box.id !== id && box.style.display === "block") {
-            box.style.display = "none";
-          }
-        });
-
-        // Toggle the clicked content
-        content.style.display =
-          content.style.display === "block" ? "none" : "block";
-      }
-
+      // Modal functionality
       function openModal(modalId) {
         document.getElementById(modalId).style.display = "block";
       }
@@ -702,82 +762,89 @@
         document.getElementById(modalId).style.display = "none";
       }
 
-      // Close modal when clicking outside
-      window.onclick = function (event) {
-        if (event.target.classList.contains("modal")) {
-          event.target.style.display = "none";
-        }
-      };
+      // Navigation Menu
+      document.addEventListener("DOMContentLoaded", () => {
+        const navMenu = document.querySelector(".nav-menu");
+        const menuBtn = document.querySelector(".menu-btn");
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBlJcfYnRktHQ0RnX1xuLPydXVc2Mtf2cE",
-        authDomain: "brankey.firebaseapp.com",
-        databaseURL:
-          "https://brankey-default-rtdb.europe-west1.firebasedatabase.app",
-        projectId: "brankey",
-        storageBucket: "brankey.firebasestorage.app",
-        messagingSenderId: "754839683415",
-        appId: "1:754839683415:web:0afa911c1606228875be12",
-        measurementId: "G-9D25N99EQP",
-      };
+        const toggleMenu = () => navMenu.classList.toggle("active");
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const database = firebase.database();
+        menuBtn.addEventListener("click", toggleMenu);
 
-      // Load messages
-      function loadMessages() {
-        const messagesRef = database.ref("messages");
-        const container = document.getElementById("messageContainer");
-
-        messagesRef.on("value", (snapshot) => {
-          container.innerHTML = "";
-          const messages = snapshot.val();
-
-          if (messages) {
-            Object.values(messages)
-              .reverse()
-              .forEach((msg) => {
-                const messageDiv = document.createElement("div");
-                messageDiv.className = "message";
-                messageDiv.innerHTML = `
-          <div>${msg.text}</div>
-          <div class="message-meta">
-            Posted on ${new Date(msg.timestamp).toLocaleDateString()}
-          </div>
-        `;
-                container.appendChild(messageDiv);
-              });
+        document.addEventListener("click", (e) => {
+          if (
+            navMenu.classList.contains("active") &&
+            !e.target.closest(".nav-menu") &&
+            !e.target.closest(".menu-btn")
+          ) {
+            toggleMenu();
           }
+        });
+      });
+      const elements = [
+        {
+          id: "self",
+          icon: "🧠",
+          title: "Self-Acceptance",
+          description: "Embracing your unique journey",
+          position: "left",
+        },
+        {
+          id: "connection",
+          icon: "❤️",
+          title: "Meaningful Connection",
+          description: "Building genuine bonds with others",
+          position: "right",
+        },
+        {
+          id: "community",
+          icon: "👥",
+          title: "Community",
+          description: "Growing together and supporting each other",
+          position: "left",
+        },
+      ];
+
+      function createElementHTML(element, index) {
+        return `
+                <div class="element">
+                    <div class="element-content ${element.position}" data-id="${element.id}">
+                        <h3 class="element-title">${element.title}</h3>
+                        <p class="element-description">${element.description}</p>
+                    </div>
+                    <div class="icon-container" data-id="${element.id}">
+                        ${element.icon}
+                    </div>
+                </div>
+            `;
+      }
+
+      function initializeVisualization() {
+        const container = document.querySelector(".elements-container");
+
+        elements.forEach((element, index) => {
+          const elementHTML = createElementHTML(element, index);
+          container.insertAdjacentHTML("beforeend", elementHTML);
+        });
+
+        // Add click handlers
+        const iconContainers = document.querySelectorAll(".icon-container");
+        iconContainers.forEach((icon) => {
+          icon.addEventListener("click", () => {
+            const id = icon.dataset.id;
+            const content = document.querySelector(
+              `.element-content[data-id="${id}"]`
+            );
+
+            // Toggle active state
+            icon.classList.toggle("active");
+            content.classList.toggle("active");
+          });
         });
       }
 
-      // Submit new message
-      function submitMessage() {
-        const input = document.getElementById("messageInput");
-        const text = input.value.trim();
-
-        if (text) {
-          const messagesRef = database.ref("messages");
-          const newMessage = {
-            text: text,
-            timestamp: Date.now(),
-          };
-
-          messagesRef
-            .push(newMessage)
-            .then(() => {
-              input.value = "";
-            })
-            .catch((error) => {
-              console.error("Error saving message:", error);
-              alert("Error saving your message. Please try again.");
-            });
-        }
-      }
-
-      // Initialize the board
-      document.addEventListener("DOMContentLoaded", loadMessages);
+      // Initialize when DOM is loaded
+      document.addEventListener("DOMContentLoaded", initializeVisualization);
     </script>
   </body>
 </html>
