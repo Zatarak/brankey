@@ -436,7 +436,7 @@
         text-align: center;
         font-size: 1.5rem;
         font-weight: bold;
-        margin-bottom: 3rem;
+        margin-bottom: 0.5rem;
         font-family: monospace;
       }
 
@@ -564,7 +564,7 @@
       .element-title {
         font-size: 1.1rem;
         font-weight: 600;
-        margin-bottom: 0rem;
+        margin: 1rem 0;
         font-family: monospace;
         color: #000;
       }
@@ -689,6 +689,16 @@
         font-family: monospace;
         text-align: center;
         margin-top: 0;
+        padding: 8px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .text:hover {
+        background: rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
     </style>
   </head>
@@ -769,7 +779,7 @@
 
       <div class="visualization-container">
         <h2 class="title">Understanding Belonging</h2>
-        <p class="text">Click the fully integrated elements.</p>
+        <p class="text">Click each icon to see how belonging takes shape.</p>
 
         <div class="elements-container">
           <div class="barometer">
