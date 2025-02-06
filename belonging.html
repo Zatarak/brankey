@@ -441,7 +441,7 @@
       }
 
       .visualization-container {
-        max-width: 900px; /* Reduced from 1200px for better proportions */
+        max-width: 900px;
         margin: 2rem auto;
         padding: 2rem;
         background-color: rgba(255, 255, 255, 0.15);
@@ -452,7 +452,7 @@
 
       .elements-container {
         position: relative;
-        min-height: 400px; /* Reduced from 600px */
+        min-height: 400px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -475,6 +475,52 @@
         transform: translateX(-50%);
       }
 
+      .barometer {
+        position: absolute;
+        left: 50%;
+        top: 15%;
+        height: 70%;
+        transform: translateX(-50%);
+        width: 20px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      .barometer-fill {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(to top, #ff6b6b, #4ecdc4);
+        border-radius: 10px;
+        transition: height 0.5s ease;
+      }
+
+      .barometer-marker {
+        position: absolute;
+        left: 50%;
+        width: 30px;
+        height: 30px;
+        background: white;
+        border: 3px solid #333;
+        border-radius: 50%;
+        transform: translate(-50%, 50%);
+        cursor: grab;
+        z-index: 2;
+      }
+
+      .belonging-score {
+        position: absolute;
+        left: 10%;
+        top: -15%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 0.5rem;
+        border-radius: 5px;
+        font-weight: bold;
+        font-family: monospace;
+      }
+
       .element {
         position: relative;
         width: 100%;
@@ -482,7 +528,7 @@
         align-items: center;
         justify-content: center;
         margin: 1rem 0;
-        height: 120px; /* Fixed height for equal spacing */
+        height: 120px;
       }
 
       .element-content {
@@ -518,7 +564,7 @@
       .element-title {
         font-size: 1.1rem;
         font-weight: 600;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0rem;
         font-family: monospace;
         color: #000;
       }
@@ -638,6 +684,12 @@
           height: 3rem;
         }
       }
+      .text {
+        font-size: 16px;
+        font-family: monospace;
+        text-align: center;
+        margin-top: 0;
+      }
     </style>
   </head>
   <body>
@@ -717,17 +769,15 @@
 
       <div class="visualization-container">
         <h2 class="title">Understanding Belonging</h2>
+        <p class="text">Click the fully integrated elements.</p>
 
         <div class="elements-container">
-          <div class="connecting-line"></div>
-
-          <!-- Elements will be inserted here by JavaScript -->
-
-          <div class="central-element">
-            <div class="central-circle">
-              <span>Belonging</span>
-            </div>
+          <div class="barometer">
+            <div class="barometer-fill"></div>
+            <div class="barometer-marker"></div>
+            <div class="belonging-score">Belonging: 0%</div>
           </div>
+          <!-- Elements will be inserted here by JavaScript -->
         </div>
 
         <p class="footer-text">
@@ -829,6 +879,8 @@
 
         // Add click handlers
         const iconContainers = document.querySelectorAll(".icon-container");
+        let activeCount = 0;
+
         iconContainers.forEach((icon) => {
           icon.addEventListener("click", () => {
             const id = icon.dataset.id;
@@ -837,10 +889,58 @@
             );
 
             // Toggle active state
-            icon.classList.toggle("active");
+            const isActive = icon.classList.toggle("active");
             content.classList.toggle("active");
+
+            // Update active count and belonging score
+            activeCount += isActive ? 1 : -1;
+            updateBelongingScore((activeCount / elements.length) * 100);
           });
         });
+
+        // Initialize barometer functionality
+        initializeBarometer();
+      }
+
+      function initializeBarometer() {
+        const barometer = document.querySelector(".barometer");
+        const marker = document.querySelector(".barometer-marker");
+        const fill = document.querySelector(".barometer-fill");
+        const score = document.querySelector(".belonging-score");
+        let isDragging = false;
+
+        marker.addEventListener("mousedown", (e) => {
+          isDragging = true;
+          document.addEventListener("mousemove", onDrag);
+          document.addEventListener("mouseup", stopDrag);
+        });
+
+        function onDrag(e) {
+          if (!isDragging) return;
+
+          const rect = barometer.getBoundingClientRect();
+          const y = Math.max(rect.top, Math.min(e.clientY, rect.bottom));
+          const percentage = (1 - (y - rect.top) / rect.height) * 100;
+
+          updateBelongingScore(percentage);
+        }
+
+        function stopDrag() {
+          isDragging = false;
+          document.removeEventListener("mousemove", onDrag);
+          document.removeEventListener("mouseup", stopDrag);
+        }
+      }
+
+      function updateBelongingScore(percentage) {
+        percentage = Math.max(0, Math.min(100, percentage));
+        const fill = document.querySelector(".barometer-fill");
+        const marker = document.querySelector(".barometer-marker");
+        const score = document.querySelector(".belonging-score");
+
+        fill.style.height = `${percentage}%`;
+        marker.style.bottom = `${percentage}%`;
+        score.textContent = `Belonging: ${Math.round(percentage)}%`;
       }
 
       // Initialize when DOM is loaded
