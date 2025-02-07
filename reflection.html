@@ -232,610 +232,543 @@
         left: 0;
       }
 
-      .reflective-container {
-        width: 80%;
-        max-width: 600px;
-        margin: 60px auto;
-        padding: 20px;
-        background: transparent;
-        border: 2px solid black;
-        border-radius: 10px;
-        box-shadow: 8px 8px 14px rgba(0, 0, 0, 0.6);
-        text-align: center;
+      .progress-container {
+        width: 90%;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+
+      .progress {
+        position: absolute;
+        height: 100%;
+        background-color: white;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+
+      .step-indicators {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .step {
+        font-size: clamp(12px, 1vw + 8px, 14px);
         color: black;
+        transition: color 0.3s ease;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .step::before {
+        content: attr(data-text);
+        display: block;
+      }
+
+      .step.active {
+        background-color: transparent;
+        color: black;
+        transform: translateY(-2px);
+        font-weight: bold;
+      }
+
+      /* Step Sections */
+      .step-section {
+        display: none;
+        width: 90%;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: transparent;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+      }
+
+      .step-section.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Typography */
+      h2 {
+        font-size: clamp(24px, 2vw + 16px, 32px);
+        color: black;
+        margin-bottom: 1rem;
         font-family: monospace;
+        text-align: center;
+      }
+
+      p {
+        font-size: clamp(16px, 1vw + 12px, 18px);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        color: #333;
+        font-family: monospace;
+        text-align: center;
+      }
+
+      /* Buttons */
+      .primary-btn {
+        padding: 1rem 1rem;
+        background-color: transparent;
+        color: black;
+        border: 2px solid black;
+        border-radius: 6px;
+        text-decoration: none;
+        font-family: monospace;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        font-size: clamp(14px, 1.2vw, 16px);
+        margin: 0.5rem auto;
+        display: block;
+      }
+
+      .primary-btn:hover {
+        background-color: #f5a7bf;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .primary-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
       }
 
-      .reflective-container p {
-        margin: 25px;
-        line-height: 1.6;
+      .primary-btn:hover::before {
+        transform: translateX(100%);
       }
 
-      .reflective-container:hover {
-        transform: scale(1.01);
-      }
-
-      .yes-btn {
-        padding: 8px 16px;
-        background: transparent;
-        color: black;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        white-space: nowrap;
-        border: 2px solid black;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
+      /* Breathing Animation */
+      .breathing-container {
+        width: 200px;
+        height: 200px;
+        margin: 2rem auto;
         position: relative;
-        backdrop-filter: blur(2px);
-        font-size: 14px;
-        font-family: monospace;
-      }
-
-      .yes-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      #breathing-circle {
-        position: absolute;
-        left: 50%;
-        top: 45%;
-        transform: translate(-50%, -50%);
-        width: 50px;
-        height: 50px;
-        background-color: rgba(255, 255, 255, 0.7);
-        border-radius: 50%;
-        margin: 0;
-        transform: scale(1);
-        transform-origin: center;
-        will-change: transform;
-        display: none;
-      }
-
-      .breathing-explanation {
-        position: relative;
-        z-index: 1;
-        margin-top: 400px;
-        text-align: center;
-        color: black;
-        font-family: monospace;
-        font-size: 1.2rem;
-        opacity: 0.8;
-        display: none;
-      }
-
-      .breathing-header {
-        display: none;
-        text-align: center;
-        margin-bottom: 0px;
-        font-family: monospace;
-        position: relative;
-        z-index: 1;
-      }
-
-      .breathing-header h1 {
-        font-size: 2rem;
-        margin-bottom: 15px;
-      }
-
-      h2 {
-        font-size: 2rem;
-        margin-bottom: 15px;
-        font-family: monospace;
-        text-align: center;
-      }
-
-      .breathing-header p,
-      .explanation {
-        font-size: 1rem;
-        opacity: 0.8;
-      }
-
-      .breathing-explanation p:first-child {
-        margin-bottom: 15px;
-        font-size: 0.7rem;
-        opacity: 1;
-        text-align: center;
-      }
-
-      #breathing-circle-container {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 400px;
-        position: relative;
-      }
-
-      #breathing-circle-container.hidden {
-        margin: 0;
-        min-height: 0;
-        display: none;
-      }
-
-      .continue-btn {
-        display: none;
-        margin-top: 40px;
-        padding: 8px 16px;
-        background: transparent;
-        color: black;
-        border: 2px solid black;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
-        position: relative;
-        backdrop-filter: blur(2px);
-        font-size: 14px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-family: monospace;
-        text-transform: uppercase;
-        z-index: 1;
-        margin-top: 20px;
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      #emotion-wheel-container {
-        display: none;
-        width: 80%;
-        height: 60vh;
-        position: relative;
-        margin: 20px auto;
-      }
-
-      .emotion-circle {
-        position: absolute;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: transparent;
-        border: 2px solid black;
         display: flex;
         align-items: center;
         justify-content: center;
-        cursor: pointer;
-        font-family: monospace;
-        font-size: 1.2rem;
-        transition: all 0.3s ease;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
       }
 
-      .emotion-circle:hover {
-        transform: scale(1.1);
-        background: rgba(255, 255, 255, 0.2);
+      .breathing-circle {
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(40, 2, 136, 0.2);
+        animation: breathe 14s infinite;
       }
 
-      .emotion-content {
-        display: none;
-        position: relative;
-        top: 0;
-        left: 0;
-        margin: 10px auto;
-        width: 80%;
-        max-width: 600px;
-        padding: 20px;
-        background: transparent;
-        border: 2px solid black;
-        border-radius: 5px;
-        box-shadow: 8px 8px 14px rgba(0, 0, 0, 0.6);
-        text-align: center;
-        font-family: monospace;
-        position: relative;
-      }
-
-      .emotion-content.active {
-        display: block;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-      }
-
-      .emotion-content h3 {
-        font-size: 2rem;
-        margin-bottom: 30px;
-      }
-
-      .emotion-content p {
-        max-width: 600px;
-        margin: 0 auto 30px;
-        line-height: 1.8;
-        font-size: 1.1rem;
-      }
-
-      .close-emotion {
+      .breathing-text {
         position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        z-index: 1001;
+        font-size: 1rem;
+        color: black;
+        text-align: center;
+        animation: breatheText 14s infinite;
+        font-family: monospace;
       }
 
-      .back-to-emotions {
-        margin-top: 40px;
-        padding: 12px 24px;
-        background: transparent;
+      @keyframes breathe {
+        /* Inhale - grow from 20px to 150px over 4 seconds */
+        0% {
+          transform: scale(1);
+          background: rgba(255, 255, 255, 0.9);
+        }
+        28.57% {
+          /* 4s */
+          transform: scale(7.5);
+          background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Hold - maintain size for 4 seconds */
+        28.57% {
+          transform: scale(7.5);
+          background: rgba(255, 255, 255, 0.9);
+        }
+        57.14% {
+          /* 8s */
+          transform: scale(7.5);
+          background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Exhale - shrink back to original size over 6 seconds */
+        57.14% {
+          transform: scale(7.5);
+          background: rgba(255, 255, 255, 0.9);
+        }
+        100% {
+          /* 14s */
+          transform: scale(1);
+          background: rgba(255, 255, 255, 0.9);
+        }
+      }
+
+      @keyframes breatheText {
+        0% {
+          opacity: 1;
+          content: "Inhale";
+        }
+        28.57% {
+          opacity: 1;
+        }
+        28.57% {
+          content: "Hold";
+        }
+        57.14% {
+          opacity: 1;
+        }
+        57.14% {
+          content: "Exhale";
+        }
+        95% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Emotion Grid */
+      .emotion-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .emotion-btn {
+        aspect-ratio: 1;
+        width: 100%;
+        max-width: 100px;
+        height: auto;
+        background-color: white;
+        border: 2px solid black;
+        color: black;
+        border-radius: 50%;
+        font-size: clamp(14px, 1vw + 12px, 16px);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        font-family: monospace;
+      }
+
+      .emotion-btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(245, 167, 191, 0.5);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.4s ease, height 0.4s ease;
+      }
+
+      .emotion-btn:hover {
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        background-color: #f5a7bf;
+        color: white;
+      }
+
+      .emotion-btn:hover::before {
+        width: 100%;
+        height: 100%;
+      }
+
+      .emotion-btn:active {
+        transform: scale(0.95) translateY(0);
+      }
+
+      .emotionCap {
+        font-size: clamp(24px, 2vw + 16px, 32px);
+        color: black;
+        margin-bottom: 1rem;
+        font-family: monospace;
+        text-align: left;
+        text-decoration: underline;
+        text-decoration-color: black;
+      }
+
+      .emotionWhy {
+        text-align: left;
+        line-height: 1.5;
+        letter-spacing: 0.5px;
+        max-width: 800px;
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+        font-size: clamp(15px, 1vw + 14px, 15px);
+        padding-left: 20px;
+      }
+
+      .emotionWhy strong {
+        font-style: bold;
+        margin: 25px 0;
+        padding: 5px;
+        border-left: 3px solid rgba(0, 0, 0, 0.5);
+      }
+
+      .emotion-highlight {
+        font-style: normal;
+        margin: 25px 0;
+        padding: 5px;
+        border-left: 3px solid rgba(0, 0, 0, 0.5);
+        font-size: clamp(12px, 0.5vw + 10px, 14px);
+      }
+
+      /* Duration and Environment Buttons */
+      .duration-buttons,
+      .environment-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+
+      .duration-btn,
+      .environment-btn {
+        flex: 1;
+        min-width: 150px;
+        max-width: 200px;
+        padding: 1rem;
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        font-family: monospace;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: clamp(14px, 1.2vw, 16px);
+      }
+
+      .duration-btn:hover,
+      .environment-btn:hover {
+        background-color: #f5a7bf;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Navigation Buttons */
+      .navigation-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .nav-btn {
+        padding: 0.5rem 0.5rem;
+        border: none;
+        border-radius: 6px;
+        font-size: clamp(14px, 1.2vw, 16px);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: transparent;
         color: black;
         border: 2px solid black;
-        border-radius: 4px;
-        cursor: pointer;
+        text-decoration: none;
         font-family: monospace;
-        font-size: 1.1rem;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
+        text-transform: uppercase;
+        position: relative;
+        overflow: hidden;
       }
 
-      .back-to-emotions:hover {
+      #navYesBtn:hover {
+        background-color: #f5a7bf;
+        color: white;
         transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.2);
       }
 
-      .option-container {
+      #navYesBtn {
+        background-color: transparent;
+        color: black;
+      }
+
+      #navNoBtn:hover {
+        background-color: #f5a7bf;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      #navNoBtn {
+        background-color: transparent;
+        color: black;
+      }
+
+      .action-list {
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-      }
-
-      .journey-option {
-        padding: 15px;
-        background: transparent;
-        border: 2px solid black;
-        border-radius: 25px;
-        cursor: pointer;
-        font-family: monospace;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(4px);
-      }
-
-      .journey-option:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: translateY(-2px);
-      }
-
-      .yes-no-btn {
-        padding: 8px 16px;
-        background: transparent;
-        color: black;
-        border: 2px solid black;
-        border-radius: 4px;
-        cursor: pointer;
-        font-family: monospace;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      .navigation-steps .yes-no-btn {
-        display: inline-block;
-        margin: 10px;
-        padding: 8px 16px;
-        background: transparent;
-        color: black;
-        border: 2px solid black;
-        border-radius: 4px;
-        cursor: pointer;
-        font-family: monospace;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      .navigation-steps .ye-no-btn:hover {
-        transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.2);
-      }
-      .navigation-steps p {
-        margin: 15px 0;
-        font-size: 1.1rem;
-        line-height: 1.7;
-        position: relative;
-        padding-left: 25px;
-      }
-
-      .navigation-steps p::before {
-        content: "•";
-        position: absolute;
-        left: 0;
-        color: rgba(0, 0, 0, 0.7);
-      }
-
-      #duration-question,
-      #environment-question,
-      [id^="navigate-"] {
-        width: 80%;
+        gap: 5px;
         max-width: 600px;
-        margin-bottom: 20px;
-        margin-top: 40px;
-        flex-direction: column;
-        align-items: center;
+        margin: 1rem auto;
       }
 
-      .navigation-result {
-        background: transparent;
-        border: 2px solid black;
-        padding: 30px;
-        margin-bottom: 20px;
-        margin-top: 40px;
-        max-width: 600px;
+      .action-item {
+        color: #333;
         font-family: monospace;
-        box-shadow: 8px 8px 14px rgba(0, 0, 0, 0.6);
-      }
-
-      .navigation-result h3 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-        text-align: center;
-      }
-
-      .navigation-result p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 20px;
-      }
-
-      .practice-section {
-        margin: 25px 0;
-        padding: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-      }
-
-      .practice-section h4 {
-        font-size: 1.2rem;
-        margin-bottom: 15px;
-      }
-
-      .practice-section ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      .practice-section li {
-        margin: 12px 0;
-        padding-left: 20px;
-        position: relative;
-      }
-
-      .practice-section li::before {
-        content: "•";
-        position: absolute;
-        left: 0;
-        color: rgba(0, 0, 0, 0.7);
       }
 
       .wisdom-note {
-        font-style: italic;
+        font-style: normal;
         margin: 25px 0;
-        padding: 15px;
+        padding: 5px;
         border-left: 3px solid rgba(0, 0, 0, 0.5);
+        font-size: clamp(12px, 0.5vw + 10px, 14px);
       }
 
-      .resources-btn {
-        display: block;
-        margin: 30px auto 0;
-        padding: 12px 24px;
-        background: transparent;
-        border: 2px solid black;
-        border-radius: 4px;
-        font-family: monospace;
-        font-size: 1.1rem;
-        cursor: pointer;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      .resources-btn:hover {
-        transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .reflection-outcome-container {
-        background: transparent;
-        border: 2px solid black;
-        border-radius: 10px;
-        padding: 30px;
-        margin: 40px auto;
-        max-width: 600px;
-        font-family: monospace;
-        box-shadow: 8px 8px 14px rgba(0, 0, 0, 0.6);
-      }
-
-      .reflection-outcome-container h3 {
-        font-size: 1.8rem;
-        margin-bottom: 25px;
-        text-align: center;
-      }
-
-      .outcome-summary {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 30px;
-        padding: 20px;
-        border-left: 3px solid rgba(0, 0, 0, 0.5);
-      }
-
-      .cta-container {
-        text-align: center;
-        margin-top: 30px;
-        padding: 20px;
-        border-top: 2px solid rgba(0, 0, 0, 0.2);
+      /* Outcome Section */
+      .outcome-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
       }
 
       .cta-text {
-        font-size: 1.2rem;
-        margin-bottom: 20px;
-      }
-
-      .cta-buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .cta-btn {
-        padding: 12px 24px;
-        background: transparent;
-        color: black;
-        border: 2px solid black;
-        border-radius: 4px;
-        cursor: pointer;
-        font-family: monospace;
-        font-size: 1.1rem;
-        text-decoration: none;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      .cta-btn:hover {
-        transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      /* Timeline Container */
-      .timeline-container {
-        width: 100%;
-        padding: 20px 10px;
-        margin: 0 auto;
-        max-width: 1200px;
-        position: relative;
-        z-index: 1000;
-      }
-
-      /* Enhanced Responsive Styles */
-      @media screen and (max-width: 768px) {
-        .emotion-circle {
-          width: 80px;
-          height: 80px;
-          font-size: 1rem;
-        }
-
-        .reflective-container {
-          width: 90%;
-          margin: 40px auto;
-        }
-
-        .emotion-content {
-          width: 90%;
-          margin: 10px auto;
-        }
-        .progress-container {
-          gap: 8px;
-          padding: 15px 5px;
-        }
-        .step-number {
-          width: 28px;
-          height: 28px;
-          font-size: 13px;
-        }
-      }
-
-      @media screen and (max-width: 480px) {
-        .emotion-circle {
-          width: 60px;
-          height: 60px;
-          font-size: 0.9rem;
-        }
-
-        .breathing-circle {
-          max-width: 200px;
-          max-height: 200px;
-        }
-      }
-
-      /* Accessibility Improvements */
-      @media (prefers-reduced-motion: reduce) {
-        .breathing-circle,
-        .emotion-circle,
-        .nav-button {
-          transition: none;
-        }
-      }
-
-      .progress-container {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        padding: 20px 10px;
-        position: relative;
-        z-index: 1000;
-        background: transparent;
-        overflow-x: auto;
-      }
-
-      .progress-step {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-        opacity: 0.3;
-        flex-shrink: 0;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-      }
-
-      .progress-step:hover {
-        transform: scale(1.1);
-      }
-
-      .progress-step.active {
-        opacity: 1;
-        cursor: default;
-      }
-
-      .step-number {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: black;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: monospace;
-        font-size: 14px;
-        border: 2px solid black;
-      }
-
-      .step-label {
-        font-size: 12px;
         text-align: center;
-        color: black;
-        display: none;
-        font-family: monospace;
-        white-space: nowrap;
+        font-weight: bold;
+        margin: 2rem 0;
       }
 
-      @media (min-width: 768px) {
-        .progress-container {
-          gap: 20px;
+      /* Hidden Content */
+      .emotion-explanation,
+      .navigation-content,
+      .action-content {
+        display: none;
+      }
+
+      .emotion-explanation.active,
+      .navigation-content.active,
+      .action-content.active {
+        display: block;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .step-indicators {
+          font-size: clamp(10px, 0.8vw + 8px, 12px);
         }
-        .step-label {
-          display: block;
-          font-size: 14px;
+
+        .step-section {
+          padding: 1.5rem;
         }
-        .step-number {
-          width: 25px;
-          height: 25px;
+
+        .step::before {
+          display: none;
+        }
+
+        .step {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
           font-size: 12px;
+          color: rgba(0, 0, 0, 0.6);
+        }
+
+        .step.active {
+          background: rgb(71, 1, 71);
+          color: white;
+        }
+
+        .emotion-grid {
+          gap: 0.75rem;
+          padding: 0.75rem;
+        }
+
+        .emotion-btn {
+          max-width: 100px;
+        }
+
+        .navigation-buttons {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .nav-btn {
+          width: 100%;
         }
       }
 
       @media (max-width: 480px) {
-        .progress-container {
-          gap: 4px;
+        .primary-btn {
+          width: 100%;
+          margin: 0.5rem 0;
         }
-        .step-number {
-          width: 25px;
-          height: 25px;
-          font-size: 12px;
+
+        .duration-btn,
+        .environment-btn {
+          min-width: 100%;
+        }
+
+        .outcome-buttons {
+          flex-direction: column;
+        }
+
+        .step-indicators {
+          gap: 0.25rem;
+        }
+
+        .step {
+          width: 20px;
+          height: 20px;
+          font-size: 10px;
+        }
+
+        .emotion-grid {
+          gap: 0.5rem;
+          padding: 0.5rem;
+        }
+
+        .emotion-btn {
+          max-width: 90px;
+          font-size: clamp(12px, 1vw + 8px, 14px);
         }
       }
     </style>
@@ -859,543 +792,493 @@
     </nav>
 
     <div class="horizontal-line"></div>
-
-    <div class="progress-container">
-      <div class="progress-step" data-step="1" data-target="start">
-        <div class="step-number">1</div>
-        <div class="step-label">Start</div>
-      </div>
-      <div class="progress-step" data-step="2" data-target="breathing">
-        <div class="step-number">2</div>
-        <div class="step-label">Breathing</div>
-      </div>
-      <div class="progress-step" data-step="3" data-target="emotion-selection">
-        <div class="step-number">3</div>
-        <div class="step-label">Emotion</div>
-      </div>
-      <div
-        class="progress-step"
-        data-step="4"
-        data-target="emotion-explanation"
-      >
-        <div class="step-number">4</div>
-        <div class="step-label">Explanation</div>
-      </div>
-      <div class="progress-step" data-step="5" data-target="duration">
-        <div class="step-number">5</div>
-        <div class="step-label">Duration</div>
-      </div>
-      <div class="progress-step" data-step="6" data-target="environment">
-        <div class="step-number">6</div>
-        <div class="step-label">Environment</div>
-      </div>
-      <div class="progress-step" data-step="7" data-target="navigation">
-        <div class="step-number">7</div>
-        <div class="step-label">Navigation</div>
-      </div>
-      <div class="progress-step" data-step="8" data-target="action">
-        <div class="step-number">8</div>
-        <div class="step-label">Action</div>
-      </div>
-      <div class="progress-step" data-step="9" data-target="outcome">
-        <div class="step-number">9</div>
-        <div class="step-label">Outcome</div>
-      </div>
-    </div>
-    <div class="reflective-container">
-      <p>
-        This is your reflective space.
-        <strong>The Pain We Ignore Shapes Our World!</strong>
-        How is your world shaped? It takes less than 10 minutes to explore.
-      </p>
-      <p>Are you ready to start?</p>
-      <button class="yes-btn">YES</button>
-    </div>
-
-    <div id="breathing-circle-container" class="hidden">
-      <div class="breathing-header">
-        <h1>Take a Moment to Connect</h1>
-        <p>Let the circle guide your breath</p>
-        <br />
-        <p>Whenever you feel grounded and ready to reflect ↓CONTINUE</p>
-      </div>
-      <div id="breathing-circle"></div>
-      <div class="breathing-explanation">
-        <p>Inhale for 4 seconds → Hold for 4 seconds → Exhale for 6 seconds</p>
-      </div>
-      <button class="continue-btn btn">Continue</button>
-    </div>
-
-    <div id="emotion-wheel-container" class="hidden">
-      <h2>How do you feel now?</h2>
-      <div
-        class="emotion-circle"
-        data-emotion="lost"
-        style="top: 25%; left: 50%; transform: translateX(-50%)"
-      >
-        Lost
-      </div>
-      <div
-        class="emotion-circle"
-        data-emotion="lonely"
-        style="top: 35%; right: 30%"
-      >
-        Lonely
-      </div>
-      <div
-        class="emotion-circle"
-        data-emotion="ashamed"
-        style="bottom: 25%; right: 30%"
-      >
-        Ashamed
-      </div>
-      <div
-        class="emotion-circle"
-        data-emotion="guilty"
-        style="bottom: 15%; left: 50%; transform: translateX(-50%)"
-      >
-        Guilty
-      </div>
-      <div
-        class="emotion-circle"
-        data-emotion="angry"
-        style="bottom: 25%; left: 30%"
-      >
-        Angry
-      </div>
-      <div
-        class="emotion-circle"
-        data-emotion="afraid"
-        style="top: 35%; left: 30%"
-      >
-        Afraid
-      </div>
-    </div>
-
-    <!-- Emotion content modals -->
-    <div id="lost-content" class="emotion-content">
-      <span class="close-emotion">×</span>
-      <h3>What makes us feel lost</h3>
-      <p>
-        When life pivots—careers change, parenthood begins, identities shift—the
-        world tilts. Suddenly, you’re scrambling for footing as familiar rhythms
-        dissolve.<br /><br />
-        It’s not just milestones. Daily tremors hit too: rent spikes, unstable
-        jobs, fading connections. Your mind races—Should I move? Quit?
-        Stay?—while navigating a city with no street signs.<br /><br />
-        Your body rebels—tense shoulders, restless exhaustion, fractured sleep
-        filled with missed trains and unprepared exams.
-      </p>
-      <button class="back-to-emotions">Reclaim Your Compass</button>
-    </div>
-
-    <div id="lonely-content" class="emotion-content">
-      <span class="close-emotion">×</span>
-      <h3>What makes us feel lonely</h3>
-      <p>
-        It’s feeling unseen in a crowd, shouting into voids where no one hears
-        the real you.<br /><br />
-        Remote life blurs into days where your only chat is with a barista.
-        Friendships become forgotten.<br /><br />
-        Your body betrays it: shoulders tight as guitar strings, avoiding
-        mirrors to escape your own hollow stare.<br /><br />
-        The irony? We’re all craving connection but too drained—or afraid—to
-        admit it. Third wheels in our own lives, dancing alone together.
-      </p>
-      <button class="back-to-emotions">Break the Silence</button>
-    </div>
-
-    <div id="ashamed-content" class="emotion-content">
-      <span class="close-emotion">×</span>
-      <h3>What Makes Us Feel Ashamed</h3>
-      <p>
-        Ever tripped over your words and suddenly you’re convinced the whole
-        world’s cringing at you?<br /><br />
-        Shame’s that voice in your head that goes, “Yikes, you really messed
-        up—better hide.” Your body goes full turtle mode: gaze locked on the
-        floor, shoulders hunched like you’re trying to fold into a paper
-        airplane, breath shallow like you’re hoping no one notices you exist.<br /><br />
-        Maybe you over-apologize or laugh too loud. And that soundtrack of “not
-        good enough”? It’s on repeat, louder than your AirPods. Shame loves to
-        convince us we’re the only ones. It’s lying.
-      </p>
-      <button class="back-to-emotions">Reclaim Your Radiance</button>
-    </div>
-
-    <div id="guilty-content" class="emotion-content">
-      <span class="close-emotion">×</span>
-      <h3>What Makes Us Feel Guilty</h3>
-      <p>
-        Guilt is that suffocating weight when you’ve fallen short—even
-        silently.<br /><br />
-        It’s not just “bad” actions. It’s childhood rules drilled into you (“Be
-        polite!”) or that inner critic snarling “You failed” as you’re already
-        drained. Your body rebels: throat tight, eyes avoiding the person you
-        hurt, “sorry” tumbling out mid-sentence.<br /><br />
-        Yet guilt reveals humanity. (Psychopaths don’t agonize over forgotten
-        birthdays.) That visceral ache? It’s empathy.
-      </p>
-      <button class="back-to-emotions">Liberate Your Worth</button>
-    </div>
-
-    <div id="angry-content" class="emotion-content">
-      <span class="close-emotion">×</span>
-      <h3>What Makes Us Feel Angry</h3>
-      <p>
-        You ever bite your tongue while someoen dismissing your idea (AGAIN)
-        that makes whole body goes full volcano mode? Anger’s not just “being
-        mad”—it’s your brain screaming, “HEY, THIS ISN’T OKAY.” It’s that
-        childhood bruise when no one stood up for you, or years of swallowing
-        “fine” when you meant “screw this.” It’s your boundaries doing push-ups,
-        begging to be taken seriously.<br /><br />
-        Your body turns into a live wire: jaw clenched like a vice, fists tight
-        enough to crack walnuts, breath sharp and hot. <br /><br />
-        Here’s the secret: Anger’s just pain with a megaphone.
-      </p>
-      <button class="back-to-emotions">Transform the Flame</button>
-    </div>
-
-    <div id="afraid-content" class="emotion-content">
-      <span class="close-emotion">×</span>
-      <h3>What Makes Us Feel Afraid</h3>
-      <p>
-        “What if they hate me?” suddenly feels like a life-or-death question?
-        Fear’s not just horror movies—it’s that sinking dread when the future
-        feels like a dark hallway.<br /><br />
-        Maybe it’s rent hikes swallowing your paycheck, a doctor’s call you’re
-        too scared to answer. Your body goes full alarm system: chest buzzing,
-        eyes wide, legs itching to bolt even when you’re just… sitting there.<br /><br />
-        Fear’s sneaky like that. It’s old scars hissing “Don’t get hurt again,”
-        mixed with new what-ifs like “Will I ever feel safe?” It’s the
-        helplessness when the world’s on fire and you’re holding a teacup of
-        water.
-      </p>
-      <button class="back-to-emotions">Reclaim Your Power</button>
-    </div>
-
-    <div id="duration-question" class="emotion-content hidden">
-      <span class="close-emotion">×</span>
-      <h3>
-        Have you noticed how long have you been aware that you feel like this?
-      </h3>
-      <div class="option-container">
-        <button class="journey-option" data-next="environment-question">
-          Recent Emergence
-        </button>
-        <button class="journey-option" data-next="environment-question">
-          Gradual Accumulation (Past Year)
-        </button>
-        <button class="journey-option" data-next="environment-question">
-          Persistent Pattern
-        </button>
-      </div>
-    </div>
-
-    <div id="environment-question" class="emotion-content hidden">
-      <span class="close-emotion">×</span>
-      <h3>Have you noticed which environment stimulates this feeling?</h3>
-      <div class="option-container">
-        <button class="journey-option">Professional Ecosystem</button>
-        <button class="journey-option">Family Dynamics</button>
-        <button class="journey-option">Social Interactions</button>
-      </div>
-    </div>
-
-    <!-- Lost Navigation -->
-    <div id="navigate-lost" class="emotion-content hidden">
-      <span class="close-emotion">×</span>
-      <h3>When disorientation becomes your compass...</h3>
-      <p>
-        When disorientation becomes your compass...Your feeling of being lost
-        whispers profound truths. It's not a weakness, but a call for
-        realignment—an invitation to reconnect. The underlying needs of feeling
-        lost are clarity of purpose, personal agency, sense of direction,
-        self-understanding and meaningful goals.
-      </p>
-      <br />
-      <p>Ask yourself:</p>
-      <p>Can you sense the clarity of your current path?</p>
-      <p>Do you feel empowered in your relationships?</p>
-      <button class="yes-no-btn">yes</button>
-      <button class="yes-no-btn">no</button>
-    </div>
-
-    <!-- Lonely Navigation -->
-    <div id="navigate-lonely" class="emotion-content hidden">
-      <span class="close-emotion">×</span>
-      <h3>When silence becomes the loudest voice...</h3>
-      <p>
-        Your loneliness is not a void, but a profound messenger. It speaks of
-        unmet needs, hidden yearnings for genuine connection. The underlying
-        needs of loneliness are meaningful connection, authentic relationships,
-        emotional validation, sense of belonging and interpersonal
-        understanding.
-      </p>
-      <br />
-      <p>Ask yourself:</p>
-      <p>Do your current connections truly see you?</p>
-      <p>When you speak, do you feel genuinely heard?</p>
-      <button class="yes-no-btn">yes</button>
-      <button class="yes-no-btn">no</button>
-    </div>
-
-    <!-- Ashamed Navigation -->
-    <div id="navigate-ashamed" class="emotion-content hidden">
-      <span class="close-emotion">×</span>
-      <h3>When the ground beneath you feels treacherous...</h3>
-      <p>
-        Your shame carries wisdom. It's not a flaw, but a tender invitation to
-        radical self-acceptance. The underlying needs of shame are self-worth
-        recognition, healing your childhood wounds and self-expression.
-      </p>
-      <br />
-      <p>Ask yourself:</p>
-      <p>Can I embrace every fragment of my being?</p>
-      <p>Do I believe in my inherent worthiness?</p>
-      <button class="yes-no-btn">yes</button>
-      <button class="yes-no-btn">no</button>
-    </div>
-
-    <!-- Guilty Navigation -->
-    <div id="navigate-guilty" class="emotion-content hidden">
-      <span class="close-emotion">×</span>
-      <h3>When moral pull at your footing...</h3>
-      <p>
-        Your guilt is not a flaw, but a profound messenger. It emerges from a
-        deep well of empathy, moral sensitivity, and a desire for integrity.The
-        underlying needs of guilt are self-forgiveness, realistic expectations,
-        setting up healthy boundaries, establishing emotional integrity and
-        self- compassion.
-      </p>
-      <br />
-      <p>Ask yourself:</p>
-      <p>Do I truly believe I deserve wholeness?</p>
-      <p>Can I honor my right to say “no”?</p>
-      <button class="yes-no-btn">yes</button>
-      <button class="yes-no-btn">no</button>
-    </div>
-
-    <!-- Angry Navigation -->
-    <div id="navigate-angry" class="emotion-content hidden">
-      <span class="close-emotion">×</span>
-      <h3>When heat seeks expression...</h3>
-      <p>
-        Your anger whispers profound truths. It's not a weakness, but a sacred
-        signal—an invitation to realign and reclaim your power. The underlying
-        needs of anger are respect, healthy boundaries, emotional safety,
-        justice and fairness and a space where you can have agency.
-      </p>
-      <br />
-      <p>Ask yourself:</p>
-      <p>Do others truly respect my decisions?</p>
-      <p>Can I act with authentic autonomy?</p>
-      <button class="yes-no-btn">yes</button>
-      <button class="yes-no-btn">no</button>
-    </div>
-
-    <!-- Afraid Navigation -->
-    <div id="navigate-afraid" class="emotion-content hidden">
-      <span class="close-emotion">×</span>
-      <h3>When visibility drops to zero...</h3>
-      <p>
-        Your feeling of fear whispers profound truths. It's not a weakness, but
-        a call for realignment—an invitation to reconnect with your inner
-        compass. The underlying needs of fear are safety, predictability,
-        self-trust, emotional regulation and personal empowerment.
-      </p>
-      <br />
-      <p>Ask yourself</p>
-      <p>Can I sense my inner trust?</p>
-      <p>Can I recall the whispers of confidence?</p>
-      <button class="yes-no-btn">yes</button>
-      <button class="yes-no-btn">no</button>
-    </div>
-
-    <div
-      id="navigate-lost-yes"
-      class="emotion-content navigation-result hidden"
-    >
-      <span class="close-emotion">×</span>
-      <h3>YES is the place you want to be at!</h3>
-      <p>
-        Your purpose is not a fixed destination, but a living, breathing
-        landscape. It shifts as you evolve, breathe, transform. No emotional
-        state is permanent—you are constantly becoming.
-      </p>
-      <div class="practice-section">
-        <h4>Gentle Exploration Practices:</h4>
-        <ul>
-          <li>Identify your current core values</li>
-          <li>Craft a flexible life vision</li>
-          <li>Make one intentional decision today</li>
-          <li>Acknowledge your courage in showing up</li>
-        </ul>
-      </div>
-      <p class="wisdom-note">
-        Wisdom lives in the uncertainty. Your feeling of being lost is actually
-        a profound readiness for emergence.
-      </p>
-      <button class="resources-btn">Your Reflecion Outcome</button>
-    </div>
-
-    <div
-      id="navigate-lonely-yes"
-      class="emotion-content navigation-result hidden"
-    >
-      <span class="close-emotion">×</span>
-      <h3>YES is the place you want to be at!</h3>
-      <p>
-        Your social landscape is dynamic. Connections evolve as you transform,
-        breathing new life into relationships.
-      </p>
-      <div class="practice-section">
-        <h4>Courageous Next Steps:</h4>
-        <ul>
-          <li>Embrace vulnerability</li>
-          <li>Share your inner experience</li>
-          <li>Create intentional connections</li>
-          <li>Cultivate self-compassion</li>
-        </ul>
-      </div>
-      <p class="wisdom-note">
-        Vulnerability is your bridge. Each honest conversation is a step toward
-        deeper belonging.
-      </p>
-      <button class="resources-btn">Your Reflecion Outcome</button>
-    </div>
-
-    <div
-      id="navigate-afraid-yes"
-      class="emotion-content navigation-result hidden"
-    >
-      <span class="close-emotion">×</span>
-      <h3>YES is the place you want to be at!</h3>
-      <p>
-        Fear is a fluid state, shapeshifting with your evolution. No emotional
-        landscape remains static.
-      </p>
-      <div class="practice-section">
-        <h4>Courageous Exploration:</h4>
-        <ul>
-          <li>Develop trust practices</li>
-          <li>Create personal safety mechanisms</li>
-          <li>Practice vulnerable communication</li>
-          <li>Challenge negative thought patterns</li>
-          <li>Build emotional resilience</li>
-        </ul>
-      </div>
-      <p class="wisdom-note">
-        Your vulnerability is your greatest strength. Each trembling step is an
-        act of profound courage.
-      </p>
-      <button class="resources-btn">Your Reflecion Outcome</button>
-    </div>
-
-    <div
-      id="navigate-guilty-yes"
-      class="emotion-content navigation-result hidden"
-    >
-      <span class="close-emotion">×</span>
-      <h3>YES is the place you want to be at!</h3>
-      <p>
-        Your emotional states are fluid—constantly shifting, growing,
-        transforming. What feels immovable today will reshape tomorrow.
-      </p>
-      <div class="practice-section">
-        <h4>Healing Pathways:</h4>
-        <ul>
-          <li>Examine your internal standards</li>
-          <li>Recognize self-sabotaging patterns</li>
-          <li>Offer yourself radical compassion</li>
-          <li>Make genuine amends where necessary</li>
-          <li>
-            Understand: you were doing your best with the knowledge you had
-          </li>
-        </ul>
-      </div>
-      <p class="wisdom-note">
-        Guilt whispers: "You care deeply." Listen, but don't let it define you.
-      </p>
-      <button class="resources-btn">Your Reflecion Outcome</button>
-    </div>
-
-    <div
-      id="navigate-ashamed-yes"
-      class="emotion-content navigation-result hidden"
-    >
-      <span class="close-emotion">×</span>
-      <h3>YES is the place you want to be at!</h3>
-      <p>
-        Your emotional states are fluid—constantly shifting, evolving,
-        transforming. No experience is permanent.
-      </p>
-      <div class="practice-section">
-        <h4>Compassionate Practices:</h4>
-        <ul>
-          <li>Challenge negative self-narratives</li>
-          <li>Observe your inner dialogue</li>
-          <li>Extend self-compassion</li>
-          <li>Share vulnerably with trusted companions</li>
-          <li>Cultivate a loving self-image</li>
-        </ul>
-      </div>
-      <p class="wisdom-note">Shame whispers. Your worthiness roars.</p>
-      <button class="resources-btn">Your Reflecion Outcome</button>
-    </div>
-
-    <div
-      id="navigate-angry-yes"
-      class="emotion-content navigation-result hidden"
-    >
-      <span class="close-emotion">×</span>
-      <h3>YES is the place you want to be at!</h3>
-      <p>
-        Anger is not an enemy, but a messenger. It reveals where your boundaries
-        have been crossed, where your voice needs to be heard.
-      </p>
-      <div class="practice-section">
-        <h4>Transformative Practices:</h4>
-        <ul>
-          <li>Identify underlying triggers</li>
-          <li>Develop nuanced communication</li>
-          <li>Express boundaries with clarity</li>
-          <li>Channel energy constructively</li>
-          <li>Cultivate emotional intelligence</li>
-        </ul>
-      </div>
-      <p class="wisdom-note">
-        Your emotional landscape is fluid. As you change, your relationship with
-        anger transforms.
-      </p>
-      <button class="resources-btn">Your Reflecion Outcome</button>
-    </div>
-
-    <div class="reflection-outcome-container hidden">
-      <h3>Your Reflection Outcome</h3>
-      <div class="outcome-summary"></div>
-
-      <div class="cta-container">
-        <p class="cta-text">Ready to explore your reflection deeper?</p>
-        <div class="cta-buttons">
-          <a
-            href="https://calendly.com/brankeey/30min"
-            target="_blank"
-            class="cta-btn book-session"
-          >
-            Book a Session
-          </a>
-          <a href="keyResources.html" class="cta-btn explore-resources">
-            Explore KEY Resources
-          </a>
+    <main class="main-content">
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <div class="step-indicators">
+          <span class="step active" data-step="1" data-text="">1</span>
+          <span class="step" data-step="2" data-text="">2</span>
+          <span class="step" data-step="3" data-text="">3</span>
+          <span class="step" data-step="4" data-text="">4</span>
+          <span class="step" data-step="5" data-text="">5</span>
+          <span class="step" data-step="6" data-text="">6</span>
+          <span class="step" data-step="7" data-text="">7</span>
+          <span class="step" data-step="8" data-text="">8</span>
+          <span class="step" data-step="9" data-text="">9</span>
         </div>
       </div>
-    </div>
 
-    <div class="demo-container">
-      <div class="logo-pulse">
-        BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
+      <!-- Step 1: Start -->
+      <section id="step1" class="step-section active">
+        <h2>Welcome to Your Reflection Space</h2>
+        <br />
+        <p>
+          This is your judgment-free zone where only you walk. No one has access
+          to this space but you. The complete process may take less then 10
+          minutes. Start when you feel ready.
+        </p>
+        <button class="primary-btn" id="startBtn">START</button>
+      </section>
+
+      <!-- Step 2: Breathing -->
+      <section id="step2" class="step-section">
+        <h2>Let's Begin with Breathing</h2>
+        <p>
+          Take a moment. Connect. Let the circle guide you. <br />Continue when
+          you feel ready.
+        </p>
+        <div class="breathing-container">
+          <div class="breathing-circle"></div>
+          <div class="breathing-text">Inhale</div>
+        </div>
+        <button class="primary-btn" id="breathingBtn">CONTINUE</button>
+      </section>
+
+      <!-- Step 3: Emotions -->
+      <section id="step3" class="step-section">
+        <h2>How do you feel now?</h2>
+        <p>Select the emotion that resonates most with you right now:</p>
+        <div class="emotion-grid">
+          <button class="emotion-btn" data-emotion="lost">Lost</button>
+          <button class="emotion-btn" data-emotion="lonely">Lonely</button>
+          <button class="emotion-btn" data-emotion="ashamed">Ashamed</button>
+          <button class="emotion-btn" data-emotion="guilty">Guilty</button>
+          <button class="emotion-btn" data-emotion="angry">Angry</button>
+          <button class="emotion-btn" data-emotion="afraid">Afraid</button>
+        </div>
+      </section>
+
+      <!-- Step 4: Explanation -->
+      <section id="step4" class="step-section">
+        <div id="lost-explanation" class="emotion-explanation">
+          <h2 class="emotionCap">Feeling Lost</h2>
+          <p class="emotionWhy">
+            It's natural to feel uncertain about directions. This feeling often
+            emerges when we're transitioning or seeking deeper meaning. And it's
+            not just milestones. It's daily life: rent spikes, unstable jobs,
+            fading connections.<br /><br />
+            <strong>... Should I move? ... Quit? ... Stay? ...</strong>
+            <br /><br />Your body rebels too. Your shoulders tense, restless
+            exhaustion, fractured sleep filled with missed trains and unprepared
+            exams.<br /><br />
+            <span class="emotion-highlight"
+              >Not an easy step but you did it. The emotion feels more tangible
+              now!? You've recognized and named it. In the next moments, let's
+              explore some of its triggers. This will make the unaware reaction
+              to an aware response.</span
+            >
+          </p>
+        </div>
+        <div id="lonely-explanation" class="emotion-explanation">
+          <h2 class="emotionCap">Feeling Lonely</h2>
+          <p class="emotionWhy">
+            The city pulses around you, yet silence echoes. Crowds move like
+            rivers, but you stand still. Connections feel like distant whispers:
+            texts left unread, invitations declined, conversations that never
+            quite connect.<br /><br />
+            <strong
+              >... Am I forgettable? ... Does anyone truly see me? ...</strong
+            ><br /><br />
+            Your body carries this isolation: hunched shoulders, a quiet
+            apartment, meals for one. Social media scrolls connection that never
+            quite fills the void. It's not just absence—it's a active, consuming
+            presence.<br /><br />
+            <span class="emotion-highlight"
+              >Not an easy step but you did it. The emotion feels more tangible
+              now!? You've recognized and named it. In the next moments, let's
+              explore some of its triggers. This will make the unaware reaction
+              to an aware response.</span
+            >
+          </p>
+        </div>
+        <div id="ashamed-explanation" class="emotion-explanation">
+          <h2 class="emotionCap">Feeling Ashamed</h2>
+          <p class="emotionWhy">
+            Shame crawls beneath your skin, a persistent shadow. It's born from
+            moments replayed: conversations you wish you'd handled differently,
+            choices that haunt you, perceived failures that loop in your
+            mind.<br /><br />
+            <strong
+              >... What will they think of me? ... They hate me! ...</strong
+            ><br /><br />
+            Your body remembers—cheeks flush, eyes avoid contact, breath becomes
+            shallow. Shame isn't just an emotion; it's a narrative you've
+            internalized, a harsh internal judge that sits in every room with
+            you.<br /><br />
+            <span class="emotion-highlight"
+              >Not an easy step but you did it. The emotion feels more tangible
+              now!? You've recognized and named it. In the next moments, let's
+              explore some of its triggers. This will make the unaware reaction
+              to an aware response.</span
+            >
+          </p>
+        </div>
+        <div id="guilty-explanation" class="emotion-explanation">
+          <h2 class="emotionCap">Feeling Guilty</h2>
+          <p class="emotionWhy">
+            Guilt is a weight that sits heavy in your chest, a constant reminder
+            of perceived shortcomings. It emerges from unmet expectations,
+            broken promises, moments where you feel you've fallen short of your
+            own standards.<br /><br />
+            <strong
+              >... Did I do enough? ... Am I letting people down? ...</strong
+            ><br /><br />
+            Your muscles tense, sleep becomes fragmented. Guilt whispers in
+            quiet moments, replaying scenarios where you believe you could have
+            done more, been more, given more. It's an emotion that demands
+            constant negotiation with yourself.<br /><br />
+            <span class="emotion-highlight"
+              >Not an easy step but you did it. The emotion feels more tangible
+              now!? You've recognized and named it. In the next moments, let's
+              explore some of its triggers. This will make the unaware reaction
+              to an aware response.</span
+            >
+          </p>
+        </div>
+        <div id="angry-explanation" class="emotion-explanation">
+          <h2 class="emotionCap">Feeling Angry</h2>
+          <p class="emotionWhy">
+            Anger surges like an underground current- electric and
+            unpredictable. It's born from repeated violations, systemic
+            frustrations, personal boundaries constantly pushed and ignored.<br /><br />
+            <strong>... Why does this keep happening? ... </strong><br /><br />
+            Your body becomes a pressure cooker: clenched jaw, tight fists,
+            rapid heartbeat. Anger isn't just an emotion—it's a signal, a primal
+            communication that something fundamental needs immediate
+            attention.<br /><br />
+            <span class="emotion-highlight"
+              >Not an easy step but you did it. The emotion feels more tangible
+              now!? You've recognized and named it. In the next moments, let's
+              explore some of its triggers. This will make the unaware reaction
+              to an aware response.</span
+            >
+          </p>
+        </div>
+        <div id="afraid-explanation" class="emotion-explanation">
+          <h2 class="emotionCap">Feeling Afraid</h2>
+          <p class="emotionWhy">
+            Fear operates like an invisible architecture, constructing walls and
+            limitations around your potential. It emerges from uncertainty, past
+            wounds, and the vast unknown that stretches before you.<br /><br />
+            <strong
+              >... What if I fail? ... What if everything falls apart?
+              ...</strong
+            ><br /><br />
+            Your nervous system becomes a constant alert system: shallow
+            breathing, hyper-vigilance, muscles ready to contract. Fear isn't
+            weakness—it's your body's sophisticated protection mechanism,
+            mapping potential threats in a complex world.<br /><br />
+            <span class="emotion-highlight"
+              >Not an easy step but you did it. The emotion feels more tangible
+              now!? You've recognized and named it. In the next moments, let's
+              explore some of its triggers. This will make the unaware reaction
+              to an aware response.</span
+            >
+          </p>
+        </div>
+        <button class="primary-btn" id="explanationBtn">LET'S GO</button>
+      </section>
+
+      <!-- Step 5: Duration -->
+      <section id="step5" class="step-section">
+        <h2>How Long Have You Felt This Way?</h2>
+        <p>
+          Understanding the timeline can help provide context to your
+          experience.
+        </p>
+        <div class="duration-buttons">
+          <button class="duration-btn">Recently</button>
+          <button class="duration-btn">For Some Time</button>
+          <button class="duration-btn">For a Long Time</button>
+        </div>
+      </section>
+
+      <!-- Step 6: Environment -->
+      <section id="step6" class="step-section">
+        <h2>Where Do You Experience This Most?</h2>
+        <p>
+          Your environment can significantly impact your emotional experience.
+        </p>
+        <div class="environment-buttons">
+          <button class="environment-btn">At Home</button>
+          <button class="environment-btn">At Work</button>
+          <button class="environment-btn">In Social Settings</button>
+        </div>
+      </section>
+
+      <!-- Step 7: Navigation -->
+      <section id="step7" class="step-section">
+        <div id="lost-navigation" class="navigation-content">
+          <h2 class="emotionCap">Finding Your Direction</h2>
+          <p class="emotionWhy">
+            This disorientation is your compass... It's not a weakness, but an
+            opportunity to realign— an invitation to reconnect. The underlying
+            needs of lost are clarity of purpose, personal agency, sense of
+            direction, self-understanding and meaningful goals.
+            <br /><br /><strong>Reflect:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Can I sense where I'm going?</span>
+              <span class="action-item">→ Do I want that?</span>
+              <span class="action-item"
+                >→ Do I feel empowered in my relationships?</span
+              >
+            </span>
+          </p>
+        </div>
+        <div id="lonely-navigation" class="navigation-content">
+          <h2 class="emotionCap">Building Connections</h2>
+          <p class="emotionWhy">
+            Your loneliness is not a void, but a profound messenger. It speaks
+            of unmet needs, hidden yearnings for genuine connection. The
+            underlying needs of loneliness are meaningful connection, authentic
+            relationships, emotional validation, sense of belonging and
+            interpersonal understanding.
+            <br /><br /><strong>Reflect:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Do my connections see me?</span>
+              <span class="action-item">→ Do I feel heard?</span>
+              <span class="action-item">→ Are my feelings validated?</span>
+            </span>
+          </p>
+        </div>
+        <div id="ashamed-navigation" class="navigation-content">
+          <h2 class="emotionCap">Embracing Self-Compassion</h2>
+          <p class="emotionWhy">
+            Your shame carries wisdom. It's not a flaw, but a tender invitation
+            to radical self-acceptance. The underlying needs of shame are
+            self-worth recognition, healing your childhood wounds and
+            self-expression.
+            <br /><br /><strong>Reflect:</strong>
+            <span class="action-list">
+              <span class="action-item"
+                >→ Do I embrace every version of myself?</span
+              >
+              <span class="action-item">→ Am I ... (worthy)?</span>
+              <span class="action-item">→ Can I forgive myself?</span>
+            </span>
+          </p>
+        </div>
+        <div id="guilty-navigation" class="navigation-content">
+          <h2 class="emotionCap">Understanding Responsibility</h2>
+          <p class="emotionWhy">
+            Your guilt is not a flaw, but your messenger. It emerges from a deep
+            well of empathy, moral sensitivity, and a desire for integrity.The
+            underlying needs of guilt are self-forgiveness, realistic
+            expectations, setting up healthy boundaries, establishing emotional
+            integrity and self- compassion.
+            <br /><br /><strong>Reflect:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Do I truly believe I deserve?</span>
+              <span class="action-item">→ Do I want that?</span>
+              <span class="action-item">→ Do I say “no” when I want to?</span>
+            </span>
+          </p>
+        </div>
+        <div id="angry-navigation" class="navigation-content">
+          <h2 class="emotionCap">Processing Anger</h2>
+          <p class="emotionWhy">
+            Your anger whispers your truths. It's not a weakness, but a signal—
+            an invitation to realign and reclaim your power. The underlying
+            needs of anger are respect, healthy boundaries, emotional safety,
+            justice and fairness and a space where you can have agency.
+            <br /><br /><strong>Reflect:</strong>
+            <span class="action-list">
+              <span class="action-item"
+                >→ Do others truly respect my decisions?</span
+              >
+              <span class="action-item"
+                >→ Can I act with authentic autonomy?</span
+              >
+              <span class="action-item"
+                >→ Do I feel empowered in my relationships?</span
+              >
+            </span>
+          </p>
+        </div>
+        <div id="afraid-navigation" class="navigation-content">
+          <h2 class="emotionCap">Facing Fear</h2>
+          <p class="emotionWhy">
+            Your feeling of fear whispers your truths. It's not a weakness, but
+            an opportunity to realign— an invitation to reconnect with your
+            inner compass. The underlying needs of fear are safety,
+            predictability, self-trust, emotional regulation and personal
+            empowerment.
+            <br /><br /><strong>Reflect:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Can I sense my inner trust?</span>
+              <span class="action-item">→ Can I recall my confidence?</span>
+              <span class="action-item">→ Can I let go of control?</span>
+            </span>
+          </p>
+        </div>
+        <div class="navigation-buttons">
+          <button class="nav-btn" id="navYesBtn">YES</button>
+          <button class="nav-btn" id="navNoBtn">NO</button>
+        </div>
+      </section>
+
+      <!-- Step 8: Action -->
+      <section id="step8" class="step-section">
+        <div id="lost-action" class="action-content">
+          <h2 class="emotionCap">Your Path Forward</h2>
+          <p class="emotionWhy">
+            Your purpose is not a fixed destination, but a living, breathing
+            landscape. It shifts as you evolve, breathe, transform. No emotional
+            state is permanent— you are constantly becoming.
+            <br /><br /><strong>Gentle Exploration Practices:</strong>
+            <span class="action-list">
+              <span class="action-item"
+                >→ Identify your current core values</span
+              >
+              <span class="action-item">→ Craft a flexible life vision</span>
+              <span class="action-item"
+                >→ Make one intentional decision today</span
+              >
+              <span class="action-item">→ Acknowledge your showing up</span>
+            </span>
+
+            <span class="wisdom-note">
+              Wisdom lives in the uncertainty. Your feeling of being lost is
+              actually a profound readiness for emergence.
+            </span>
+          </p>
+        </div>
+
+        <div id="lonely-action" class="action-content">
+          <h2 class="emotionCap">Nurturing Connections</h2>
+          <p class="emotionWhy">
+            Small gestures of connection can create meaningful bridges. our
+            social landscape is dynamic. Connections evolve as you transform,
+            breathing new life into relationships.
+            <br /><br /><strong>Gentle Exploration Practices:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Define vulnerability</span>
+              <span class="action-item">→ Share your inner experience</span>
+              <span class="action-item"
+                >→ Create an intentional connection</span
+              >
+              <span class="action-item">→ Define self-compassion</span>
+            </span>
+            <span class="wisdom-note">
+              Vulnerability is your bridge. Each honest conversation is a step
+              toward deeper belonging.
+            </span>
+          </p>
+        </div>
+
+        <div id="ashamed-action" class="action-content">
+          <h2 class="emotionCap">Growing Self-Acceptance</h2>
+          <p class="emotionWhy">
+            Each step toward self-compassion strengthens your foundation.
+            <br /><br /><strong>Gentle Exploration Practices:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Observe your inner dialogue</span>
+              <span class="action-item"
+                >→ Challenge negative self-narratives</span
+              >
+              <span class="action-item">→ Be vulnerable</span>
+              <span class="action-item">→ Cultivate a loving self-image</span>
+            </span>
+            <span class="wisdom-note">
+              Shame whispers. Your worthiness roars.
+            </span>
+          </p>
+        </div>
+
+        <div id="guilty-action" class="action-content">
+          <h2 class="emotionCap">Balancing Care</h2>
+          <p class="emotionWhy">
+            Finding balance between caring for others and yourself is key. Your
+            emotional states are fluid—constantly shifting, growing,
+            transforming. What feels immovable today will reshape tomorrow.
+            <br /><br /><strong>Gentle Exploration Practices:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Examine your internal standards</span>
+              <span class="action-item"
+                >→ Recognize self-sabotaging patterns</span
+              >
+              <span class="action-item"
+                >→ Offer yourself radical compassion</span
+              >
+              <span class="action-item"
+                >→ Make genuine amends where necessary</span
+              >
+            </span>
+            <span class="wisdom-note">
+              Understand: you were doing your best with the knowledge you had.
+            </span>
+          </p>
+        </div>
+
+        <div id="angry-action" class="action-content">
+          <h2 class="emotionCap">Channeling Energy</h2>
+          <p class="emotionWhy">
+            Transform this energy into positive action. Anger is not an enemy,
+            but a messenger. It reveals where your boundaries have been crossed,
+            where your voice needs to be heard.
+            <br /><br /><strong>Gentle Exploration Practices:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Identify underlying triggers</span>
+              <span class="action-item">→ Develop nuanced communication</span>
+              <span class="action-item">→ Express boundaries with clarity</span>
+              <span class="action-item"
+                >→ Cultivate emotional intelligence</span
+              >
+            </span>
+            <span class="wisdom-note">
+              Anger is power! Express it so it can serve you, and not serve
+              against you.
+            </span>
+          </p>
+        </div>
+
+        <div id="afraid-action" class="action-content">
+          <h2 class="emotionCap">Building Courage</h2>
+          <p class="emotionWhy">
+            Each small brave action builds your confidence. Fear is a fluid
+            state, shapeshifting with your evolution. No emotional landscape
+            remains static.
+            <br /><br /><strong>Gentle Exploration Practices:</strong>
+            <span class="action-list">
+              <span class="action-item">→ Develop trust practices</span>
+              <span class="action-item">→ Create a safety mechanisms</span>
+              <span class="action-item">→ Express your fears</span>
+              <span class="action-item"
+                >→ Challenge negative thought patterns</span
+              >
+            </span>
+            <span class="wisdom-note">
+              Your vulnerability is your greatest strength. Each trembling step
+              is an act of profound courage.
+            </span>
+          </p>
+        </div>
+        <button class="primary-btn" id="actionBtn">OUTCOME</button>
+      </section>
+
+      <!-- Step 9: Outcome -->
+      <section id="step9" class="step-section">
+        <h2>Your Reflection Journey</h2>
+        <p id="reflection-summary"></p>
+        <p class="cta-text">Ready to explore your reflection deeper?</p>
+        <div class="outcome-buttons">
+          <button class="primary-btn" id="bookSessionBtn">
+            Book a Session
+          </button>
+          <button class="primary-btn" id="exploreResourcesBtn">
+            Explore Key Resources
+          </button>
+        </div>
+      </section>
+
+      <div class="demo-container">
+        <div class="logo-pulse">
+          BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
+        </div>
       </div>
-    </div>
+    </main>
 
     <footer>
       <a href="index.html">Home</a>
@@ -1407,353 +1290,253 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // DOM Element Selections
+        // State management
+        let currentStep = 1;
+        let selectedEmotion = "";
+        let userChoices = {
+          emotion: "",
+          duration: "",
+          environment: "",
+          navigation: "",
+        };
+
+        // Elements
+        const progressBar = document.querySelector(".progress");
+        const stepIndicators = document.querySelectorAll(".step");
+        const sections = document.querySelectorAll(".step-section");
+        const breathingText = document.querySelector(".breathing-text");
+        const breathingCircle = document.querySelector(".breathing-circle");
+
+        // Update progress bar and indicators
+        function updateProgress(step) {
+          const progress = ((step - 1) / (stepIndicators.length - 1)) * 100;
+          progressBar.style.width = `${progress}%`;
+
+          stepIndicators.forEach((indicator, index) => {
+            if (index + 1 <= step) {
+              indicator.classList.add("active");
+            } else {
+              indicator.classList.remove("active");
+            }
+          });
+        }
+
+        // Show specific step
+        function showStep(step) {
+          sections.forEach((section) => section.classList.remove("active"));
+          document.getElementById(`step${step}`).classList.add("active");
+          currentStep = step;
+          updateProgress(step);
+
+          // Start breathing animation when step 2 is shown
+          if (step === 2) {
+            startBreathingAnimation();
+          }
+        }
+
+        // Breathing Animation Functions
+        function startBreathingAnimation() {
+          let totalTime = 0;
+
+          // Clear any existing interval
+          if (window.breathingInterval) {
+            clearInterval(window.breathingInterval);
+          }
+
+          // Set initial text
+          breathingText.textContent = "Inhale";
+
+          window.breathingInterval = setInterval(() => {
+            totalTime = (totalTime + 1) % 14;
+
+            // Update text based on the phase
+            if (totalTime < 4) {
+              breathingText.textContent = "Inhale";
+            } else if (totalTime < 8) {
+              breathingText.textContent = "Hold";
+            } else {
+              breathingText.textContent = "Exhale";
+            }
+          }, 1000);
+        }
+
+        // Generate reflection summary
+        function generateSummary() {
+          const summaries = {
+            lost:
+              "Your reflection reveals you're seeking clarity and direction. This has been " +
+              `${userChoices.duration.toLowerCase()} part of your story, particularly ${userChoices.environment.toLowerCase()}. ` +
+              "You're acknowledging areas needing compassionate attention. This awareness marks a powerful step in your personal evolution.",
+
+            lonely:
+              "Your journey speaks to a desire for deeper connection. These feelings have been present " +
+              `${userChoices.duration.toLowerCase()}, especially ${userChoices.environment.toLowerCase()}. ` +
+              "Recognizing this need for connection is the first step toward building meaningful relationships.",
+
+            ashamed:
+              "Your reflection shows courage in facing difficult emotions. These feelings have been present " +
+              `${userChoices.duration.toLowerCase()}, particularly ${userChoices.environment.toLowerCase()}. ` +
+              "Your willingness to explore these emotions opens the door to self-compassion and growth.",
+
+            guilty:
+              "Your reflection indicates a deep sense of responsibility. These feelings have been present " +
+              `${userChoices.duration.toLowerCase()}, especially ${userChoices.environment.toLowerCase()}. ` +
+              "Acknowledging these emotions creates space for understanding and self-forgiveness.",
+
+            angry:
+              "Your reflection reveals important boundaries that need attention. These feelings have been present " +
+              `${userChoices.duration.toLowerCase()}, particularly ${userChoices.environment.toLowerCase()}. ` +
+              "This awareness can be channeled into positive change and personal growth.",
+
+            afraid:
+              "Your reflection shows courage in acknowledging your fears. These feelings have been present " +
+              `${userChoices.duration.toLowerCase()}, especially ${userChoices.environment.toLowerCase()}. ` +
+              "Recognizing these emotions is the first step toward building resilience.",
+          };
+
+          return (
+            summaries[selectedEmotion] ||
+            "Your reflection journey shows courage in exploring your emotions."
+          );
+        }
+
+        // Event Listeners
+        // Start Button
+        document.getElementById("startBtn").addEventListener("click", () => {
+          showStep(2);
+        });
+
+        // Breathing Button
+        document
+          .getElementById("breathingBtn")
+          .addEventListener("click", () => {
+            showStep(3);
+            // Clear breathing interval when moving to next step
+            if (window.breathingInterval) {
+              clearInterval(window.breathingInterval);
+            }
+          });
+
+        // Emotion Buttons
+        const emotionButtons = document.querySelectorAll(".emotion-btn");
+        emotionButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            selectedEmotion = button.dataset.emotion;
+            userChoices.emotion = selectedEmotion;
+
+            // Show corresponding explanation
+            const explanations = document.querySelectorAll(
+              ".emotion-explanation"
+            );
+            explanations.forEach((exp) => exp.classList.remove("active"));
+            document
+              .getElementById(`${selectedEmotion}-explanation`)
+              .classList.add("active");
+
+            showStep(4);
+          });
+        });
+
+        // Explanation Button
+        document
+          .getElementById("explanationBtn")
+          .addEventListener("click", () => {
+            showStep(5);
+          });
+
+        // Duration Buttons
+        const durationButtons = document.querySelectorAll(".duration-btn");
+        durationButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            userChoices.duration = button.textContent;
+            showStep(6);
+          });
+        });
+
+        // Environment Buttons
+        const environmentButtons =
+          document.querySelectorAll(".environment-btn");
+        environmentButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            userChoices.environment = button.textContent;
+
+            // Show corresponding navigation content
+            const navigations = document.querySelectorAll(
+              ".navigation-content"
+            );
+            navigations.forEach((nav) => nav.classList.remove("active"));
+            document
+              .getElementById(`${selectedEmotion}-navigation`)
+              .classList.add("active");
+
+            showStep(7);
+          });
+        });
+
+        // Navigation Buttons (Yes/No)
+        ["navYesBtn", "navNoBtn"].forEach((btnId) => {
+          document.getElementById(btnId).addEventListener("click", () => {
+            userChoices.navigation = btnId === "navYesBtn" ? "Yes" : "No";
+
+            // Show corresponding action content
+            const actions = document.querySelectorAll(".action-content");
+            actions.forEach((action) => action.classList.remove("active"));
+            document
+              .getElementById(`${selectedEmotion}-action`)
+              .classList.add("active");
+
+            showStep(8);
+          });
+        });
+
+        // Action Button
+        document.getElementById("actionBtn").addEventListener("click", () => {
+          document.getElementById("reflection-summary").textContent =
+            generateSummary();
+          showStep(9);
+        });
+
+        // Step Indicators Navigation
+        stepIndicators.forEach((indicator, index) => {
+          indicator.addEventListener("click", () => {
+            const step = index + 1;
+            if (step <= currentStep) {
+              showStep(step);
+            }
+          });
+        });
+
+        // Outcome Buttons
+        document
+          .getElementById("bookSessionBtn")
+          .addEventListener("click", () => {
+            window.location.href = "contact.html";
+          });
+
+        document
+          .getElementById("exploreResourcesBtn")
+          .addEventListener("click", () => {
+            window.location.href = "keyResources.html";
+          });
+
+        // Menu functionality
         const navMenu = document.querySelector(".nav-menu");
         const menuToggle = document.querySelector(".menu-btn");
         const closeBtn = document.querySelector(".close-btn");
-        const breathingCircle = document.getElementById("breathing-circle");
-        const reflectiveContainer = document.querySelector(
-          ".reflective-container"
-        );
-        const breathingExplanation = document.querySelector(
-          ".breathing-explanation"
-        );
-        const continueBtn = document.querySelector(".continue-btn");
-        const breathingContainer = document.querySelector(
-          "#breathing-circle-container"
-        );
-        const emotionWheel = document.querySelector("#emotion-wheel-container");
-        const yesBtn = document.querySelector(".yes-btn");
-        const breathingHeader = document.querySelector(".breathing-header");
-        const durationQuestion = document.getElementById("duration-question");
-        const environmentQuestion = document.getElementById(
-          "environment-question"
-        );
-        const progressSteps = document.querySelectorAll(".progress-step");
 
-        // State Management
-        let selectedEmotion = "";
-        let currentStep = 1;
-        const userJourney = {
-          selectedEmotion: "",
-          duration: "",
-          environment: "",
-          responses: [],
-        };
-
-        // Progress Management
-        function updateProgressIndicator(stepNumber) {
-          currentStep = Math.max(currentStep, stepNumber);
-          progressSteps.forEach((step, index) => {
-            const isActive = index < currentStep;
-            step.classList.toggle("active", isActive);
-            step.style.cursor = isActive ? "pointer" : "default";
-          });
-        }
-
-        // Navigation Function
-        function navigateToStep(stepNumber, targetSection) {
-          if (stepNumber > currentStep) return;
-
-          // Hide all sections
-          document
-            .querySelectorAll(
-              ".emotion-content, #breathing-circle-container, #emotion-wheel-container, .reflective-container, .reflection-outcome-container, .navigation-result"
-            )
-            .forEach((el) => (el.style.display = "none"));
-
-          // Show target section
-          switch (targetSection) {
-            case "start":
-              reflectiveContainer.style.display = "block";
-              break;
-            case "breathing":
-              breathingContainer.style.display = "flex";
-              breathingHeader.style.display = "block";
-              breathingCircle.style.display = "block";
-              breathingExplanation.style.display = "block";
-              continueBtn.style.display = "block";
-              break;
-            case "emotion-selection":
-              emotionWheel.style.display = "block";
-              break;
-            case "emotion-explanation":
-              if (selectedEmotion) {
-                document.getElementById(
-                  `${selectedEmotion}-content`
-                ).style.display = "block";
-              }
-              break;
-            case "duration":
-              durationQuestion.style.display = "flex";
-              break;
-            case "environment":
-              environmentQuestion.style.display = "flex";
-              break;
-            case "navigation":
-              if (selectedEmotion) {
-                document.getElementById(
-                  `navigate-${selectedEmotion}`
-                ).style.display = "block";
-              }
-              break;
-            case "action":
-              if (selectedEmotion && userJourney.responses.includes("yes")) {
-                document.getElementById(
-                  `navigate-${selectedEmotion}-yes`
-                ).style.display = "block";
-              }
-              break;
-            case "outcome":
-              document.querySelector(
-                ".reflection-outcome-container"
-              ).style.display = "block";
-              break;
-          }
-
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-
-        // Progress Step Click Handlers
-        document.querySelectorAll(".progress-step").forEach((step) => {
-          step.addEventListener("click", () => {
-            const targetStep = parseInt(step.dataset.step);
-            const targetSection = step.dataset.target;
-            if (targetStep <= currentStep) {
-              navigateToStep(targetStep, targetSection);
-            }
-          });
-        });
-
-        // Initial Setup
-        updateProgressIndicator(1);
-
-        // Navigation Menu
         const toggleMenu = () => navMenu.classList.toggle("active");
+
         menuToggle.addEventListener("click", toggleMenu);
         closeBtn.addEventListener("click", toggleMenu);
+
         navMenu.addEventListener("click", (e) => {
-          if (e.target.classList.contains("nav-link")) toggleMenu();
+          if (e.target.classList.contains("nav-link")) {
+            toggleMenu();
+          }
         });
 
-        // Breathing Animation
-        function startBreathingAnimation() {
-          breathingCircle.className = "";
-
-          // Initial reset to small size
-          breathingCircle.style.transform = "scale(1)";
-
-          // Inhale phase (4 seconds)
-          setTimeout(() => {
-            breathingCircle.style.transition =
-              "transform 4s cubic-bezier(0.4, 0, 0.2, 1)";
-            breathingCircle.style.transform = "scale(6)";
-          }, 100);
-
-          // Hold phase starts after 4 seconds
-          setTimeout(() => {
-            // Maintain size during hold
-            breathingCircle.style.transition = "none";
-
-            // Exhale phase starts after total 8 seconds (4 inhale + 4 hold)
-            setTimeout(() => {
-              breathingCircle.style.transition =
-                "transform 6s cubic-bezier(0.4, 0, 0.2, 1)";
-              breathingCircle.style.transform = "scale(1)";
-            }, 4000);
-          }, 4000);
-
-          // Restart animation after full cycle (14 seconds)
-          setTimeout(startBreathingAnimation, 14000);
-        }
-
-        // Reflection Flow
-        yesBtn.addEventListener("click", () => {
-          reflectiveContainer.style.display = "none";
-          breathingContainer.style.display = "flex";
-          breathingHeader.style.display = "block";
-          breathingCircle.style.display = "block";
-          breathingExplanation.style.display = "block";
-          continueBtn.style.display = "block";
-          startBreathingAnimation();
-          updateProgressIndicator(2);
-        });
-
-        continueBtn.addEventListener("click", () => {
-          breathingContainer.style.display = "none";
-          emotionWheel.style.display = "block";
-          updateProgressIndicator(3);
-        });
-
-        // Emotion Handling
-        document.querySelectorAll(".emotion-circle").forEach((circle) => {
-          circle.addEventListener("click", () => {
-            selectedEmotion = circle.dataset.emotion;
-            userJourney.selectedEmotion = selectedEmotion;
-            const content = document.getElementById(
-              `${selectedEmotion}-content`
-            );
-
-            if (content) {
-              emotionWheel.style.display = "none";
-              content.style.display = "block";
-              content.scrollIntoView({ behavior: "smooth" });
-              updateProgressIndicator(4);
-            }
-          });
-        });
-
-        // Content Navigation
-        document.querySelectorAll(".close-emotion").forEach((button) => {
-          button.addEventListener("click", (e) => {
-            const contentModal = e.target.closest(".emotion-content");
-            if (contentModal) {
-              contentModal.style.display = "none";
-              emotionWheel.style.display = "block";
-            }
-          });
-        });
-
-        // Question Flow
-        document.querySelectorAll(".back-to-emotions").forEach((button) => {
-          button.addEventListener("click", () => {
-            const currentContent = button.closest(".emotion-content");
-            currentContent.style.display = "none";
-            durationQuestion.style.display = "flex";
-            updateProgressIndicator(5);
-          });
-        });
-
-        // Journey Options Handler for vertical layout
-        document.querySelectorAll(".journey-option").forEach((option) => {
-          option.addEventListener("click", (e) => {
-            const currentModal = e.target.closest(".emotion-content");
-            const selectedOption = e.target.textContent.trim();
-
-            if (currentModal.id === "duration-question") {
-              userJourney.duration = selectedOption;
-              currentModal.style.display = "none";
-              environmentQuestion.style.display = "flex";
-              environmentQuestion.style.flexDirection = "column"; // Add vertical layout
-              updateProgressIndicator(6);
-            } else if (currentModal.id === "environment-question") {
-              userJourney.environment = selectedOption;
-              currentModal.style.display = "none";
-              const navigationContent = document.getElementById(
-                `navigate-${selectedEmotion}`
-              );
-              if (navigationContent) {
-                navigationContent.style.display = "block";
-                updateProgressIndicator(7);
-              }
-            }
-          });
-        });
-
-        // Response Handling
-        document.querySelectorAll(".yes-no-btn").forEach((button) => {
-          button.addEventListener("click", (e) => {
-            const response = e.target.textContent.toLowerCase().trim();
-            userJourney.responses.push(response);
-            const currentNavigation = e.target.closest(".emotion-content");
-
-            if (currentNavigation) {
-              currentNavigation.style.display = "none";
-              const emotionId = currentNavigation.id.replace("navigate-", "");
-              const resultContent = document.getElementById(
-                `navigate-${emotionId}-yes`
-              );
-
-              if (resultContent) {
-                resultContent.style.display = "block";
-                updateProgressIndicator(8); // Progress to Action step for both responses
-              }
-            }
-          });
-        });
-
-        // Reflection Outcome
-        function generateReflectionOutcome() {
-          // Hide any active navigation results
-          document.querySelectorAll(".navigation-result").forEach((result) => {
-            result.style.display = "none";
-          });
-
-          const reflectionContainer = document.querySelector(
-            ".reflection-outcome-container"
-          );
-          const outcomeSummary = document.querySelector(".outcome-summary");
-
-          const emotionMap = {
-            lost: "seeking clarity and direction",
-            lonely: "yearning for meaningful connection",
-            ashamed: "working towards self-acceptance",
-            guilty: "learning to balance responsibility",
-            angry: "processing and channeling emotions",
-            afraid: "building confidence and security",
-          };
-
-          const durationMap = {
-            "Recent Emergence": "This is a new chapter in your journey",
-            "Gradual Accumulation (Past Year)":
-              "You've been carrying this for some time",
-            "Persistent Pattern":
-              "This has been a significant part of your story",
-          };
-
-          const environmentMap = {
-            "Professional Ecosystem": "workplace dynamics",
-            "Family Dynamics": "family relationships",
-            "Social Interactions": "social connections",
-          };
-
-          const summary = `
-        Your reflection reveals you're ${
-          emotionMap[userJourney.selectedEmotion]
-        }. 
-        ${durationMap[userJourney.duration]}, particularly in relation to 
-        ${environmentMap[userJourney.environment]}. 
-        ${
-          userJourney.responses.includes("yes")
-            ? "You're showing strong readiness for growth and transformation."
-            : "You're acknowledging areas needing compassionate attention."
-        }
-        This awareness marks a powerful step in your personal evolution.
-      `;
-
-          outcomeSummary.textContent = summary.replace(/\s+/g, " ").trim();
-          reflectionContainer.style.display = "block";
-        }
-
-        // Final Outcome Handling
-        document.querySelectorAll(".resources-btn").forEach((button) => {
-          button.addEventListener("click", () => {
-            // Hide active action content
-            const activeAction = document.querySelector(
-              ".navigation-result[style*='display: block']"
-            );
-            if (activeAction) activeAction.style.display = "none";
-
-            generateReflectionOutcome();
-            updateProgressIndicator(9);
-            document
-              .querySelector(".reflection-outcome-container")
-              .scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-          });
-        });
-
-        // Navigation Controls
-        document.querySelector(".back-button").addEventListener("click", () => {
-          window.history.back();
-        });
-
-        window.addEventListener("popstate", () => {
-          if (document.referrer) window.location = document.referrer;
-          else window.history.back();
-        });
+        // Initialize
+        updateProgress(1);
       });
     </script>
   </body>
