@@ -125,7 +125,6 @@
         flex: 1;
         padding: clamp(20px, 3vw, 40px);
         width: 100%;
-        max-width: none;
         margin: 0 auto;
         max-width: 1200px;
       }
@@ -297,50 +296,6 @@
         white-space: nowrap;
       }
 
-      .circles-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-        margin: 30px 0;
-      }
-
-      .circle {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        color: black;
-        cursor: pointer;
-        border: 2px solid black;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
-        position: relative;
-        backdrop-filter: blur(2px);
-        font-size: 14px;
-        font-family: monospace;
-      }
-
-      .circle:hover {
-        transform: scale(1.05);
-        box-shadow: 8px 8px 14px rgba(0, 0, 0, 0.3);
-        background: rgba(255, 255, 255, 0.1);
-        border-color: #000;
-      }
-
-      .content-box {
-        display: none;
-        background: #f5f5f5;
-        padding: 20px;
-        margin: 20px 0;
-        border-radius: 8px;
-        width: 100%;
-      }
-
       .read-more-btn {
         padding: 8px 16px;
         background: transparent;
@@ -399,11 +354,6 @@
       }
 
       @media (max-width: 768px) {
-        .circle {
-          width: 120px;
-          height: 120px;
-        }
-
         .container {
           padding: 10px;
         }
@@ -462,12 +412,6 @@
       }
 
       @media (max-width: 480px) {
-        .circle {
-          width: 100px;
-          height: 100px;
-          font-size: 12px;
-        }
-
         .section-header {
           padding-right: 10px;
         }
@@ -509,6 +453,182 @@
           overflow-y: auto;
         }
       }
+
+      .reflection-section {
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .reflection-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 0 auto;
+        max-width: 800px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(20px);
+        opacity: 0;
+        animation: slideIn 0.5s forwards;
+      }
+
+      @keyframes slideIn {
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .reflection-container h3 {
+        font-family: monospace;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        color: #333;
+      }
+
+      .system-dropdown {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        font-size: 1em;
+        cursor: pointer;
+        margin-bottom: 10px;
+        outline: none;
+      }
+
+      .system-dropdown:hover {
+        background: rgba(255, 255, 255, 0.7);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .impact-questions {
+        margin-top: 10px;
+      }
+
+      .impact-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .impact-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.9em;
+      }
+
+      .impact-item label {
+        min-width: 150px;
+        font-family: monospace;
+      }
+
+      .impact-slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 2px;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.1);
+        outline: none;
+        margin: 10px 0;
+        transition: all 0.2s ease;
+      }
+
+      .impact-slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #333;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .impact-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        background: #222;
+      }
+
+      .insight-btn {
+        padding: 15px 20px;
+        background: transparent;
+        color: black;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        white-space: nowrap;
+        border: 2px solid black;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3);
+        position: relative;
+        backdrop-filter: blur(2px);
+        font-size: 14px;
+        font-family: monospace;
+      }
+
+      .insight-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 8px 8px 14px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #000;
+      }
+
+      .insight-result {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        transform: scale(0.95);
+        opacity: 0;
+        transition: all 0.5s ease;
+        font-size: 0.9em;
+      }
+
+      .insight-result.active {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+
+      @media (max-width: 768px) {
+        .reflection-container {
+          margin: 10px;
+          padding: 20px;
+        }
+
+        .impact-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+
+        .impact-item label {
+          min-width: auto;
+        }
+      }
     </style>
   </head>
   <body>
@@ -534,128 +654,158 @@
         <div class="header">
           <h1>Systems:</h1>
           <p>
-            don't exist in isolation - they flow into each other creating waves
-            of change across the whole. Nurturing one system can create harmony
-            in others, and teach us to orchestrate this beautiful complexity.
+            don't exist in isolation - they flow into each other like rivers,
+            creating waves of change across the whole. Nurturing one system can
+            create harmony in others, and teach us to orchestrate this beautiful
+            complexity.
           </p>
         </div>
-        <br /><br /><br />
-        <div class="section-header">
-          <h2>Human Systems</h2>
-          <button
-            class="read-more-btn"
-            onclick="openModal('humanSystemsModal')"
-          >
-            Read More
-          </button>
-        </div>
-        <p>
-          Each system within us is like a string in an instrument - when one
-          vibrates, others respond. Strengthening your physical health might
-          lift your psychological state. Enriching your social connections can
-          transform your environment. Where do you might need to restore balance
-          or amplify strength? Click each system to explore its elements.
-        </p>
+        <button class="read-more-btn" onclick="openModal('humanSystemsModal')">
+          Read More
+        </button>
+      </div>
 
-        <div class="circles-container">
-          <div class="circle" onclick="toggleContent('physical')">Physical</div>
-          <div class="circle" onclick="toggleContent('psychological')">
-            Psychological
+      <div class="reflection-section">
+        <div class="reflection-container">
+          <h3>Personal Systems Reflection</h3>
+          <div class="reflection-prompt">
+            <p class="prompt-text">
+              Think about a recent change in your life...
+            </p>
+            <div class="dropdown-container">
+              <select id="systemSelect" class="system-dropdown">
+                <option value="">
+                  Choose a system where you noticed change...
+                </option>
+                <option value="physical">
+                  Physical (e.g., new exercise routine)
+                </option>
+                <option value="psychological">
+                  Psychological (e.g., new mindset)
+                </option>
+                <option value="social">Social (e.g., new relationship)</option>
+                <option value="environmental">
+                  Environmental (e.g., new workspace)
+                </option>
+              </select>
+            </div>
+
+            <div
+              id="impactQuestions"
+              class="impact-questions"
+              style="display: none"
+            >
+              <p>How did this change affect other systems?</p>
+              <div class="impact-options">
+                <div class="impact-item">
+                  <label>Physical Impact:</label>
+                  <input
+                    type="range"
+                    class="impact-slider"
+                    min="0"
+                    max="10"
+                    value="5"
+                  />
+                </div>
+                <div class="impact-item">
+                  <label>Psychological Impact:</label>
+                  <input
+                    type="range"
+                    class="impact-slider"
+                    min="0"
+                    max="10"
+                    value="5"
+                  />
+                </div>
+                <div class="impact-item">
+                  <label>Social Impact:</label>
+                  <input
+                    type="range"
+                    class="impact-slider"
+                    min="0"
+                    max="10"
+                    value="5"
+                  />
+                </div>
+                <div class="impact-item">
+                  <label>Environmental Impact:</label>
+                  <input
+                    type="range"
+                    class="impact-slider"
+                    min="0"
+                    max="10"
+                    value="5"
+                  />
+                </div>
+              </div>
+              <button id="showInsight" class="insight-btn">
+                Show My Systems Insight
+              </button>
+            </div>
+            <div id="insightResult" class="insight-result"></div>
           </div>
-          <div class="circle" onclick="toggleContent('social')">Social</div>
-          <div class="circle" onclick="toggleContent('environmental')">
-            Environmental
+        </div>
+
+        <div class="reflection-container org-reflection">
+          <h3>Organizational Systems Reflection</h3>
+          <div class="reflection-prompt">
+            <p class="prompt-text">
+              Consider a recent change in your organization...
+            </p>
+            <div class="dropdown-container">
+              <select id="orgSystemSelect" class="system-dropdown">
+                <option value="">Choose where the change occurred...</option>
+                <option value="core">Core (e.g., new strategy)</option>
+                <option value="operation">
+                  Operations (e.g., new process)
+                </option>
+                <option value="human">Human (e.g., new policy)</option>
+              </select>
+            </div>
+            <div
+              id="orgImpactQuestions"
+              class="impact-questions"
+              style="display: none"
+            >
+              <p>How did this change affect other systems?</p>
+              <div class="impact-options">
+                <div class="impact-item">
+                  <label>Core Impact:</label>
+                  <input
+                    type="range"
+                    class="impact-slider"
+                    min="0"
+                    max="10"
+                    value="5"
+                  />
+                </div>
+                <div class="impact-item">
+                  <label>Operations Impact:</label>
+                  <input
+                    type="range"
+                    class="impact-slider"
+                    min="0"
+                    max="10"
+                    value="5"
+                  />
+                </div>
+                <div class="impact-item">
+                  <label>Human Impact:</label>
+                  <input
+                    type="range"
+                    class="impact-slider"
+                    min="0"
+                    max="10"
+                    value="5"
+                  />
+                </div>
+              </div>
+              <button id="showOrgInsight" class="insight-btn">
+                Show Organizational Insight
+              </button>
+            </div>
+            <div id="orgInsightResult" class="insight-result"></div>
           </div>
-        </div>
-
-        <div id="physical" class="content-box">
-          <h3>Physical System</h3>
-          <p>
-            Your body is your foundation. It influences everything from your
-            energy and focus to how you show up in the world. Physical wellbeing
-            isn't just about fitness. Small changes here can create powerful
-            ripples across all areas of your life.
-          </p>
-        </div>
-
-        <div id="psychological" class="content-box">
-          <h3>Psychological System</h3>
-          <p>
-            Your mind shapes your reality. This system includes your thoughts,
-            emotions, and how you process experiences. It's the lens through
-            which you view yourself and the world. Building mental strength and
-            emotional awareness here creates resilience and better
-            decision-making in all areas of life.
-          </p>
-        </div>
-
-        <div id="social" class="content-box">
-          <h3>Social System</h3>
-          <p>
-            We thrive through connection. Your relationships, communication
-            patterns, and community ties form this vital system. Strong social
-            connections boost resilience, provide support during challenges, and
-            create opportunities for growth. The quality of these connections
-            directly impacts your wellbeing and success.
-          </p>
-        </div>
-
-        <div id="environmental" class="content-box">
-          <h3>Environmental System</h3>
-          <p>
-            This system includes both natural and built surroundings. It affects
-            physical health, psychological well-being, and social interactions,
-            while being influenced by human behavior and organizational systems.
-          </p>
-        </div>
-
-        <div class="section-header">
-          <h2>Organisation Systems</h2>
-          <button class="read-more-btn" onclick="openModal('orgSystemsModal')">
-            Read More
-          </button>
-        </div>
-        <p>
-          Organizations are living ecosystems where each system nurtures the
-          others. A strong core culture flows into human engagement, which in
-          turn powers operational excellence. Explore how these systems support
-          and strengthen each other, creating resilient organizations that
-          thrive through change. Click each system to explore its elements.
-        </p>
-
-        <div class="circles-container">
-          <div class="circle" onclick="toggleContent('core')">Core</div>
-          <div class="circle" onclick="toggleContent('operation')">
-            Operation
-          </div>
-          <div class="circle" onclick="toggleContent('human')">Human</div>
-        </div>
-
-        <div id="core" class="content-box">
-          <h3>Core System</h3>
-          <p>
-            The core system represents the fundamental structure and values of
-            an organization. It includes mission, vision, strategy, and
-            governance, affecting all other organizational aspects.
-          </p>
-        </div>
-
-        <div id="operation" class="content-box">
-          <h3>Operation System</h3>
-          <p>
-            The operation system manages day-to-day processes, workflows, and
-            resource allocation. It ensures efficient execution of tasks while
-            maintaining quality and meeting objectives.
-          </p>
-        </div>
-
-        <div id="human" class="content-box">
-          <h3>Human System</h3>
-          <p>
-            The human system in organizations involves workforce management,
-            culture, and development. It focuses on maintaining productive and
-            positive work environments while supporting individual growth.
-          </p>
         </div>
       </div>
 
@@ -664,7 +814,7 @@
           <span class="close-btn" onclick="closeModal('humanSystemsModal')"
             >&times;</span
           >
-          <h2><u>Human Systems Deeper</u></h2>
+          <h2><u>Systems Deeper</u></h2>
           <p>
             Within us lies a magnificent web of interconnected systems, each
             supporting and influencing the others. When our physical system is
@@ -685,30 +835,6 @@
         </div>
       </div>
 
-      <div id="orgSystemsModal" class="modal">
-        <div class="modal-content">
-          <span class="close-btn" onclick="closeModal('orgSystemsModal')"
-            >&times;</span
-          >
-          <h2><u>Organisation Systems Deeper</u></h2>
-          <p>
-            Organizations thrive when their systems flow together in harmony. A
-            strong core system radiates purpose and clarity, energizing the
-            human system with meaning and direction. This human engagement, in
-            turn, fuels operational excellence, creating a virtuous cycle of
-            growth and innovation.
-            <br /><br />
-            When challenges arise in one system, solutions often lie in
-            strengthening another. Operational inefficiencies might signal a
-            need for better human connection and communication. Cultural
-            struggles might be addressed through improved processes and
-            workflows. By understanding these interconnections, leaders can
-            orchestrate positive change that resonates throughout the entire
-            organization, creating sustainable success and meaningful impact.
-          </p>
-        </div>
-      </div>
-
       <div class="demo-container">
         <div class="logo-pulse">
           BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
@@ -724,53 +850,154 @@
       <a href="contact.html" class="nav-link">Contact</a>
     </footer>
     <script>
-      // Menu functionality
       document.addEventListener("DOMContentLoaded", () => {
+        // DOM Elements
         const navMenu = document.querySelector(".nav-menu");
         const menuToggle = document.querySelector(".menu-btn");
         const closeBtn = document.querySelector(".close-btn");
+        const systemSelect = document.getElementById("systemSelect");
+        const orgSystemSelect = document.getElementById("orgSystemSelect");
+        const impactQuestions = document.getElementById("impactQuestions");
+        const orgImpactQuestions =
+          document.getElementById("orgImpactQuestions");
+        const showInsight = document.getElementById("showInsight");
+        const showOrgInsight = document.getElementById("showOrgInsight");
+        const insightResult = document.getElementById("insightResult");
+        const orgInsightResult = document.getElementById("orgInsightResult");
 
-        const toggleMenu = () => navMenu.classList.toggle("active");
+        // Navigation Menu Functions
+        const toggleMenu = () => {
+          navMenu.classList.toggle("active");
+        };
 
         menuToggle.addEventListener("click", toggleMenu);
         closeBtn.addEventListener("click", toggleMenu);
 
-        navMenu.addEventListener("click", (e) => {
-          if (e.target.classList.contains("nav-link")) {
-            toggleMenu();
+        // Modal Functions
+        window.openModal = function (modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = "block";
           }
+        };
+
+        window.closeModal = function (modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = "none";
+          }
+        };
+
+        // System Selection Handlers
+        systemSelect.addEventListener("change", function () {
+          if (this.value) {
+            impactQuestions.style.display = "block";
+          } else {
+            impactQuestions.style.display = "none";
+          }
+        });
+
+        orgSystemSelect.addEventListener("change", function () {
+          if (this.value) {
+            orgImpactQuestions.style.display = "block";
+          } else {
+            orgImpactQuestions.style.display = "none";
+          }
+        });
+
+        // Generate insight function
+        function generateInsight(selectedSystem, impacts) {
+          let systemName = "";
+          switch (selectedSystem) {
+            case "physical":
+              systemName = "Physical";
+              break;
+            case "psychological":
+              systemName = "Psychological";
+              break;
+            case "social":
+              systemName = "Social";
+              break;
+            case "environmental":
+              systemName = "Environmental";
+              break;
+            case "core":
+              systemName = "Core";
+              break;
+            case "operation":
+              systemName = "Operations";
+              break;
+            case "human":
+              systemName = "Human";
+              break;
+          }
+
+          const highestImpact = Math.max(...impacts);
+          const lowestImpact = Math.min(...impacts);
+
+          return `
+      <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 8px;">
+        <p>🔍 <strong>Your Systems Insight:</strong></p>
+        <p>The change in your ${systemName} system had a particularly strong effect on other areas of your life.
+        This shows how interconnected our systems really are - a change in one area creates ripples throughout our whole experience.</p>
+        <p>💡 <strong>Key Observation:</strong> The strongest impact was rated ${highestImpact}/10, while the lowest was ${lowestImpact}/10.
+        This difference shows how changes can affect some systems more than others.</p>
+        <p>🌱 <strong>Growth Opportunity:</strong> Consider how you might leverage these connections to create positive change across all your systems.</p>
+      </div>
+    `;
+        }
+
+        // Show insight event listeners
+        showInsight.addEventListener("click", function () {
+          if (!systemSelect.value) {
+            alert("Please select a system first");
+            return;
+          }
+
+          const impacts = Array.from(
+            impactQuestions.querySelectorAll(".impact-slider")
+          ).map((slider) => parseInt(slider.value));
+
+          insightResult.innerHTML = generateInsight(
+            systemSelect.value,
+            impacts
+          );
+          insightResult.classList.add("active");
+          insightResult.style.display = "block";
+        });
+
+        showOrgInsight.addEventListener("click", function () {
+          if (!orgSystemSelect.value) {
+            alert("Please select a system first");
+            return;
+          }
+
+          const impacts = Array.from(
+            orgImpactQuestions.querySelectorAll(".impact-slider")
+          ).map((slider) => parseInt(slider.value));
+
+          orgInsightResult.innerHTML = generateInsight(
+            orgSystemSelect.value,
+            impacts
+          );
+          orgInsightResult.classList.add("active");
+          orgInsightResult.style.display = "block";
+        });
+
+        // Initialize sliders with visual feedback
+        document.querySelectorAll(".impact-slider").forEach((slider) => {
+          slider.addEventListener("input", function () {
+            const value =
+              ((this.value - this.min) / (this.max - this.min)) * 100;
+            this.style.background = `linear-gradient(to right, #333 ${value}%, #ddd ${value}%)`;
+          });
+
+          // Initialize slider background
+          const value =
+            ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+          slider.style.background = `linear-gradient(to right, #333 ${value}%, #ddd ${value}%)`;
         });
       });
-      function toggleContent(id) {
-        const content = document.getElementById(id);
-        const allContent = document.getElementsByClassName("content-box");
-
-        // Close all other content boxes
-        Array.from(allContent).forEach((box) => {
-          if (box.id !== id && box.style.display === "block") {
-            box.style.display = "none";
-          }
-        });
-
-        // Toggle the clicked content
-        content.style.display =
-          content.style.display === "block" ? "none" : "block";
-      }
-
-      function openModal(modalId) {
-        document.getElementById(modalId).style.display = "block";
-      }
-
-      function closeModal(modalId) {
-        document.getElementById(modalId).style.display = "none";
-      }
-
-      // Close modal when clicking outside
-      window.onclick = function (event) {
-        if (event.target.classList.contains("modal")) {
-          event.target.style.display = "none";
-        }
-      };
     </script>
   </body>
 </html>
