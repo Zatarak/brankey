@@ -226,8 +226,9 @@
         .right-content {
           width: 70%;
           flex: 0 0 70%;
-          max-height: 60vh;
-          overflow-y: auto;
+          /* Removed max-height and overflow-y properties */
+          height: auto;
+          overflow: visible;
         }
 
         .left-content h2 {
@@ -412,6 +413,24 @@
         background-color: transparent;
         color: white;
       }
+
+      .services-intro {
+        padding: clamp(15px, 2vw, 30px);
+        text-align: left;
+        font-size: clamp(16px, 2vw, 18px);
+        font-family: monospace;
+        line-height: 1.7;
+        letter-spacing: 0.3px;
+        border: 1px solid #333;
+        margin-bottom: -1px;
+        background-color: transparent;
+      }
+
+      .services-intro p {
+        max-width: 100%;
+        margin: 0 auto;
+        font-size: clamp(14px, 1.8vw, 16px);
+      }
     </style>
   </head>
   <body>
@@ -455,6 +474,21 @@
             <br /><br /><br />
           </h3>
 
+          <div class="box services-intro">
+            <p>
+              I invite you to explore pathways to clearer communication and
+              deeper connections. Each approach below offers a gentle entry
+              point to growth, meeting you exactly where you are in your
+              personal or organizational journey.
+            </p>
+            <button
+              class="buttonAboutMe"
+              onclick="window.location.href='about.html'"
+            >
+              About Me
+            </button>
+          </div>
+
           <div class="box">
             <h4>Systemic Coaching</h4>
             <p>
@@ -468,22 +502,8 @@
             >
               Coaching Programs
             </button>
-            <button
-              class="buttonAboutMe"
-              onclick="window.location.href='about.html'"
-            >
-              About Me
-            </button>
           </div>
-          <div class="box">
-            <h1></h1>
-            <p class="quote">
-              "Love is the grounding of our existence as humans and it is the
-              basic emotioning in our systemic identity as human beings"<br />
-            </p>
-            <br />
-            <strong><p class="author">Humberto Maturana</p></strong>
-          </div>
+
           <div class="box">
             <h5>Leadership Training</h5>
             <p>
