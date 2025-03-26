@@ -295,19 +295,7 @@
         display: inline-block;
         position: relative;
         padding-right: 30px;
-      }
-
-      /* Left chevron effect */
-      h4::before::after,
-      h5::before::after,
-      h6::before::after {
-        content: "‹";
-        position: absolute;
-        right: 5px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 20px;
-        font-weight: bold;
+        clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
       }
 
       h4::before {
@@ -321,6 +309,7 @@
       h6::before {
         content: "Training 3: Build Stronger Communities";
       }
+
       h4,
       h5,
       h6 {
@@ -532,7 +521,9 @@
           </div>
 
           <div class="box">
-            <h4>Systemic Coaching</h4>
+            <h4 data-label="Training 1: Transform Your Relationships">
+              Systemic Coaching
+            </h4>
             <p>
               When personal relationships or organizational dynamics lack
               clarity and purpose
@@ -547,7 +538,9 @@
           </div>
 
           <div class="box">
-            <h5>Leadership Training</h5>
+            <h5 data-label="Training 2: Elevate Your Team">
+              Leadership Training
+            </h5>
             <p>
               When skills lack encouragement that foster collaboration and
               resilient teams
@@ -561,7 +554,9 @@
             </button>
           </div>
           <div class="box">
-            <h6>Community Engagement</h6>
+            <h6 data-label="Training 3: Build Stronger Communities">
+              Community Engagement
+            </h6>
             <p>
               When organisational culture lacks authentic communication and
               mutual understanding
