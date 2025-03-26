@@ -406,39 +406,10 @@
           1px -1px 0px transparent, -1px -1px 0px transparent;
       }
 
-      .sliding-text-container {
-        text-align: right;
-        font-family: monospace;
-        font-size: clamp(20px, 2.5vw, 25px);
-        height: 28.5px;
-        overflow: hidden;
-        position: relative;
-        margin-top: 10px;
-      }
-
-      .sliding-text {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        animation: slide 6s linear infinite;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      @keyframes slide {
-        0%,
-        33% {
-          transform: translateY(0);
-        }
-        34%,
-        66% {
-          transform: translateY(-100%);
-        }
-        67%,
-        100% {
-          transform: translateY(-200%);
-        }
+      .key-pulse:hover {
+        background: transparent;
+        color: black;
+        border: 1px solid black;
       }
     </style>
   </head>
@@ -542,13 +513,6 @@
       <div class="demo-container">
         <div class="logo-pulse">
           BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
-        </div>
-        <div class="sliding-text-container">
-          <div class="sliding-text">
-            <div>Coaching</div>
-            <div>Leadership</div>
-            <div>Engagement</div>
-          </div>
         </div>
       </div>
     </main>
