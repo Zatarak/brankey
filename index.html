@@ -182,12 +182,11 @@
         width: 100%;
         margin: 0 auto;
         padding-right: 20px;
-        border-bottom: none !important;
       }
 
       h3 {
         font-size: clamp(16px, 2vw, 30px);
-        border: 1px solid #333;
+        border: 1px solid transparent; /* Change border color to transparent */
         padding: clamp(15px, 2vw, 40px);
         background-color: transparent;
         margin-bottom: 1px;
@@ -244,7 +243,6 @@
         .left-content h2 {
           width: 100%;
           margin: 0;
-          border-bottom: none !important;
         }
 
         .right-content h3 {
@@ -287,15 +285,12 @@
         position: absolute;
         top: -65px;
         left: 0;
-        background-color: transparent;
         color: black;
-        font-size: 12px;
-        padding: 10px 15px;
-        border: 1px solid black;
+        font-size: 14px;
+        text-decoration: underline;
         display: inline-block;
-        position: relative;
-        padding-right: 30px;
-        clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
+        font-family: monospace;
+        padding: 15px 5px;
       }
 
       h4::before {
@@ -319,6 +314,10 @@
         margin-top: 50px;
         font-family: monospace;
         overflow: visible;
+        text-align: left;
+        margin-left: 0;
+        padding-left: 0;
+        width: 100%;
       }
 
       p {
@@ -336,7 +335,8 @@
         font-family: "Courier New", Courier, monospace;
       }
 
-      .buttonLearnMore {
+      .buttonLearnMore,
+      .buttonAboutMe {
         width: clamp(120px, 15vw, 200px);
         position: absolute;
         right: -2px;
@@ -348,22 +348,6 @@
         cursor: pointer;
         text-align: center;
         transform: translateY(-2%);
-        font-size: clamp(16px, 1vw, 18px);
-        font-family: "Courier New", Courier, monospace;
-      }
-
-      .buttonAboutMe {
-        width: clamp(120px, 20vw, 200px);
-        position: absolute;
-        top: -36px;
-        right: -1px;
-        padding: 10px;
-        background-color: transparent;
-        color: black;
-        border: 1px solid black;
-        cursor: pointer;
-        text-align: center;
-        transform: translateY(-10%);
         font-size: clamp(16px, 1vw, 18px);
         font-family: "Courier New", Courier, monospace;
       }
@@ -413,7 +397,7 @@
 
       .key-pulse {
         text-decoration: none;
-        color: black;
+        color: white;
         padding: clamp(2px, 0.5vw, 5px);
         position: relative;
         display: inline-block;
@@ -422,54 +406,39 @@
           1px -1px 0px transparent, -1px -1px 0px transparent;
       }
 
-      .key-pulse::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border: clamp(1px, 0.3vw, 3px) solid black;
-        animation: pulse 2s infinite;
-        transform-origin: center;
-      }
-
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scale(1.1);
-          opacity: 0.5;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-
-      .key-pulse:hover {
-        background-color: transparent;
-        color: white;
-      }
-
-      .services-intro {
-        padding: clamp(15px, 2vw, 30px);
-        text-align: left;
-        font-size: clamp(16px, 2vw, 18px);
+      .sliding-text-container {
+        text-align: right;
         font-family: monospace;
-        line-height: 1.7;
-        letter-spacing: 0.3px;
-        border: 1px solid #333;
-        margin-bottom: -1px;
-        background-color: transparent;
+        font-size: clamp(20px, 2.5vw, 25px);
+        height: 28.5px;
+        overflow: hidden;
+        position: relative;
+        margin-top: 10px;
       }
 
-      .services-intro p {
-        max-width: 100%;
-        margin: 0 auto;
-        font-size: clamp(14px, 1.8vw, 16px);
+      .sliding-text {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: slide 6s linear infinite;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      @keyframes slide {
+        0%,
+        33% {
+          transform: translateY(0);
+        }
+        34%,
+        66% {
+          transform: translateY(-100%);
+        }
+        67%,
+        100% {
+          transform: translateY(-200%);
+        }
       }
     </style>
   </head>
@@ -504,14 +473,13 @@
         </div>
 
         <div class="right-content connected-boxes">
-          <h3>
-            BranKey was built on the belief that we realize ourselves through
-            the relationships we engage in within the language we use.
-            <br /><br /><br />
-          </h3>
-
-          <div class="box services-intro">
-            <p>Select a traning to receive practical tools</p>
+          <div class="box">
+            <h3>
+              BranKey was built on the belief that we as individuals and
+              organisations realize ourselves through the relationships we
+              engage in within the language we use.
+              <br /><br /><br />
+            </h3>
             <button
               class="buttonAboutMe"
               onclick="window.location.href='about.html'"
@@ -519,7 +487,6 @@
               About Me
             </button>
           </div>
-
           <div class="box">
             <h4 data-label="Training 1: Transform Your Relationships">
               Systemic Coaching
@@ -533,7 +500,7 @@
               class="buttonLearnMore"
               onclick="window.location.href='systemicCoaching.html'"
             >
-              Coaching Programs
+              Coaching Program
             </button>
           </div>
 
@@ -550,7 +517,7 @@
               class="buttonLearnMore"
               onclick="window.location.href='leadershipTraining.html'"
             >
-              Training Program
+              Leaders Program
             </button>
           </div>
           <div class="box">
@@ -575,6 +542,13 @@
       <div class="demo-container">
         <div class="logo-pulse">
           BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
+        </div>
+        <div class="sliding-text-container">
+          <div class="sliding-text">
+            <div>Coaching</div>
+            <div>Leadership</div>
+            <div>Engagement</div>
+          </div>
         </div>
       </div>
     </main>
