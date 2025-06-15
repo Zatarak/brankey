@@ -6,32 +6,25 @@
     <link rel="icon" type="image/png" href="./images/branKeyLogo.png" />
     <meta
       name="description"
-      content="BranKey: Transforming Relationships through Clear Communication and Systemic Coaching"
+      content="We don't teach communication. We create the conditions where important conversations happen naturally."
     />
-    <!-- Favicon Links -->
-    <link rel="icon" href="./images/branKeyLogo.png" type="image/png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-66EQFBS4VH"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-66EQFBS4VH");
-    </script>
-
-    <title>BranKey</title>
+    <title>BranKey - We create space for what matters</title>
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+      }
+
+      .wave-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.6;
       }
 
       body {
@@ -41,11 +34,7 @@
         flex-direction: column;
         font-family: Arial, sans-serif;
         font-size: calc(14px + 0.390625vw);
-        background: linear-gradient(
-          106.5deg,
-          rgba(255, 215, 185, 0.91) 23%,
-          rgba(223, 159, 247, 0.8) 93%
-        );
+        background: transparent;
       }
 
       header {
@@ -65,16 +54,28 @@
         font-family: monospace;
         text-decoration: none;
         color: black;
-        -webkit-text-fill-color: black;
-        -webkit-text-stroke: 1px black;
         transition: all 0.3s ease;
+      }
+
+      .logo .key-part {
+        color: white;
+        -webkit-text-stroke: 1px black;
       }
 
       .menu-btn {
         margin-right: clamp(10px, 2vw, 30px);
         cursor: pointer;
-        font-size: clamp(30px, 3vw, 50px);
+        font-size: clamp(24px, 2.5vw, 36px);
         z-index: 1002;
+        background: none;
+        border: none;
+        color: black;
+        font-family: monospace;
+        transition: all 0.3s ease;
+      }
+
+      .menu-btn:hover {
+        transform: scale(1.1);
       }
 
       .nav-menu {
@@ -84,8 +85,7 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        background-color: black;
-        padding: clamp(20px, 3vw, 40px);
+        background-color: white;
         z-index: 1000;
         justify-content: center;
         align-items: center;
@@ -93,44 +93,108 @@
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
+        padding: 40px;
       }
 
       .nav-menu.active {
         display: flex;
         opacity: 1;
         visibility: visible;
-        background: linear-gradient(
-          123.5deg,
-          rgb(244, 219, 251) 29.3%,
-          rgb(255, 214, 214) 67.1%
-        );
+      }
+
+      .nav-menu-content {
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-title {
+        font-size: clamp(28px, 5vw, 48px);
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        margin-bottom: 40px;
+        background-color: white;
+        padding: 20px;
+        border: 3px solid black;
+        color: black;
+      }
+
+      .nav-links {
+        border: 3px solid black;
+        background-color: white;
+        margin-bottom: 40px;
       }
 
       .nav-menu a {
+        display: block;
         color: black;
         text-decoration: none;
-        display: block;
-        padding: clamp(15px, 2.5vw, 30px) 0;
-        font-size: clamp(24px, 4vw, 48px);
-        text-align: left;
-        transition: color 0.3s ease;
-        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        padding: clamp(20px, 3vw, 25px);
+        font-size: clamp(16px, 2.5vw, 20px);
+        text-align: center;
+        transition: all 0.3s ease;
+        font-family: monospace;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        border-bottom: 2px solid black;
+        background-color: white;
+      }
+
+      .nav-menu a:last-child {
+        border-bottom: none;
       }
 
       .nav-menu a:hover {
-        color: #280288;
+        background-color: pink;
+        transform: translateX(4px);
       }
 
       .close-btn {
         position: absolute;
-        top: 55px;
-        right: 55px;
-        color: black;
-        font-size: clamp(24px, 3vw, 36px);
+        top: clamp(30px, 4vw, 50px);
+        right: clamp(30px, 4vw, 50px);
+        background: black;
+        color: white;
+        border: none;
+        width: clamp(40px, 5vw, 60px);
+        height: clamp(40px, 5vw, 60px);
+        border-radius: 50%;
+        font-size: clamp(20px, 2.5vw, 28px);
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-family: monospace;
+        font-weight: bold;
+      }
+
+      .close-btn:hover {
+        background: pink;
+        color: black;
+        transform: scale(1.1);
+      }
+
+      .nav-footer {
+        font-size: clamp(12px, 1.4vw, 14px);
+        font-family: monospace;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background-color: white;
+        padding: 15px;
+        border: 2px solid black;
       }
 
       .horizontal-line {
+        height: 2px;
+        background-color: #333;
+        margin: 5px 30px;
+      }
+
+      .footer-line {
         height: 2px;
         background-color: #333;
         margin: 5px 30px;
@@ -143,10 +207,17 @@
 
       h1 {
         text-align: center;
-        margin-bottom: clamp(120px, 10vw, 80px);
+        margin-bottom: clamp(60px, 8vw, 80px);
         margin-top: 50px;
-        font-size: clamp(40px, 20vw, 80px);
+        font-size: clamp(30px, 10vw, 80px);
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        line-height: 0.9;
+        letter-spacing: -1px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(2px);
+        padding: 20px;
+        border-radius: 10px;
+        background-color: white;
       }
 
       .h1-line {
@@ -156,374 +227,1420 @@
         margin-bottom: -1px;
       }
 
+      .tagline {
+        text-align: center;
+        font-size: clamp(14px, 2vw, 18px);
+        color: #333;
+        margin-bottom: 16px;
+        font-family: monospace;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-top: 40px;
+      }
+
+      .tagline-highlight {
+        background-color: white;
+        padding: 2px 4px;
+      }
+
+      .subtitle {
+        text-align: center;
+        font-size: clamp(14px, 2vw, 18px);
+        color: #333;
+        margin-bottom: 50px;
+        font-family: monospace;
+        line-height: 1.3;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background-color: white;
+      }
+
+      .big-cta {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+
+      .assessment-button {
+        display: inline-block;
+        padding: clamp(20px, 4vw, 30px) clamp(40px, 8vw, 60px);
+        font-size: clamp(20px, 4vw, 32px);
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        background-color: pink;
+        color: black;
+        border: 3px solid black;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin: 10px;
+      }
+
+      .assessment-button:hover {
+        background: transparent;
+        color: black;
+        border: 2px solid black;
+        transform: translateY(-2px);
+      }
+
+      .secondary-cta {
+        background-color: transparent !important;
+        border-color: black;
+        color: black;
+        font-size: clamp(14px, 2vw, 18px);
+        padding: clamp(12px, 2.5vw, 16px) clamp(24px, 5vw, 32px);
+      }
+
+      .secondary-cta:hover {
+        background: pink !important;
+        border-color: black;
+        color: black;
+      }
+
+      .assessment-explanation {
+        text-align: center;
+        margin: 10px auto 0;
+        background-color: transparent;
+      }
+
+      .explanation-line {
+        font-size: clamp(12px, 1.5vw, 14px);
+        font-family: monospace;
+        color: black;
+        margin: 4px 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Stats Section */
+      .stats-section {
+        border: 3px solid #333;
+        background-color: transparent;
+        padding: clamp(40px, 6vw, 60px);
+        margin: clamp(60px, 10vw, 100px) 0;
+        position: relative;
+      }
+
+      .stats-section::before {
+        content: "RESULTS";
+        position: absolute;
+        top: -15px;
+        left: 30px;
+        background: pink;
+        padding: 5px 15px;
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        border: 2px solid #333;
+      }
+
+      .stat-box {
+        text-align: center;
+        padding: clamp(30px, 5vw, 50px) clamp(20px, 4vw, 30px);
+        border-right: 2px solid #333;
+        background-color: rgba(255, 255, 255, 0.9);
+        transition: all 0.3s ease;
+      }
+
+      .stat-box:last-child {
+        border-right: none;
+      }
+
+      .stat-box:hover {
+        background-color: rgba(255, 255, 255, 1);
+      }
+
+      .stat-number {
+        font-size: clamp(32px, 6vw, 60px);
+        font-weight: bold;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        color: #1a1a1a;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .stat-label {
+        font-size: clamp(10px, 1.5vw, 14px);
+        color: #333;
+        font-family: monospace;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.2;
+      }
+
+      .stats-cta {
+        margin-top: 40px;
+        text-align: center;
+      }
+
+      .stats-cta a {
+        color: #333;
+        text-decoration: underline;
+        font-size: clamp(14px, 1.8vw, 18px);
+        font-family: monospace;
+        text-underline-offset: 4px;
+        font-weight: bold;
+      }
+
+      /* Content Layout */
       .content-container {
         display: flex;
         flex-direction: column;
-        gap: clamp(20px, 3vw, 40px);
+        gap: 0;
         height: auto;
         overflow: visible;
+        margin: clamp(60px, 10vw, 100px) 0;
+        background-color: transparent;
       }
 
       .left-content {
         order: 1;
-        min-width: 300px;
+        border-bottom: 2px solid #333;
+        padding: clamp(30px, 5vw, 50px);
+        background-color: white;
+        border: 3px solid #333;
+        border-bottom: none;
       }
 
       .right-content {
         order: 2;
-        min-width: 300px;
-      }
-
-      h2 {
-        font-size: clamp(30px, 5vw, 36px);
-        margin-bottom: clamp(25px, 2vw, 30px);
-        font-family: monospace;
-        text-align: center;
-        width: 100%;
-        margin: 0 auto;
-        padding-right: 20px;
-      }
-
-      h3 {
-        font-size: clamp(16px, 2vw, 30px);
-        border: 1px solid transparent; /* Change border color to transparent */
-        padding: clamp(15px, 2vw, 40px);
+        display: flex;
+        flex-direction: column;
         background-color: transparent;
-        margin-bottom: 1px;
-        font-family: monospace;
-        padding-top: clamp(90px, 4vw, 90px);
-        padding-bottom: clamp(15px, 2vw, 30px);
-        margin: 0 auto;
-        width: 100%;
-        position: relative;
       }
 
       @media (min-width: 768px) {
         .content-container {
           flex-direction: row;
           align-items: flex-start;
-          justify-content: space-between;
-          gap: 0;
-          padding: 0 15px;
-        }
-        .box {
-          width: 100%;
-          box-sizing: border-box;
-        }
-
-        .buttonLearnMore,
-        .buttonAboutMe {
-          width: auto;
-          min-width: 80px;
-          max-width: 120px;
-        }
-
-        h1,
-        h2,
-        h3,
-        p {
-          word-wrap: break-word;
         }
 
         .left-content {
+          width: 35%;
+          flex: 0 0 35%;
+          border-bottom: none;
+          border-right: 2px solid #333;
           position: sticky;
           top: 20px;
-          width: 30%;
-          flex: 0 0 30%;
+          height: fit-content;
+          border: 3px solid #333;
         }
 
         .right-content {
-          width: 70%;
-          flex: 0 0 70%;
-          /* Removed max-height and overflow-y properties */
-          height: auto;
-          overflow: visible;
+          width: 65%;
+          flex: 1;
+          background-color: transparent;
         }
 
-        .left-content h2 {
-          width: 100%;
-          margin: 0;
+        .connected-boxes {
+          border: 3px solid #333;
+          border-left: none;
         }
 
-        .right-content h3 {
-          width: 100%;
-          border-right: none;
-        }
-        .right-content h3,
-        .right-content .box {
-          width: 100%;
-          border-right: none;
+        .stats-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
 
-      .box {
-        padding: clamp(15px, 2vw, 30px);
-        border: 1px solid #333;
-        margin-bottom: -1px;
+      @media (max-width: 768px) {
+        .left-content {
+          border: 3px solid #333;
+          border-bottom: none;
+        }
+
+        .connected-boxes {
+          border: 3px solid #333;
+          border-top: none;
+        }
+      }
+
+      h2 {
+        font-size: clamp(24px, 4vw, 36px);
+        font-family: monospace;
+        font-weight: bold;
+        line-height: 1.1;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+      }
+
+      .left-content p {
+        font-size: clamp(14px, 2vw, 16px);
+        font-family: monospace;
+        line-height: 1.4;
+        margin-top: 20px;
+        color: #333;
+      }
+
+      /* Conversation Boxes */
+      .connected-boxes {
+        display: flex;
+        flex-direction: column;
         background-color: transparent;
-        position: relative;
-        overflow: visible;
-        transition: transparent 0.3s ease;
-      }
-
-      .box:hover {
-        background-color: rgba(255, 255, 255, 0.1);
       }
 
       .connected-boxes .box {
-        border-bottom: none;
+        border: none;
+        border-bottom: 2px solid #333;
+        margin-bottom: 0;
+        background-color: white;
+        position: relative;
+        overflow: visible;
+        transition: all 0.3s ease;
+        padding: clamp(30px, 5vw, 50px);
+        cursor: pointer;
       }
 
       .connected-boxes .box:last-child {
-        border-bottom: 1px solid #333 !important;
+        border-bottom: none;
       }
 
-      h4::before,
-      h5::before,
-      h6::before {
-        content: attr(data-label);
+      .connected-boxes .box:hover {
+        background-color: rgba(255, 255, 255, 1);
+        transform: translateX(2px);
+      }
+
+      .connected-boxes .box.collapsed {
+        background-color: white;
+      }
+
+      .connected-boxes .box.expanded {
+        background-color: white;
+      }
+
+      @media (max-width: 768px) {
+        .connected-boxes .box.collapsed {
+          background: white;
+        }
+      }
+
+      .conversation-label {
         position: absolute;
-        top: -65px;
+        top: -2px;
         left: 0;
-        color: black;
-        font-size: 14px;
-        text-decoration: underline;
-        display: inline-block;
+        background: black;
+        color: white;
+        padding: 8px 10px;
         font-family: monospace;
-        padding: 15px 5px;
+        font-size: clamp(10px, 1.2vw, 12px);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        margin-bottom: 10px;
       }
 
-      h4::before {
-        content: "Training 1: Transform Your Relationships";
-      }
-
-      h5::before {
-        content: "Training 2: Elevate Your Team";
-      }
-
-      h6::before {
-        content: "Training 3: Build Stronger Communities";
-      }
-
-      h4,
-      h5,
-      h6 {
-        position: relative;
-        font-size: clamp(35px, 4vw, 32px);
-        margin-bottom: clamp(35px, 3vw, 60px);
-        margin-top: 50px;
-        font-family: monospace;
-        overflow: visible;
-        text-align: left;
-        margin-left: 0;
-        padding-left: 0;
-        width: 100%;
-      }
-
-      p {
-        font-size: clamp(18px, 4vw, 15px);
+      .conversation-trigger {
+        font-style: normal;
+        color: #666;
+        margin-bottom: 0px;
+        margin-top: -5px;
+        font-size: clamp(14px, 1.8vw, 16px);
         font-family: monospace;
       }
 
-      .quote {
-        font-size: clamp(20px, 2vw, 20px);
-        font-family: "Courier New", Courier, monospace;
-      }
-
-      .author {
-        font-size: clamp(20px, 2.5vw, 15px);
-        font-family: "Courier New", Courier, monospace;
-      }
-
-      .buttonLearnMore,
-      .buttonAboutMe {
-        width: clamp(120px, 15vw, 200px);
+      .conversation-arrow {
         position: absolute;
-        right: -2px;
-        bottom: -1px;
-        padding: 10px;
+        top: clamp(35px, 5vw, 45px);
+        right: 20px;
+        font-size: clamp(16px, 2vw, 20px);
+        transition: transform 0.3s ease;
+        color: #333;
+      }
+
+      .box.expanded .conversation-arrow {
+        transform: rotate(180deg);
+      }
+
+      .conversation-expanded {
+        display: none;
+        margin-top: 5px;
+        padding-top: 5px;
+        border-top: 1px solid #ddd;
+      }
+
+      .box.expanded .conversation-expanded {
+        display: block;
+      }
+
+      .conversation-description {
+        font-size: clamp(14px, 1.8vw, 16px);
+        line-height: 1.4;
+        font-family: monospace;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .modal-content-inline {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+      }
+
+      .modal-content-inline .modal-insight {
+        font-size: clamp(14px, 1.6vw, 16px);
+        font-family: monospace;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        color: #333;
+        padding-left: 15px;
+        border-left: 3px solid pink;
+      }
+
+      .modal-content-inline .modal-insight strong {
+        color: black;
+        display: block;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: clamp(12px, 1.4vw, 14px);
+      }
+
+      .explore-button {
+        display: inline-block;
+        padding: 6px 12px;
         background-color: transparent;
         color: black;
-        border: 1px solid black;
+        border: 2px solid black;
         cursor: pointer;
         text-align: center;
-        transform: translateY(-2%);
-        font-size: clamp(16px, 1vw, 18px);
-        font-family: "Courier New", Courier, monospace;
-      }
-
-      .buttonLearnMore,
-      .buttonAboutMe {
+        font-size: clamp(8px, 1.1vw, 10px);
+        font-family: monospace;
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 1px;
+        text-decoration: none;
       }
 
-      button:hover {
+      .explore-button:hover {
         background: pink;
         color: black;
-        border: 1px solid black;
+        border: 2px solid black;
+      }
+
+      /* Begin Conversation Button */
+      .begin-conversation-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: pink;
+        color: black;
+        border: 2px solid black;
+        cursor: pointer;
+        text-align: center;
+        font-size: clamp(12px, 1.4vw, 14px);
+        font-family: monospace;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        margin-top: 20px;
+      }
+
+      .begin-conversation-btn:hover {
+        background: black;
+        color: white;
+        transform: translateY(-1px);
+      }
+
+      /* Testimonials Section */
+      .testimonials {
+        border: 3px solid #333;
+        background-color: white;
+        padding: clamp(40px, 6vw, 80px);
+        margin: clamp(60px, 10vw, 100px) 0;
+        position: relative;
+      }
+
+      .testimonials::before {
+        content: "TESTIMONIALS";
+        position: absolute;
+        top: -15px;
+        left: 30px;
+        background: pink;
+        padding: 5px 15px;
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+      }
+
+      .testimonials .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .testimonials h2 {
+        font-size: clamp(24px, 4vw, 40px);
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        margin-bottom: clamp(40px, 6vw, 60px);
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        text-align: center;
+      }
+
+      .testimonials-carousel {
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #333;
+        background: white;
+      }
+
+      .testimonials-track {
+        display: flex;
+        transition: transform 0.5s ease;
+        width: 300%;
+      }
+
+      .testimonial {
+        width: 33.333%;
+        display: flex;
+        align-items: center;
+        padding: clamp(30px, 5vw, 50px);
+        gap: clamp(20px, 4vw, 40px);
+        min-height: 200px;
+      }
+
+      .testimonial-content {
+        flex: 1;
+      }
+
+      .testimonial-text {
+        font-size: clamp(16px, 2.2vw, 20px);
+        font-family: monospace;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        color: #333;
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        font-size: clamp(14px, 1.8vw, 16px);
+        font-family: monospace;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: black;
+      }
+
+      .testimonial-image {
+        width: clamp(60px, 8vw, 80px);
+        height: clamp(60px, 8vw, 80px);
+        border: 2px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(18px, 3vw, 24px);
+        font-family: monospace;
+        font-weight: bold;
+        background: white;
+        flex-shrink: 0;
+      }
+
+      .testimonial-dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 30px;
+        padding: 20px 0;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border: 2px solid black;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .dot.active {
+        background: black;
+      }
+
+      .dot:hover {
+        background: pink;
+      }
+
+      @media (max-width: 768px) {
+        .testimonial {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .testimonial-image {
+          order: -1;
+          margin-bottom: 20px;
+        }
+      }
+
+      /* Services Section */
+      .services-section {
+        border: 3px solid #333;
+        background-color: transparent;
+        padding: clamp(40px, 6vw, 80px);
+        margin: clamp(60px, 10vw, 100px) 0;
+        position: relative;
+      }
+
+      .services-section::before {
+        content: "HOW WE WORK";
+        position: absolute;
+        top: -15px;
+        left: 30px;
+        background: pink;
+        padding: 5px 15px;
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+      }
+
+      .services-title {
+        font-size: clamp(24px, 4vw, 40px);
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        margin-bottom: clamp(40px, 6vw, 60px);
+        text-transform: uppercase;
+        letter-spacing: -1px;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        border: 2px solid #333;
+      }
+
+      @media (min-width: 768px) {
+        .services-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .service-box {
+        padding: clamp(25px, 4vw, 40px);
+        border-bottom: 2px solid #333;
+        background: rgba(255, 255, 255, 0.9);
+        position: relative;
+        min-height: 200px;
+        transition: all 0.3s ease;
+      }
+
+      @media (min-width: 768px) {
+        .service-box {
+          border-bottom: none;
+          border-right: 2px solid #333;
+        }
+
+        .service-box:last-child {
+          border-right: none;
+        }
+      }
+
+      .service-box:hover {
+        background: rgba(255, 255, 255, 1);
+      }
+
+      .service-box h3 {
+        font-size: clamp(18px, 2.5vw, 24px);
+        margin-bottom: 16px;
+        font-family: monospace;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .service-description {
+        margin-bottom: 16px;
+        font-size: clamp(14px, 1.5vw, 16px);
+        font-family: monospace;
+        line-height: 1.4;
+      }
+
+      .service-details {
+        font-size: clamp(12px, 1.4vw, 14px);
+        color: #666;
+        margin-bottom: 20px;
+        font-family: monospace;
+        line-height: 1.3;
+      }
+
+      .service-cta {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: clamp(8px, 1.1vw, 10px);
+        font-family: monospace;
+        background-color: transparent;
+        color: black;
+        border: 2px solid black;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .service-cta:hover {
+        background: pink;
+        color: black;
+      }
+
+      /* BranKey Section */
+      .brankey-section {
+        text-align: center;
+        padding: clamp(60px, 8vw, 100px) 0;
+      }
+
+      .brankey-intro {
+        margin-bottom: 30px;
+      }
+
+      .brankey-intro p {
+        font-size: clamp(16px, 2.5vw, 20px);
+        font-family: monospace;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background-color: white;
+        display: inline-block;
+        padding: 10px 20px;
+        border: 2px solid black;
+      }
+
+      .brankey-intro strong {
+        color: black;
+        font-weight: bold;
+      }
+
+      .logo-pulse {
+        font-size: clamp(60px, 10vw, 120px);
+        font-weight: bold;
+        font-family: monospace;
+        line-height: 1;
+      }
+
+      .key-pulse {
+        text-decoration: none;
+        color: white;
+        padding: clamp(4px, 1vw, 8px);
+        position: relative;
+        display: inline-block;
+        -webkit-text-stroke: 2px black;
+        text-shadow: 2px 2px 0px transparent, -2px 2px 0px transparent,
+          2px -2px 0px transparent, -2px -2px 0px transparent;
+        transition: all 0.3s ease;
+      }
+
+      .key-pulse:hover {
+        background: transparent;
+        color: transparent;
+        border: 2px solid black;
       }
 
       footer {
         background-color: transparent;
         padding: clamp(20px, 3vw, 40px);
         text-align: center;
-        margin-top: clamp(10px, 2vw, 20px);
       }
 
       footer a {
         text-decoration: underline;
         color: black;
-        margin: 0 clamp(1px, 0.5vw, 10px);
-        font-size: clamp(10px, 1.5vw, 20px);
+        margin: 0 clamp(5px, 1vw, 15px);
+        font-size: clamp(12px, 1.5vw, 16px);
         font-family: monospace;
-      }
-
-      .demo-container {
-        padding: clamp(10px, 2vw, 30px);
-        font-family: monospace;
-      }
-
-      .logo-pulse {
-        display: block;
-        font-size: clamp(60px, 4vw, 40px);
-        margin: clamp(20px, 1vw, 20px) 0;
         font-weight: bold;
-        text-align: center;
-        padding-top: 40px;
-        line-height: 1.2;
       }
 
-      .key-pulse {
-        text-decoration: none;
-        color: white;
-        padding: clamp(2px, 0.5vw, 5px);
+      /* Mobile Responsive */
+      @media (max-width: 767px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stat-box {
+          border-right: none;
+          border-bottom: 2px solid #333;
+        }
+
+        .stat-box:last-child {
+          border-bottom: none;
+        }
+
+        .big-cta {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+      }
+
+      /* Desktop: Show line breaks after each word */
+      @media (min-width: 769px) {
+        .left-content h2 {
+          line-height: 1.1;
+        }
+        .left-content h2 .word {
+          display: block;
+        }
+      }
+
+      /* Mobile: Show normal text flow */
+      @media (max-width: 768px) {
+        .left-content h2 {
+          line-height: 1.1;
+        }
+        .left-content h2 .word {
+          display: inline;
+        }
+      }
+
+      /* Modal Styles */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        background: white;
+        border: 3px solid black;
+        max-width: 600px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 40px;
         position: relative;
-        display: inline-block;
-        -webkit-text-stroke: 1px black;
-        text-shadow: 1px 1px 0px transparent, -1px 1px 0px transparent,
-          1px -1px 0px transparent, -1px -1px 0px transparent;
+        margin: 20px;
       }
 
-      .key-pulse:hover {
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: black;
+      }
+
+      .modal-title {
+        font-size: clamp(24px, 4vw, 32px);
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+      }
+
+      .modal-insight {
+        font-size: clamp(16px, 2vw, 18px);
+        font-family: monospace;
+        margin-bottom: 30px;
+        font-style: italic;
+        color: #666;
+      }
+
+      .impact-section {
+        margin-bottom: 25px;
+        border-left: 4px solid pink;
+        padding-left: 20px;
+      }
+
+      .impact-level {
+        font-size: clamp(14px, 1.8vw, 16px);
+        font-family: monospace;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        color: black;
+      }
+
+      .impact-description {
+        font-size: clamp(14px, 1.6vw, 16px);
+        font-family: monospace;
+        line-height: 1.5;
+        color: #333;
+      }
+
+      .modal-cta-section {
+        margin-top: 40px;
+        text-align: center;
+        padding-top: 30px;
+        border-top: 2px solid #333;
+      }
+
+      .modal-cta-section .cta {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: clamp(14px, 2vw, 16px);
+        font-family: monospace;
+        background-color: pink;
+        color: black;
+        border: 2px solid black;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin: 5px;
+      }
+
+      .modal-cta-section .cta:hover {
         background: transparent;
-        color: transparent;
-        border: 1px solid black;
+        color: black;
+        transform: translateY(-2px);
+      }
+
+      .modal-cta-section .cta-secondary {
+        background-color: transparent;
+      }
+
+      .modal-cta-section .cta-secondary:hover {
+        background: pink;
       }
     </style>
   </head>
   <body>
+    <video class="wave-background" autoplay muted loop>
+      <source
+        src="file:///Users/brankica/Desktop/brankey/userProfile/video/wave-background.mp4"
+        type="video/mp4"
+      />
+    </video>
+
     <header>
-      <a href="index.html" class="logo">BranKey</a>
+      <a href="index.html" class="logo"
+        >BRAN<span class="key-part">KEY</span></a
+      >
+
       <div class="menu-btn">☰</div>
     </header>
 
     <nav class="nav-menu">
       <div class="close-btn">×</div>
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="services.html" class="nav-link">Training</a>
-      <a href="keyResources.html" class="nav-link">KEY Resources</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="nav-menu-content">
+        <h2 class="nav-title">Navigation</h2>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="keyResource.html" class="nav-link">KEY Resources</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-footer">We create space for what matters</div>
+      </div>
     </nav>
 
     <div class="horizontal-line"></div>
 
     <main class="main-content">
-      <h1>
-        Clear Thinking <br />
-        Connects Systems
-      </h1>
+      <div class="tagline">
+        <span class="tagline-highlight">We create space for what matters</span>
+      </div>
+
+      <h1>What happens when you feel safe to speak?</h1>
+
+      <div class="subtitle">
+        We help design environments where communication flows naturally
+      </div>
+
+      <div class="big-cta">
+        <a href="assessment.html" class="assessment-button">Start Assessment</a>
+        <a href="#truth" class="assessment-button secondary-cta"
+          >Our Approach</a
+        >
+      </div>
+
+      <div class="assessment-explanation">
+        <p class="explanation-line">3 questions • 1 insight • 1 suggestion</p>
+        <p class="explanation-line">90 seconds to clarity</p>
+      </div>
+
       <div class="h1-line"></div>
 
-      <div class="content-container">
+      <!-- Stats Section -->
+      <section class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-number">35%</div>
+            <div class="stat-label">Better feedback quality</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">40%</div>
+            <div class="stat-label">Fewer conflicts</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">2.1×</div>
+            <div class="stat-label">More proactive conversations</div>
+          </div>
+        </div>
+        <div class="stats-cta">
+          <a href="caseStudy.html">READ THE COMPLETE CASE STUDY →</a>
+        </div>
+      </section>
+
+      <div class="content-container" id="truth">
         <div class="left-content">
-          <br />
-          <h2>I focus on clear communication and responsibility.</h2>
+          <h2>
+            <span class="word">Your</span> <span class="word">team</span>
+            <span class="word">knows</span> <span class="word">how</span>
+            <span class="word">to</span> <span class="word">talk.</span>
+            <br />
+            <span class="word">They</span> <span class="word">need</span>
+            <span class="word">a</span> <span class="word">safe</span>
+            <span class="word">space</span> <span class="word">to</span>
+            <span class="word">say</span> <span class="word">it.</span>
+            <br />
+          </h2>
+          <p>
+            The most genuine conversations emerge when the environment supports
+            them. We help you create that environment.
+          </p>
+          <p>
+            Through carefully designed experiences, we remove the invisible
+            barriers that keep important things unsaid.
+          </p>
         </div>
 
         <div class="right-content connected-boxes">
-          <div class="box">
-            <h3>
-              BranKey was built on the belief that we as individuals and
-              organisations realize ourselves through the relationships we
-              engage in within the language we use.
-              <br /><br /><br />
-            </h3>
-            <button
-              class="buttonAboutMe"
-              onclick="window.location.href='about.html'"
-            >
-              About Me
-            </button>
-          </div>
-          <div class="box">
-            <h4 data-label="Training 1: Transform Your Relationships">
-              Systemic Coaching
-            </h4>
-            <p>
-              When individuals feel stuck in patterns or seek deeper
-              self-understanding, while professionals strive to develop skills
-              and organizations aim to improve collaboration
-            </p>
-            <br /><br /><br />
-            <button
-              class="buttonLearnMore"
-              onclick="window.location.href='systemicCoaching.html'"
-            >
-              Coaching Program
-            </button>
+          <div class="box" onclick="toggleConversation(this)">
+            <div class="conversation-label">
+              CONVERSATION 01: IMPOSTER SYNDROME
+            </div>
+            <div class="conversation-trigger">
+              I don't know if I can do that
+            </div>
+            <div class="conversation-arrow">▼</div>
+            <div class="conversation-expanded">
+              <p class="conversation-description">
+                Transform self-doubt into self-advocacy. Own your expertise
+                without waiting for permission.
+              </p>
+              <div class="modal-content-inline">
+                <p class="modal-insight">
+                  <strong>What's really happening:</strong> You DO know how to
+                  do it. You're afraid others will discover you figured it out
+                  differently than they would have. You're not missing knowledge
+                  - you're missing permission to own your unique approach.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>The cost of this pattern:</strong> Your breakthrough
+                  ideas stay locked inside. Team loses your distinct
+                  perspective. You burn energy trying to sound "expert enough"
+                  instead of being useful. Others make decisions without your
+                  crucial input.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>What shifts:</strong> From "Do I know enough?" to
+                  "What do I know that others don't?" The question becomes: How
+                  can my different way of seeing this help the team?
+                </p>
+
+                <a
+                  href="https://calendly.com/brankeey/brankey-session?prefill_custom_1=Imposter%20Syndrome&prefill_custom_2=Individual%20Session"
+                  target="_blank"
+                  class="begin-conversation-btn"
+                  >Begin This Conversation</a
+                >
+              </div>
+            </div>
           </div>
 
-          <div class="box">
-            <h5 data-label="Training 2: Elevate Your Team">
-              Leadership Training
-            </h5>
-            <p>
-              When skills lack encouragement that foster collaboration and
-              resilient teams
-            </p>
-            <br /><br /><br />
-            <button
-              class="buttonLearnMore"
-              onclick="window.location.href='leadershipTraining.html'"
-            >
-              Leaders Program
-            </button>
+          <div class="box" onclick="toggleConversation(this)">
+            <div class="conversation-label">
+              CONVERSATION 02: FEEDBACK RECEPTION
+            </div>
+            <div class="conversation-trigger">Not taking things personally</div>
+            <div class="conversation-arrow">▼</div>
+            <div class="conversation-expanded">
+              <p class="conversation-description">
+                Transform feedback from threat to information. Build resilience
+                to hear what helps you grow.
+              </p>
+              <div class="modal-content-inline">
+                <p class="modal-insight">
+                  <strong>What's really happening:</strong> Your nervous system
+                  treats criticism like physical danger. When someone says "this
+                  could be better," your brain hears "you are inadequate" and
+                  activates fight-or-flight. You literally can't process useful
+                  information when you're in threat mode.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>The cost of this pattern:</strong> Feedback →
+                  Defensive reaction → Miss the useful part → Relationship
+                  damage → Less feedback → Worse performance → More criticism
+                </p>
+
+                <p class="modal-insight">
+                  <strong>What shifts:</strong> Learn to create a 3-second pause
+                  between "hearing words" and "making it personal." The feedback
+                  isn't about your worth - it's data about impact. You can
+                  disagree with feedback without defending your entire identity.
+                </p>
+
+                <a
+                  href="https://calendly.com/brankeey/brankey-session?prefill_custom_1=Feedback%20Reception&prefill_custom_2=Individual%20Session"
+                  target="_blank"
+                  class="begin-conversation-btn"
+                  >Begin This Conversation</a
+                >
+              </div>
+            </div>
           </div>
-          <div class="box">
-            <h6 data-label="Training 3: Build Stronger Communities">
-              Community Engagement
-            </h6>
-            <p>
-              When organisational culture lacks authentic communication and
-              mutual understanding
-            </p>
-            <br /><br /><br />
-            <button
-              class="buttonLearnMore"
-              onclick="window.location.href='communityEngagement.html'"
-            >
-              Community Program
-            </button>
+
+          <div class="box" onclick="toggleConversation(this)">
+            <div class="conversation-label">
+              CONVERSATION 03: ENABLING VS. EMPOWERING
+            </div>
+            <div class="conversation-trigger">Enabling others</div>
+            <div class="conversation-arrow">▼</div>
+            <div class="conversation-expanded">
+              <p class="conversation-description">
+                Stop solving problems for people who need to solve them
+                themselves. Coach instead of rescue.
+              </p>
+              <div class="modal-content-inline">
+                <p class="modal-insight">
+                  <strong>What's really happening:</strong> You solve their
+                  problem because watching them struggle feels worse than being
+                  overwhelmed yourself. But every time you rescue someone, you
+                  rob them of the chance to build their own capability. You're
+                  not helping - you're creating dependency.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>The cost of this pattern:</strong> You become the
+                  bottleneck for everything. Others never develop their own
+                  problem-solving muscles. You're exhausted while they're
+                  under-challenged. Team can't function without you.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>What shifts:</strong> From "How do I solve this for
+                  them?" to "How do I help them solve this themselves?" Ask:
+                  "What would you try first?" instead of providing solutions.
+                </p>
+
+                <a
+                  href="https://calendly.com/brankeey/brankey-session?prefill_custom_1=Enabling%20vs%20Empowering&prefill_custom_2=Individual%20Session"
+                  target="_blank"
+                  class="begin-conversation-btn"
+                  >Begin This Conversation</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="box" onclick="toggleConversation(this)">
+            <div class="conversation-label">
+              CONVERSATION 04: EMOTIONAL REGULATION
+            </div>
+            <div class="conversation-trigger">Respond, don't react</div>
+            <div class="conversation-arrow">▼</div>
+            <div class="conversation-expanded">
+              <p class="conversation-description">
+                Master your triggers before they master you. Create space
+                between feeling and action.
+              </p>
+              <div class="modal-content-inline">
+                <p class="modal-insight">
+                  <strong>What's really happening:</strong> Someone pushes your
+                  button and you're already reacting - heart racing, words
+                  flying, decisions made from emotion. You know you should "stay
+                  calm" but your nervous system is already running the show. The
+                  trigger owns you instead of you owning your response.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>The cost of this pattern:</strong> Trigger → Immediate
+                  reaction → Damage done → Regret → Promise to do better → Same
+                  trigger → Same reaction
+                </p>
+
+                <p class="modal-insight">
+                  <strong>What shifts:</strong> Notice the physical sensation
+                  BEFORE the emotion takes over. That tight chest, clenched jaw,
+                  or heat rising - that's your early warning system. You have
+                  about 3 seconds to choose your response instead of being
+                  hijacked by it.
+                </p>
+
+                <a
+                  href="https://calendly.com/brankeey/brankey-session?prefill_custom_1=Emotional%20Regulation&prefill_custom_2=Individual%20Session"
+                  target="_blank"
+                  class="begin-conversation-btn"
+                  >Begin This Conversation</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="box" onclick="toggleConversation(this)">
+            <div class="conversation-label">
+              CONVERSATION 05: MEANINGFUL WORK
+            </div>
+            <div class="conversation-trigger">Good work isn't enough</div>
+            <div class="conversation-arrow">▼</div>
+            <div class="conversation-expanded">
+              <p class="conversation-description">
+                Bridge the gap between achievement and fulfillment. Find purpose
+                beyond performance.
+              </p>
+              <div class="modal-content-inline">
+                <p class="modal-insight">
+                  <strong>What's really happening:</strong> You've optimized for
+                  performance metrics that don't actually matter to you. Every
+                  achievement feels hollow because you're succeeding at someone
+                  else's definition of success. You're climbing a ladder leaning
+                  against the wrong wall.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>The cost of this pattern:</strong> Energy drain from
+                  work that doesn't energize you. Success feels empty instead of
+                  fulfilling. You become good at things you don't care about.
+                  Burnout disguised as high performance.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>What shifts:</strong> From "Am I doing this well?" to
+                  "Does this matter to me?" The shift: Finding the intersection
+                  between what you're good at and what actually energizes you,
+                  not just what gets rewarded.
+                </p>
+
+                <a
+                  href="https://calendly.com/brankeey/brankey-session?prefill_custom_1=Meaningful%20Work&prefill_custom_2=Individual%20Session"
+                  target="_blank"
+                  class="begin-conversation-btn"
+                  >Begin This Conversation</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="box" onclick="toggleConversation(this)">
+            <div class="conversation-label">CONVERSATION 06: BOUNDARIES</div>
+            <div class="conversation-trigger">Saying no</div>
+            <div class="conversation-arrow">▼</div>
+            <div class="conversation-expanded">
+              <p class="conversation-description">
+                Set limits without guilt. Protect your energy while maintaining
+                relationships.
+              </p>
+              <div class="modal-content-inline">
+                <p class="modal-insight">
+                  <strong>What's really happening:</strong> You say yes because
+                  saying no feels selfish, even when yes means breaking a
+                  promise to yourself or your family. You prioritize everyone
+                  else's urgent over your own important. Your calendar becomes
+                  everyone else's agenda.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>The cost of this pattern:</strong> Your priorities get
+                  pushed aside for everyone else's. Resentment builds toward the
+                  people you're "helping". Quality of your work drops because
+                  you're spread too thin. The people who matter most get your
+                  leftover energy.
+                </p>
+
+                <p class="modal-insight">
+                  <strong>What shifts:</strong> From "How can I make this work?"
+                  to "What am I saying no to if I say yes to this?" Every yes is
+                  a no to something else. Make that trade-off conscious instead
+                  of automatic.
+                </p>
+
+                <a
+                  href="https://calendly.com/brankeey/brankey-session?prefill_custom_1=Boundaries&prefill_custom_2=Individual%20Session"
+                  target="_blank"
+                  class="begin-conversation-btn"
+                  >Begin This Conversation</a
+                >
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="demo-container">
+      <!-- Services Section -->
+      <section class="services-section">
+        <h2 class="services-title">CO-CREATING DOMAINS OF ACTION</h2>
+
+        <div class="services-grid">
+          <div class="service-box">
+            <h3>1-ON-1 SESSIONS</h3>
+            <p class="service-description">
+              Enter the conversation that's already shaping you.
+            </p>
+            <p class="service-details">
+              60 minutes<br />
+              Virtual or in-person<br />
+              from €90
+            </p>
+            <a
+              href="https://calendly.com/brankeey/brankey-session"
+              target="_blank"
+              class="service-cta"
+              >BEGIN</a
+            >
+          </div>
+
+          <div class="service-box">
+            <h3>TEAM WORKSHOPS</h3>
+            <p class="service-description">
+              Create space for what wants to emerge within your team.
+            </p>
+            <p class="service-details">
+              Half or full day<br />
+              8-15 people<br />
+              from €2,500
+            </p>
+            <a
+              href="https://calendly.com/brankeey/team-workshop-consultation"
+              target="_blank"
+              class="service-cta"
+              >EXPLORE</a
+            >
+          </div>
+
+          <div class="service-box">
+            <h3>INTERNAL DESIGN</h3>
+            <p class="service-description">
+              Build BranKey's conversation practices into your culture.
+            </p>
+            <p class="service-details">
+              Multi-session engagement<br />
+              Custom pricing
+            </p>
+            <a href="mailto:brankeey@gmail.com" class="service-cta">CONTACT</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="testimonials">
+        <div class="container">
+          <h2>What transformation looks like</h2>
+
+          <div class="testimonials-carousel">
+            <div class="testimonials-track" id="testimonialsTrack">
+              <div class="testimonial">
+                <div class="testimonial-content">
+                  <p class="testimonial-text">
+                    "I used to dread feedback conversations. Now I see them as
+                    opportunities to grow. The shift wasn't in what I learned to
+                    say – it was in understanding why I was afraid to listen."
+                  </p>
+                  <p class="testimonial-author">
+                    Sarah Mitchell, Senior Developer
+                  </p>
+                </div>
+                <div class="testimonial-image">
+                  <p>SM</p>
+                </div>
+              </div>
+
+              <div class="testimonial">
+                <div class="testimonial-content">
+                  <p class="testimonial-text">
+                    "Our team went from avoiding difficult topics to seeking
+                    them out. BranKey didn't give us a script – they gave us
+                    permission to be human."
+                  </p>
+                  <p class="testimonial-author">David Chen, Product Lead</p>
+                </div>
+                <div class="testimonial-image">
+                  <p>DC</p>
+                </div>
+              </div>
+
+              <div class="testimonial">
+                <div class="testimonial-content">
+                  <p class="testimonial-text">
+                    "The biggest change? I stopped carrying everyone else's
+                    problems. Now I help them find their own solutions. I'm less
+                    exhausted and they're more capable."
+                  </p>
+                  <p class="testimonial-author">
+                    Maria Rodriguez, Engineering Manager
+                  </p>
+                </div>
+                <div class="testimonial-image">
+                  <p>MR</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-dots">
+              <span class="dot active" onclick="goToTestimonial(0)"></span>
+              <span class="dot" onclick="goToTestimonial(1)"></span>
+              <span class="dot" onclick="goToTestimonial(2)"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="brankey-section">
+        <div class="brankey-intro">
+          <p>
+            Click the <strong>KEY</strong> to learn more about me and the
+            process
+          </p>
+        </div>
         <div class="logo-pulse">
-          BRAN<a href="keyResources.html" class="key-pulse">KEY</a>
+          BRAN<a href="about.html" class="key-pulse">KEY</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer-line"></div>
+
+    <footer>
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="keyResource.html">KEY RESOURCES</a>
+      <a href="contact.html">CONTACT</a>
+    </footer>
+
+    <!-- Modal -->
+    <div id="conversationModal" class="modal-overlay">
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeConversationModal()">
+          ×
+        </button>
+        <div id="conversationModalContent">
+          <!-- Content will be inserted here by JavaScript -->
         </div>
       </div>
-    </main>
-    <footer>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Training</a>
-      <a href="keyResources.html">KEY Resources</a>
-      <a href="contact.html">Contact</a>
-    </footer>
+    </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -540,6 +1657,195 @@
           if (e.target.classList.contains("nav-link")) {
             toggleMenu();
           }
+        });
+      });
+
+      // Conversation data for modals
+      const conversationData = {
+        feedback: {
+          title: "Feedback Reception",
+          trigger: "Feedback feels like an attack on who you are",
+          happening:
+            'Your nervous system treats criticism like physical danger. When someone says "this could be better," your brain hears "you are inadequate" and activates fight-or-flight. You literally can\'t process useful information when you\'re in threat mode.',
+          cost: "Feedback → Defensive reaction → Miss the useful part → Relationship damage → Less feedback → Worse performance → More criticism",
+          shift:
+            'Learn to create a 3-second pause between "hearing words" and "making it personal." The feedback isn\'t about your worth - it\'s data about impact. You can disagree with feedback without defending your entire identity.',
+          calendlyUrl:
+            "https://calendly.com/brankeey/brankey-session?prefill_custom_1=Feedback%20Reception&prefill_custom_2=Individual%20Session",
+        },
+        imposter: {
+          title: "Imposter Syndrome",
+          trigger: '"I don\'t know if I can do that"',
+          happening:
+            "You DO know how to do it. You're afraid others will discover you figured it out differently than they would have. You're not missing knowledge - you're missing permission to own your unique approach.",
+          cost: 'Your breakthrough ideas stay locked inside. Team loses your distinct perspective. You burn energy trying to sound "expert enough" instead of being useful. Others make decisions without your crucial input.',
+          shift:
+            'From "Do I know enough?" to "What do I know that others don\'t?" The question becomes: How can my different way of seeing this help the team?',
+          calendlyUrl:
+            "https://calendly.com/brankeey/brankey-session?prefill_custom_1=Imposter%20Syndrome&prefill_custom_2=Individual%20Session",
+        },
+        enabling: {
+          title: "Enabling vs. Empowering",
+          trigger: "Jumping in to solve problems that aren't yours",
+          happening:
+            "You solve their problem because watching them struggle feels worse than being overwhelmed yourself. But every time you rescue someone, you rob them of the chance to build their own capability. You're not helping - you're creating dependency.",
+          cost: "You become the bottleneck for everything. Others never develop their own problem-solving muscles. You're exhausted while they're under-challenged. Team can't function without you.",
+          shift:
+            'From "How do I solve this for them?" to "How do I help them solve this themselves?" Ask: "What would you try first?" instead of providing solutions.',
+          calendlyUrl:
+            "https://calendly.com/brankeey/brankey-session?prefill_custom_1=Enabling%20vs%20Empowering&prefill_custom_2=Individual%20Session",
+        },
+        emotion: {
+          title: "Emotional Regulation",
+          trigger: "Your body responds before your brain catches up",
+          happening:
+            'Someone pushes your button and you\'re already reacting - heart racing, words flying, decisions made from emotion. You know you should "stay calm" but your nervous system is already running the show. The trigger owns you instead of you owning your response.',
+          cost: "Trigger → Immediate reaction → Damage done → Regret → Promise to do better → Same trigger → Same reaction",
+          shift:
+            "Notice the physical sensation BEFORE the emotion takes over. That tight chest, clenched jaw, or heat rising - that's your early warning system. You have about 3 seconds to choose your response instead of being hijacked by it.",
+          calendlyUrl:
+            "https://calendly.com/brankeey/brankey-session?prefill_custom_1=Emotional%20Regulation&prefill_custom_2=Individual%20Session",
+        },
+        meaningful: {
+          title: "Meaningful Work",
+          trigger: "\"I'm successful but something's still missing\"",
+          happening:
+            "You've optimized for performance metrics that don't actually matter to you. Every achievement feels hollow because you're succeeding at someone else's definition of success. You're climbing a ladder leaning against the wrong wall.",
+          cost: "Energy drain from work that doesn't energize you. Success feels empty instead of fulfilling. You become good at things you don't care about. Burnout disguised as high performance.",
+          shift:
+            'From "Am I doing this well?" to "Does this matter to me?" The shift: Finding the intersection between what you\'re good at and what actually energizes you, not just what gets rewarded.',
+          calendlyUrl:
+            "https://calendly.com/brankeey/brankey-session?prefill_custom_1=Meaningful%20Work&prefill_custom_2=Individual%20Session",
+        },
+        boundaries: {
+          title: "Boundaries",
+          trigger: '"I should say no, but..." and then you say yes',
+          happening:
+            "You say yes because saying no feels selfish, even when yes means breaking a promise to yourself or your family. You prioritize everyone else's urgent over your own important. Your calendar becomes everyone else's agenda.",
+          cost: "Your priorities get pushed aside for everyone else's. Resentment builds toward the people you're \"helping\". Quality of your work drops because you're spread too thin. The people who matter most get your leftover energy.",
+          shift:
+            'From "How can I make this work?" to "What am I saying no to if I say yes to this?" Every yes is a no to something else. Make that trade-off conscious instead of automatic.',
+          calendlyUrl:
+            "https://calendly.com/brankeey/brankey-session?prefill_custom_1=Boundaries&prefill_custom_2=Individual%20Session",
+        },
+      };
+
+      // Conversation modal functions
+      function openConversationModal(type) {
+        const data = conversationData[type];
+        const modal = document.getElementById("conversationModal");
+        const content = document.getElementById("conversationModalContent");
+
+        content.innerHTML = `
+          <h2 class="modal-title">${data.title}</h2>
+          <p class="modal-insight"><strong>Trigger moment:</strong> ${data.trigger}</p>
+          
+          <div class="impact-section">
+            <div class="impact-level">What's really happening</div>
+            <p class="impact-description">${data.happening}</p>
+          </div>
+          
+          <div class="impact-section">
+            <div class="impact-level">The cost of this pattern</div>
+            <p class="impact-description">${data.cost}</p>
+          </div>
+          
+          <div class="impact-section">
+            <div class="impact-level">What shifts</div>
+            <p class="impact-description">${data.shift}</p>
+          </div>
+          
+          <div class="modal-cta-section">
+            <a href="${data.calendlyUrl}" target="_blank" class="cta">Begin 1-on-1</a>
+            <a href="https://calendly.com/brankeey/team-workshop-consultation" target="_blank" class="cta cta-secondary">Team Workshop</a>
+          </div>
+        `;
+
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeConversationModal() {
+        const modal = document.getElementById("conversationModal");
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("conversationModal")
+        .addEventListener("click", (e) => {
+          if (e.target.id === "conversationModal") {
+            closeConversationModal();
+          }
+        });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeConversationModal();
+        }
+      });
+
+      // Testimonials Carousel
+      let currentTestimonial = 0;
+      const totalTestimonials = 3;
+
+      function moveTestimonials(direction) {
+        currentTestimonial += direction;
+
+        if (currentTestimonial >= totalTestimonials) {
+          currentTestimonial = 0;
+        } else if (currentTestimonial < 0) {
+          currentTestimonial = totalTestimonials - 1;
+        }
+
+        updateTestimonialPosition();
+      }
+
+      function goToTestimonial(index) {
+        currentTestimonial = index;
+        updateTestimonialPosition();
+      }
+
+      function updateTestimonialPosition() {
+        const track = document.getElementById("testimonialsTrack");
+        const translateX = -(currentTestimonial * (100 / totalTestimonials));
+        track.style.transform = `translateX(${translateX}%)`;
+
+        // Update dots
+        const dots = document.querySelectorAll(".dot");
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === currentTestimonial);
+        });
+      }
+
+      // Auto-advance testimonials every 5 seconds
+      setInterval(() => {
+        moveTestimonials(1);
+      }, 5000);
+
+      // Conversation Toggle Functionality
+      function toggleConversation(box) {
+        const isExpanded = box.classList.contains("expanded");
+
+        // Close all boxes first
+        document.querySelectorAll(".box").forEach((b) => {
+          b.classList.remove("expanded");
+          b.classList.add("collapsed");
+        });
+
+        // If this box wasn't expanded, expand it
+        if (!isExpanded) {
+          box.classList.add("expanded");
+          box.classList.remove("collapsed");
+        }
+      }
+
+      // Initialize all boxes as collapsed
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".box").forEach((box) => {
+          box.classList.add("collapsed");
         });
       });
     </script>
