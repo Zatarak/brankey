@@ -269,6 +269,13 @@
         display: flex;
         gap: clamp(30px, 5vw, 40px);
         align-items: flex-start;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: clamp(30px, 5vw, 40px);
+        border: 2px solid #333;
+      }
+
+      .bio-container:hover {
+        background-color: rgba(255, 255, 255, 1); /* Hover effect */
       }
 
       .bio-image {
@@ -276,7 +283,6 @@
         aspect-ratio: 1;
         overflow: hidden;
         transition: all 0.3s ease;
-        height: auto;
       }
 
       .bio-image:hover {
@@ -299,7 +305,7 @@
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
         margin-bottom: 20px;
         text-transform: uppercase;
-        letter-spacing: -1px;
+        letter-spacing: 1px;
         color: black;
       }
 
@@ -378,13 +384,13 @@
         padding: clamp(25px, 4vw, 35px);
         border-right: 2px solid #333;
         border-bottom: 2px solid #333;
-        background-color: transparent;
+        background-color: rgba(255, 255, 255, 0.9);
         transition: all 0.3s ease;
         text-align: center;
       }
 
       .partner-box:hover {
-        background-color: rgba(255, 192, 203, 0.1);
+        background-color: rgba(255, 255, 255, 1);
         transform: translateY(-2px);
       }
 
@@ -441,6 +447,43 @@
         font-family: monospace;
         line-height: 1.4;
         color: #333;
+      }
+
+      /* Collaboration Box Styling */
+      .collaborate-box {
+        border: 3px dashed #333 !important;
+        background-color: rgba(255, 192, 203, 0.1) !important;
+      }
+
+      .collaborate-box:hover {
+        background-color: rgba(255, 192, 203, 0.2) !important;
+        border-style: solid !important;
+      }
+
+      .collaborate-icon {
+        border: 3px dashed #333 !important;
+        background-color: transparent !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .collaborate-icon span {
+        font-size: clamp(32px, 4vw, 40px);
+        font-weight: bold;
+        color: #333;
+        font-family: monospace;
+      }
+
+      .collaborate-link {
+        color: #333 !important;
+        font-weight: bold;
+        text-decoration: underline;
+      }
+
+      .collaborate-link:hover {
+        color: #666 !important;
+        text-decoration-color: pink;
       }
 
       /* Contact Button */
@@ -560,10 +603,7 @@
   </head>
   <body>
     <video class="wave-background" autoplay muted loop>
-      <source
-        src="images/wave-background.mp4"
-        type="video/mp4"
-      />
+      <source src="images/wave-background.mp4" type="video/mp4" />
     </video>
 
     <header>
@@ -597,7 +637,7 @@
       <section class="bio-section">
         <div class="bio-container">
           <div class="bio-image">
-            <img src="images/branKeyT.png" alt="Brankica's Photo" />
+            <img src="images/bioOne.png" alt="Brankica's Photo" />
           </div>
           <div class="bio-content">
             <h3 class="bio-title">Hi, I'm Brankica</h3>
@@ -686,7 +726,7 @@
             <div class="partner-image">
               <img src="./images/logo.png" alt="Chi Kung Fu" />
             </div>
-            <h4 class="partner-name">Master Chen</h4>
+            <h4 class="partner-name">Petr Osadchev</h4>
             <p class="partner-company">Chi Kung Fu</p>
             <a href="https://www.chi-kung-fu.de/" class="partner-url"
               >chi-kung-fu.de</a
@@ -720,10 +760,59 @@
             </div>
             <h4 class="partner-name">Jovana Zatarakoska</h4>
             <p class="partner-company">Metafora</p>
-            <a href="#" class="partner-url">metafora.com</a>
+            <a href="#" class="partner-url">metafora.mk</a>
             <p class="partner-desc">
-              Innovative consulting approach that bridges metaphorical thinking
-              with practical business solutions
+              Licensed psychologist and certified systemic and family
+              psychotherapist helping individuals, couples, and families develop
+              essential skills and resources to navigate life's challenges and
+              create meaningful change.
+            </p>
+          </div>
+
+          <!-- Partner 4 -->
+          <div class="partner-box">
+            <div class="partner-image">
+              <img src="/api/placeholder/150/150" alt="DAO DANCE Festival" />
+            </div>
+            <h4 class="partner-name">Dao Dance Collective</h4>
+            <p class="partner-company">Dao Dance</p>
+            <a href="#" class="partner-url">www.dao-dance.de/</a>
+            <p class="partner-desc">
+              Transformative festival combining ancient martial arts training
+              with conscious movement and electronic music to create spaces for
+              physical practice, inner connection, and community celebration.
+            </p>
+          </div>
+
+          <!-- Partner 5 -->
+          <div class="partner-box">
+            <div class="partner-image">
+              <img src="/api/placeholder/150/150" alt="C++" />
+            </div>
+            <h4 class="partner-name">Ruta Randelovic</h4>
+            <p class="partner-company">City ++ e.V.</p>
+            <a href="#" class="partner-url">cityplusplus.com</a>
+            <p class="partner-desc">
+              Innovative urban development platform fostering participatory
+              placemaking and sustainable communities through collaborative
+              design and citizen engagement.
+            </p>
+          </div>
+
+          <!-- Partner 6 - Collaboration CTA -->
+          <div class="partner-box collaborate-box">
+            <div class="partner-image collaborate-icon">
+              <span>+</span>
+            </div>
+            <h4 class="partner-name">Let's Collaborate</h4>
+            <p class="partner-company">Your Partnership</p>
+            <a href="contact.html" class="partner-url collaborate-link"
+              >Join Our Network</a
+            >
+            <p class="partner-desc">
+              Ready to create meaningful conversations and transformative
+              experiences together? Let's explore how we can support each
+              other's work.
             </p>
           </div>
         </div>
