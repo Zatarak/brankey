@@ -379,6 +379,14 @@
         padding: 20px;
         border-left: 4px solid pink;
         background: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .pain-point:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: translateX(2px);
       }
 
       .pain-point h4 {
@@ -396,6 +404,14 @@
         font-family: monospace;
         line-height: 1.4;
         color: #333;
+      }
+
+      .pain-point.collapsed {
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .pain-point.expanded {
+        background: rgba(255, 255, 255, 1);
       }
 
       .problem-solution {
@@ -1294,24 +1310,36 @@
           </p>
           
           <div class="problem-pain-points">
-            <div class="pain-point">
+            <div class="pain-point box" onclick="toggleConversation(this)">
               <h4>The Silent Knowing</h4>
-              <p>You're all thinking the same thing. You can sense it in the pauses, the glances, the way conversations shift. The questions about AI, about layoffs, about what's next. But the environment hasn't quite formed where that knowing can become words.</p>
+              <div class="conversation-arrow">▼</div>
+              <div class="conversation-expanded">
+                <p>You're all thinking the same thing. You can sense it in the pauses, the glances, the way conversations shift. The questions about AI, about layoffs, about what's next. But the environment hasn't quite formed where that knowing can become words.</p>
+              </div>
             </div>
             
-            <div class="pain-point">
+            <div class="pain-point box" onclick="toggleConversation(this)">
               <h4>The Feedback Dilemma</h4>
-              <p>Everyone wants to grow. Everyone has insights that could help others grow. The conditions just haven't emerged yet where giving and receiving feels generative rather than threatening.</p>
+              <div class="conversation-arrow">▼</div>
+              <div class="conversation-expanded">
+                <p>Everyone wants to grow. Everyone has insights that could help others grow. The conditions just haven't emerged yet where giving and receiving feels generative rather than threatening.</p>
+              </div>
             </div>
             
-            <div class="pain-point">
+            <div class="pain-point box" onclick="toggleConversation(this)">
               <h4>The Innovation Pause</h4>
-              <p>The breakthrough ideas are there. They surface in hallway conversations, in private moments, in your head at 3am. But the spontaneous collisions that used to spark innovation - the coffee encounters, the elevator conversations - now require scheduling a meeting. They're waiting for an environment where they can safely become real.</p>
+              <div class="conversation-arrow">▼</div>
+              <div class="conversation-expanded">
+                <p>The breakthrough ideas are there. They surface in hallway conversations, in private moments, in your head at 3am. But the spontaneous collisions that used to spark innovation - the coffee encounters, the elevator conversations - now require scheduling a meeting. They're waiting for an environment where they can safely become real.</p>
+              </div>
             </div>
             
-            <div class="pain-point">
+            <div class="pain-point box" onclick="toggleConversation(this)">
               <h4>The Carrying Pattern</h4>
-              <p>The strongest people naturally carry more. It's what makes them valuable. But when people quietly step back, when engagement shifts in ways no one discusses, when the environment only rewards individual heroics, collective capability never gets the chance to develop.</p>
+              <div class="conversation-arrow">▼</div>
+              <div class="conversation-expanded">
+                <p>The strongest people naturally carry more. It's what makes them valuable. But when people quietly step back, when engagement shifts in ways no one discusses, when the environment only rewards individual heroics, collective capability never gets the chance to develop.</p>
+              </div>
             </div>
           </div>
           
