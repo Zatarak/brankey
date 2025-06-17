@@ -247,7 +247,7 @@
         text-align: center;
         font-size: clamp(14px, 2vw, 18px);
         color: #333;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         font-family: monospace;
         line-height: 1.3;
         max-width: 500px;
@@ -256,6 +256,12 @@
         text-transform: uppercase;
         letter-spacing: 2px;
         background-color: white;
+      }
+
+      .assessment-explanation {
+        text-align: center;
+        margin: 0 auto 40px;
+        background-color: transparent;
       }
 
       .big-cta {
@@ -300,12 +306,6 @@
         color: black;
       }
 
-      .assessment-explanation {
-        text-align: center;
-        margin: 10px auto 0;
-        background-color: transparent;
-      }
-
       .explanation-line {
         font-size: clamp(12px, 1.5vw, 14px);
         font-family: monospace;
@@ -313,6 +313,114 @@
         margin: 4px 0;
         text-transform: uppercase;
         letter-spacing: 1px;
+      }
+
+      /* New Problem Statement Section */
+      .problem-section {
+        border: 3px solid #333;
+        background-color: transparent;
+        padding: clamp(40px, 6vw, 60px);
+        margin: clamp(60px, 10vw, 100px) 0;
+        position: relative;
+      }
+
+      .problem-section::before {
+        content: "THE CHALLENGE";
+        position: absolute;
+        top: -15px;
+        left: 30px;
+        background: pink;
+        padding: 5px 15px;
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+      }
+
+      .problem-title {
+        font-size: clamp(28px, 5vw, 48px);
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        margin-bottom: clamp(30px, 4vw, 40px);
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        text-align: center;
+        color: black;
+      }
+
+      .problem-content {
+        background: white;
+        border: 2px solid #333;
+        padding: clamp(30px, 5vw, 50px);
+      }
+
+      .problem-statement {
+        font-size: clamp(16px, 2.2vw, 20px);
+        font-family: monospace;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .problem-pain-points {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      @media (min-width: 768px) {
+        .problem-pain-points {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+        }
+      }
+
+      .pain-point {
+        padding: 20px;
+        border-left: 4px solid pink;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .pain-point h4 {
+        font-size: clamp(14px, 1.8vw, 16px);
+        font-family: monospace;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        color: black;
+      }
+
+      .pain-point p {
+        font-size: clamp(13px, 1.6vw, 15px);
+        font-family: monospace;
+        line-height: 1.4;
+        color: #333;
+      }
+
+      .problem-solution {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 2px solid #333;
+      }
+
+      .solution-highlight {
+        font-size: clamp(18px, 2.5vw, 24px);
+        font-family: monospace;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: black;
+        margin-bottom: 20px;
+      }
+
+      .solution-description {
+        font-size: clamp(15px, 2vw, 18px);
+        font-family: monospace;
+        line-height: 1.5;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
       }
 
       /* Stats Section */
@@ -1161,7 +1269,12 @@
       <h1>What happens when you feel safe to speak?</h1>
 
       <div class="subtitle">
-        We help design environments where communication flows naturally
+        We help you design environments where communication flows naturally
+      </div>
+
+      <div class="assessment-explanation">
+        <p class="explanation-line">3 questions • 1 insight • 1 suggestion</p>
+        <p class="explanation-line">90 seconds to clarity</p>
       </div>
 
       <div class="big-cta">
@@ -1171,10 +1284,45 @@
         >
       </div>
 
-      <div class="assessment-explanation">
-        <p class="explanation-line">3 questions • 1 insight • 1 suggestion</p>
-        <p class="explanation-line">90 seconds to clarity</p>
-      </div>
+      <!-- New Problem Section -->
+      <section class="problem-section">
+        <h2 class="problem-title" style="letter-spacing: 1px;">The Space Between Thinking and Speaking</h2>
+        
+        <div class="problem-content">
+          <p class="problem-statement">
+            You have brilliant people. They see things others don't. They have ideas that could change everything. But somewhere between thinking it and saying it, something shifts. The moment passes. The meeting moves on. The opportunity dissolves.
+          </p>
+          
+          <div class="problem-pain-points">
+            <div class="pain-point">
+              <h4>The Silent Knowing</h4>
+              <p>You're all thinking the same thing. You can sense it in the pauses, the glances, the way conversations shift. The questions about AI, about layoffs, about what's next. But the environment hasn't quite formed where that knowing can become words.</p>
+            </div>
+            
+            <div class="pain-point">
+              <h4>The Feedback Dilemma</h4>
+              <p>Everyone wants to grow. Everyone has insights that could help others grow. The conditions just haven't emerged yet where giving and receiving feels generative rather than threatening.</p>
+            </div>
+            
+            <div class="pain-point">
+              <h4>The Innovation Pause</h4>
+              <p>The breakthrough ideas are there. They surface in hallway conversations, in private moments, in your head at 3am. But the spontaneous collisions that used to spark innovation - the coffee encounters, the elevator conversations - now require scheduling a meeting. They're waiting for an environment where they can safely become real.</p>
+            </div>
+            
+            <div class="pain-point">
+              <h4>The Carrying Pattern</h4>
+              <p>The strongest people naturally carry more. It's what makes them valuable. But when people quietly step back, when engagement shifts in ways no one discusses, when the environment only rewards individual heroics, collective capability never gets the chance to develop.</p>
+            </div>
+          </div>
+          
+          <div class="problem-solution">
+            <p class="solution-highlight">We don't teach people how to talk.</p>
+            <p class="solution-description">
+              We help create the conditions where what wants to be said... can be said. When the environment supports authentic expression, everything that's already there gets the chance to emerge.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <div class="h1-line"></div>
 
